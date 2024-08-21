@@ -29,8 +29,9 @@
         .nav-item .collapse {
             margin-bottom: -5px
         }
+
         </style>
-       
+    
     </head>
     <body>
         <div class="container-scroller">
@@ -227,11 +228,13 @@
 
 
         <!-- samer js  start-->
+     
         <!-- Include jQuery -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
         <!-- Include Popper.js -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+
         <!-- samer js end  -->
        
 
