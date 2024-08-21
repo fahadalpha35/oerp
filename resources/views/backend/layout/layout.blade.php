@@ -20,6 +20,8 @@
         <link rel="stylesheet" href="{{ url('backend/css/vertical-layout-light/style.css') }}">
         <!-- endinject -->
         <link rel="shortcut icon" href="{{ url('backend/images/favicon.png') }}" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHm+2c0UjR1LLRexmnu8BxDFRxmjmIxI5B1ue8syB2B72v6K8ltyyJYrrMym1ccBb2Kg3w0Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
     </head>
     <body>
         <div class="container-scroller">

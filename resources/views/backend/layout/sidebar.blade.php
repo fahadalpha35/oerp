@@ -28,8 +28,8 @@
             </a>
             <div class="collapse" id="hr">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="">Employees</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Leaves</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ url('backend/employees') }}">Employees</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ url('backend/designation') }}">Leaves</a></li>
                     <li class="nav-item"> <a class="nav-link" href="">Attendance</a></li>
                     <li class="nav-item"> <a class="nav-link" href="">Payroll</a></li>
                     <li class="nav-item"> <a class="nav-link" href="">Recruitment and Onboarding</a></li>
@@ -420,7 +420,7 @@
         </li>
 
         
-        <!-- <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
             <i class="icon-columns menu-icon"></i>
             <span class="menu-title">Form elements</span>
@@ -432,7 +432,7 @@
                 </ul>
             </div>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
             <i class="icon-bar-graph menu-icon"></i>
             <span class="menu-title">Charts</span>
