@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 20, 2024 at 10:21 AM
+-- Generation Time: Aug 21, 2024 at 10:30 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.4
 
@@ -61,14 +61,6 @@ CREATE TABLE `cache` (
   `expiration` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `cache`
---
-
-INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('fahadahmedsam@gmail.com|127.0.0.1', 'i:2;', 1724133941),
-('fahadahmedsam@gmail.com|127.0.0.1:timer', 'i:1724133941;', 1724133941);
-
 -- --------------------------------------------------------
 
 --
@@ -80,6 +72,54 @@ CREATE TABLE `cache_locks` (
   `owner` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `demousers`
+--
+
+CREATE TABLE `demousers` (
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `demousers`
+--
+
+INSERT INTO `demousers` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Fahad Ahmed', 'fahad@gmail.com', NULL, '$2y$12$vxWQxf6krDQUXcvhK483uOqZ2Z1tae9bONy7NaYz0me9xhkWoT9ZS', NULL, '2024-07-13 00:23:59', '2024-07-13 00:23:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `designations`
+--
+
+CREATE TABLE `designations` (
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `department_id` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `designations`
+--
+
+INSERT INTO `designations` (`id`, `name`, `is_active`, `department_id`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 1, 1, NULL, NULL),
+(2, 'HR', 1, 2, NULL, NULL),
+(3, 'Software Engineer', 1, 3, '2024-08-18 05:59:08', '2024-08-19 06:13:51');
 
 -- --------------------------------------------------------
 
@@ -187,7 +227,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('j4NDqXClI6KjCjDzGql4SfXmhiUl5uxKl8TAXyv9', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiNzhDeTRFSVpOVkRuQ2ZWODdtNVpiUk90SEQxQkhMYjBRNzFRV1poVyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9iYWNrZW5kL2Rhc2hib2FyZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO31zOjUyOiJsb2dpbl9hZG1pbl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1724149284);
+('bzwRiPBWrNTrPKkB0Ya50bBZn4cTIiFWNDjzYggX', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVEFpWW5HSnl4WVR5dFJDeXJUcjBrMXdXNDZmZEpVRm9uUDZicnpIRSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly9vZXJwLnRlc3QvYmFja2VuZC9lbXBsb3llZXMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUyOiJsb2dpbl9hZG1pbl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1724236191);
 
 -- --------------------------------------------------------
 
@@ -198,10 +238,14 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Emp_Id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `designation_id` bigint UNSIGNED NOT NULL,
   `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -210,8 +254,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Fahad Ahmed', 'fahad@gmail.com', NULL, '$2y$12$vxWQxf6krDQUXcvhK483uOqZ2Z1tae9bONy7NaYz0me9xhkWoT9ZS', NULL, '2024-07-13 00:23:59', '2024-07-13 00:23:59');
+INSERT INTO `users` (`id`, `name`, `Emp_Id`, `email`, `email_verified_at`, `password`, `is_active`, `designation_id`, `remember_token`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 'Fahad Ahmed', 'EMP-1', 'fahad@gmail.com', NULL, '$2y$12$152COMqm9YAGb.u4nPvD0uRhdfOkavU26n//BVypzgGPlHI2FHPye', 1, 1, NULL, NULL, '2024-08-18 05:46:18', '2024-08-18 11:16:02'),
+(2, 'HR', 'EMP-2', 'hr@gmail.com', NULL, '$2y$12$T4JDb4LngMlYGgqnXFc8Q.3tn48NYwebw7het7pfsw2aststrIjJi', 1, 2, NULL, NULL, '2024-08-18 05:46:18', '2024-08-18 05:46:18'),
+(3, 'Sam', 'EMP-3', 'sam@gmail.com', NULL, '$2y$12$K0KcW3JPHYGpGydGNneiU.ZmRF/X/t8VpQX/B9feIbn58DwpEk.xK', 1, 3, NULL, NULL, '2024-08-18 06:11:36', '2024-08-18 06:11:36'),
+(4, 'Sadi', 'Admin', 'sadi@gmail.com', NULL, '$2y$12$152COMqm9YAGb.u4nPvD0uRhdfOkavU26n//BVypzgGPlHI2FHPye', 1, 1, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -258,6 +305,20 @@ ALTER TABLE `cache_locks`
   ADD PRIMARY KEY (`key`);
 
 --
+-- Indexes for table `demousers`
+--
+ALTER TABLE `demousers`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- Indexes for table `designations`
+--
+ALTER TABLE `designations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `designations_department_id_foreign` (`department_id`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -302,7 +363,8 @@ ALTER TABLE `sessions`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD KEY `1` (`designation_id`);
 
 --
 -- Indexes for table `vendors`
@@ -320,6 +382,18 @@ ALTER TABLE `vendors`
 --
 ALTER TABLE `admins`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `demousers`
+--
+ALTER TABLE `demousers`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `designations`
+--
+ALTER TABLE `designations`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -343,7 +417,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `vendors`

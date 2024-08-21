@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\EmployeeUsersController;
 
 Route::get('/', function () {
     return view('/backend/login');
@@ -34,8 +35,14 @@ Route::prefix('/backend')->namespace('App\Http\Controllers\Backend')->group(func
         Route::post('check-admin-password', [AdminController::class, 'checkAdminPassword']);
         // Update Admin Details
         Route::match(['get', 'post'], 'update-admin-details', [AdminController::class, 'updateAdminDetails']);
+
+        //Employees
+        Route::match(['get', 'post'], 'employees', [EmployeeUsersController::class, 'index']);
+        Route::match(['get', 'post'], 'designation', [EmployeeUsersController::class, 'designation']);
+
     });
 
     // Admin Logout
+    Route::match(['get', 'post'], 'update-admin-details', [AdminController::class, 'updateAdminDetails']);
     Route::get('logout', [AdminController::class, 'logout']);
 });
