@@ -30,7 +30,26 @@
             margin-bottom: -5px
         }
         </style>
-       
+
+      
+ <!-- Custom CSS -->
+{{-- <style>
+    /* Disable interaction with the disabled class */
+    .nav-link.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    /* Styling the active menu */
+    .nav-item .nav-link.active {
+        background-color: #908ec4;
+        color: white !important;
+    }
+
+    .nav-item .nav-link.active .menu-icon {
+        color: white !important;
+    }
+</style> --}}
     </head>
     <body>
         <div class="container-scroller">
@@ -226,13 +245,32 @@
         <script src="{{ url('backend/vendors/js/vendor.bundle.base.js') }}"></script>
 
 
-        <!-- samer js  start-->
+        <!-- ********* samer js  start **********-->
+
         <!-- Include jQuery -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
         <!-- Include Popper.js -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-        <!-- samer js end  -->
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+        $(document).ready(function() {
+    // Check if the current page is within the first-level menu
+            $('.nav-item').each(function() {
+                if ($(this).find('.nav-link.active').length > 0) {
+                    // Expand the parent first-level menu
+                    $(this).closest('.collapse').collapse('show');
+                    // Expand the second-level menu if applicable
+                    $(this).find('.collapse').collapse('show');
+                }
+            });
+        });
+
+        </script>
+
+        <!-- ********* samer js end *********** -->
        
 
         <!-- endinject -->

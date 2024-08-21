@@ -24,37 +24,54 @@
 
 
 
-        <li class="nav-item">
-            <a class="nav-link" href="#humanResource" data-toggle="collapse" aria-expanded="false" >
+        <li class="nav-item ">
+            <a class="nav-link" href="#humanResource" data-toggle="collapse"  aria-expanded="@if(Request::is('backend/employees')) true
+                      @elseif(Request::is('backend/designation')) true
+                      @else false
+                      @endif">
                 <i class="mdi mdi-account-check menu-icon"></i>
                 <span class="menu-title">Human Resource</span>
                 <i class="menu-arrow"></i>
             </a>
             
             <!-- First-level sub-menu -->
-            <ul class="collapse nav" id="humanResource" style="margin-top: -2px;">
-              <li class="nav-item">
-                <a class="nav-link" href="#Employee" data-toggle="collapse" aria-expanded="false">
+            <ul class="collapse nav  @if(Request::is('backend/employees')) show
+                            @elseif(Request::is('backend/designation')) show
+                            @endif" id="humanResource" style="margin-top: -2px;">
+
+              <li class="nav-item @if(Request::is('backend/employees')) active
+                            @elseif(Request::is('backend/designation')) active
+                            @endif">
+                
+                <a class="nav-link" href="#Employee" data-toggle="collapse" 
+                     aria-expanded="@if(Request::is('backend/employees')) true
+                      @elseif(Request::is('backend/designation')) true
+                      @else false
+                      @endif">
                   <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
                 <span class="menu-title">Employee</span>
                 <i class="menu-arrow"></i>
                 </a>
                 <!-- Second-level sub-menu -->
-                <ul class="collapse nav flex-column ms-3" id="Employee" style="margin-top: -2px;">
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{ url('backend/employees') }}">
-                    <i class="mdi mdi-adjust menu-icon"></i>
-                    <span class="menu-title">Employee List</span>
-                    <i class="menu-arrow"></i>
-                    </a>
+                <ul class="collapse nav flex-column ms-3 @if(Request::is('backend/employees')) show
+                            @elseif(Request::is('backend/designation')) show
+                            @endif" id="Employee" style="margin-top: -2px;">
+                  
+                <li class="nav-item">
+                    <a href="{{ url('backend/employees') }}" class="nav-link {{ Request::is('backend/employees') ? 'active' : '' }}" style="{{ Request::is('backend/employees') ? 'background-color: #908ec4; color: white; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('backend/employees') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('backend/employees') ? 'color: white; !important' : ''}}">Employee List</span>
+                      </a>
                   </li>
+
                   <li class="nav-item">
-                    <a class="nav-link" href="#">
-                    <i class="mdi mdi-adjust menu-icon"></i>
-                    <span class="menu-title">Add Employee</span>
-                    <i class="menu-arrow"></i>
-                    </a>
+                    <a href="{{ url('backend/designation') }}" class="nav-link {{ Request::is('backend/designation') ? 'active' : '' }}" style="{{ Request::is('backend/designation') ? 'background-color: #908ec4; color: white; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('backend/designation') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('backend/designation') ? 'color: white; !important' : ''}}">Add Employee</span>
+                      </a>
                   </li>
+
+
 
                   <li class="nav-item">
                     <a class="nav-link" href="#">
