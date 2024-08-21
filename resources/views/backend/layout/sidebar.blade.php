@@ -28,23 +28,23 @@
             </a>
             <div class="collapse" id="hr">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="">Employee Management</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Leave Management</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Attendance Tracking</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Payroll Management</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="">Employees</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="">Leaves</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="">Attendance</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="">Payroll</a></li>
                     <li class="nav-item"> <a class="nav-link" href="">Recruitment and Onboarding</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Performance Management</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="">Performance</a></li>
                     <li class="nav-item"> <a class="nav-link" href="">Training and Development</a></li>
                     <li class="nav-item"> <a class="nav-link" href="">Employee Self-Service</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Document Management</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Employee Benefits Management</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="">Documents</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="">Employee Benefits</a></li>
                 </ul>
             </div>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#im" aria-expanded="false" aria-controls="im">
                 <i class="icon-columns menu-icon"></i>
-                <span class="menu-title">Inventory Management</span>
+                <span class="menu-title">Inventory</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="im">
@@ -175,7 +175,7 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#crm" aria-expanded="false" aria-controls="crm">
                 <i class="icon-columns menu-icon"></i>
-                <span class="menu-title">Customer Relation Management</span>
+                <span class="menu-title">CRM</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="crm">
@@ -190,7 +190,7 @@
                     <li class="nav-item"> <a class="nav-link" href="#">Feedback & Surveys</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Reports & Analytics</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Integrations</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Customer Membership Management</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Customer Membership</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Settings</a></li>
                 </ul>
             </div>
@@ -407,9 +407,9 @@
                     <li class="nav-item"> <a class="nav-link" href="#">Social Media Management</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Email Marketing</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Content Marketing</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Pay-Per-Click (PPC) Advertising</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Pay-Per-Click Advertising</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Affiliate Marketing</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Conversion Rate Optimization (CRO)</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Conversion Rate Optimization</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Lead Generation</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Market Research</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Brand Management</a></li>
