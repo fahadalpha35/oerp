@@ -21,7 +21,7 @@
             </div>
         </li>
 
-{{-- 
+
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#hr" aria-expanded="false" aria-controls="hr">
                 <i class="mdi mdi-account-check menu-icon"></i>
@@ -42,7 +42,7 @@
                     <li class="nav-item"> <a class="nav-link" href="">Employee Benefits</a></li>
                 </ul>
             </div>
-        </li> --}}
+        </li>
 
 
         <li class="nav-item">
@@ -63,7 +63,7 @@
                 <!-- Second-level sub-menu -->
                 <ul class="collapse nav flex-column ms-3" id="Employee" style="margin-top: -2px;">
                   <li class="nav-item">
-                    <a class="nav-link" href="{{ url('backend/employees') }}">
+                    <a class="nav-link" href="#">
                     <i class="mdi mdi-adjust menu-icon"></i>
                     <span class="menu-title">Employee List</span>
                     <i class="menu-arrow"></i>
@@ -168,62 +168,18 @@
                     <i class="menu-arrow"></i>
                     </a>
                   </li>
+
                 </ul>
-              </li> 
-              
-                <li class="nav-item"> 
-                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">
-                        <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
-                    <span class="menu-title">Recruitment</span>
-                    <i class="menu-arrow"></i>
-                    </a>         
-                </li>
+              </li>
 
-                <li class="nav-item"> 
-                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">
-                        <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
-                        <span class="menu-title">Performance</span>
-                        <i class="menu-arrow"></i>
-                        </a>         
-                </li>
 
-                <li class="nav-item"> 
-                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">
-                        <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
-                        <span class="menu-title">Training & Development</span>
-                        <i class="menu-arrow"></i>
-                        </a>         
-                </li>
-
-                <li class="nav-item"> 
-                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">
-                        <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
-                        <span class="menu-title">Employee Self-Service</span>
-                        <i class="menu-arrow"></i>
-                        </a>         
-                </li>
-
-                <li class="nav-item"> 
-                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">
-                        <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
-                        <span class="menu-title">Documents</span>
-                        <i class="menu-arrow"></i>
-                        </a>         
-                </li>
-
-                <li class="nav-item"> 
-                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">
-                        <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
-                        <span class="menu-title">Employee Benefits</span>
-                        <i class="menu-arrow"></i>
-                        </a>         
-                </li>
+            
             </ul>
           </li>
 
 
 
-          <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#im" aria-expanded="false" aria-controls="im">
                 <i class="mdi mdi-warehouse menu-icon"></i>
                 <span class="menu-title">Inventory</span>
@@ -247,11 +203,12 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#manu" aria-expanded="false" aria-controls="manu">
                 <i class="mdi mdi-puzzle menu-icon"></i>
-                <span class="menu-title">Manufacture</span>
+                <span class="menu-title">Manufacturing</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="manu">
                 <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="">Production</a></li>
                     <li class="nav-item"> <a class="nav-link" href="">Production Planning</a></li>
                     <li class="nav-item"> <a class="nav-link" href="">Quality Control</a></li>
                     <li class="nav-item"> <a class="nav-link" href="">Work Orders</a></li>
@@ -295,15 +252,15 @@
             </a>
             <div class="collapse" id="scm">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="#">Supplier Management</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Suppliers</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Logistics</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Inventory Management</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Order Management</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Orders</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Procurement</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Demand Planning</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Supplier Performance</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Transport Management</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Warehouse Management</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Transport</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Warehouses</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Reports</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Settings</a></li>
                 </ul>
@@ -357,7 +314,7 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#crm" aria-expanded="false" aria-controls="crm">
                 <i class="mdi mdi-account-switch menu-icon"></i>
-                <span class="menu-title">CRM</span>
+                <span class="menu-title">Customer Relation Management</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="crm">
@@ -372,7 +329,7 @@
                     <li class="nav-item"> <a class="nav-link" href="#">Feedback & Surveys</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Reports & Analytics</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Integrations</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Customer Membership</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Customer Membership Management</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Settings</a></li>
                 </ul>
             </div>
@@ -424,34 +381,10 @@
                 </ul>
             </div>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#report" aria-expanded="false" aria-controls="report">
-                <i class="mdi mdi-pencil-box-outline menu-icon"></i>
-                <span class="menu-title">Reporting</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="report">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="#">Monthly Reports</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Annual Reports</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Financial Reports</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Sales Reports</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Inventory Reports</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Project Reports</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Customer Reports</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Performance Reports</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Operational Reports</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Compliance Reports</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Custom Reports</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Analytics Dashboard</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Export Reports</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Report Settings</a></li>
-                </ul>
-            </div>
-        </li>
+        
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ec" aria-expanded="false" aria-controls="ec">
-                <i class="mdi mdi-cart menu-icon"></i>
+                <i class="mdi mdi-cart  menu-icon"></i>
                 <span class="menu-title">e-Commerce</span>
                 <i class="menu-arrow"></i>
             </a>
@@ -575,6 +508,7 @@
                 </ul>
             </div>
         </li>
+       
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#dm" aria-expanded="false" aria-controls="dm">
                 <i class="mdi mdi-cellphone-link menu-icon"></i>
@@ -583,15 +517,27 @@
             </a>
             <div class="collapse" id="dm">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="#">Campaign Management</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="campaignManagementToggle">
+                            <span class="menu-title">Campaign Management</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="campaign-management">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"><a class="nav-link" href="#">Create Campaign</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Manage Campaigns</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Campaign Templates</a></li>
+                            </ul>
+                        </div>
+                    </li>
                     <li class="nav-item"> <a class="nav-link" href="#">Analytics</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">SEO Strategies</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Social Media Management</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Email Marketing</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Content Marketing</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Pay-Per-Click Advertising</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Pay-Per-Click (PPC) Advertising</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Affiliate Marketing</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Conversion Rate Optimization</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Conversion Rate Optimization (CRO)</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Lead Generation</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Market Research</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Brand Management</a></li>
@@ -601,6 +547,58 @@
             </div>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#report" aria-expanded="false" aria-controls="report">
+                <i class="mdi mdi-pencil-box-outline menu-icon"></i>
+                <span class="menu-title">Reporting</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="report">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="#">Monthly Reports</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Annual Reports</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Financial Reports</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Sales Reports</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Inventory Reports</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Project Reports</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Customer Reports</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Performance Reports</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Operational Reports</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Compliance Reports</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Custom Reports</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Analytics Dashboard</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Export Reports</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Report Settings</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="#mainMenu1" data-toggle="collapse" aria-expanded="false">
+              <i class="icon-home"></i> Main Menu 1
+            </a>
+            <!-- First-level sub-menu -->
+            <ul class="collapse nav flex-column" id="mainMenu1">
+              <li class="nav-item">
+                <a class="nav-link" href="#subMenu1" data-toggle="collapse" aria-expanded="false">
+                  <i class="icon-folder"></i> Sub Menu 1
+                </a>
+                <!-- Second-level sub-menu -->
+                <ul class="collapse nav flex-column ms-3" id="subMenu1">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Sub Menu Item 1</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Sub Menu Item 2</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Another Item</a>
+              </li>
+            </ul>
+          </li>
+        
       
     </ul>
 </nav>
