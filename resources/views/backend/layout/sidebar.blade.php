@@ -212,7 +212,7 @@
                         <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
                         <span class="menu-title">Employee Benefits</span>
                         <i class="menu-arrow"></i>
-                        </a>         
+                        </a><br>         
                 </li>
             </ul>
           </li>
