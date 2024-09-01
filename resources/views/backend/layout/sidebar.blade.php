@@ -58,9 +58,9 @@
                             @endif" id="Employee" style="margin-top: -2px;">
                   
                 <li class="nav-item">
-                    <a href="{{ url('backend/employees') }}" class="nav-link {{ Request::is('backend/employees') ? 'active' : '' }}" style="{{ Request::is('backend/employees') ? 'background-color: #908ec4; color: white; !important' : ''}}">
-                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('backend/employees') ? 'color: white; !important' : ''}}"></i>
-                        <span class="menu-arrow" style="{{ Request::is('backend/employees') ? 'color: white; !important' : ''}}">Employee List</span>
+                    <a href="{{ url('employees') }}" class="nav-link {{ Request::is('employees') ? 'active' : '' }}" style="{{ Request::is('employees') ? 'background-color: #908ec4; color: white; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('employees') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('employees') ? 'color: white; !important' : ''}}">Employee List</span>
                       </a>
                   </li>
 
@@ -71,12 +71,24 @@
                       </a>
                   </li>
 
-
+                  <li class="nav-item">
+                    <a href="{{ url('employees') }}" class="nav-link {{ Request::is('employees') ? 'active' : '' }}" style="{{ Request::is('employees') ? 'background-color: #908ec4; color: white; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('employees') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('employees') ? 'color: white; !important' : ''}}">Employee Profile</span>
+                      </a>
+                  </li>
 
                   <li class="nav-item">
-                    <a class="nav-link" href="http://ohr.test/">
+                    <a class="nav-link" href="{{ url('employees') }}">
                     <i class="mdi mdi-adjust menu-icon"></i>
-                    <span class="menu-title">Employee Profile</span>
+                    <span class="menu-title">Department</span>
+                    <i class="menu-arrow"></i>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url('employees') }}">
+                    <i class="mdi mdi-adjust menu-icon"></i>
+                    <span class="menu-title">Designation</span>
                     <i class="menu-arrow"></i>
                     </a>
                   </li>
