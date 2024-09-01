@@ -4,10 +4,20 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\EmployeeUsersController;
+// use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
     return view('/backend/login');
 });
+
+
+#### CLEAR ALL IN ONE ####
+Route::get('/clear-cache', function () {
+    Artisan::call('optimize:clear');
+    return 'Caches cleared and configuration files regenerated.';
+});
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -19,7 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';
 
 Route::prefix('/backend')->namespace('App\Http\Controllers\Backend')->group(function() {
     // Admin Login Route
@@ -27,7 +37,7 @@ Route::prefix('/backend')->namespace('App\Http\Controllers\Backend')->group(func
     Route::match(['get', 'post'], 'register', [AdminController::class, 'register']);
 
     Route::group(['middleware' => ['Admin']], function() {
-        require base_path('Modules/Hr/routes/web.php');
+        // require base_path('Modules/Hr/routes/web.php');
 
 
 
