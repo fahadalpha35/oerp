@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 21, 2024 at 10:30 AM
+-- Generation Time: Sep 01, 2024 at 09:21 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.4
 
@@ -124,6 +124,40 @@ INSERT INTO `designations` (`id`, `name`, `is_active`, `department_id`, `created
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `employees`
+--
+
+CREATE TABLE `employees` (
+  `id` int UNSIGNED NOT NULL,
+  `first_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `last_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
+  `phone_number` varchar(20) DEFAULT NULL,
+  `hire_date` date DEFAULT NULL,
+  `job_title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `department` varchar(100) DEFAULT NULL,
+  `salary` decimal(10,2) DEFAULT NULL,
+  `manager_id` int DEFAULT NULL,
+  `status` enum('Active','Inactive') NOT NULL DEFAULT 'Active',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `employees`
+--
+
+INSERT INTO `employees` (`id`, `first_name`, `last_name`, `email`, `phone_number`, `hire_date`, `job_title`, `department`, `salary`, `manager_id`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Fahad', 'Ahmed', 'fahad@gmail.com', '01790004664', '2023-11-01', 'Software Engineer', 'Software Solution', 100000.00, 11, 'Active', '2024-08-29 08:11:15', '2024-08-29 08:11:15'),
+(2, 'Sadi', 'Khan', 'sadi@gmail.com', '01790004664', '2024-09-01', 'Finance Manager', 'Software Solution', 500000.00, 22, 'Active', '2024-09-01 05:07:52', '2024-09-01 07:07:35'),
+(3, 'Shohorafuzzaman', 'Shuvo', 'shuvo@gmail.com', '01790004664', '2024-09-01', 'Jr. Software Engineer', 'Software Solution', 100000.00, 33, 'Active', '2024-09-01 06:52:54', '2024-09-01 06:54:24'),
+(4, 'Yamin', 'Hossain', 'yamin@gmail.com', '01790004664', '2024-09-01', 'Sr. Software Engineer', 'Software Solution', 100000.00, 44, 'Active', '2024-09-01 06:54:08', '2024-09-01 06:54:28'),
+(5, 'Kawser', 'Samer', 'samer@gmail.com', '01790004664', '2024-09-01', 'Sr. Software Engineer', 'Software Solution', 100000.00, 55, 'Active', '2024-09-01 06:56:19', '2024-09-01 06:58:30'),
+(6, 'Masud', 'Sheikh', 'masud@gmail.com', '01790004664', '2024-09-01', 'Data Entry', 'Software Solution', 1000000.00, 66, 'Active', '2024-09-01 06:58:09', '2024-09-01 06:58:09');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `failed_jobs`
 --
 
@@ -227,7 +261,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('bzwRiPBWrNTrPKkB0Ya50bBZn4cTIiFWNDjzYggX', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVEFpWW5HSnl4WVR5dFJDeXJUcjBrMXdXNDZmZEpVRm9uUDZicnpIRSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly9vZXJwLnRlc3QvYmFja2VuZC9lbXBsb3llZXMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUyOiJsb2dpbl9hZG1pbl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1724236191);
+('saukrzNdI9urdbehEXHEL89E6lDslszMMdmFgYKc', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYVAzc1JIb2VRME5nVnBCbmthME8ycm91dGtJdTFWcENHSW5OcXZ3dyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly9vZXJwLnRlc3QvZW1wbG95ZWVzLzQiO31zOjUyOiJsb2dpbl9hZG1pbl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1725182327);
 
 -- --------------------------------------------------------
 
@@ -319,6 +353,13 @@ ALTER TABLE `designations`
   ADD KEY `designations_department_id_foreign` (`department_id`);
 
 --
+-- Indexes for table `employees`
+--
+ALTER TABLE `employees`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -394,6 +435,12 @@ ALTER TABLE `demousers`
 --
 ALTER TABLE `designations`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `employees`
+--
+ALTER TABLE `employees`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`

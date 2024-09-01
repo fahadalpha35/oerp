@@ -20,4 +20,7 @@ Route::group([], function () {
     Route::resource('hr', HrController::class)->names('hr');
     Route::get('/employees', [EmployeeController::class, 'index'])->name('index');
     Route::resource('employees', EmployeeController::class);
+    Route::get('export/excel', [EmployeeController::class, 'exportExcel'])->name('export.excel');
+    Route::get('export/csv', [EmployeeController::class, 'exportCSV'])->name('export.csv');
+
 });

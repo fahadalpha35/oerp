@@ -15,7 +15,7 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::paginate(1); // Paginate with 10 items per page
+        $employees = Employee::paginate(5); // Paginate with 10 items per page
         return view('hr::employees.index', compact('employees'));
     }
 

@@ -9,6 +9,8 @@
 .content-wrapper1 {
     background: #F5F7FF;
     width: 100%;
+    /* padding: 2.375rem 2.375rem; */
+    -webkit-flex-grow: 1;
     flex-grow: 1;
 }
 @media (max-width: 767px) {
@@ -65,14 +67,41 @@
     background-color: #fff;
     color: #6c757d;
 }
+
+/* Button styles */
+.button-toolbar {
+    margin-bottom: 15px;
+}
+
+.button-toolbar .btn {
+    margin-right: 10px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border: 2px solid #007bff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button-toolbar .btn:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
 </style>
 
 <div class="main-panel">
     <div class="content-wrapper1">
         <div style="background-color: #fff;border-radius: 20px;">
             <div class="mt-5" style="padding: 25px;">
+            <a href="" class="btn btn-success">Add Employee</a><br><br>
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <a href="" class="btn btn-success">Download Excel</a>
+                    <div class="button-toolbar">
+                        <a href="{{ route('export.excel') }}" class="btn">Excel</a>
+                        <a href="{{ route('export.csv') }}" class="btn">CSV</a>
+                        <button onclick="window.print();" class="btn">Print</button>
+                    </div>
                     <input type="text" id="employeeSearch" class="form-control w-25" placeholder="Search Employee">
                 </div>
                 <h2 class="mb-4 text-center">Employee List</h2>
