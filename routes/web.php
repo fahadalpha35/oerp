@@ -50,10 +50,6 @@ Route::prefix('/backend')->namespace('App\Http\Controllers\Backend')->group(func
         // Update Admin Details
         Route::match(['get', 'post'], 'update-admin-details', [AdminController::class, 'updateAdminDetails']);
 
-        //Employees
-        Route::match(['get', 'post'], 'employees', [EmployeeUsersController::class, 'index']);
-        Route::match(['get', 'post'], 'designation', [EmployeeUsersController::class, 'designation']);
-
     });
 
     // Admin Logout
