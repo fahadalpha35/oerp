@@ -25,8 +25,8 @@
 
 
         <li class="nav-item ">
-            <a class="nav-link" href="#humanResource" data-toggle="collapse"  aria-expanded="@if(Request::is('backend/employees')) true
-                      @elseif(Request::is('backend/designation')) true
+            <a class="nav-link" href="#humanResource" data-toggle="collapse"  aria-expanded="@if(Request::is('employees')) true
+                      @elseif(Request::is('designation')) true
                       @else false
                       @endif">
                 <i class="mdi mdi-account-check menu-icon"></i>
@@ -35,17 +35,17 @@
             </a>
             
             <!-- First-level sub-menu -->
-            <ul class="collapse nav  @if(Request::is('backend/employees')) show
-                            @elseif(Request::is('backend/designation')) show
+            <ul class="collapse nav  @if(Request::is('employees')) show
+                            @elseif(Request::is('designation')) show
                             @endif" id="humanResource" style="margin-top: -2px;">
 
-              <li class="nav-item @if(Request::is('backend/employees')) active
-                            @elseif(Request::is('backend/designation')) active
+              <li class="nav-item @if(Request::is('employees')) active
+                            @elseif(Request::is('designation')) active
                             @endif">
                 
                 <a class="nav-link" href="#Employee" data-toggle="collapse" 
-                     aria-expanded="@if(Request::is('backend/employees')) true
-                      @elseif(Request::is('backend/designation')) true
+                     aria-expanded="@if(Request::is('employees')) true
+                      @elseif(Request::is('designation')) true
                       @else false
                       @endif">
                   <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
@@ -53,8 +53,8 @@
                 <i class="menu-arrow"></i>
                 </a>
                 <!-- Second-level sub-menu -->
-                <ul class="collapse nav flex-column ms-3 @if(Request::is('backend/employees')) show
-                            @elseif(Request::is('backend/designation')) show
+                <ul class="collapse nav flex-column ms-3 @if(Request::is('employees')) show
+                            @elseif(Request::is('designation')) show
                             @endif" id="Employee" style="margin-top: -2px;">
                   
                 <li class="nav-item">
@@ -65,9 +65,9 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="{{ url('backend/designation') }}" class="nav-link {{ Request::is('backend/designation') ? 'active' : '' }}" style="{{ Request::is('backend/designation') ? 'background-color: #908ec4; color: white; !important' : ''}}">
-                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('backend/designation') ? 'color: white; !important' : ''}}"></i>
-                        <span class="menu-arrow" style="{{ Request::is('backend/designation') ? 'color: white; !important' : ''}}">Add Employee</span>
+                    <a href="{{ url('designation') }}" class="nav-link {{ Request::is('designation') ? 'active' : '' }}" style="{{ Request::is('designation') ? 'background-color: #908ec4; color: white; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('designation') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('designation') ? 'color: white; !important' : ''}}">Add Employee</span>
                       </a>
                   </li>
 
