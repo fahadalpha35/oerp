@@ -2,8 +2,8 @@
 @extends('backend.layout.layout')
 
 @section('content')
-<div class="container">
-    <h2>Edit Employee</h2>
+<div class="container"><br><br><br>
+    <h2>Edit Employee</h2><br>
     <form action="{{ route('employees.update', $employee->id) }}" method="POST">
         @csrf
         @method('PUT')
@@ -68,7 +68,7 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary">Update</button><br><br><br>
     </form>
 </div>
 @endsection

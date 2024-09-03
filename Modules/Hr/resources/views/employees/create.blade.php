@@ -1,8 +1,10 @@
-@extends('layouts.app')
+@extends('backend.layout.layout')
 
 @section('content')
 <div class="container">
+    <br><br><br>
     <h2>Create Employee</h2>
+    <br>
     <form action="{{ route('employees.store') }}" method="POST">
         @csrf
         <div class="mb-3">
@@ -63,7 +65,7 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">Create</button><br><br><br>
     </form>
 </div>
 @endsection
