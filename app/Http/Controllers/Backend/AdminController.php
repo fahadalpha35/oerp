@@ -102,6 +102,11 @@ class AdminController extends Controller
 
     public function login(Request $request)
     {
+        // Check if the admin is already logged in
+        if (Auth::guard('admin')->check()) {
+            return redirect('backend/dashboard'); // Redirect to dashboard if already logged in
+        }
+
         if ($request->isMethod('post')) {
             $data = $request->all();
 

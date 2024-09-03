@@ -39,8 +39,6 @@ Route::prefix('/backend')->namespace('App\Http\Controllers\Backend')->group(func
     Route::group(['middleware' => ['Admin']], function() {
         // require base_path('Modules/Hr/routes/web.php');
 
-
-
         // Admin Dashboard Route
         Route::get('dashboard', [AdminController::class, 'dashboard']);    
         // Update Admin Password
