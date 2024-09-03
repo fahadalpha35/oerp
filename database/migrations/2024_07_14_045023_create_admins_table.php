@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('image');
             $table->tinyInteger('status');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 
