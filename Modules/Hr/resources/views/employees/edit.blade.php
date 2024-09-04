@@ -49,6 +49,11 @@
         </div>
 
         <div class="mb-3">
+            <label for="manager_id" class="form-label">Manager ID</label>
+            <input type="number" class="form-control" id="manager_id" name="manager_id" value="{{ $employee->manager_id }}">
+        </div>
+
+        <!-- <div class="mb-3">
             <label for="manager_id" class="form-label">Manager</label>
             <select class="form-control" id="manager_id" name="manager_id">
                 <option value="">Select a Manager</option>
@@ -58,7 +63,7 @@
                     </option>
                 @endforeach
             </select>
-        </div>
+        </div> -->
 
         <div class="mb-3">
             <label for="status" class="form-label">Status</label>

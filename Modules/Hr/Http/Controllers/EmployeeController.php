@@ -40,10 +40,18 @@ class EmployeeController extends Controller
             'status' => 'required|in:Active,Inactive',
         ]);
 
-        Employee::create($request->all());
+        // Check if the request has all necessary fields
+        $employeeData = $request->only([
+            'first_name', 'last_name', 'email', 'phone_number', 
+            'hire_date', 'job_title', 'department', 'salary', 
+            'manager_id', 'status'
+        ]);
+
+        Employee::create($employeeData);
 
         return redirect()->route('employees.index')->with('success', 'Employee created successfully.');
     }
+
 
     public function edit($id)
     {
