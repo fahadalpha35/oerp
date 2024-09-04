@@ -3029,6 +3029,7 @@ return array(
     'Modules\\Ecommerce\\Providers\\EcommerceServiceProvider' => $baseDir . '/Modules/Ecommerce/Providers/EcommerceServiceProvider.php',
     'Modules\\Ecommerce\\Providers\\EventServiceProvider' => $baseDir . '/Modules/Ecommerce/Providers/EventServiceProvider.php',
     'Modules\\Ecommerce\\Providers\\RouteServiceProvider' => $baseDir . '/Modules/Ecommerce/Providers/RouteServiceProvider.php',
+    'Modules\\Hr\\Http\\Controllers\\DepartmentController' => $baseDir . '/Modules/Hr/Http/Controllers/DepartmentController.php',
     'Modules\\Hr\\Http\\Controllers\\EmployeeController' => $baseDir . '/Modules/Hr/Http/Controllers/EmployeeController.php',
     'Modules\\Hr\\Http\\Controllers\\HrController' => $baseDir . '/Modules/Hr/Http/Controllers/HrController.php',
     'Modules\\Hr\\Providers\\EventServiceProvider' => $baseDir . '/Modules/Hr/Providers/EventServiceProvider.php',

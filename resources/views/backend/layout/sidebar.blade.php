@@ -81,14 +81,14 @@
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link" href="{{ url('employees') }}">
+                    <a class="nav-link" href="{{ url('department') }}">
                     <i class="mdi mdi-adjust menu-icon"></i>
                     <span class="menu-title">Department</span>
                     <i class="menu-arrow"></i>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{{ url('employees') }}">
+                    <a class="nav-link" href="{{ url('designation') }}">
                     <i class="mdi mdi-adjust menu-icon"></i>
                     <span class="menu-title">Designation</span>
                     <i class="menu-arrow"></i>

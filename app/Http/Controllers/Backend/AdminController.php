@@ -52,11 +52,13 @@ class AdminController extends Controller
     {
         if ($request->isMethod('post')) {
             $data = $request->all();
+
             $rules = [
                 'admin_name' => 'required|regex:/^[\pL\s\-]+$/u',
                 'admin_mobile' => 'required|numeric',
-                'admin_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'admin_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048',
             ];
+
             $customMessages = [
                 'admin_name.required' => 'Name is required',
                 'admin_name.regex' => 'Valid Name is required',
@@ -66,9 +68,10 @@ class AdminController extends Controller
                 'admin_image.mimes' => 'Allowed image types: jpeg, png, jpg, gif, svg',
                 'admin_image.max' => 'Image size should not exceed 2MB',
             ];
+
             $this->validate($request, $rules, $customMessages);
 
-            // Upload Admin Photo
+            // Handle Image Upload
             if ($request->hasFile('admin_image')) {
                 $image_tmp = $request->file('admin_image');
                 if ($image_tmp->isValid()) {
@@ -76,9 +79,14 @@ class AdminController extends Controller
                     $extension = $image_tmp->getClientOriginalExtension();
                     // Generate New Image Name
                     $imageName = rand(111, 99999) . '.' . $extension;
-                    $imagePath = 'backend/images/profile/' . $imageName;
-                    // Upload the image
-                    Image::make($image_tmp)->resize(300, 300)->save($imagePath);
+                    $imagePath = public_path('backend/images/profile/' . $imageName);
+                    
+                    // Upload the image using Intervention Image
+                    try {
+                        Image::make($image_tmp)->resize(300, 300)->save($imagePath);
+                    } catch (\Intervention\Image\Exception\NotReadableException $e) {
+                        return redirect()->back()->with('error_message', 'Unable to read the image file. Please try a different file.');
+                    }
                 }
             } else if (!empty($data['current_admin_image'])) {
                 $imageName = $data['current_admin_image'];

@@ -3571,6 +3571,7 @@ class ComposerStaticInit2d0804ca2ba9334bf587d45ac0575239
         'Modules\\Ecommerce\\Providers\\EcommerceServiceProvider' => __DIR__ . '/../..' . '/Modules/Ecommerce/Providers/EcommerceServiceProvider.php',
         'Modules\\Ecommerce\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/Ecommerce/Providers/EventServiceProvider.php',
         'Modules\\Ecommerce\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/Ecommerce/Providers/RouteServiceProvider.php',
+        'Modules\\Hr\\Http\\Controllers\\DepartmentController' => __DIR__ . '/../..' . '/Modules/Hr/Http/Controllers/DepartmentController.php',
         'Modules\\Hr\\Http\\Controllers\\EmployeeController' => __DIR__ . '/../..' . '/Modules/Hr/Http/Controllers/EmployeeController.php',
         'Modules\\Hr\\Http\\Controllers\\HrController' => __DIR__ . '/../..' . '/Modules/Hr/Http/Controllers/HrController.php',
         'Modules\\Hr\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/Hr/Providers/EventServiceProvider.php',
