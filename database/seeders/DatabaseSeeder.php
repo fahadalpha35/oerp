@@ -18,7 +18,9 @@ class DatabaseSeeder extends Seeder
             AdminsTableSeeder::class,
             BusinessTypesTableSeeder::class,
             DivisionsTableSeeder::class,
+            DistrictsTableSeeder::class,
             RolesTableSeeder::class,
+            CompaniesTableSeeder::class,
             // Add more seeder classes as needed
         ]);
         
@@ -26,9 +28,12 @@ class DatabaseSeeder extends Seeder
             ['id' => 1, 
             'name' => 'OSSL',
             'role_id' => 1,
+            'company_id' => 1,
             'email' => 'ossl@gmail.com',
             'password' => Hash::make('12345678'),
-            'active_status' => 1]     
+            'active_status' => 1,
+            'company_business_type' => 1
+            ]     
 
         ]);
     }

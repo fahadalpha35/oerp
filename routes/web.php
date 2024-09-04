@@ -4,10 +4,11 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\EmployeeUsersController;
+
 // use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
-    return view('/backend/login');
+    return view('backend.login');
 });
 
 
@@ -16,7 +17,6 @@ Route::get('/clear-cache', function () {
     Artisan::call('optimize:clear');
     return 'Caches cleared and configuration files regenerated.';
 });
-
 
 
 Route::get('/dashboard', function () {
@@ -29,16 +29,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// require __DIR__.'/auth.php';
 
-Route::prefix('/backend')->namespace('App\Http\Controllers\Backend')->group(function() {
+Route::prefix('/backend')->group(function() {
+
     // Admin Login Route
-    Route::match(['get', 'post'], 'login', [AdminController::class, 'login']);
-    Route::match(['get', 'post'], 'register', [AdminController::class, 'register']);
+    Route::match(['get', 'post'], 'login', [AdminController::class, 'login'])->name('admin.login');
+    Route::match(['get', 'post'], 'register', [AdminController::class, 'register'])->name('admin.register');
+
+    //division and district depedancy
+    Route::post('/division',[AdminController::class,'division']);
+
 
     Route::group(['middleware' => ['Admin']], function() {
-        // require base_path('Modules/Hr/routes/web.php');
-
 
         // Admin Dashboard Route
         Route::get('dashboard', [AdminController::class, 'dashboard']);    
