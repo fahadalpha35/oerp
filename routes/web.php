@@ -39,7 +39,6 @@ Route::prefix('/backend')->namespace('App\Http\Controllers\Backend')->group(func
     Route::group(['middleware' => ['Admin']], function() {
         // require base_path('Modules/Hr/routes/web.php');
 
-
         // Admin Dashboard Route
         Route::get('dashboard', [AdminController::class, 'dashboard']);    
         // Update Admin Password
@@ -48,10 +47,6 @@ Route::prefix('/backend')->namespace('App\Http\Controllers\Backend')->group(func
         Route::post('check-admin-password', [AdminController::class, 'checkAdminPassword']);
         // Update Admin Details
         Route::match(['get', 'post'], 'update-admin-details', [AdminController::class, 'updateAdminDetails']);
-
-        //Employees
-        Route::match(['get', 'post'], 'employees', [EmployeeUsersController::class, 'index']);
-        Route::match(['get', 'post'], 'designation', [EmployeeUsersController::class, 'designation']);
 
     });
 

@@ -65,9 +65,11 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="{{ url('designation') }}" class="nav-link {{ Request::is('designation') ? 'active' : '' }}" style="{{ Request::is('designation') ? 'background-color: #908ec4; color: white; !important' : ''}}">
-                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('designation') ? 'color: white; !important' : ''}}"></i>
-                        <span class="menu-arrow" style="{{ Request::is('designation') ? 'color: white; !important' : ''}}">Add Employee</span>
+
+                    <a href="{{ url('employees/create') }}" class="nav-link {{ Request::is('employees/create') ? 'active' : '' }}" style="{{ Request::is('employees/create') ? 'background-color: #908ec4; color: white; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('employees/create') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('employees/create') ? 'color: white; !important' : ''}}">Add Employee</span>
+
                       </a>
                   </li>
 
