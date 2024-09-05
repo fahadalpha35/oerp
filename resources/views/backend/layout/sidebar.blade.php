@@ -64,14 +64,14 @@
                       </a>
                   </li>
 
-                  <li class="nav-item">
+                  <!-- <li class="nav-item">
 
                     <a href="{{ url('employees/create') }}" class="nav-link {{ Request::is('employees/create') ? 'active' : '' }}" style="{{ Request::is('employees/create') ? 'background-color: #908ec4; color: white; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('employees/create') ? 'color: white; !important' : ''}}"></i>
                         <span class="menu-arrow" style="{{ Request::is('employees/create') ? 'color: white; !important' : ''}}">Add Employee</span>
 
                       </a>
-                  </li>
+                  </li> -->
 
                   <li class="nav-item">
                     <a href="{{ url('employees') }}" class="nav-link {{ Request::is('employees') ? 'active' : '' }}" style="{{ Request::is('employees') ? 'background-color: #908ec4; color: white; !important' : ''}}">
