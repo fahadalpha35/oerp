@@ -95,7 +95,7 @@
     <div class="content-wrapper1">
         <div style="background-color: #fff;border-radius: 20px;">
             <div class="mt-5" style="padding: 25px;">
-            <a href="" class="btn btn-success">Add Employee</a><br><br>
+            <a href="{{ url('employees/create') }}" class="btn btn-success">Add Employee</a><br><br>
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <div class="button-toolbar">
                         <a href="{{ route('export.excel') }}" class="btn">Excel</a>

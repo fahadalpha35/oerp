@@ -2,8 +2,8 @@
 @extends('backend.layout.layout')
 
 @section('content')
-<div class="container">
-    <h2>Edit Employee</h2>
+<div class="container"><br><br><br>
+    <h2>Edit Employee</h2><br>
     <form action="{{ route('employees.update', $employee->id) }}" method="POST">
         @csrf
         @method('PUT')
@@ -49,6 +49,11 @@
         </div>
 
         <div class="mb-3">
+            <label for="manager_id" class="form-label">Manager ID</label>
+            <input type="number" class="form-control" id="manager_id" name="manager_id" value="{{ $employee->manager_id }}">
+        </div>
+
+        <!-- <div class="mb-3">
             <label for="manager_id" class="form-label">Manager</label>
             <select class="form-control" id="manager_id" name="manager_id">
                 <option value="">Select a Manager</option>
@@ -58,7 +63,7 @@
                     </option>
                 @endforeach
             </select>
-        </div>
+        </div> -->
 
         <div class="mb-3">
             <label for="status" class="form-label">Status</label>
@@ -68,7 +73,7 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary">Update</button><br><br><br>
     </form>
 </div>
 @endsection

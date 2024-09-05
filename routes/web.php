@@ -39,7 +39,6 @@ Route::prefix('/backend')->group(function() {
     //division and district depedancy
     Route::post('/division',[AdminController::class,'division']);
 
-
     Route::group(['middleware' => ['Admin']], function() {
 
         // Admin Dashboard Route
@@ -50,10 +49,6 @@ Route::prefix('/backend')->group(function() {
         Route::post('check-admin-password', [AdminController::class, 'checkAdminPassword']);
         // Update Admin Details
         Route::match(['get', 'post'], 'update-admin-details', [AdminController::class, 'updateAdminDetails']);
-
-        //Employees
-        Route::match(['get', 'post'], 'employees', [EmployeeUsersController::class, 'index']);
-        Route::match(['get', 'post'], 'designation', [EmployeeUsersController::class, 'designation']);
 
     });
 

@@ -2,7 +2,7 @@
 @extends('backend.layout.layout')
 
 @section('content')
-<div class="container">
+<div class="container"><br><br><br>
     <h2>Employee Details</h2>
     <div class="card">
         <div class="card-body">
