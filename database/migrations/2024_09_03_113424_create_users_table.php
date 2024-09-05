@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('password');
             $table->integer('active_status')->comment('Status of the role: 1 for active, 2 for inactive'); // Adding a comment
             $table->foreignId('company_business_type')->nullable()->constrained('business_types')->onDelete('cascade');
+            $table->date('registration_date')->nullable();
             $table->rememberToken();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

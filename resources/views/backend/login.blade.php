@@ -126,7 +126,7 @@
                             </button>
                         </div>
                         @endif
-                        <form class="pt-3" action="{{ route('admin.login') }}" method="post">
+                        <form class="pt-3" action="{{ route('login') }}" method="post">
                             @csrf
                             <div class="form-group">
                                 <input type="text" required name="email" id="email" class="form-control form-control-lg" placeholder="Email Address">
