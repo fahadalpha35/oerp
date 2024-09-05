@@ -126,23 +126,25 @@
                             </button>
                         </div>
                         @endif
-                        <form class="pt-3" action="{{ url('backend/login') }}" method="post">@csrf
+                        <form class="pt-3" action="{{ route('admin.login') }}" method="post">
+                            @csrf
                             <div class="form-group">
-                                <input type="text" name="email" id="email" class="form-control form-control-lg" placeholder="Email Address">
+                                <input type="text" required name="email" id="email" class="form-control form-control-lg" placeholder="Email Address">
                             </div>
                             <div class="form-group">
-                                <input type="password" name="password" id="password" class="form-control form-control-lg" placeholder="Password">
+                                <input type="password" required name="password"  id="password" class="form-control form-control-lg" placeholder="Password">
                             </div>
+
                             <div class="mt-3">
-                                <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
+                                <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Login</button>
                             </div>
                             <div class="my-2 d-flex justify-content-between align-items-center">
-                                <div class="form-check">
+                                {{-- <div class="form-check">
                                     <label class="form-check-label text-muted">
                                         <input type="checkbox" class="form-check-input"> Keep me signed in
                                     </label>
-                                </div>
-                                <a href="#" class="auth-link text-black">Forgot password?</a>
+                                </div> --}}
+                                {{-- <a href="#" class="auth-link text-black">Forgot password?</a> --}}
                             </div>
                         </form>
                     </div>
@@ -151,13 +153,9 @@
         </div>
         <!-- content-wrapper ends -->
     </div>
-    <!-- page-body-wrapper ends -->
-    <!-- container-scroller -->
-    <!-- plugins:js -->
+   
+
     <script src="{{ url('backend/vendors/js/vendor.bundle.base.js') }}"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <!-- End plugin js for this page -->
     <!-- inject:js -->
     <script src="{{ url('backend/js/off-canvas.js') }}"></script>
     <script src="{{ url('backend/js/hoverable-collapse.js') }}"></script>

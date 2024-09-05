@@ -9,6 +9,7 @@ use Auth;
 use App\Models\Admin;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Intervention\Image\Facades\Image;
+use DB;
 
 class AdminController extends Controller
 {
@@ -132,14 +133,68 @@ class AdminController extends Controller
         return view('backend.login');
     }
 
-    public function register()
+    public function register(Request $request)
     {
-        return view('backend.register');
+        
+        if ($request->isMethod('post')) {
+            $data = $request->all();
+
+            $validated = $request->validate([
+                'email' => 'required|email|max:255',
+                'password' => 'required',
+            ]);
+
+            $company = DB::table('companies')
+                        ->insertGetId([
+                            'company_name' => $request->company_name,
+                            // 'company_email' => $request->company_email,
+                            'contact_no' => $request->contact_no,
+                            'trade_license_no' => $request->trade_license_no,
+                            'bin_no' => $request->bin_no,
+                            'tin_no' => $request->tin_no,
+                            'company_address' => $request->company_address,
+                            'division_id' => $request->division,
+                            'district_id' => $request->district,
+                            'country' => $request->country
+                        ]);
+
+            $business_type = DB::table('business_types')
+                            ->insertGetId([
+                            'business_type' => $request->business_type
+                            ]);
+
+            if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password'], 'status' => 1])) {
+                return redirect('backend/dashboard');
+            } else {
+                return redirect()->back()->with('error_message', 'Invalid Email or Password');
+            }
+        }
+        
+        
+        $divisions = DB::table('divisions')->get(); 
+        return view('backend.register',compact('divisions'));
     }
+
+    public function division(Request $request){
+
+        $selectedDivision = $request->input('data');
+        $districts = DB::table('districts')
+                    ->where('division_id',$selectedDivision)
+                    ->get();
+  
+      $str="<option value=''>-- Select --</option>";
+      foreach ($districts as $district) {
+         $str .= "<option value='$district->id'> $district->name </option>";
+         
+      }
+      echo $str;
+      }
 
     public function logout()
     {
         Auth::guard('admin')->logout();
         return redirect('backend/login');
     }
+
+    
 }
