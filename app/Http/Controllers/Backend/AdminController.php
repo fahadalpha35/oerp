@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Hash;
 use Auth;
-use App\Models\Admin;
+// use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Intervention\Image\Facades\Image;
 use DB;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -24,9 +26,9 @@ class AdminController extends Controller
     {
         if ($request->isMethod('post')) {
             $data = $request->all();
-            if (Hash::check($data['current_password'], Auth::guard('admin')->user()->password)) {
+            if (Hash::check($data['current_password'], Auth::user()->password)) {
                 if ($data['confirm_password'] == $data['new_password']) {
-                    Admin::where('id', Auth::guard('admin')->user()->id)->update(['password' => bcrypt($data['new_password'])]);
+                    User::where('id', Auth::user()->id)->update(['password' => bcrypt($data['new_password'])]);
                     return redirect()->back()->with('success_message', 'Password has been updated successfully!');
                 } else {
                     return redirect()->back()->with('error_message', 'New Password and Confirm Password do not match!');
@@ -35,85 +37,85 @@ class AdminController extends Controller
                 return redirect()->back()->with('error_message', 'Your current password is incorrect!');
             }
         }
-        $adminDetails = Admin::where('email', Auth::guard('admin')->user()->email)->first()->toArray();
+        $adminDetails = User::where('email', Auth::user()->email)->first()->toArray();
         return view('backend.settings.update_admin_password')->with(compact('adminDetails'));
     }
 
     public function checkAdminPassword(Request $request)
     {
         $data = $request->all();
-        if (Hash::check($data['current_password'], Auth::guard('admin')->user()->password)) {
+        if (Hash::check($data['current_password'], Auth::user()->password)) {
             return "true";
         } else {
             return "false";
         }
     }
 
-    public function updateAdminDetails(Request $request)
-    {
-        if ($request->isMethod('post')) {
-            $data = $request->all();
+    // public function updateAdminDetails(Request $request)
+    // {
+    //     if ($request->isMethod('post')) {
+    //         $data = $request->all();
 
-            $rules = [
-                'admin_name' => 'required|regex:/^[\pL\s\-]+$/u',
-                'admin_mobile' => 'required|numeric',
-                'admin_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048',
-            ];
+    //         $rules = [
+    //             'admin_name' => 'required|regex:/^[\pL\s\-]+$/u',
+    //             'admin_mobile' => 'required|numeric',
+    //             'admin_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048',
+    //         ];
 
-            $customMessages = [
-                'admin_name.required' => 'Name is required',
-                'admin_name.regex' => 'Valid Name is required',
-                'admin_mobile.required' => 'Mobile Number is required',
-                'admin_mobile.numeric' => 'Valid Mobile Number is required',
-                'admin_image.image' => 'Valid Image is required',
-                'admin_image.mimes' => 'Allowed image types: jpeg, png, jpg, gif, svg',
-                'admin_image.max' => 'Image size should not exceed 2MB',
-            ];
+    //         $customMessages = [
+    //             'admin_name.required' => 'Name is required',
+    //             'admin_name.regex' => 'Valid Name is required',
+    //             'admin_mobile.required' => 'Mobile Number is required',
+    //             'admin_mobile.numeric' => 'Valid Mobile Number is required',
+    //             'admin_image.image' => 'Valid Image is required',
+    //             'admin_image.mimes' => 'Allowed image types: jpeg, png, jpg, gif, svg',
+    //             'admin_image.max' => 'Image size should not exceed 2MB',
+    //         ];
 
-            $this->validate($request, $rules, $customMessages);
+    //         $this->validate($request, $rules, $customMessages);
 
-            // Handle Image Upload
-            if ($request->hasFile('admin_image')) {
-                $image_tmp = $request->file('admin_image');
-                if ($image_tmp->isValid()) {
-                    // Get Image Extension
-                    $extension = $image_tmp->getClientOriginalExtension();
-                    // Generate New Image Name
-                    $imageName = rand(111, 99999) . '.' . $extension;
-                    $imagePath = public_path('backend/images/profile/' . $imageName);
+    //         // Handle Image Upload
+    //         if ($request->hasFile('admin_image')) {
+    //             $image_tmp = $request->file('admin_image');
+    //             if ($image_tmp->isValid()) {
+    //                 // Get Image Extension
+    //                 $extension = $image_tmp->getClientOriginalExtension();
+    //                 // Generate New Image Name
+    //                 $imageName = rand(111, 99999) . '.' . $extension;
+    //                 $imagePath = public_path('backend/images/profile/' . $imageName);
                     
-                    // Upload the image using Intervention Image
-                    try {
-                        Image::make($image_tmp)->resize(300, 300)->save($imagePath);
-                    } catch (\Intervention\Image\Exception\NotReadableException $e) {
-                        return redirect()->back()->with('error_message', 'Unable to read the image file. Please try a different file.');
-                    }
-                }
-            } else if (!empty($data['current_admin_image'])) {
-                $imageName = $data['current_admin_image'];
-            } else {
-                $imageName = "";
-            }
+    //                 // Upload the image using Intervention Image
+    //                 try {
+    //                     Image::make($image_tmp)->resize(300, 300)->save($imagePath);
+    //                 } catch (\Intervention\Image\Exception\NotReadableException $e) {
+    //                     return redirect()->back()->with('error_message', 'Unable to read the image file. Please try a different file.');
+    //                 }
+    //             }
+    //         } else if (!empty($data['current_admin_image'])) {
+    //             $imageName = $data['current_admin_image'];
+    //         } else {
+    //             $imageName = "";
+    //         }
 
-            // Update Admin Details
-            Admin::where('id', Auth::guard('admin')->user()->id)->update([
-                'name' => $data['admin_name'],
-                'mobile' => $data['admin_mobile'],
-                'image' => $imageName
-            ]);
+    //         // Update Admin Details
+    //         Admin::where('id', Auth::user()->id)->update([
+    //             'name' => $data['admin_name'],
+    //             'mobile' => $data['admin_mobile'],
+    //             'image' => $imageName
+    //         ]);
 
-            return redirect()->back()->with('success_message', 'Admin details updated successfully!');
-        }
+    //         return redirect()->back()->with('success_message', 'Admin details updated successfully!');
+    //     }
 
-        $adminDetails = Auth::guard('admin')->user()->toArray();
-        return view('backend.settings.update_admin_details')->with(compact('adminDetails'));
-    }
+    //     $adminDetails = Auth::user()->toArray();
+    //     return view('backend.settings.update_admin_details')->with(compact('adminDetails'));
+    // }
 
     public function login(Request $request)
     {
         // Check if the admin is already logged in
-        if (Auth::guard('admin')->check()) {
-            return redirect('backend/dashboard'); // Redirect to dashboard if already logged in
+        if (Auth::check()) {
+            return redirect('/dashboard'); // Redirect to dashboard if already logged in
         }
 
         if ($request->isMethod('post')) {
@@ -124,8 +126,8 @@ class AdminController extends Controller
                 'password' => 'required',
             ]);
 
-            if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password'], 'status' => 1])) {
-                return redirect('backend/dashboard');
+            if (Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'active_status' => 1])) {
+                return redirect('/dashboard');
             } else {
                 return redirect()->back()->with('error_message', 'Invalid Email or Password');
             }
@@ -141,7 +143,7 @@ class AdminController extends Controller
 
             $validated = $request->validate([
                 'email' => 'required|email|max:255',
-                'password' => 'required',
+                'password' => 'required|min:8',
             ]);
 
             $company = DB::table('companies')
@@ -160,11 +162,41 @@ class AdminController extends Controller
 
             $business_type = DB::table('business_types')
                             ->insertGetId([
-                            'business_type' => $request->business_type
+                            'business_type' => $request->business_type,
+                            'business_status' => 1
                             ]);
 
-            if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password'], 'status' => 1])) {
-                return redirect('backend/dashboard');
+
+            // $user = DB::table('users')
+            //         ->insertGetId([
+            //             'name'=> $request->name,
+            //             'role_id'=> 2,
+            //             'company_id'=> $company,
+            //             'email'=> $request->email,
+            //             'password'=> Hash::make($request->password),
+            //             'active_status'=> 1,
+            //             'company_business_type'=> $business_type
+            //             ]);
+
+
+            $user = new User();
+            $user->name = $request->name;
+            $user->role_id = 2;
+            $user->company_id = $company;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->active_status = '1';
+            $user->company_business_type = $business_type;
+            $user->registration_date = Carbon::now()->toDateString();       
+            $user->save();
+
+            $admin = DB::table('admins')
+                        ->insertGetId([
+                        'user_id'=>$user->id
+                        ]);
+
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                return redirect('/dashboard');
             } else {
                 return redirect()->back()->with('error_message', 'Invalid Email or Password');
             }
@@ -192,8 +224,9 @@ class AdminController extends Controller
 
     public function logout()
     {
-        Auth::guard('admin')->logout();
-        return redirect('backend/login');
+        // Auth::logout();
+        Auth::logout();
+        return redirect('/login');
     }
 
     

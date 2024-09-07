@@ -52,10 +52,7 @@
                                 <label >Admin Username/Email</label>
                                 <input type="text" class="form-control" value="{{ $adminDetails['email'] }}" readonly="">
                             </div>
-                            <div class="form-group">
-                                <label >Admin Type</label>
-                                <input type="email" class="form-control" value="{{ $adminDetails['type'] }}" readonly="">
-                            </div>
+                            
                             <div class="form-group">
                                 <label for="current_password">Current Password</label>
                                 <input type="password" class="form-control" id="current_password" placeholder="Enter Current Password" name="current_password" required="">

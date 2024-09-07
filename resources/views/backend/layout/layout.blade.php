@@ -7,23 +7,23 @@
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <title>Otithee ERP</title>
         <!-- plugins:css -->
-        <link rel="stylesheet" href="{{ url('backend/vendors/feather/feather.css') }}">
-        <link rel="stylesheet" href="{{ url('backend/vendors/ti-icons/css/themify-icons.css') }}">
-        <link rel="stylesheet" href="{{ url('backend/vendors/css/vendor.bundle.base.css') }}">
+        <link rel="stylesheet" href="{{ asset('backend/vendors/feather/feather.css') }}">
+        <link rel="stylesheet" href="{{ asset('backend/vendors/ti-icons/css/themify-icons.css') }}">
+        <link rel="stylesheet" href="{{ asset('backend/vendors/css/vendor.bundle.base.css') }}">
         <!-- endinject -->
         <!-- Plugin css for this page -->
-        <link rel="stylesheet" href="{{ url('backend/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
-        <link rel="stylesheet" href="{{ url('backend/vendors/ti-icons/css/themify-icons.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url('backend/js/select.dataTables.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('backend/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
+        <link rel="stylesheet" href="{{ asset('backend/vendors/ti-icons/css/themify-icons.css') }}">
+        <link rel="stylesheet"  href="{{ asset('backend/js/select.dataTables.min.css') }}">
         <!-- End plugin css for this page -->
         <!-- inject:css -->
-        <link rel="stylesheet" href="{{ url('backend/css/vertical-layout-light/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('backend/css/vertical-layout-light/style.css') }}">
         <!-- endinject -->
-        <link rel="shortcut icon" href="{{ url('backend/images/favicon.png') }}" />
+        <link rel="shortcut icon" href="{{ asset('backend/images/favicon.png') }}" />
         <!-- font-awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
          <!-- Plugin css for this page -->
-        <link rel="stylesheet" href="{{ url('backend/vendors/mdi/css/materialdesignicons.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('backend/vendors/mdi/css/materialdesignicons.min.css') }}">
 
         <style>
         .nav-item .collapse {
@@ -177,7 +177,7 @@
                             </div>
                             <ul class="chat-list">
                                 <li class="list active">
-                                    <div class="profile"><img src="{{ url('backend/images/faces/face1.jpg') }}" alt="image"><span class="online"></span></div>
+                                    <div class="profile"><img src="{{ asset('backend/images/faces/face1.jpg') }}" alt="image"><span class="online"></span></div>
                                     <div class="info">
                                         <p>Thomas Douglas</p>
                                         <p>Available</p>
@@ -185,7 +185,7 @@
                                     <small class="text-muted my-auto">19 min</small>
                                 </li>
                                 <li class="list">
-                                    <div class="profile"><img src="{{ url('backend/images/faces/face2.jpg') }}" alt="image"><span class="offline"></span></div>
+                                    <div class="profile"><img src="{{ asset('backend/images/faces/face2.jpg') }}" alt="image"><span class="offline"></span></div>
                                     <div class="info">
                                         <div class="wrapper d-flex">
                                             <p>Catherine</p>
@@ -196,7 +196,7 @@
                                     <small class="text-muted my-auto">23 min</small>
                                 </li>
                                 <li class="list">
-                                    <div class="profile"><img src="{{ url('backend/images/faces/face3.jpg') }}" alt="image"><span class="online"></span></div>
+                                    <div class="profile"><img src="{{ asset('backend/images/faces/face3.jpg') }}" alt="image"><span class="online"></span></div>
                                     <div class="info">
                                         <p>Daniel Russell</p>
                                         <p>Available</p>
@@ -204,7 +204,7 @@
                                     <small class="text-muted my-auto">14 min</small>
                                 </li>
                                 <li class="list">
-                                    <div class="profile"><img src="{{ url('backend/images/faces/face4.jpg') }}" alt="image"><span class="offline"></span></div>
+                                    <div class="profile"><img src="{{ asset('backend/images/faces/face4.jpg') }}" alt="image"><span class="offline"></span></div>
                                     <div class="info">
                                         <p>James Richardson</p>
                                         <p>Away</p>
@@ -212,7 +212,7 @@
                                     <small class="text-muted my-auto">2 min</small>
                                 </li>
                                 <li class="list">
-                                    <div class="profile"><img src="{{ url('backend/images/faces/face5.jpg') }}" alt="image"><span class="online"></span></div>
+                                    <div class="profile"><img src="{{ asset('backend/images/faces/face5.jpg') }}" alt="image"><span class="online"></span></div>
                                     <div class="info">
                                         <p>Madeline Kennedy</p>
                                         <p>Available</p>
@@ -220,7 +220,7 @@
                                     <small class="text-muted my-auto">5 min</small>
                                 </li>
                                 <li class="list">
-                                    <div class="profile"><img src="{{ url('backend/images/faces/face6.jpg') }}" alt="image"><span class="online"></span></div>
+                                    <div class="profile"><img src="{{ asset('backend/images/faces/face6.jpg') }}" alt="image"><span class="online"></span></div>
                                     <div class="info">
                                         <p>Sarah Graves</p>
                                         <p>Available</p>
@@ -249,7 +249,7 @@
         <!-- ********* samer js  start **********-->
 
         <!-- Include jQuery -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> --}}
 
         <!-- Include Popper.js -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -258,6 +258,7 @@
 
         <script>
         $(document).ready(function() {
+         
     // Check if the current page is within the first-level menu
             $('.nav-item').each(function() {
                 if ($(this).find('.nav-link.active').length > 0) {
@@ -276,23 +277,23 @@
 
         <!-- endinject -->
         <!-- Plugin js for this page -->
-        <script src="{{ url('backend/vendors/chart.js/Chart.min.js') }}"></script>
-        <script src="{{ url('backend/vendors/datatables.net/jquery.dataTables.js') }}"></script>
-        <script src="{{ url('backend/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
-        <script src="{{ url('backend/js/dataTables.select.min.js') }}"></script>
+        <script src="{{ asset('backend/vendors/chart.js/Chart.min.js') }}"></script>
+        <script src="{{ asset('backend/vendors/datatables.net/jquery.dataTables.js') }}"></script>
+        <script src="{{ asset('backend/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
+        <script src="{{ asset('backend/js/dataTables.select.min.js') }}"></script>
         <!-- End plugin js for this page -->
         <!-- inject:js -->
-        <script src="{{ url('backend/js/off-canvas.js') }}"></script>
-        <script src="{{ url('backend/js/hoverable-collapse.js') }}"></script>
-        <script src="{{ url('backend/js/template.js') }}"></script>
-        <script src="{{ url('backend/js/settings.js') }}"></script>
-        <script src="{{ url('backend/js/todolist.js') }}"></script>
+        <script src="{{ asset('backend/js/off-canvas.js') }}"></script>
+        <script src="{{ asset('backend/js/hoverable-collapse.js') }}"></script>
+        <script src="{{ asset('backend/js/template.js') }}"></script>
+        <script src="{{ asset('backend/js/settings.js') }}"></script>
+        <script src="{{ asset('backend/js/todolist.js') }}"></script>
         <!-- endinject -->
         <!-- Custom js for this page-->
-        <script src="{{ url('backend/js/dashboard.js') }}"></script>
-        <script src="{{ url('backend/js/Chart.roundedBarCharts.js') }}"></script>
+        <script src="{{ asset('backend/js/dashboard.js') }}"></script>
+        <script src="{{ asset('backend/js/Chart.roundedBarCharts.js') }}"></script>
 
-        <script src="{{ url('backend/js/custom.js') }}"></script>
+        <script src="{{ asset('backend/js/custom.js') }}"></script>
         <!-- End custom js for this page-->
          
     </body>

@@ -2,21 +2,30 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('backend/dashboard') }}">
+            <a class="nav-link" href="{{ url('dashboard') }}">
                 <i class="icon-grid menu-icon"></i>
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="@if(Request::is('update-admin-password')) true
+                      @elseif(Request::is('update-admin-details')) true
+                      @else false
+                      @endif" aria-controls="ui-basic">
                 <i class="mdi mdi-cogs  menu-icon"></i>&nbsp;
                 <span class="menu-title">Settings</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ url('backend/update-admin-password') }}">Update Password</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ url('backend/update-admin-details') }}">Update Details</a></li>
+                    <li class="nav-item">
+                        <a href="{{ url('update-admin-password') }}" class="nav-link {{ Request::is('update-admin-password') ? 'active' : '' }}" style="{{ Request::is('update-admin-password') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                            {{-- <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('update-admin-password') ? 'color: white; !important' : ''}}"></i> --}}
+                            <span class="menu-arrow" style="{{ Request::is('update-admin-password') ? 'color: white; !important' : ''}}">Update Password</span>
+                          </a>
+                        {{-- <a class="nav-link" href="{{ url('update-admin-password') }}">Update Password</a> --}}
+                    </li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ url('update-admin-details') }}">Update Details</a></li>
                 </ul>
             </div>
         </li>
@@ -58,7 +67,7 @@
                             @endif" id="Employee" style="margin-top: -2px;">
                   
                 <li class="nav-item">
-                    <a href="{{ url('employees') }}" class="nav-link {{ Request::is('employees') ? 'active' : '' }}" style="{{ Request::is('employees') ? 'background-color: #908ec4; color: white; !important' : ''}}">
+                    <a href="{{ url('employees') }}" class="nav-link {{ Request::is('employees') ? 'active' : '' }}" style="{{ Request::is('employees') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('employees') ? 'color: white; !important' : ''}}"></i>
                         <span class="menu-arrow" style="{{ Request::is('employees') ? 'color: white; !important' : ''}}">Employee List</span>
                       </a>
@@ -66,7 +75,7 @@
 
                   <!-- <li class="nav-item">
 
-                    <a href="{{ url('employees/create') }}" class="nav-link {{ Request::is('employees/create') ? 'active' : '' }}" style="{{ Request::is('employees/create') ? 'background-color: #908ec4; color: white; !important' : ''}}">
+                    <a href="{{ url('employees/create') }}" class="nav-link {{ Request::is('employees/create') ? 'active' : '' }}" style="{{ Request::is('employees/create') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('employees/create') ? 'color: white; !important' : ''}}"></i>
                         <span class="menu-arrow" style="{{ Request::is('employees/create') ? 'color: white; !important' : ''}}">Add Employee</span>
 
@@ -74,7 +83,7 @@
                   </li> -->
 
                   <li class="nav-item">
-                    <a href="{{ url('employees') }}" class="nav-link {{ Request::is('employees') ? 'active' : '' }}" style="{{ Request::is('employees') ? 'background-color: #908ec4; color: white; !important' : ''}}">
+                    <a href="{{ url('employees') }}" class="nav-link {{ Request::is('employees') ? 'active' : '' }}" style="{{ Request::is('employees') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('employees') ? 'color: white; !important' : ''}}"></i>
                         <span class="menu-arrow" style="{{ Request::is('employees') ? 'color: white; !important' : ''}}">Employee Profile</span>
                       </a>

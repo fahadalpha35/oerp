@@ -1,3 +1,11 @@
+@if(Auth::check())
+@php
+$url = url('dashboard');
+header("Location: $url");
+exit();
+@endphp
+@else
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -133,7 +141,7 @@
                                 </button>
                             </div>
                             @endif
-                        <form class="pt-3" action="{{route('admin.register')}}" method="post">
+                        <form class="pt-3" action="{{route('register')}}" method="post">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12 col-sm-12">
@@ -242,7 +250,7 @@
                                     {{-- <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="#">Register</a> --}}
                                 </div>
                                 <div class="text-center mt-4 font-weight-light">
-                                    Already have an account? <a href="{{route('admin.login')}}" class="text-primary">Login</a>
+                                    Already have an account? <a href="{{route('login')}}" class="text-primary">Login</a>
                                 </div>
                             </form>
                         </div>
@@ -298,7 +306,7 @@
             axios.defaults.withCredentials = true;
             axios.defaults.headers.common['X-CSRF-TOKEN'] = getCsrfToken();
 
-            axios.post('/backend/division',{
+            axios.post('/division',{
                     data: selectedDivision
                 }).then(response=>{
                 $('#district').html(response.data);
@@ -335,3 +343,4 @@
 
 </body>
 </html>
+@endif
