@@ -25,6 +25,9 @@
          <!-- Plugin css for this page -->
         <link rel="stylesheet" href="{{ asset('backend/vendors/mdi/css/materialdesignicons.min.css') }}">
 
+        <!-- SweetAlert2 CSS -->
+        <link href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.13.3/dist/sweetalert2.min.css " rel="stylesheet">
+
         <style>
         .nav-item .collapse {
             margin-bottom: -5px
@@ -282,6 +285,16 @@
         <script src="{{ asset('backend/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
         <script src="{{ asset('backend/js/dataTables.select.min.js') }}"></script>
         <!-- End plugin js for this page -->
+
+
+        <!-- SweetAlert2 JS -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.13.3/dist/sweetalert2.all.min.js"></script>
+
+        <!-- Axios -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+        
+        @stack('masterScripts')
+
         <!-- inject:js -->
         <script src="{{ asset('backend/js/off-canvas.js') }}"></script>
         <script src="{{ asset('backend/js/hoverable-collapse.js') }}"></script>

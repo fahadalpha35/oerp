@@ -40,13 +40,12 @@ Route::get('/clear-cache', function () {
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
-        // Admin Dashboard Route
+        // Dashboard Route
         Route::get('/dashboard', [AdminController::class, 'dashboard']);  
-        // Update Admin Password
+        // Update Password
         Route::match(['get', 'post'], 'update-admin-password', [AdminController::class, 'updateAdminPassword']);
-        // Check Admin Password
-        Route::post('check-admin-password', [AdminController::class, 'checkAdminPassword']);
-        // Update Admin Details
+
+        // Update Personal Details
         Route::match(['get', 'post'], 'update-admin-details', [AdminController::class, 'updateAdminDetails']);
     
     });

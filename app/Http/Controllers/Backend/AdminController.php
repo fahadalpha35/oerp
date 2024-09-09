@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Hash;
 use Auth;
+use Illuminate\Support\Facades\Validator;
 // use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -25,21 +26,64 @@ class AdminController extends Controller
     public function updateAdminPassword(Request $request)
     {
         if ($request->isMethod('post')) {
-            $data = $request->all();
-            if (Hash::check($data['current_password'], Auth::user()->password)) {
-                if ($data['confirm_password'] == $data['new_password']) {
-                    User::where('id', Auth::user()->id)->update(['password' => bcrypt($data['new_password'])]);
-                    return redirect()->back()->with('success_message', 'Password has been updated successfully!');
-                } else {
-                    return redirect()->back()->with('error_message', 'New Password and Confirm Password do not match!');
+            // $data = $request->all();
+            // if (Hash::check($data['current_password'], Auth::user()->password)) {
+            //     if ($data['confirm_password'] == $data['new_password']) {
+            //         User::where('id', Auth::user()->id)->update(['password' => bcrypt($data['new_password'])]);
+            //         return redirect()->back()->with('success_message', 'Password has been updated successfully!');
+            //     } else {
+            //         return redirect()->back()->with('error_message', 'New Password and Confirm Password do not match!');
+            //     }
+            // } else {
+            //     return redirect()->back()->with('error_message', 'Your current password is incorrect!');
+            // }
+
+
+             $user = Auth::user();
+
+            $validator = \Validator::make($request->all(),[
+                    'current_password' => 'required',
+                    'new_password' => [
+                        'required',
+                        'string',
+                        'min:7',
+                        
+                        function ($attribute, $value, $fail) use ($user) {
+                            if (Hash::check($value, $user->password)) {
+                                $fail('The new password must be different from the current password.');
+                            }
+                        },
+                    ],
+                ]);
+
+                if ($validator->fails()) {
+                    return response()->json($validator->errors(), 422);
                 }
-            } else {
-                return redirect()->back()->with('error_message', 'Your current password is incorrect!');
-            }
+
+                if (!Hash::check($request->current_password, $user->password)) {
+                    return response()->json(['error' => 'Current password is incorrect'], 422);
+                }
+
+                $user->password = Hash::make($request->new_password);
+                $user->save();
+
+                Auth::guard('web')->logout();
+
+                return response()->json(['message' => 'Password is changed successfully!']);
+
         }
-        $adminDetails = User::where('email', Auth::user()->email)->first()->toArray();
-        return view('backend.settings.update_admin_password')->with(compact('adminDetails'));
+
+        $user_email = Auth::user()->email;
+        // $adminDetails = User::where('email', Auth::user()->email)->first()->toArray();
+        // return view('backend.settings.update_admin_password')->with(compact('adminDetails'));
+        return view('backend.settings.update_admin_password',compact('user_email'));
     }
+
+
+
+
+
+
 
     public function checkAdminPassword(Request $request)
     {
