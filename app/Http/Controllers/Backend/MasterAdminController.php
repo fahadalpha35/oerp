@@ -14,7 +14,7 @@ use Intervention\Image\Facades\Image;
 use DB;
 use Carbon\Carbon;
 
-class AdminController extends Controller
+class MasterAdminController extends Controller
 {
     use ValidatesRequests;
 
@@ -23,24 +23,11 @@ class AdminController extends Controller
         return view('backend.dashboard');
     }
 
-    public function updateAdminPassword(Request $request)
+    public function updatePassword(Request $request)
     {
         if ($request->isMethod('post')) {
-            // $data = $request->all();
-            // if (Hash::check($data['current_password'], Auth::user()->password)) {
-            //     if ($data['confirm_password'] == $data['new_password']) {
-            //         User::where('id', Auth::user()->id)->update(['password' => bcrypt($data['new_password'])]);
-            //         return redirect()->back()->with('success_message', 'Password has been updated successfully!');
-            //     } else {
-            //         return redirect()->back()->with('error_message', 'New Password and Confirm Password do not match!');
-            //     }
-            // } else {
-            //     return redirect()->back()->with('error_message', 'Your current password is incorrect!');
-            // }
-
-
+          
              $user = Auth::user();
-
             $validator = \Validator::make($request->all(),[
                     'current_password' => 'required',
                     'new_password' => [
@@ -76,7 +63,7 @@ class AdminController extends Controller
         $user_email = Auth::user()->email;
         // $adminDetails = User::where('email', Auth::user()->email)->first()->toArray();
         // return view('backend.settings.update_admin_password')->with(compact('adminDetails'));
-        return view('backend.settings.update_admin_password',compact('user_email'));
+        return view('backend.settings.update_password',compact('user_email'));
     }
 
 
@@ -95,65 +82,79 @@ class AdminController extends Controller
         }
     }
 
-    // public function updateAdminDetails(Request $request)
-    // {
-    //     if ($request->isMethod('post')) {
-    //         $data = $request->all();
+    public function updatePersonalDetails(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $data = $request->all();
 
-    //         $rules = [
-    //             'admin_name' => 'required|regex:/^[\pL\s\-]+$/u',
-    //             'admin_mobile' => 'required|numeric',
-    //             'admin_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048',
-    //         ];
+            $rules = [
+                'admin_name' => 'required|regex:/^[\pL\s\-]+$/u',
+                'admin_mobile' => 'required|numeric',
+                'admin_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048',
+            ];
 
-    //         $customMessages = [
-    //             'admin_name.required' => 'Name is required',
-    //             'admin_name.regex' => 'Valid Name is required',
-    //             'admin_mobile.required' => 'Mobile Number is required',
-    //             'admin_mobile.numeric' => 'Valid Mobile Number is required',
-    //             'admin_image.image' => 'Valid Image is required',
-    //             'admin_image.mimes' => 'Allowed image types: jpeg, png, jpg, gif, svg',
-    //             'admin_image.max' => 'Image size should not exceed 2MB',
-    //         ];
+            $customMessages = [
+                'admin_name.required' => 'Name is required',
+                'admin_name.regex' => 'Valid Name is required',
+                'admin_mobile.required' => 'Mobile Number is required',
+                'admin_mobile.numeric' => 'Valid Mobile Number is required',
+                'admin_image.image' => 'Valid Image is required',
+                'admin_image.mimes' => 'Allowed image types: jpeg, png, jpg, gif, svg',
+                'admin_image.max' => 'Image size should not exceed 2MB',
+            ];
 
-    //         $this->validate($request, $rules, $customMessages);
+            $this->validate($request, $rules, $customMessages);
 
-    //         // Handle Image Upload
-    //         if ($request->hasFile('admin_image')) {
-    //             $image_tmp = $request->file('admin_image');
-    //             if ($image_tmp->isValid()) {
-    //                 // Get Image Extension
-    //                 $extension = $image_tmp->getClientOriginalExtension();
-    //                 // Generate New Image Name
-    //                 $imageName = rand(111, 99999) . '.' . $extension;
-    //                 $imagePath = public_path('backend/images/profile/' . $imageName);
+            // Handle Image Upload
+            if ($request->hasFile('admin_image')) {
+                $image_tmp = $request->file('admin_image');
+                if ($image_tmp->isValid()) {
+                    // Get Image Extension
+                    $extension = $image_tmp->getClientOriginalExtension();
+                    // Generate New Image Name
+                    $imageName = rand(111, 99999) . '.' . $extension;
+                    $imagePath = public_path('backend/images/profile/' . $imageName);
                     
-    //                 // Upload the image using Intervention Image
-    //                 try {
-    //                     Image::make($image_tmp)->resize(300, 300)->save($imagePath);
-    //                 } catch (\Intervention\Image\Exception\NotReadableException $e) {
-    //                     return redirect()->back()->with('error_message', 'Unable to read the image file. Please try a different file.');
-    //                 }
-    //             }
-    //         } else if (!empty($data['current_admin_image'])) {
-    //             $imageName = $data['current_admin_image'];
-    //         } else {
-    //             $imageName = "";
-    //         }
+                    // Upload the image using Intervention Image
+                    try {
+                        Image::make($image_tmp)->resize(300, 300)->save($imagePath);
+                    } catch (\Intervention\Image\Exception\NotReadableException $e) {
+                        return redirect()->back()->with('error_message', 'Unable to read the image file. Please try a different file.');
+                    }
+                }
+            } else if (!empty($data['current_admin_image'])) {
+                $imageName = $data['current_admin_image'];
+            } else {
+                $imageName = "";
+            }
 
-    //         // Update Admin Details
-    //         Admin::where('id', Auth::user()->id)->update([
-    //             'name' => $data['admin_name'],
-    //             'mobile' => $data['admin_mobile'],
-    //             'image' => $imageName
-    //         ]);
+            // Update Admin Details
+            Admin::where('id', Auth::user()->id)->update([
+                'name' => $data['admin_name'],
+                'mobile' => $data['admin_mobile'],
+                'image' => $imageName
+            ]);
 
-    //         return redirect()->back()->with('success_message', 'Admin details updated successfully!');
-    //     }
+            return redirect()->back()->with('success_message', 'Admin details updated successfully!');
+        }
 
-    //     $adminDetails = Auth::user()->toArray();
-    //     return view('backend.settings.update_admin_details')->with(compact('adminDetails'));
-    // }
+        $user_id = Auth::user()->id;
+        $user_role_id = Auth::user()->role_id;
+
+        if($user_role_id = 2){
+
+            $personalDetails = DB::table('admins')
+                               ->leftJoin('users','admins.user_id','users.id')
+                               ->select('admins.*', 'users.name as user_full_name')
+                               ->where('admins.user_id',$user_id)
+                               ->first();
+
+            return view('backend.settings.update_personal_details')->with(compact('personalDetails'));
+            
+        }
+
+        
+    }
 
     public function login(Request $request)
     {
