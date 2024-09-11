@@ -8,8 +8,8 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="@if(Request::is('update-admin-password')) true
-                      @elseif(Request::is('update-admin-details')) true
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="@if(Request::is('update-password')) true
+                      @elseif(Request::is('update-personal-details')) true
                       @else false
                       @endif" aria-controls="ui-basic">
                 <i class="mdi mdi-cogs  menu-icon"></i>&nbsp;
@@ -19,13 +19,13 @@
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a href="{{ url('update-admin-password') }}" class="nav-link {{ Request::is('update-admin-password') ? 'active' : '' }}" style="{{ Request::is('update-admin-password') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                            <span class="menu-arrow" style="{{ Request::is('update-admin-password') ? 'color: white; !important' : ''}}">Update Password</span>
+                        <a href="{{ url('update-password') }}" class="nav-link {{ Request::is('update-password') ? 'active' : '' }}" style="{{ Request::is('update-password') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                            <span class="menu-arrow" style="{{ Request::is('update-password') ? 'color: white; !important' : ''}}">Update Password</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('update-admin-password') }}" class="nav-link {{ Request::is('update-admin-password') ? 'active' : '' }}" style="{{ Request::is('update-admin-password') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                            <span class="menu-arrow" style="{{ Request::is('update-admin-password') ? 'color: white; !important' : ''}}">Update Personal Details</span>
+                        <a href="{{ url('update-personal-details') }}" class="nav-link {{ Request::is('update-personal-details') ? 'active' : '' }}" style="{{ Request::is('update-personal-details') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                            <span class="menu-arrow" style="{{ Request::is('update-personal-details') ? 'color: white; !important' : ''}}">Update Personal Details</span>
                         </a>
                     </li>
                     {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('update-admin-details') }}">Update Personal Details</a></li> --}}

@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\MasterAdminController;
 use App\Http\Controllers\Backend\EmployeeUsersController;
 
 // use Illuminate\Support\Facades\Artisan;
@@ -21,14 +21,14 @@ Route::get('/clear-cache', function () {
 
 // Route::prefix('/backend')->group(function() {
 
-    Route::get('/', [AdminController::class, 'login'])->name('login');
+    Route::get('/', [MasterAdminController::class, 'login'])->name('login');
 
     // Admin Login Route
-    Route::match(['get', 'post'], 'login', [AdminController::class, 'login'])->name('login');
-    Route::match(['get', 'post'], 'register', [AdminController::class, 'register'])->name('register');
+    Route::match(['get', 'post'], 'login', [MasterAdminController::class, 'login'])->name('login');
+    Route::match(['get', 'post'], 'register', [MasterAdminController::class, 'register'])->name('register');
 
     //division and district depedancy
-    Route::post('/division',[AdminController::class,'division']);
+    Route::post('/division',[MasterAdminController::class,'division']);
 
     // Route::group(['middleware' => ['Admin']], function() {
 
@@ -41,18 +41,18 @@ Route::get('/clear-cache', function () {
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
         // Dashboard Route
-        Route::get('/dashboard', [AdminController::class, 'dashboard']);  
+        Route::get('/dashboard', [MasterAdminController::class, 'dashboard']);  
         // Update Password
-        Route::match(['get', 'post'], 'update-admin-password', [AdminController::class, 'updateAdminPassword']);
+        Route::match(['get', 'post'], 'update-password', [MasterAdminController::class, 'updatePassword']);
 
         // Update Personal Details
-        Route::match(['get', 'post'], 'update-admin-details', [AdminController::class, 'updateAdminDetails']);
+        Route::match(['get', 'post'], 'update-personal-details', [MasterAdminController::class, 'updatePersonalDetails']);
     
     });
 
     // Admin Logout
-    Route::match(['get', 'post'], 'update-admin-details', [AdminController::class, 'updateAdminDetails']);
-    Route::get('/logout', [AdminController::class, 'logout']);
+    // Route::match(['get', 'post'], 'update-admin-details', [MasterAdminController::class, 'updateAdminDetails']);
+    Route::get('/logout', [MasterAdminController::class, 'logout']);
 // });
 
 

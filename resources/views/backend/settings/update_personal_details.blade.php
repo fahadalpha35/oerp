@@ -3,67 +3,170 @@
 @section('content')
 <div class="container">
     <br><br><br>
-    <h2>Create Employee</h2>
+    <h2>Personal Details</h2>
     <br>
-    <form action="{{ route('employees.store') }}" method="POST">
+    <form action="" method="POST">
         @csrf
-        <div class="mb-3">
-            <label for="first_name" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ old('first_name') }}">
+        <div class="mb-3 form-group">
+            <label for="full_name" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="full_name" name="full_name" value="{{ $personalDetails->user_full_name }}">
         </div>
 
-        <div class="mb-3">
-            <label for="last_name" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name') }}">
+        <div class="mb-3 form-group">
+            <label for="father_name" class="form-label">Father Name</label>
+            <input type="text" class="form-control" id="father_name" name="father_name" value="{{ old('father_name') }}">
         </div>
 
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
+        <div class="mb-3 form-group">
+            <label for="mother_name" class="form-label">Mother Name</label>
+            <input type="text" class="form-control" id="mother_name" name="mother_name" value="{{ old('mother_name') }}">
         </div>
 
-        <div class="mb-3">
-            <label for="phone_number" class="form-label">Phone Number</label>
-            <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ old('phone_number') }}">
+        <div class="mb-3 form-group">
+            <label for="mobile_number" class="form-label">Mobile Number</label>
+            <input type="text" class="form-control" id="mobile_number" name="mobile_number" value="{{ old('mobile_number') }}">
         </div>
 
-        <div class="mb-3">
-            <label for="hire_date" class="form-label">Hire Date</label>
-            <input type="date" class="form-control" id="hire_date" name="hire_date" value="{{ old('hire_date') }}">
+        <div class="mb-3 form-group">
+            <label for="nid_number" class="form-label">NID Number</label>
+            <input type="text" class="form-control" id="nid_number" name="nid_number" value="{{ old('nid_number') }}">
         </div>
 
-        <div class="mb-3">
-            <label for="job_title" class="form-label">Job Title</label>
-            <input type="text" class="form-control" id="job_title" name="job_title" value="{{ old('job_title') }}">
+        <div class="mb-3 form-group">
+            <label for="present_address" class="form-label">Present Address</label>
+            <textarea class="form-control" id="present_address" name="present_address">{{ old('present_address') }}</textarea>
         </div>
 
-        <div class="mb-3">
-            <label for="department" class="form-label">Department</label>
-            <input type="text" class="form-control" id="department" name="department" value="{{ old('department') }}">
+        <div class="mb-3 form-group">
+            <label for="permanent_address" class="form-label">Permanent Address</label>
+            <textarea class="form-control" id="permanent_address" name="permanent_address">{{ old('permanent_address') }}</textarea>
         </div>
 
-        <div class="mb-3">
-            <label for="salary" class="form-label">Salary</label>
-            <input type="number" step="0.01" class="form-control" id="salary" name="salary" value="{{ old('salary') }}">
+        <div class="mb-3 form-group">
+            <label for="birth_date" class="form-label">Date of Birth</label>
+            <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{ old('birth_date') }}">
         </div>
 
-        <div class="mb-3">
-            <label for="manager_id" class="form-label">Manager</label>
-            <select class="form-control" id="manager_id" name="manager_id">
-                <option value="">Select a Manager</option>
-                @foreach ($managers as $manager)
-                    <option value="{{ $manager->id }}">{{ $manager->first_name }} {{ $manager->last_name }}</option>
-                @endforeach
+        <div class="form-group">
+            <label for="blood_group" class="form-label">Blood Group</label>
+            <select class="form-control select2" id="blood_group" name="blood_group" style="width: 100%;">
+                <option value="A+">A+</option>
+                <option value="B+">B+</option>                                
+                <option value="AB+">AB+</option>                                
+                <option value="O+">O+</option>                            
+                <option value="A-">A-</option>
+                <option value="B-">B-</option>                                
+                <option value="AB-">AB-</option>                                
+                <option value="O-">O-</option>   
+            </select>
+        </div>
+        
+        <div class="mb-3 form-group">
+            <label for="nationality" class="form-label">Nationality</label>
+            <input type="text" class="form-control" id="nationality" name="nationality" value="{{ old('nationality') }}">
+        </div>
+
+        <div class="form-group">
+            <label for="marital_status" class="form-label">Marital Status</label>
+            <select class="form-control select2" id="marital_status" name="marital_status" style="width: 100%;">
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Divorced">Divorced</option>  
             </select>
         </div>
 
-        <div class="mb-3">
-            <label for="status" class="form-label">Status</label>
-            <select class="form-control" id="status" name="status" required>
-                <option value="Active" {{ old('status') == 'Active' ? 'selected' : '' }}>Active</option>
-                <option value="Inactive" {{ old('status') == 'Inactive' ? 'selected' : '' }}>Inactive</option>
+        <div class="mb-3 form-group">
+            <label for="religion" class="form-label">Religion</label>
+            <input type="text" class="form-control" id="religion" name="religion" value="{{ old('religion') }}">
+        </div>
+
+
+        <div class="form-group">
+            <label for="marital_status" class="form-label">Gender</label>
+            <select class="form-control select2" id="gender" name="gender" style="width: 100%;">
+                <option value="Male"> Male</option>
+                <option value="Female">Female</option>   
             </select>
         </div>
+
+       
+        <div class="card">
+            <div class="card-header">
+              Emergency Contact Person Information
+            </div>
+          <div class="card-body">
+            <div class="row">
+              <h2>1.</h2>
+            </div>
+            <div class="row">
+              <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                  <label>Name <small style="color: red">*</small></label>
+                  <input type="text" required  class="form-control" id="emergency_contact_name_one" name="emergency_contact_name_one" value="{{old('emergency_contact_name_one')}}">
+                </div>
+              </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+                <label>Number <small style="color: red">*</small></label>
+                <input type="text" required class="form-control" id="emergency_contact_number_one" name="emergency_contact_number_one" value="{{old('emergency_contact_number_one')}}">
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+                <label>Relation <small style="color: red">*</small></label>
+                <input type="text" required class="form-control" id="emergency_contact_relation_one" name="emergency_contact_relation_one" value="{{old('emergency_contact_relation_one')}}">
+              </div>
+            </div>
+           </div>
+           <div class="row">
+            <h2>2.</h2>
+          </div>
+           <div class="row">
+            <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+                <label>Name <small style="color: red">*</small></label>
+                <input type="text" required  class="form-control" id="emergency_contact_name_two" name="emergency_contact_name_two" value="{{old('emergency_contact_name_two')}}">
+              </div>
+            </div>
+          <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+              <label>Number <small style="color: red">*</small></label>
+              <input type="text" required class="form-control" id="emergency_contact_number_two" name="emergency_contact_number_two" value="{{old('emergency_contact_number_two')}}">
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+              <label>Relation <small style="color: red">*</small></label>
+              <input type="text" required class="form-control" id="emergency_contact_relation_two" name="emergency_contact_relation_two" value="{{old('emergency_contact_relation_two')}}">
+            </div>
+          </div>
+         </div>
+         <div class="row">
+          <h2>3.</h2>
+        </div>
+         <div class="row">
+          <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" class="form-control" id="emergency_contact_name_three" name="emergency_contact_name_three" value="{{old('emergency_contact_name_three')}}">
+            </div>
+          </div>
+        <div class="col-md-4 col-sm-12">
+          <div class="form-group">
+            <label>Number</label>
+            <input type="text" class="form-control" id="emergency_contact_number_three" name="emergency_contact_number_three" value="{{old('emergency_contact_number_three')}}">
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+          <div class="form-group">
+            <label>Relation</label>
+            <input type="text" class="form-control" id="emergency_contact_relation_three" name="emergency_contact_relation_three" value="{{old('emergency_contact_relation_three')}}">
+          </div>
+        </div>
+       </div>
+
+          </div>
+          </div>
 
         <button type="submit" class="btn btn-primary">Create</button><br><br><br>
     </form>
