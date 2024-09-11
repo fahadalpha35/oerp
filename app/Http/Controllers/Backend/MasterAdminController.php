@@ -14,6 +14,10 @@ use Intervention\Image\Facades\Image;
 use DB;
 use Carbon\Carbon;
 
+// use Intervention\Image\ImageManager;
+// use Intervention\Image\Drivers\Gd\Driver;
+
+
 class MasterAdminController extends Controller
 {
     use ValidatesRequests;
@@ -85,25 +89,372 @@ class MasterAdminController extends Controller
     public function updatePersonalDetails(Request $request)
     {
         if ($request->isMethod('post')) {
-            $data = $request->all();
 
-            $rules = [
-                'admin_name' => 'required|regex:/^[\pL\s\-]+$/u',
-                'admin_mobile' => 'required|numeric',
-                'admin_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048',
-            ];
+            //  $data = $request->all();
 
-            $customMessages = [
-                'admin_name.required' => 'Name is required',
-                'admin_name.regex' => 'Valid Name is required',
-                'admin_mobile.required' => 'Mobile Number is required',
-                'admin_mobile.numeric' => 'Valid Mobile Number is required',
-                'admin_image.image' => 'Valid Image is required',
-                'admin_image.mimes' => 'Allowed image types: jpeg, png, jpg, gif, svg',
-                'admin_image.max' => 'Image size should not exceed 2MB',
-            ];
+            //  dd($data);
 
-            $this->validate($request, $rules, $customMessages);
+            // $rules = [
+            //     // 'admin_name' => 'required|regex:/^[\pL\s\-]+$/u',
+            //     'mobile_number' => 'required|numeric',
+            //     'profile_pic' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048',
+            // ];
+
+            // $customMessages = [
+            //     // 'admin_name.required' => 'Name is required',
+            //     // 'admin_name.regex' => 'Valid Name is required',
+            //     'mobile_number.required' => 'Mobile Number is required',
+            //     'mobile_number.numeric' => 'Valid Mobile Number is required',
+            //     'profile_pic.image' => 'Valid Image is required',
+            //     'profile_pic.mimes' => 'Allowed image types: jpeg, png, jpg, gif, svg',
+            //     'profile_pic.max' => 'Image size should not exceed 2MB',
+            // ];
+
+            // $this->validate($request, $rules, $customMessages);
+
+
+            $user_id = Auth::user()->id;
+            $user_role = Auth::user()->role_id;
+            
+    
+            //super admin (ossl)
+            if($user_role == 1){
+                $member = DB::table('super_admins')
+                        ->where('user_id',$user_id)
+                        ->first();
+                              
+                $member_name = $request->input('full_name');
+                $update_user_data = DB::table('users')
+                                    ->where('id', $user_id)
+                                    ->update(['name' => $member_name]);
+    
+    
+                $getPicFromDb = $member->profile_pic;
+                $admin_new_image = $request->file('profile_pic');
+                
+                
+                    if(!empty($admin_new_image)){
+    
+                        if(!empty($getPicFromDb)){
+                        $filePath = public_path('backend/images/' . $getPicFromDb);
+                            unlink($filePath);
+                        }
+    
+                    $manager = new ImageManager(new Driver());
+                    $profile_image = $manager->read($request->file('profile_pic'));
+                    $profile_image_file_name = date('Ymd') . time() . '.' . $admin_new_image->getClientOriginalExtension();
+                    $profile_image = $profile_image->resize(500,500);
+                    $profile_image->toJpg(80)->save(base_path('public/backend/images/profile/'.$profile_image_file_name));  
+                    $super_admin_image = 'profile/' . $profile_image_file_name;
+    
+                    
+                    $data = array();
+                    $data['full_name'] = $request->full_name;
+                    $data['father_name'] = $request->father_name;
+                    $data['mother_name'] = $request->mother_name;
+                    $data['mobile_number'] = $request->mobile_number;
+                    $data['nid_number'] = $request->nid_number;
+                    $data['present_address'] = $request->present_address;
+                    $data['permanent_address'] = $request->permanent_address;
+                    $data['birth_date'] = $request->birth_date;
+                    $data['blood_group'] = $request->blood_group;
+                    $data['nationality'] = $request->nationality;
+                    $data['marital_status'] = $request->marital_status;
+                    $data['religion'] = $request->religion;
+                    $data['gender'] = $request->gender;
+                    $data['profile_pic'] = $super_admin_image;
+
+                    $data['emergency_contact_name_one'] = $request->emergency_contact_name_one;
+                    $data['emergency_contact_number_one'] = $request->emergency_contact_number_one;
+                    $data['emergency_contact_relation_one'] = $request->emergency_contact_relation_one;
+
+                    $data['emergency_contact_name_two'] = $request->emergency_contact_name_two;
+                    $data['emergency_contact_number_two'] = $request->emergency_contact_number_two;
+                    $data['emergency_contact_relation_two'] = $request->emergency_contact_relation_two;
+
+                    $data['emergency_contact_name_three'] = $request->emergency_contact_name_three;
+                    $data['emergency_contact_number_three'] = $request->emergency_contact_number_three;
+                    $data['emergency_contact_relation_three'] = $request->emergency_contact_relation_three;
+    
+                    $updated = DB::table('super_admins')
+                              ->where('user_id', $user_id)
+                              ->update($data);
+    
+                    if(($updated == true) || ($update_user_data == true)){
+                        return redirect()->back()->with('success_message', 'Personal details updated successfully!');
+                    }else{
+                        return redirect()->back()->with('error_message', 'Personal details update is failed!');
+                    }
+    
+                    }else{
+    
+                        $data = array();
+                        $data['full_name'] = $request->full_name;
+                        $data['father_name'] = $request->father_name;
+                        $data['mother_name'] = $request->mother_name;
+                        $data['mobile_number'] = $request->mobile_number;
+                        $data['nid_number'] = $request->nid_number;
+                        $data['present_address'] = $request->present_address;
+                        $data['permanent_address'] = $request->permanent_address;
+                        $data['birth_date'] = $request->birth_date;
+                        $data['blood_group'] = $request->blood_group;
+                        $data['nationality'] = $request->nationality;
+                        $data['marital_status'] = $request->marital_status;
+                        $data['religion'] = $request->religion;
+                        $data['gender'] = $request->gender;
+                        // $data['profile_pic'] = $admin_image;
+                        $data['emergency_contact_name_one'] = $request->emergency_contact_name_one;
+                        $data['emergency_contact_number_one'] = $request->emergency_contact_number_one;
+                        $data['emergency_contact_relation_one'] = $request->emergency_contact_relation_one;
+
+                        $data['emergency_contact_name_two'] = $request->emergency_contact_name_two;
+                        $data['emergency_contact_number_two'] = $request->emergency_contact_number_two;
+                        $data['emergency_contact_relation_two'] = $request->emergency_contact_relation_two;
+
+                        $data['emergency_contact_name_three'] = $request->emergency_contact_name_three;
+                        $data['emergency_contact_number_three'] = $request->emergency_contact_number_three;
+                        $data['emergency_contact_relation_three'] = $request->emergency_contact_relation_three;
+        
+                        $updated = DB::table('super_admins')
+                                  ->where('user_id', $user_id)
+                                  ->update($data);
+    
+                        if(($updated == true) || ($update_user_data == true)){
+                            return redirect()->back()->with('success_message', 'Personal details updated successfully!');
+                        }else{
+                            return redirect()->back()->with('error_message', 'Personal details update is failed!');
+                        }
+                    }   
+           
+    
+             //master_admins   
+            }elseif($user_role == 2){
+
+                $member = DB::table('master_admins')
+                        ->where('user_id',$user_id)
+                        ->first();
+                              
+                $member_name = $request->input('full_name');
+                $update_user_data = DB::table('users')
+                                    ->where('id', $user_id)
+                                    ->update(['name' => $member_name]);
+    
+    
+                $getPicFromDb = $member->profile_pic;
+                $admin_new_image = $request->file('profile_pic');
+                
+                
+                    if(!empty($admin_new_image)){
+    
+                        if(!empty($getPicFromDb)){
+                        $filePath = public_path('backend/images/' . $getPicFromDb);
+                            unlink($filePath);
+                        }
+    
+                    // $manager = new ImageManager(new Driver());
+                    // $profile_image = $manager->read($request->file('profile_pic'));
+                    // $profile_image_file_name = date('Ymd') . time() . '.' . $admin_new_image->getClientOriginalExtension();
+                    // $profile_image = $profile_image->resize(500,500);
+                    // $profile_image->toJpg(80)->save(base_path('public/backend/images/profile/'.$profile_image_file_name));  
+                    // $master_admin_image = 'profile/' . $profile_image_file_name;
+
+                    
+                    // Generate New Image Name
+                    $imageName = date('Ymd') . time() . '.' . $admin_new_image->getClientOriginalExtension();
+                    $imagePath = public_path('backend/images/profile/' . $imageName);
+                    Image::make($admin_new_image)->resize(300, 300)->save($imagePath);
+                    $master_admin_image = 'profile/' . $imageName;
+    
+                    
+                    $data = array();
+                    $data['full_name'] = $request->full_name;
+                    $data['father_name'] = $request->father_name;
+                    $data['mother_name'] = $request->mother_name;
+                    $data['mobile_number'] = $request->mobile_number;
+                    $data['nid_number'] = $request->nid_number;
+                    $data['present_address'] = $request->present_address;
+                    $data['permanent_address'] = $request->permanent_address;
+                    $data['birth_date'] = $request->birth_date;
+                    $data['blood_group'] = $request->blood_group;
+                    $data['nationality'] = $request->nationality;
+                    $data['marital_status'] = $request->marital_status;
+                    $data['religion'] = $request->religion;
+                    $data['gender'] = $request->gender;
+                    $data['profile_pic'] = $master_admin_image;
+                    $data['emergency_contact_name_one'] = $request->emergency_contact_name_one;
+                    $data['emergency_contact_number_one'] = $request->emergency_contact_number_one;
+                    $data['emergency_contact_relation_one'] = $request->emergency_contact_relation_one;
+
+                    $data['emergency_contact_name_two'] = $request->emergency_contact_name_two;
+                    $data['emergency_contact_number_two'] = $request->emergency_contact_number_two;
+                    $data['emergency_contact_relation_two'] = $request->emergency_contact_relation_two;
+
+                    $data['emergency_contact_name_three'] = $request->emergency_contact_name_three;
+                    $data['emergency_contact_number_three'] = $request->emergency_contact_number_three;
+                    $data['emergency_contact_relation_three'] = $request->emergency_contact_relation_three;
+    
+                    $updated = DB::table('master_admins')
+                              ->where('user_id', $user_id)
+                              ->update($data);
+    
+                    if(($updated == true) || ($update_user_data == true)){
+                        return redirect()->back()->with('success_message', 'Personal details updated successfully!');
+                    }else{
+                        return redirect()->back()->with('error_message', 'Personal details update is failed!');
+                    }
+    
+                    }else{
+    
+                        $data = array();
+                        $data['full_name'] = $request->full_name;
+                        $data['father_name'] = $request->father_name;
+                        $data['mother_name'] = $request->mother_name;
+                        $data['mobile_number'] = $request->mobile_number;
+                        $data['nid_number'] = $request->nid_number;
+                        $data['present_address'] = $request->present_address;
+                        $data['permanent_address'] = $request->permanent_address;
+                        $data['birth_date'] = $request->birth_date;
+                        $data['blood_group'] = $request->blood_group;
+                        $data['nationality'] = $request->nationality;
+                        $data['marital_status'] = $request->marital_status;
+                        $data['religion'] = $request->religion;
+                        $data['gender'] = $request->gender;
+                        // $data['profile_pic'] = $admin_image;
+                        $data['emergency_contact_name_one'] = $request->emergency_contact_name_one;
+                        $data['emergency_contact_number_one'] = $request->emergency_contact_number_one;
+                        $data['emergency_contact_relation_one'] = $request->emergency_contact_relation_one;
+
+                        $data['emergency_contact_name_two'] = $request->emergency_contact_name_two;
+                        $data['emergency_contact_number_two'] = $request->emergency_contact_number_two;
+                        $data['emergency_contact_relation_two'] = $request->emergency_contact_relation_two;
+
+                        $data['emergency_contact_name_three'] = $request->emergency_contact_name_three;
+                        $data['emergency_contact_number_three'] = $request->emergency_contact_number_three;
+                        $data['emergency_contact_relation_three'] = $request->emergency_contact_relation_three;
+        
+                        $updated = DB::table('master_admins')
+                                  ->where('user_id', $user_id)
+                                  ->update($data);
+    
+                        if(($updated == true) || ($update_user_data == true)){
+                            return redirect()->back()->with('success_message', 'Personal details updated successfully!');
+                        }else{
+                            return redirect()->back()->with('error_message', 'Personal details update is failed!');
+                        }
+                    }
+
+            //admins
+            }else{
+
+                $member = DB::table('admins')
+                        ->where('user_id',$user_id)
+                        ->first();
+                              
+                $member_name = $request->input('full_name');
+                $update_user_data = DB::table('users')
+                                    ->where('id', $user_id)
+                                    ->update(['name' => $member_name]);
+    
+    
+                $getPicFromDb = $member->profile_pic;
+                $admin_new_image = $request->file('profile_pic');
+                
+                
+                    if(!empty($admin_new_image)){
+    
+                        if(!empty($getPicFromDb)){
+                        $filePath = public_path('backend/images/' . $getPicFromDb);
+                            unlink($filePath);
+                        }
+    
+                    $manager = new ImageManager(new Driver());
+                    $profile_image = $manager->read($request->file('profile_pic'));
+                    $profile_image_file_name = date('Ymd') . time() . '.' . $admin_new_image->getClientOriginalExtension();
+                    $profile_image = $profile_image->resize(500,500);
+                    $profile_image->toJpg(80)->save(base_path('public/backend/images/profile/'.$profile_image_file_name));  
+                    $admin_image = 'profile/' . $profile_image_file_name;
+    
+                    
+                    $data = array();
+                    $data['full_name'] = $request->full_name;
+                    $data['father_name'] = $request->father_name;
+                    $data['mother_name'] = $request->mother_name;
+                    $data['mobile_number'] = $request->mobile_number;
+                    $data['nid_number'] = $request->nid_number;
+                    $data['present_address'] = $request->present_address;
+                    $data['permanent_address'] = $request->permanent_address;
+                    $data['birth_date'] = $request->birth_date;
+                    $data['blood_group'] = $request->blood_group;
+                    $data['nationality'] = $request->nationality;
+                    $data['marital_status'] = $request->marital_status;
+                    $data['religion'] = $request->religion;
+                    $data['gender'] = $request->gender;
+                    $data['profile_pic'] = $admin_image;
+                    $data['emergency_contact_name_one'] = $request->emergency_contact_name_one;
+                    $data['emergency_contact_number_one'] = $request->emergency_contact_number_one;
+                    $data['emergency_contact_relation_one'] = $request->emergency_contact_relation_one;
+
+                    $data['emergency_contact_name_two'] = $request->emergency_contact_name_two;
+                    $data['emergency_contact_number_two'] = $request->emergency_contact_number_two;
+                    $data['emergency_contact_relation_two'] = $request->emergency_contact_relation_two;
+
+                    $data['emergency_contact_name_three'] = $request->emergency_contact_name_three;
+                    $data['emergency_contact_number_three'] = $request->emergency_contact_number_three;
+                    $data['emergency_contact_relation_three'] = $request->emergency_contact_relation_three;
+    
+                    $updated = DB::table('admins')
+                              ->where('user_id', $user_id)
+                              ->update($data);
+    
+                    if(($updated == true) || ($update_user_data == true)){
+                        return redirect()->back()->with('success_message', 'Personal details updated successfully!');
+                    }else{
+                        return redirect()->back()->with('error_message', 'Personal details update is failed!');
+                    }
+    
+                    }else{
+    
+                        $data = array();
+                        $data['full_name'] = $request->full_name;
+                        $data['father_name'] = $request->father_name;
+                        $data['mother_name'] = $request->mother_name;
+                        $data['mobile_number'] = $request->mobile_number;
+                        $data['nid_number'] = $request->nid_number;
+                        $data['present_address'] = $request->present_address;
+                        $data['permanent_address'] = $request->permanent_address;
+                        $data['birth_date'] = $request->birth_date;
+                        $data['blood_group'] = $request->blood_group;
+                        $data['nationality'] = $request->nationality;
+                        $data['marital_status'] = $request->marital_status;
+                        $data['religion'] = $request->religion;
+                        $data['gender'] = $request->gender;
+                        // $data['profile_pic'] = $admin_image;
+                        $data['emergency_contact_name_one'] = $request->emergency_contact_name_one;
+                        $data['emergency_contact_number_one'] = $request->emergency_contact_number_one;
+                        $data['emergency_contact_relation_one'] = $request->emergency_contact_relation_one;
+
+                        $data['emergency_contact_name_two'] = $request->emergency_contact_name_two;
+                        $data['emergency_contact_number_two'] = $request->emergency_contact_number_two;
+                        $data['emergency_contact_relation_two'] = $request->emergency_contact_relation_two;
+
+                        $data['emergency_contact_name_three'] = $request->emergency_contact_name_three;
+                        $data['emergency_contact_number_three'] = $request->emergency_contact_number_three;
+                        $data['emergency_contact_relation_three'] = $request->emergency_contact_relation_three;
+        
+                        $updated = DB::table('admins')
+                                  ->where('user_id', $user_id)
+                                  ->update($data);
+    
+                        if(($updated == true) || ($update_user_data == true)){
+                            return redirect()->back()->with('success_message', 'Personal details updated successfully!');
+                        }else{
+                            return redirect()->back()->with('error_message', 'Personal details update is failed!');
+                        }
+                    }
+            }
+
+
+            //************* old (start) **********/
 
             // Handle Image Upload
             if ($request->hasFile('admin_image')) {
@@ -136,23 +487,44 @@ class MasterAdminController extends Controller
             ]);
 
             return redirect()->back()->with('success_message', 'Admin details updated successfully!');
+            //************* old (start) **********/
         }
 
         $user_id = Auth::user()->id;
         $user_role_id = Auth::user()->role_id;
 
-        if($user_role_id = 2){
+        if($user_role_id == 1){
 
-            $personalDetails = DB::table('admins')
-                               ->leftJoin('users','admins.user_id','users.id')
-                               ->select('admins.*', 'users.name as user_full_name')
-                               ->where('admins.user_id',$user_id)
+            $personalDetails = DB::table('super_admins')
+                               ->leftJoin('users','super_admins.user_id','users.id')
+                               ->select('super_admins.*', 'users.name as user_full_name')
+                               ->where('super_admins.user_id',$user_id)
                                ->first();
+
 
             return view('backend.settings.update_personal_details')->with(compact('personalDetails'));
             
-        }
+        }elseif($user_role_id == 2){
 
+            $personalDetails = DB::table('master_admins')
+                               ->leftJoin('users','master_admins.user_id','users.id')
+                               ->select('master_admins.*', 'users.name as user_full_name')
+                               ->where('master_admins.user_id',$user_id)
+                               ->first();
+
+            // dd($personalDetails);
+
+            return view('backend.settings.update_personal_details')->with(compact('personalDetails'));
+        }else{
+
+            $personalDetails = DB::table('admins')
+            ->leftJoin('users','admins.user_id','users.id')
+            ->select('admins.*', 'users.name as user_full_name')
+            ->where('admins.user_id',$user_id)
+            ->first();
+
+            return view('backend.settings.update_personal_details')->with(compact('personalDetails'));
+        }
         
     }
 
@@ -235,7 +607,7 @@ class MasterAdminController extends Controller
             $user->registration_date = Carbon::now()->toDateString();       
             $user->save();
 
-            $admin = DB::table('admins')
+            $admin = DB::table('master_admins')
                         ->insertGetId([
                         'user_id'=>$user->id
                         ]);

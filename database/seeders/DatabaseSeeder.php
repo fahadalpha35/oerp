@@ -36,5 +36,11 @@ class DatabaseSeeder extends Seeder
             ]     
 
         ]);
+
+         // Then, insert into super_admins table
+         DB::table('super_admins')->insert([
+            ['id' => 1, 'user_id' => 1],
+            // Add more rows if needed
+        ]);
     }
 }
