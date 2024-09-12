@@ -94,23 +94,23 @@ class MasterAdminController extends Controller
 
             //  dd($data);
 
-            // $rules = [
-            //     // 'admin_name' => 'required|regex:/^[\pL\s\-]+$/u',
-            //     'mobile_number' => 'required|numeric',
-            //     'profile_pic' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048',
-            // ];
+            $rules = [
+                // 'admin_name' => 'required|regex:/^[\pL\s\-]+$/u',
+                'mobile_number' => 'required|numeric',
+                'profile_pic' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048',
+            ];
 
-            // $customMessages = [
-            //     // 'admin_name.required' => 'Name is required',
-            //     // 'admin_name.regex' => 'Valid Name is required',
-            //     'mobile_number.required' => 'Mobile Number is required',
-            //     'mobile_number.numeric' => 'Valid Mobile Number is required',
-            //     'profile_pic.image' => 'Valid Image is required',
-            //     'profile_pic.mimes' => 'Allowed image types: jpeg, png, jpg, gif, svg',
-            //     'profile_pic.max' => 'Image size should not exceed 2MB',
-            // ];
+            $customMessages = [
+                // 'admin_name.required' => 'Name is required',
+                // 'admin_name.regex' => 'Valid Name is required',
+                'mobile_number.required' => 'Mobile Number is required',
+                'mobile_number.numeric' => 'Valid Mobile Number is required',
+                'profile_pic.image' => 'Valid Image is required',
+                'profile_pic.mimes' => 'Allowed image types: jpeg, png, jpg, gif, svg',
+                'profile_pic.max' => 'Image size should not exceed 2MB',
+            ];
 
-            // $this->validate($request, $rules, $customMessages);
+            $this->validate($request, $rules, $customMessages);
 
 
             $user_id = Auth::user()->id;
@@ -140,13 +140,11 @@ class MasterAdminController extends Controller
                             unlink($filePath);
                         }
     
-                    $manager = new ImageManager(new Driver());
-                    $profile_image = $manager->read($request->file('profile_pic'));
-                    $profile_image_file_name = date('Ymd') . time() . '.' . $admin_new_image->getClientOriginalExtension();
-                    $profile_image = $profile_image->resize(500,500);
-                    $profile_image->toJpg(80)->save(base_path('public/backend/images/profile/'.$profile_image_file_name));  
-                    $super_admin_image = 'profile/' . $profile_image_file_name;
-    
+                  
+                    $imageName = date('Ymd') . time() . '.' . $admin_new_image->getClientOriginalExtension();
+                    $imagePath = public_path('backend/images/profile/' . $imageName);
+                    Image::make($admin_new_image)->resize(300, 300)->save($imagePath);
+                    $super_admin_image = 'profile/' . $imageName;
                     
                     $data = array();
                     $data['full_name'] = $request->full_name;
@@ -243,28 +241,18 @@ class MasterAdminController extends Controller
                 $getPicFromDb = $member->profile_pic;
                 $admin_new_image = $request->file('profile_pic');
                 
-                
                     if(!empty($admin_new_image)){
     
                         if(!empty($getPicFromDb)){
                         $filePath = public_path('backend/images/' . $getPicFromDb);
                             unlink($filePath);
                         }
-    
-                    // $manager = new ImageManager(new Driver());
-                    // $profile_image = $manager->read($request->file('profile_pic'));
-                    // $profile_image_file_name = date('Ymd') . time() . '.' . $admin_new_image->getClientOriginalExtension();
-                    // $profile_image = $profile_image->resize(500,500);
-                    // $profile_image->toJpg(80)->save(base_path('public/backend/images/profile/'.$profile_image_file_name));  
-                    // $master_admin_image = 'profile/' . $profile_image_file_name;
-
                     
                     // Generate New Image Name
                     $imageName = date('Ymd') . time() . '.' . $admin_new_image->getClientOriginalExtension();
                     $imagePath = public_path('backend/images/profile/' . $imageName);
                     Image::make($admin_new_image)->resize(300, 300)->save($imagePath);
-                    $master_admin_image = 'profile/' . $imageName;
-    
+                    $master_admin_image = 'profile/' . $imageName;  
                     
                     $data = array();
                     $data['full_name'] = $request->full_name;
@@ -367,12 +355,19 @@ class MasterAdminController extends Controller
                             unlink($filePath);
                         }
     
-                    $manager = new ImageManager(new Driver());
-                    $profile_image = $manager->read($request->file('profile_pic'));
-                    $profile_image_file_name = date('Ymd') . time() . '.' . $admin_new_image->getClientOriginalExtension();
-                    $profile_image = $profile_image->resize(500,500);
-                    $profile_image->toJpg(80)->save(base_path('public/backend/images/profile/'.$profile_image_file_name));  
-                    $admin_image = 'profile/' . $profile_image_file_name;
+                    // $manager = new ImageManager(new Driver());
+                    // $profile_image = $manager->read($request->file('profile_pic'));
+                    // $profile_image_file_name = date('Ymd') . time() . '.' . $admin_new_image->getClientOriginalExtension();
+                    // $profile_image = $profile_image->resize(500,500);
+                    // $profile_image->toJpg(80)->save(base_path('public/backend/images/profile/'.$profile_image_file_name));  
+                    // $admin_image = 'profile/' . $profile_image_file_name;
+
+
+                    // Generate New Image Name
+                    $imageName = date('Ymd') . time() . '.' . $admin_new_image->getClientOriginalExtension();
+                    $imagePath = public_path('backend/images/profile/' . $imageName);
+                    Image::make($admin_new_image)->resize(300, 300)->save($imagePath);
+                    $admin_image = 'profile/' . $imageName;  
     
                     
                     $data = array();
@@ -452,42 +447,6 @@ class MasterAdminController extends Controller
                         }
                     }
             }
-
-
-            //************* old (start) **********/
-
-            // Handle Image Upload
-            if ($request->hasFile('admin_image')) {
-                $image_tmp = $request->file('admin_image');
-                if ($image_tmp->isValid()) {
-                    // Get Image Extension
-                    $extension = $image_tmp->getClientOriginalExtension();
-                    // Generate New Image Name
-                    $imageName = rand(111, 99999) . '.' . $extension;
-                    $imagePath = public_path('backend/images/profile/' . $imageName);
-                    
-                    // Upload the image using Intervention Image
-                    try {
-                        Image::make($image_tmp)->resize(300, 300)->save($imagePath);
-                    } catch (\Intervention\Image\Exception\NotReadableException $e) {
-                        return redirect()->back()->with('error_message', 'Unable to read the image file. Please try a different file.');
-                    }
-                }
-            } else if (!empty($data['current_admin_image'])) {
-                $imageName = $data['current_admin_image'];
-            } else {
-                $imageName = "";
-            }
-
-            // Update Admin Details
-            Admin::where('id', Auth::user()->id)->update([
-                'name' => $data['admin_name'],
-                'mobile' => $data['admin_mobile'],
-                'image' => $imageName
-            ]);
-
-            return redirect()->back()->with('success_message', 'Admin details updated successfully!');
-            //************* old (start) **********/
         }
 
         $user_id = Auth::user()->id;
