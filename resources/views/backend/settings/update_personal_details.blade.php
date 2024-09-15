@@ -33,7 +33,7 @@
           </div>
       @endif
 
-    <form action="{{route('update-personal-details')}}" method="POST">
+    <form action="{{route('update-personal-details')}}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3 form-group">         

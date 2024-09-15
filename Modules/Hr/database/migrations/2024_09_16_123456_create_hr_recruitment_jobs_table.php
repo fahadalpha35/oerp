@@ -12,12 +12,12 @@ return new class extends Migration
             $table->id();
             $table->string('job_title');
             $table->text('job_description');
-            $table->unsignedBigInteger('department_id')->nullable();
+            $table->foreignId('department_id')->nullable()->constrained('hr_departments')->onDelete('cascade');
             $table->string('employment_type')->nullable();
             $table->string('salary_range')->nullable();
             $table->date('posted_date')->nullable();
             $table->date('closing_date')->nullable();
-            $table->enum('status', ['open', 'closed', 'filled'])->default('open');
+            $table->integer('status')->comment('1 = pending, 2 = paid'); // Adding a comment
             $table->timestamps();
         });
     }
