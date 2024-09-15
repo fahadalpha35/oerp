@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 04, 2024 at 02:45 PM
+-- Generation Time: Sep 14, 2024 at 02:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,24 +29,33 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admins` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `vendor_id` varchar(255) NOT NULL,
-  `mobile` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `status` tinyint(4) NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `profile_pic` varchar(255) DEFAULT NULL,
+  `full_name` varchar(255) DEFAULT NULL,
+  `father_name` varchar(255) DEFAULT NULL,
+  `mother_name` varchar(255) DEFAULT NULL,
+  `mobile_number` varchar(255) DEFAULT NULL,
+  `nid_number` varchar(255) DEFAULT NULL,
+  `present_address` varchar(255) DEFAULT NULL,
+  `permanent_address` varchar(255) DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
+  `blood_group` varchar(255) DEFAULT NULL,
+  `nationality` varchar(255) DEFAULT NULL,
+  `marital_status` varchar(255) DEFAULT NULL,
+  `religion` varchar(255) DEFAULT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `emergency_contact_name_one` varchar(255) DEFAULT NULL,
+  `emergency_contact_number_one` varchar(255) DEFAULT NULL,
+  `emergency_contact_relation_one` varchar(255) DEFAULT NULL,
+  `emergency_contact_name_two` varchar(255) DEFAULT NULL,
+  `emergency_contact_number_two` varchar(255) DEFAULT NULL,
+  `emergency_contact_relation_two` varchar(255) DEFAULT NULL,
+  `emergency_contact_name_three` varchar(255) DEFAULT NULL,
+  `emergency_contact_number_three` varchar(255) DEFAULT NULL,
+  `emergency_contact_relation_three` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `admins`
---
-
-INSERT INTO `admins` (`id`, `name`, `type`, `vendor_id`, `mobile`, `email`, `password`, `image`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'OSSL', 'superadmin', '0', '+8801790004664', 'oerp@gmail.com', '$2y$12$Xs6PRolwb.B73QlG5n6fW.qTr6yyM84Nl67chhwW7Cw84YdOWziLW', '', 1, '2024-09-04 10:41:22', '2024-09-04 04:42:12');
 
 -- --------------------------------------------------------
 
@@ -67,7 +76,8 @@ CREATE TABLE `business_types` (
 --
 
 INSERT INTO `business_types` (`id`, `business_type`, `business_status`, `created_at`, `updated_at`) VALUES
-(1, 'Software Company', 1, '2024-09-04 10:41:22', '2024-09-04 10:41:22');
+(1, 'Software Company', 1, '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(2, 'Hospital Management', 1, '2024-09-11 09:20:08', '2024-09-11 09:20:08');
 
 -- --------------------------------------------------------
 
@@ -119,7 +129,8 @@ CREATE TABLE `companies` (
 --
 
 INSERT INTO `companies` (`id`, `company_name`, `contact_no`, `trade_license_no`, `bin_no`, `tin_no`, `company_address`, `division_id`, `district_id`, `country`, `created_at`, `updated_at`) VALUES
-(1, 'Otithee Software Solution Limited', '+8801907802744', 'TRAD/DNCC/029335/2023', NULL, NULL, 'Police Plaza Concord, Tower-A, Floor #8N, 10E, Plot #02, Road #144, Gulshan-1, Dhaka-1212, Bangladesh.', 6, 47, 'Bangladesh', '2024-09-04 10:41:22', '2024-09-04 10:41:22');
+(1, 'Otithee Software Solution Limited', '+8801907802744', 'TRAD/DNCC/029335/2023', NULL, NULL, 'Police Plaza Concord, Tower-A, Floor #8N, 10E, Plot #02, Road #144, Gulshan-1, Dhaka-1212, Bangladesh.', 6, 47, 'Bangladesh', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(2, 'FusionMatrix', '01513470120', 'TRAD/DNCC/029340/2024', '0001234567890', '123456789012', 'Tejgaon Road, Dhaka', 6, 47, 'Bangladesh', '2024-09-11 09:20:08', '2024-09-11 09:20:08');
 
 -- --------------------------------------------------------
 
@@ -144,70 +155,70 @@ CREATE TABLE `districts` (
 --
 
 INSERT INTO `districts` (`id`, `division_id`, `name`, `bn_name`, `lat`, `lon`, `url`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Comilla', 'কুমিল্লা', 23.46827470, 91.17881350, 'www.comilla.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(2, 1, 'Feni', 'ফেনী', 23.02323100, 91.38408440, 'www.feni.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(3, 1, 'Brahmanbaria', 'ব্রাহ্মণবাড়িয়া', 23.95709040, 91.11192860, 'www.brahmanbaria.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(4, 1, 'Rangamati', 'রাঙ্গামাটি', 22.65561018, 92.17541121, 'www.rangamati.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(5, 1, 'Noakhali', 'নোয়াখালী', 22.86956300, 91.09939800, 'www.noakhali.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(6, 1, 'Chandpur', 'চাঁদপুর', 23.23325850, 90.67129120, 'www.chandpur.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(7, 1, 'Lakshmipur', 'লক্ষ্মীপুর', 22.94247700, 90.84118400, 'www.lakshmipur.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(8, 1, 'Chattogram', 'চট্টগ্রাম', 22.33510900, 91.83407300, 'www.chittagong.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(9, 1, 'Coxsbazar', 'কক্সবাজার', 21.44315751, 91.97381741, 'www.coxsbazar.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(10, 1, 'Khagrachhari', 'খাগড়াছড়ি', 23.11928500, 91.98466300, 'www.khagrachhari.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(11, 1, 'Bandarban', 'বান্দরবান', 22.19532750, 92.21837730, 'www.bandarban.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(12, 2, 'Sirajganj', 'সিরাজগঞ্জ', 24.48055500, 89.70867900, 'www.sirajganj.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(13, 2, 'Pabna', 'পাবনা', 23.99852400, 89.23364500, 'www.pabna.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(14, 2, 'Bogura', 'বগুড়া', 24.84652280, 89.37775500, 'www.bogra.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(15, 2, 'Rajshahi', 'রাজশাহী', 24.37450000, 88.60416600, 'www.rajshahi.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(16, 2, 'Natore', 'নাটোর', 24.42055600, 89.00028200, 'www.natore.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(17, 2, 'Joypurhat', 'জয়পুরহাট', 25.10216400, 89.02648900, 'www.joypurhat.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(18, 2, 'Chapainawabganj', 'চাঁপাইনবাবগঞ্জ', 24.59650340, 88.27751200, 'www.chapainawabganj.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(19, 2, 'Naogaon', 'নওগাঁ', 24.82336050, 88.94486200, 'www.naogaon.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(20, 3, 'Jessore', 'যশোর', 23.17066300, 89.21320600, 'www.jessore.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(21, 3, 'Satkhira', 'সাতক্ষীরা', 22.71937600, 89.07057900, 'www.satkhira.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(22, 3, 'Meherpur', 'মেহেরপুর', 23.76794200, 88.63182100, 'www.meherpur.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(23, 3, 'Narail', 'নড়াইল', 23.16643000, 89.49514000, 'www.narail.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(24, 3, 'Chuadanga', 'চুয়াডাঙ্গা', 23.64019610, 88.84184100, 'www.chuadanga.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(25, 3, 'Kushtia', 'কুষ্টিয়া', 23.90125800, 89.12048200, 'www.kushtia.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(26, 3, 'Magura', 'মাগুরা', 23.48733700, 89.41995600, 'www.magura.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(27, 3, 'Khulna', 'খুলনা', 22.81577400, 89.56867900, 'www.khulna.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(28, 3, 'Bagerhat', 'বাগেরহাট', 22.65797000, 89.78593800, 'www.bagerhat.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(29, 3, 'Jhenaidah', 'ঝিনাইদহ', 23.54119700, 89.15318200, 'www.jhenaidah.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(30, 4, 'Jhalokathi', 'ঝালকাঠি', 22.64056000, 90.19873800, 'www.jhalokathi.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(31, 4, 'Patuakhali', 'পটুয়াখালী', 22.35831700, 90.32987100, 'www.patuakhali.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(32, 4, 'Pirojpur', 'পিরোজপুর', 22.58410500, 89.97845400, 'www.pirojpur.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(33, 4, 'Barisal', 'বরিশাল', 22.70100200, 90.35345100, 'www.barisal.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(34, 4, 'Bhola', 'ভোলা', 22.68592300, 90.71821800, 'www.bhola.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(35, 4, 'Barguna', 'বরগুনা', 22.16305300, 90.13536200, 'www.barguna.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(36, 5, 'Sylhet', 'সিলেট', 24.88979560, 91.86978940, 'www.sylhet.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(37, 5, 'Moulvibazar', 'মৌলভীবাজার', 24.48293400, 91.77741700, 'www.moulvibazar.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(38, 5, 'Habiganj', 'হবিগঞ্জ', 24.30654800, 91.41650400, 'www.habiganj.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(39, 5, 'Sunamganj', 'সুনামগঞ্জ', 25.06580400, 91.39501100, 'www.sunamganj.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(40, 6, 'Narsingdi', 'নরসিংদী', 23.93223300, 90.71541000, 'www.narsingdi.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(41, 6, 'Gazipur', 'গাজীপুর', 24.00228580, 90.42642830, 'www.gazipur.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(42, 6, 'Shariatpur', 'শরিয়তপুর', 23.24233070, 90.43478380, 'www.shariatpur.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(43, 6, 'Narayanganj', 'নারায়ণগঞ্জ', 23.63366000, 90.49648200, 'www.narayanganj.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(44, 6, 'Tangail', 'টাঙ্গাইল', 24.25134500, 89.91666700, 'www.tangail.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(45, 6, 'Kishoreganj', 'কিশোরগঞ্জ', 24.44493700, 90.77657500, 'www.kishoreganj.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(46, 6, 'Manikganj', 'মানিকগঞ্জ', 23.84780900, 90.00421050, 'www.manikganj.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(47, 6, 'Dhaka', 'ঢাকা', 23.71152530, 90.41114510, 'www.dhaka.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(48, 6, 'Munshiganj', 'মুন্সীগঞ্জ', 23.54222730, 90.53051210, 'www.munshiganj.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(49, 6, 'Rajbari', 'রাজবাড়ি', 23.75743050, 89.64446650, 'www.rajbari.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(50, 6, 'Madaripur', 'মাদারীপুর', 23.16410200, 90.18968050, 'www.madaripur.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(51, 6, 'Gopalganj', 'গোপালগঞ্জ', 23.00508570, 89.82660590, 'www.gopalganj.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(52, 6, 'Faridpur', 'ফরিদপুর', 23.60708220, 89.84294060, 'www.faridpur.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(53, 7, 'Panchagarh', 'পঞ্চগড়', 26.32784600, 88.52686600, 'www.panchagarh.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(54, 7, 'Dinajpur', 'দিনাজপুর', 25.62170610, 88.63545040, 'www.dinajpur.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(55, 7, 'Lalmonirhat', 'লালমনিরহাট', 25.99234200, 89.28472500, 'www.lalmonirhat.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(56, 7, 'Nilphamari', 'নীলফামারী', 25.93179400, 88.85600600, 'www.nilphamari.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(57, 7, 'Gaibandha', 'গাইবান্ধা', 25.32875100, 89.52808800, 'www.gaibandha.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(58, 7, 'Thakurgaon', 'ঠাকুরগাঁও', 26.03369400, 88.46470500, 'www.thakurgaon.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(59, 7, 'Rangpur', 'রংপুর', 25.75580960, 89.24446200, 'www.rangpur.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(60, 7, 'Kurigram', 'কুড়িগ্রাম', 25.80708100, 89.62926500, 'www.kurigram.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(61, 8, 'Sherpur', 'শেরপুর', 25.02049300, 90.01529600, 'www.sherpur.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(62, 8, 'Mymensingh', 'ময়মনসিংহ', 24.74714900, 90.42027300, 'www.mymensingh.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(63, 8, 'Jamalpur', 'জামালপুর', 24.93753300, 89.93777500, 'www.jamalpur.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(64, 8, 'Netrokona', 'নেত্রকোণা', 24.87095500, 90.72788700, 'www.netrokona.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22');
+(1, 1, 'Comilla', 'কুমিল্লা', 23.46827470, 91.17881350, 'www.comilla.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(2, 1, 'Feni', 'ফেনী', 23.02323100, 91.38408440, 'www.feni.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(3, 1, 'Brahmanbaria', 'ব্রাহ্মণবাড়িয়া', 23.95709040, 91.11192860, 'www.brahmanbaria.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(4, 1, 'Rangamati', 'রাঙ্গামাটি', 22.65561018, 92.17541121, 'www.rangamati.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(5, 1, 'Noakhali', 'নোয়াখালী', 22.86956300, 91.09939800, 'www.noakhali.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(6, 1, 'Chandpur', 'চাঁদপুর', 23.23325850, 90.67129120, 'www.chandpur.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(7, 1, 'Lakshmipur', 'লক্ষ্মীপুর', 22.94247700, 90.84118400, 'www.lakshmipur.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(8, 1, 'Chattogram', 'চট্টগ্রাম', 22.33510900, 91.83407300, 'www.chittagong.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(9, 1, 'Coxsbazar', 'কক্সবাজার', 21.44315751, 91.97381741, 'www.coxsbazar.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(10, 1, 'Khagrachhari', 'খাগড়াছড়ি', 23.11928500, 91.98466300, 'www.khagrachhari.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(11, 1, 'Bandarban', 'বান্দরবান', 22.19532750, 92.21837730, 'www.bandarban.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(12, 2, 'Sirajganj', 'সিরাজগঞ্জ', 24.48055500, 89.70867900, 'www.sirajganj.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(13, 2, 'Pabna', 'পাবনা', 23.99852400, 89.23364500, 'www.pabna.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(14, 2, 'Bogura', 'বগুড়া', 24.84652280, 89.37775500, 'www.bogra.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(15, 2, 'Rajshahi', 'রাজশাহী', 24.37450000, 88.60416600, 'www.rajshahi.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(16, 2, 'Natore', 'নাটোর', 24.42055600, 89.00028200, 'www.natore.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(17, 2, 'Joypurhat', 'জয়পুরহাট', 25.10216400, 89.02648900, 'www.joypurhat.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(18, 2, 'Chapainawabganj', 'চাঁপাইনবাবগঞ্জ', 24.59650340, 88.27751200, 'www.chapainawabganj.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(19, 2, 'Naogaon', 'নওগাঁ', 24.82336050, 88.94486200, 'www.naogaon.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(20, 3, 'Jessore', 'যশোর', 23.17066300, 89.21320600, 'www.jessore.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(21, 3, 'Satkhira', 'সাতক্ষীরা', 22.71937600, 89.07057900, 'www.satkhira.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(22, 3, 'Meherpur', 'মেহেরপুর', 23.76794200, 88.63182100, 'www.meherpur.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(23, 3, 'Narail', 'নড়াইল', 23.16643000, 89.49514000, 'www.narail.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(24, 3, 'Chuadanga', 'চুয়াডাঙ্গা', 23.64019610, 88.84184100, 'www.chuadanga.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(25, 3, 'Kushtia', 'কুষ্টিয়া', 23.90125800, 89.12048200, 'www.kushtia.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(26, 3, 'Magura', 'মাগুরা', 23.48733700, 89.41995600, 'www.magura.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(27, 3, 'Khulna', 'খুলনা', 22.81577400, 89.56867900, 'www.khulna.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(28, 3, 'Bagerhat', 'বাগেরহাট', 22.65797000, 89.78593800, 'www.bagerhat.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(29, 3, 'Jhenaidah', 'ঝিনাইদহ', 23.54119700, 89.15318200, 'www.jhenaidah.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(30, 4, 'Jhalokathi', 'ঝালকাঠি', 22.64056000, 90.19873800, 'www.jhalokathi.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(31, 4, 'Patuakhali', 'পটুয়াখালী', 22.35831700, 90.32987100, 'www.patuakhali.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(32, 4, 'Pirojpur', 'পিরোজপুর', 22.58410500, 89.97845400, 'www.pirojpur.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(33, 4, 'Barisal', 'বরিশাল', 22.70100200, 90.35345100, 'www.barisal.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(34, 4, 'Bhola', 'ভোলা', 22.68592300, 90.71821800, 'www.bhola.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(35, 4, 'Barguna', 'বরগুনা', 22.16305300, 90.13536200, 'www.barguna.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(36, 5, 'Sylhet', 'সিলেট', 24.88979560, 91.86978940, 'www.sylhet.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(37, 5, 'Moulvibazar', 'মৌলভীবাজার', 24.48293400, 91.77741700, 'www.moulvibazar.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(38, 5, 'Habiganj', 'হবিগঞ্জ', 24.30654800, 91.41650400, 'www.habiganj.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(39, 5, 'Sunamganj', 'সুনামগঞ্জ', 25.06580400, 91.39501100, 'www.sunamganj.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(40, 6, 'Narsingdi', 'নরসিংদী', 23.93223300, 90.71541000, 'www.narsingdi.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(41, 6, 'Gazipur', 'গাজীপুর', 24.00228580, 90.42642830, 'www.gazipur.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(42, 6, 'Shariatpur', 'শরিয়তপুর', 23.24233070, 90.43478380, 'www.shariatpur.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(43, 6, 'Narayanganj', 'নারায়ণগঞ্জ', 23.63366000, 90.49648200, 'www.narayanganj.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(44, 6, 'Tangail', 'টাঙ্গাইল', 24.25134500, 89.91666700, 'www.tangail.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(45, 6, 'Kishoreganj', 'কিশোরগঞ্জ', 24.44493700, 90.77657500, 'www.kishoreganj.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(46, 6, 'Manikganj', 'মানিকগঞ্জ', 23.84780900, 90.00421050, 'www.manikganj.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(47, 6, 'Dhaka', 'ঢাকা', 23.71152530, 90.41114510, 'www.dhaka.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(48, 6, 'Munshiganj', 'মুন্সীগঞ্জ', 23.54222730, 90.53051210, 'www.munshiganj.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(49, 6, 'Rajbari', 'রাজবাড়ি', 23.75743050, 89.64446650, 'www.rajbari.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(50, 6, 'Madaripur', 'মাদারীপুর', 23.16410200, 90.18968050, 'www.madaripur.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(51, 6, 'Gopalganj', 'গোপালগঞ্জ', 23.00508570, 89.82660590, 'www.gopalganj.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(52, 6, 'Faridpur', 'ফরিদপুর', 23.60708220, 89.84294060, 'www.faridpur.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(53, 7, 'Panchagarh', 'পঞ্চগড়', 26.32784600, 88.52686600, 'www.panchagarh.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(54, 7, 'Dinajpur', 'দিনাজপুর', 25.62170610, 88.63545040, 'www.dinajpur.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(55, 7, 'Lalmonirhat', 'লালমনিরহাট', 25.99234200, 89.28472500, 'www.lalmonirhat.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(56, 7, 'Nilphamari', 'নীলফামারী', 25.93179400, 88.85600600, 'www.nilphamari.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(57, 7, 'Gaibandha', 'গাইবান্ধা', 25.32875100, 89.52808800, 'www.gaibandha.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(58, 7, 'Thakurgaon', 'ঠাকুরগাঁও', 26.03369400, 88.46470500, 'www.thakurgaon.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(59, 7, 'Rangpur', 'রংপুর', 25.75580960, 89.24446200, 'www.rangpur.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(60, 7, 'Kurigram', 'কুড়িগ্রাম', 25.80708100, 89.62926500, 'www.kurigram.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(61, 8, 'Sherpur', 'শেরপুর', 25.02049300, 90.01529600, 'www.sherpur.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(62, 8, 'Mymensingh', 'ময়মনসিংহ', 24.74714900, 90.42027300, 'www.mymensingh.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(63, 8, 'Jamalpur', 'জামালপুর', 24.93753300, 89.93777500, 'www.jamalpur.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(64, 8, 'Netrokona', 'নেত্রকোণা', 24.87095500, 90.72788700, 'www.netrokona.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14');
 
 -- --------------------------------------------------------
 
@@ -229,14 +240,14 @@ CREATE TABLE `divisions` (
 --
 
 INSERT INTO `divisions` (`id`, `name`, `bn_name`, `url`, `created_at`, `updated_at`) VALUES
-(1, 'Chattagram', 'চট্টগ্রাম', 'www.chittagongdiv.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(2, 'Rajshahi', 'রাজশাহী', 'www.rajshahidiv.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(3, 'Khulna', 'খুলনা', 'www.khulnadiv.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(4, 'Barisal', 'বরিশাল', 'www.barisaldiv.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(5, 'Sylhet', 'সিলেট', 'www.sylhetdiv.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(6, 'Dhaka', 'ঢাকা', 'www.dhakadiv.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(7, 'Rangpur', 'রংপুর', 'www.rangpurdiv.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(8, 'Mymensingh', 'ময়মনসিংহ', 'www.mymensinghdiv.gov.bd', '2024-09-04 10:41:22', '2024-09-04 10:41:22');
+(1, 'Chattagram', 'চট্টগ্রাম', 'www.chittagongdiv.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(2, 'Rajshahi', 'রাজশাহী', 'www.rajshahidiv.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(3, 'Khulna', 'খুলনা', 'www.khulnadiv.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(4, 'Barisal', 'বরিশাল', 'www.barisaldiv.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(5, 'Sylhet', 'সিলেট', 'www.sylhetdiv.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(6, 'Dhaka', 'ঢাকা', 'www.dhakadiv.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(7, 'Rangpur', 'রংপুর', 'www.rangpurdiv.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(8, 'Mymensingh', 'ময়মনসিংহ', 'www.mymensinghdiv.gov.bd', '2024-09-11 08:00:14', '2024-09-11 08:00:14');
 
 -- --------------------------------------------------------
 
@@ -252,6 +263,22 @@ CREATE TABLE `failed_jobs` (
   `payload` longtext NOT NULL,
   `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_attendances`
+--
+
+CREATE TABLE `hr_attendances` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `attendance_date` date DEFAULT NULL,
+  `entry_time` time DEFAULT NULL,
+  `exit_time` time DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -273,6 +300,54 @@ CREATE TABLE `hr_benefits` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `hr_branches`
+--
+
+CREATE TABLE `hr_branches` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `br_name` varchar(255) DEFAULT NULL,
+  `br_address` varchar(255) DEFAULT NULL,
+  `br_type` int(11) NOT NULL COMMENT 'Status of the role: 1 for Head Office, 2 for Single Branch',
+  `br_status` int(11) NOT NULL COMMENT 'Status of the role: 1 for active, 2 for inactive',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_departments`
+--
+
+CREATE TABLE `hr_departments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `branch_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `dept_name` varchar(255) DEFAULT NULL,
+  `dept_status` int(11) NOT NULL COMMENT 'Status of the role: 1 for active, 2 for inactive',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_designations`
+--
+
+CREATE TABLE `hr_designations` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `level` int(11) NOT NULL COMMENT '1 = managing level, 2 = operational level, 3 = support level',
+  `designation_name` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `hr_documents`
 --
 
@@ -280,6 +355,46 @@ CREATE TABLE `hr_documents` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_employees`
+--
+
+CREATE TABLE `hr_employees` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `designation_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `department_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `joining_date` date DEFAULT NULL,
+  `monthly_salary` varchar(255) DEFAULT NULL,
+  `profile_pic` varchar(255) DEFAULT NULL,
+  `full_name` varchar(255) DEFAULT NULL,
+  `father_name` varchar(255) DEFAULT NULL,
+  `mother_name` varchar(255) DEFAULT NULL,
+  `mobile_number` varchar(255) DEFAULT NULL,
+  `nid_number` varchar(255) DEFAULT NULL,
+  `present_address` varchar(255) DEFAULT NULL,
+  `permanent_address` varchar(255) DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
+  `blood_group` varchar(255) DEFAULT NULL,
+  `nationality` varchar(255) DEFAULT NULL,
+  `marital_status` varchar(255) DEFAULT NULL,
+  `religion` varchar(255) DEFAULT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `emergency_contact_name_one` varchar(255) DEFAULT NULL,
+  `emergency_contact_number_one` varchar(255) DEFAULT NULL,
+  `emergency_contact_relation_one` varchar(255) DEFAULT NULL,
+  `emergency_contact_name_two` varchar(255) DEFAULT NULL,
+  `emergency_contact_number_two` varchar(255) DEFAULT NULL,
+  `emergency_contact_relation_two` varchar(255) DEFAULT NULL,
+  `emergency_contact_name_three` varchar(255) DEFAULT NULL,
+  `emergency_contact_number_three` varchar(255) DEFAULT NULL,
+  `emergency_contact_relation_three` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -329,6 +444,142 @@ CREATE TABLE `hr_employee_training` (
   `completion_date` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_leave_applications`
+--
+
+CREATE TABLE `hr_leave_applications` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `leave_type_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `application_type` int(11) NOT NULL COMMENT '1 = file attachment, 2= form submission',
+  `application_file` varchar(255) DEFAULT NULL,
+  `application_msg` text DEFAULT NULL,
+  `application_date` date DEFAULT NULL,
+  `application_from` date DEFAULT NULL,
+  `application_to` date DEFAULT NULL,
+  `duration` int(11) DEFAULT NULL,
+  `approved_duration` int(11) DEFAULT NULL,
+  `application_status` int(11) NOT NULL COMMENT '1 = pending, 2 = approved, 3 = declined',
+  `application_approved_user_id` int(11) DEFAULT NULL,
+  `application_approved_date` date DEFAULT NULL,
+  `application_decline_date` date DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_leave_types`
+--
+
+CREATE TABLE `hr_leave_types` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `type_name` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_managers`
+--
+
+CREATE TABLE `hr_managers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `designation_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `department_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `joining_date` date DEFAULT NULL,
+  `monthly_salary` varchar(255) DEFAULT NULL,
+  `profile_pic` varchar(255) DEFAULT NULL,
+  `full_name` varchar(255) DEFAULT NULL,
+  `father_name` varchar(255) DEFAULT NULL,
+  `mother_name` varchar(255) DEFAULT NULL,
+  `mobile_number` varchar(255) DEFAULT NULL,
+  `nid_number` varchar(255) DEFAULT NULL,
+  `present_address` varchar(255) DEFAULT NULL,
+  `permanent_address` varchar(255) DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
+  `blood_group` varchar(255) DEFAULT NULL,
+  `nationality` varchar(255) DEFAULT NULL,
+  `marital_status` varchar(255) DEFAULT NULL,
+  `religion` varchar(255) DEFAULT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `emergency_contact_name_one` varchar(255) DEFAULT NULL,
+  `emergency_contact_number_one` varchar(255) DEFAULT NULL,
+  `emergency_contact_relation_one` varchar(255) DEFAULT NULL,
+  `emergency_contact_name_two` varchar(255) DEFAULT NULL,
+  `emergency_contact_number_two` varchar(255) DEFAULT NULL,
+  `emergency_contact_relation_two` varchar(255) DEFAULT NULL,
+  `emergency_contact_name_three` varchar(255) DEFAULT NULL,
+  `emergency_contact_number_three` varchar(255) DEFAULT NULL,
+  `emergency_contact_relation_three` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_overtimes`
+--
+
+CREATE TABLE `hr_overtimes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `overtime_date` date DEFAULT NULL,
+  `overtime_hours` int(11) DEFAULT NULL,
+  `overtime_rate` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_payrolls`
+--
+
+CREATE TABLE `hr_payrolls` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `salary_date` date DEFAULT NULL,
+  `per_day_salary` varchar(255) DEFAULT NULL,
+  `total_working_day` int(11) DEFAULT NULL,
+  `total_leave` int(11) DEFAULT NULL,
+  `total_number_of_pay_day` int(11) DEFAULT NULL,
+  `monthly_salary` varchar(255) DEFAULT NULL,
+  `monthly_bonus` varchar(255) DEFAULT NULL,
+  `total_overtime_hours` int(11) DEFAULT NULL,
+  `overtime_rate` varchar(255) DEFAULT NULL,
+  `total_overtime_paid_amount` varchar(255) DEFAULT NULL,
+  `total_daily_allowance` varchar(255) DEFAULT NULL,
+  `total_travel_allowance` varchar(255) DEFAULT NULL,
+  `rental_cost_allowance` varchar(255) DEFAULT NULL,
+  `hospital_bill_allowance` varchar(255) DEFAULT NULL,
+  `insurance_allowance` varchar(255) DEFAULT NULL,
+  `sales_commission` varchar(255) DEFAULT NULL,
+  `retail_commission` varchar(255) DEFAULT NULL,
+  `total_others` varchar(255) DEFAULT NULL,
+  `total_salary` varchar(255) DEFAULT NULL,
+  `yearly_bonus` varchar(255) DEFAULT NULL,
+  `gross_pay` varchar(255) DEFAULT NULL,
+  `deduction` varchar(255) DEFAULT NULL,
+  `net_pay` varchar(255) DEFAULT NULL,
+  `payment_status` int(11) NOT NULL COMMENT '1 = pending, 2 = paid',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -446,6 +697,49 @@ CREATE TABLE `job_batches` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `master_admins`
+--
+
+CREATE TABLE `master_admins` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `profile_pic` varchar(255) DEFAULT NULL,
+  `full_name` varchar(255) DEFAULT NULL,
+  `father_name` varchar(255) DEFAULT NULL,
+  `mother_name` varchar(255) DEFAULT NULL,
+  `mobile_number` varchar(255) DEFAULT NULL,
+  `nid_number` varchar(255) DEFAULT NULL,
+  `present_address` varchar(255) DEFAULT NULL,
+  `permanent_address` varchar(255) DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
+  `blood_group` varchar(255) DEFAULT NULL,
+  `nationality` varchar(255) DEFAULT NULL,
+  `marital_status` varchar(255) DEFAULT NULL,
+  `religion` varchar(255) DEFAULT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `emergency_contact_name_one` varchar(255) DEFAULT NULL,
+  `emergency_contact_number_one` varchar(255) DEFAULT NULL,
+  `emergency_contact_relation_one` varchar(255) DEFAULT NULL,
+  `emergency_contact_name_two` varchar(255) DEFAULT NULL,
+  `emergency_contact_number_two` varchar(255) DEFAULT NULL,
+  `emergency_contact_relation_two` varchar(255) DEFAULT NULL,
+  `emergency_contact_name_three` varchar(255) DEFAULT NULL,
+  `emergency_contact_number_three` varchar(255) DEFAULT NULL,
+  `emergency_contact_relation_three` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `master_admins`
+--
+
+INSERT INTO `master_admins` (`id`, `user_id`, `profile_pic`, `full_name`, `father_name`, `mother_name`, `mobile_number`, `nid_number`, `present_address`, `permanent_address`, `birth_date`, `blood_group`, `nationality`, `marital_status`, `religion`, `gender`, `emergency_contact_name_one`, `emergency_contact_number_one`, `emergency_contact_relation_one`, `emergency_contact_name_two`, `emergency_contact_number_two`, `emergency_contact_relation_two`, `emergency_contact_name_three`, `emergency_contact_number_three`, `emergency_contact_relation_three`, `created_at`, `updated_at`) VALUES
+(1, 2, 'profile/202409121726120561.jpg', 'Abul Kauser Samer', 'Abul Basar Badal', 'Shamima Basar', '01513470157', '126563463', 'Laalbagh, Dhaka', 'Laalbagh, Dhaka', '1995-09-10', 'O+', 'Bangladeshi', 'Single', 'Islam', 'Male', 'Abul Basar Badal', '01513470120', 'Father', 'Shamima Basar', '01814780120', 'Mother', NULL, NULL, NULL, '2024-09-11 09:20:08', '2024-09-12 05:56:01');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -463,23 +757,35 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '0001_01_01_000001_create_cache_table', 1),
 (2, '0001_01_01_000002_create_jobs_table', 1),
 (3, '2024_07_14_042734_create_vendors_table', 1),
-(4, '2024_07_14_045023_create_admins_table', 1),
-(5, '2024_09_02_110907_inventory_stocks', 1),
-(6, '2024_09_03_102241_create_divisions_table', 1),
-(7, '2024_09_03_102242_create_districts_table', 1),
-(8, '2024_09_03_102243_create_companies_table', 1),
-(9, '2024_09_03_112346_create_roles_table', 1),
-(10, '2024_09_03_113423_create_business_types_table', 1),
-(11, '2024_09_03_113424_create_users_table', 1),
-(12, 'create_hr_benefits_table', 1),
-(13, 'create_hr_documents_table', 1),
-(14, 'create_hr_employee_benefits_table', 1),
-(15, 'create_hr_employee_self_service_table', 1),
-(16, 'create_hr_recruitment_candidates_table', 1),
-(17, 'create_hr_recruitment_interviews_table', 1),
-(18, 'create_hr_recruitment_jobs_table', 1),
-(19, 'create_hr_training_employee_training_table', 1),
-(20, 'create_hr_training_training_programs_table', 1);
+(4, '2024_09_02_110907_inventory_stocks', 1),
+(5, '2024_09_03_102241_create_divisions_table', 1),
+(6, '2024_09_03_102242_create_districts_table', 1),
+(7, '2024_09_03_102243_create_companies_table', 1),
+(8, '2024_09_03_112346_create_roles_table', 1),
+(9, '2024_09_03_113423_create_business_types_table', 1),
+(10, '2024_09_03_113424_create_users_table', 1),
+(11, '2024_09_03_113425_create_admins_table', 1),
+(12, '2024_09_11_043931_create_master_admins_table', 1),
+(13, '2024_09_11_073249_create_super_admins_table', 1),
+(14, 'create_hr_benefits_table', 1),
+(15, 'create_hr_documents_table', 1),
+(16, 'create_hr_employee_benefits_table', 1),
+(17, 'create_hr_employee_self_service_table', 1),
+(18, 'create_hr_recruitment_candidates_table', 1),
+(19, 'create_hr_recruitment_interviews_table', 1),
+(20, 'create_hr_recruitment_jobs_table', 1),
+(21, 'create_hr_training_employee_training_table', 1),
+(22, 'create_hr_training_training_programs_table', 1),
+(23, '2024_09_12_095909_create_hr_branches_table', 2),
+(24, '2024_09_12_101329_create_hr_departments_table', 3),
+(25, '2024_09_12_113837_create_hr_designations_table', 4),
+(27, '2024_09_14_063925_create_hr_employees_table', 5),
+(28, '2024_09_14_070512_create_hr_managers_table', 6),
+(29, '2024_09_14_071743_create_hr_leave_types_table', 7),
+(30, '2024_09_14_092748_create_hr_leave_applications_table', 8),
+(34, '2024_09_14_102812_create_hr_attendances_table', 9),
+(35, '2024_09_14_110938_create_hr_payrolls_table', 10),
+(37, '2024_09_14_114320_create_hr_overtimes_table', 11);
 
 -- --------------------------------------------------------
 
@@ -512,13 +818,13 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `role_name`, `role_status`, `created_at`, `updated_at`) VALUES
-(1, 'Super Admin', 1, '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(2, 'Master Admin', 1, '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(3, 'Admin', 1, '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(4, 'Employee', 1, '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(5, 'Vendor', 1, '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(6, 'Customer', 1, '2024-09-04 10:41:22', '2024-09-04 10:41:22'),
-(7, 'Manufacturer', 1, '2024-09-04 10:41:22', '2024-09-04 10:41:22');
+(1, 'Super Admin', 1, '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(2, 'Master Admin', 1, '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(3, 'Admin', 1, '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(4, 'Employee', 1, '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(5, 'Vendor', 1, '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(6, 'Customer', 1, '2024-09-11 08:00:14', '2024-09-11 08:00:14'),
+(7, 'Manufacturer', 1, '2024-09-11 08:00:14', '2024-09-11 08:00:14');
 
 -- --------------------------------------------------------
 
@@ -540,8 +846,57 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('kivK8xd8pp0cKuXfqrPc6mCzBu7nj9nCvkuftFwZ', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicXU5YkEyaVFWRWtnYVlPS2toU1M4cklEOE1Gam5hN3U0OWlwZkY1NyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9iYWNrZW5kL3JlZ2lzdGVyIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1725450960),
-('q6WDZlRjscdo61yRjE1n1rgfCTqEPpRJPau40YTD', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiNW44WllvMnMzcmZLUXJyVWpHVm5MaUlidkJMMFpkdkQ2NWZPWHV3bSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9iYWNrZW5kL3JlZ2lzdGVyIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MjoibG9naW5fYWRtaW5fNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1725453834);
+('61eJaFCcIUhTxKBngQ3BgMIbehIe1C8TQ7pRaaHa', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiTEVJU2dxNHRFdENkTUtsc2g3N0NGT2pkT0JHRnMzczdTamg5TlZmNiI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2Rhc2hib2FyZCI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjMwOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvcmVnaXN0ZXIiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1726312259),
+('E8DHz6vSmyDalSteEpYZIZKVU7RdCR6HKM4O7OYq', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoidmkxc2NUcDRONmdSdDFlVFA3WHcxdnRLVVAwWk9weG92c0ZMWUFMSiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9lbXBsb3llZXMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1726133945),
+('gKs49nefoPtWDgfIn8VkVtASqhUlwKYCi0Deqjq5', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVmFQeWdZdXV6eEJZVUFHcWxGVkJzWVFhcndVcXgyTVpMdHdrM2x1TyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0NToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3VwZGF0ZS1wZXJzb25hbC1kZXRhaWxzIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91cGRhdGUtcGVyc29uYWwtZGV0YWlscyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1726120517),
+('Hxxo01oOLk1bOBkyDz2qNGM0aSU80ZDM9uVG0FBc', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTXlDMlFxRjB3TXhuRFJXTkUyYW9xNVBsTDNuN2ZBZHpOVmJ6cFlFZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1726144452),
+('pul5CRQg5br2sS3Tvb1dlXdkTil8VHtOkPkcmE6m', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiekl3OU90TU1Nb1JRQThVaUo2OFdTbjJObzhnNkJkNkM5TVBNbXhQRiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyO30=', 1726294792),
+('q614LJjHEuCTGylnFXQEgbRUgasvpueClYhGCnjs', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicDNLRFd6T0FEbGgxR3BNNWl3NVBnTVkyZDNMZmE4S21FSUF0WDlMeCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1726120518),
+('roumKNoMPlKTZ8JBicofOMsWagPHFExbN9fy6xXP', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUElqTmVvODlBd25TS05kN3p4aFVFQ0RjSGY0S1ltWk5lNWtFVFZoMiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1726121693),
+('zNHEaQ8Csn4RSUsbM1LKK7ePLBrR8PAPO4lxqFi7', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidHRzd2tPa2F1Z1Zvc04xRGpHYU5VRlZ3YWlyV3pXOVBHaXVJamtBcCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyO30=', 1726303686);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `super_admins`
+--
+
+CREATE TABLE `super_admins` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `profile_pic` varchar(255) DEFAULT NULL,
+  `full_name` varchar(255) DEFAULT NULL,
+  `father_name` varchar(255) DEFAULT NULL,
+  `mother_name` varchar(255) DEFAULT NULL,
+  `mobile_number` varchar(255) DEFAULT NULL,
+  `nid_number` varchar(255) DEFAULT NULL,
+  `present_address` varchar(255) DEFAULT NULL,
+  `permanent_address` varchar(255) DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
+  `blood_group` varchar(255) DEFAULT NULL,
+  `nationality` varchar(255) DEFAULT NULL,
+  `marital_status` varchar(255) DEFAULT NULL,
+  `religion` varchar(255) DEFAULT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `emergency_contact_name_one` varchar(255) DEFAULT NULL,
+  `emergency_contact_number_one` varchar(255) DEFAULT NULL,
+  `emergency_contact_relation_one` varchar(255) DEFAULT NULL,
+  `emergency_contact_name_two` varchar(255) DEFAULT NULL,
+  `emergency_contact_number_two` varchar(255) DEFAULT NULL,
+  `emergency_contact_relation_two` varchar(255) DEFAULT NULL,
+  `emergency_contact_name_three` varchar(255) DEFAULT NULL,
+  `emergency_contact_number_three` varchar(255) DEFAULT NULL,
+  `emergency_contact_relation_three` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `super_admins`
+--
+
+INSERT INTO `super_admins` (`id`, `user_id`, `profile_pic`, `full_name`, `father_name`, `mother_name`, `mobile_number`, `nid_number`, `present_address`, `permanent_address`, `birth_date`, `blood_group`, `nationality`, `marital_status`, `religion`, `gender`, `emergency_contact_name_one`, `emergency_contact_number_one`, `emergency_contact_relation_one`, `emergency_contact_name_two`, `emergency_contact_number_two`, `emergency_contact_relation_two`, `emergency_contact_name_three`, `emergency_contact_number_three`, `emergency_contact_relation_three`, `created_at`, `updated_at`) VALUES
+(1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-09-11 08:00:15', '2024-09-11 08:00:15');
 
 -- --------------------------------------------------------
 
@@ -559,6 +914,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `active_status` int(11) NOT NULL COMMENT 'Status of the role: 1 for active, 2 for inactive',
   `company_business_type` bigint(20) UNSIGNED DEFAULT NULL,
+  `registration_date` date DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -569,8 +925,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `role_id`, `company_id`, `email`, `email_verified_at`, `password`, `active_status`, `company_business_type`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'OSSL', 1, 1, 'ossl@gmail.com', NULL, '$2y$12$0zItT82ulqkEIR5od.RcwO0X5/KxPMkMMMyrrOebvETrq4HI.Wi1i', 1, 1, NULL, '2024-09-04 10:41:22', '2024-09-04 10:41:22', NULL);
+INSERT INTO `users` (`id`, `name`, `role_id`, `company_id`, `email`, `email_verified_at`, `password`, `active_status`, `company_business_type`, `registration_date`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'OSSL', 1, 1, 'ossl@gmail.com', NULL, '$2y$12$q.WrTsssMzOP3bsqP/T3EOnw17oMESgRWiXaEWJLdcbB152d/JCiq', 1, 1, NULL, NULL, '2024-09-11 08:00:15', '2024-09-11 08:00:15', NULL),
+(2, 'Abul Kauser Samer', 2, 2, 'sam@gmail.com', NULL, '$2y$12$16MXOdDy9fSSar7vmXk5B.1aHb1d.gF9q4fCwxnEwGuN3yt.5s7Ya', 1, 2, '2024-09-11', NULL, '2024-09-11 03:20:08', '2024-09-12 05:56:01', NULL);
 
 -- --------------------------------------------------------
 
@@ -602,7 +959,7 @@ CREATE TABLE `vendors` (
 --
 ALTER TABLE `admins`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `admins_email_unique` (`email`);
+  ADD KEY `admins_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `business_types`
@@ -651,16 +1008,54 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
+-- Indexes for table `hr_attendances`
+--
+ALTER TABLE `hr_attendances`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `hr_attendances_user_id_foreign` (`user_id`);
+
+--
 -- Indexes for table `hr_benefits`
 --
 ALTER TABLE `hr_benefits`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `hr_branches`
+--
+ALTER TABLE `hr_branches`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `hr_branches_company_id_foreign` (`company_id`);
+
+--
+-- Indexes for table `hr_departments`
+--
+ALTER TABLE `hr_departments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `hr_departments_company_id_foreign` (`company_id`),
+  ADD KEY `hr_departments_branch_id_foreign` (`branch_id`);
+
+--
+-- Indexes for table `hr_designations`
+--
+ALTER TABLE `hr_designations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `hr_designations_company_id_foreign` (`company_id`);
+
+--
 -- Indexes for table `hr_documents`
 --
 ALTER TABLE `hr_documents`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `hr_employees`
+--
+ALTER TABLE `hr_employees`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `hr_employees_user_id_foreign` (`user_id`),
+  ADD KEY `hr_employees_designation_id_foreign` (`designation_id`),
+  ADD KEY `hr_employees_department_id_foreign` (`department_id`);
 
 --
 -- Indexes for table `hr_employee_benefits`
@@ -684,6 +1079,47 @@ ALTER TABLE `hr_employee_training`
   ADD PRIMARY KEY (`id`),
   ADD KEY `hr_employee_training_employee_id_index` (`employee_id`),
   ADD KEY `hr_employee_training_training_program_id_index` (`training_program_id`);
+
+--
+-- Indexes for table `hr_leave_applications`
+--
+ALTER TABLE `hr_leave_applications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `hr_leave_applications_user_id_foreign` (`user_id`),
+  ADD KEY `hr_leave_applications_company_id_foreign` (`company_id`),
+  ADD KEY `hr_leave_applications_leave_type_id_foreign` (`leave_type_id`);
+
+--
+-- Indexes for table `hr_leave_types`
+--
+ALTER TABLE `hr_leave_types`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `hr_leave_types_company_id_foreign` (`company_id`);
+
+--
+-- Indexes for table `hr_managers`
+--
+ALTER TABLE `hr_managers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `hr_managers_user_id_foreign` (`user_id`),
+  ADD KEY `hr_managers_designation_id_foreign` (`designation_id`),
+  ADD KEY `hr_managers_department_id_foreign` (`department_id`);
+
+--
+-- Indexes for table `hr_overtimes`
+--
+ALTER TABLE `hr_overtimes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `hr_overtimes_user_id_foreign` (`user_id`),
+  ADD KEY `hr_overtimes_company_id_foreign` (`company_id`);
+
+--
+-- Indexes for table `hr_payrolls`
+--
+ALTER TABLE `hr_payrolls`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `hr_payrolls_user_id_foreign` (`user_id`),
+  ADD KEY `hr_payrolls_company_id_foreign` (`company_id`);
 
 --
 -- Indexes for table `hr_recruitment_candidates`
@@ -726,6 +1162,13 @@ ALTER TABLE `job_batches`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `master_admins`
+--
+ALTER TABLE `master_admins`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `master_admins_user_id_foreign` (`user_id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -752,6 +1195,13 @@ ALTER TABLE `sessions`
   ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
+-- Indexes for table `super_admins`
+--
+ALTER TABLE `super_admins`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `super_admins_user_id_foreign` (`user_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -776,19 +1226,19 @@ ALTER TABLE `vendors`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `business_types`
 --
 ALTER TABLE `business_types`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `companies`
 --
 ALTER TABLE `companies`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `districts`
@@ -809,15 +1259,45 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `hr_attendances`
+--
+ALTER TABLE `hr_attendances`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `hr_benefits`
 --
 ALTER TABLE `hr_benefits`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `hr_branches`
+--
+ALTER TABLE `hr_branches`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `hr_departments`
+--
+ALTER TABLE `hr_departments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `hr_designations`
+--
+ALTER TABLE `hr_designations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `hr_documents`
 --
 ALTER TABLE `hr_documents`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `hr_employees`
+--
+ALTER TABLE `hr_employees`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -836,6 +1316,36 @@ ALTER TABLE `hr_employee_self_services`
 -- AUTO_INCREMENT for table `hr_employee_training`
 --
 ALTER TABLE `hr_employee_training`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `hr_leave_applications`
+--
+ALTER TABLE `hr_leave_applications`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `hr_leave_types`
+--
+ALTER TABLE `hr_leave_types`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `hr_managers`
+--
+ALTER TABLE `hr_managers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `hr_overtimes`
+--
+ALTER TABLE `hr_overtimes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `hr_payrolls`
+--
+ALTER TABLE `hr_payrolls`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -869,10 +1379,16 @@ ALTER TABLE `jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `master_admins`
+--
+ALTER TABLE `master_admins`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -881,10 +1397,16 @@ ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `super_admins`
+--
+ALTER TABLE `super_admins`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `vendors`
@@ -895,6 +1417,12 @@ ALTER TABLE `vendors`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `admins`
+--
+ALTER TABLE `admins`
+  ADD CONSTRAINT `admins_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `companies`
@@ -910,10 +1438,91 @@ ALTER TABLE `districts`
   ADD CONSTRAINT `districts_division_id_foreign` FOREIGN KEY (`division_id`) REFERENCES `divisions` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `hr_attendances`
+--
+ALTER TABLE `hr_attendances`
+  ADD CONSTRAINT `hr_attendances_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `hr_branches`
+--
+ALTER TABLE `hr_branches`
+  ADD CONSTRAINT `hr_branches_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `hr_departments`
+--
+ALTER TABLE `hr_departments`
+  ADD CONSTRAINT `hr_departments_branch_id_foreign` FOREIGN KEY (`branch_id`) REFERENCES `hr_branches` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `hr_departments_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `hr_designations`
+--
+ALTER TABLE `hr_designations`
+  ADD CONSTRAINT `hr_designations_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `hr_employees`
+--
+ALTER TABLE `hr_employees`
+  ADD CONSTRAINT `hr_employees_department_id_foreign` FOREIGN KEY (`department_id`) REFERENCES `hr_departments` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `hr_employees_designation_id_foreign` FOREIGN KEY (`designation_id`) REFERENCES `hr_designations` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `hr_employees_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `hr_leave_applications`
+--
+ALTER TABLE `hr_leave_applications`
+  ADD CONSTRAINT `hr_leave_applications_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `hr_leave_applications_leave_type_id_foreign` FOREIGN KEY (`leave_type_id`) REFERENCES `hr_leave_types` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `hr_leave_applications_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `hr_leave_types`
+--
+ALTER TABLE `hr_leave_types`
+  ADD CONSTRAINT `hr_leave_types_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `hr_managers`
+--
+ALTER TABLE `hr_managers`
+  ADD CONSTRAINT `hr_managers_department_id_foreign` FOREIGN KEY (`department_id`) REFERENCES `hr_departments` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `hr_managers_designation_id_foreign` FOREIGN KEY (`designation_id`) REFERENCES `hr_designations` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `hr_managers_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `hr_overtimes`
+--
+ALTER TABLE `hr_overtimes`
+  ADD CONSTRAINT `hr_overtimes_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `hr_overtimes_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `hr_payrolls`
+--
+ALTER TABLE `hr_payrolls`
+  ADD CONSTRAINT `hr_payrolls_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `hr_payrolls_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `master_admins`
+--
+ALTER TABLE `master_admins`
+  ADD CONSTRAINT `master_admins_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `sessions`
 --
 ALTER TABLE `sessions`
   ADD CONSTRAINT `sessions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `super_admins`
+--
+ALTER TABLE `super_admins`
+  ADD CONSTRAINT `super_admins_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `users`

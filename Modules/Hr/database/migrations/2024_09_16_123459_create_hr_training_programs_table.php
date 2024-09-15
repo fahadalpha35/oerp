@@ -10,13 +10,16 @@ return new class extends Migration
     {
         Schema::create('hr_training_programs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('company_id')->nullable()->constrained('companies')->onDelete('cascade');
             $table->string('program_name');
             $table->text('description')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->string('location')->nullable();
-            $table->enum('status', ['upcoming', 'ongoing', 'completed'])->default('upcoming');
-            $table->timestamps();
+            $table->integer('status')->comment('1 = upcoming, 2 = ongoing, 3 = completed'); // Adding a comment
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+
         });
     }
 
