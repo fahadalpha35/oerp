@@ -14,7 +14,8 @@ return new class extends Migration
             $table->text('benefit_description')->nullable();
             $table->string('benefit_type')->nullable();
             $table->text('eligibility_criteria')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

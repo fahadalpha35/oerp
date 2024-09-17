@@ -10,16 +10,14 @@ return new class extends Migration
     {
         Schema::create('hr_recruitment_interviews', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('candidate_id');
+            $table->foreignId('candidate_id')->nullable()->constrained('hr_recruitment_candidates')->onDelete('cascade');
             $table->date('interview_date');
             $table->time('interview_time');
             $table->text('interviewers')->nullable();
             $table->text('interview_feedback')->nullable();
-            $table->enum('status', ['scheduled', 'completed', 'cancelled'])->default('scheduled');
-            $table->timestamps();
-
-            // Optionally, you can add an index for the candidate_id column
-            $table->index('candidate_id');
+            $table->integer('status')->comment('1 = scheduled, 2 = completed, 3 = cancelled'); // Adding a comment
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 
