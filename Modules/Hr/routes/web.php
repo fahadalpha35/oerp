@@ -19,8 +19,8 @@ use Modules\Hr\Http\Controllers\DesignationController;
 
 
 Route::group([], function () {
-    Route::resource('hr', HrController::class)->names('hr');
-    Route::get('/employees', [EmployeeController::class, 'index'])->name('index');
+    // Route::resource('hr', HrController::class)->names('hr');
+    // Route::get('/employees', [EmployeeController::class, 'index'])->name('index');
     Route::get('department', [DepartmentController::class, 'index'])->name('index');
     Route::get('designation', [DesignationController::class, 'index'])->name('index');
     Route::resource('employees', EmployeeController::class);

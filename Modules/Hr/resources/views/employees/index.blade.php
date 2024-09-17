@@ -112,13 +112,13 @@
                                 <th>ID</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
-                                <th>Email</th>
+                                {{-- <th>Email</th>
                                 <th>Phone Number</th>
                                 <th>Hire Date</th>
                                 <th>Designation</th>
                                 <th>Department</th>
                                 <th>Salary</th>
-                                <th>Status</th>
+                                <th>Status</th> --}}
                                 <th>Action</th> <!-- Added Action column -->
                             </tr>
                         </thead>
@@ -126,7 +126,9 @@
                             @foreach($employees as $employee)
                                 <tr>
                                     <td>{{ $employee->id }}</td>
-                                    <td>{{ $employee->first_name }}</td>
+                                    <td>{{ $employee->level }}</td>
+                                    <td>{{ $employee->designation_name }}</td>
+                                    {{-- <td>{{ $employee->first_name }}</td>
                                     <td>{{ $employee->last_name }}</td>
                                     <td>{{ $employee->email }}</td>
                                     <td>{{ $employee->phone_number }}</td>
@@ -134,7 +136,7 @@
                                     <td>{{ $employee->job_title }}</td>
                                     <td>{{ $employee->department }}</td>
                                     <td>{{ $employee->salary }}</td>
-                                    <td>{{ $employee->status }}</td>
+                                    <td>{{ $employee->status }}</td> --}}
                                     <td>
                                         <a href="{{ route('employees.show', $employee->id) }}" class="btn btn-info btn-sm">View</a>
                                         <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-warning btn-sm">Edit</a>
@@ -151,7 +153,7 @@
                 </div>
 
                 <!-- Custom Pagination Links -->
-                <ul class="pagination">
+                {{-- <ul class="pagination">
                     @if ($employees->onFirstPage())
                         <li class="disabled"><span>&laquo; Previous</span></li>
                     @else
@@ -171,7 +173,7 @@
                     @else
                         <li class="disabled"><span>Next &raquo;</span></li>
                     @endif
-                </ul>
+                </ul> --}}
             </div>
         </div>
     </div>
