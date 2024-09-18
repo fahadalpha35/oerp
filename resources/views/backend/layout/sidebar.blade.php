@@ -217,13 +217,13 @@
                         </a>         
                 </li>
 
-                <li class="nav-item"> 
+                {{-- <li class="nav-item"> 
                     <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">
                         <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
                         <span class="menu-title">Employee Self-Service</span>
                         <i class="menu-arrow"></i>
                         </a>         
-                </li>
+                </li> --}}
 
                 <li class="nav-item"> 
                     <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">

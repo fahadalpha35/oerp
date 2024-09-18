@@ -9,13 +9,15 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Hash;
 use Auth;
+use DB;
 use App\Models\Admin;
 
 class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::paginate(5); // Paginate with 10 items per page
+        // $employees = Employee::paginate(5);
+        $employees = DB::table('hr_designations')->get();
         return view('hr::employees.index', compact('employees'));
     }
 
