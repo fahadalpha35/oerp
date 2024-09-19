@@ -11,11 +11,20 @@
         <link rel="stylesheet" href="{{ asset('backend/vendors/ti-icons/css/themify-icons.css') }}">
         <link rel="stylesheet" href="{{ asset('backend/vendors/css/vendor.bundle.base.css') }}">
         <!-- endinject -->
-        <!-- Plugin css for this page -->
+
+        <!-- Samer Datatable start -->
+        {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/> --}}
+        {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css"/> --}}
+        {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css"/> --}}
+        {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.7.0/css/select.dataTables.min.css"/> --}}
+        <!-- Samer Datatable end -->
+
+        <!-- Datatable start -->
         <link rel="stylesheet" href="{{ asset('backend/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
         <link rel="stylesheet" href="{{ asset('backend/vendors/ti-icons/css/themify-icons.css') }}">
         <link rel="stylesheet"  href="{{ asset('backend/js/select.dataTables.min.css') }}">
-        <!-- End plugin css for this page -->
+        <!-- Datatable End -->
+
         <!-- inject:css -->
         <link rel="stylesheet" href="{{ asset('backend/css/vertical-layout-light/style.css') }}">
         <!-- endinject -->
@@ -34,26 +43,9 @@
         }
         </style>
 
-      
- <!-- Custom CSS -->
-{{-- <style>
-    /* Disable interaction with the disabled class */
-    .nav-link.disabled {
-        pointer-events: none;
-        opacity: 0.5;
-    }
-
-    /* Styling the active menu */
-    .nav-item .nav-link.active {
-        background-color: #908ec4;
-        color: white !important;
-    }
-
-    .nav-item .nav-link.active .menu-icon {
-        color: white !important;
-    }
-</style> --}}
-
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{{ asset('backend/vendors/custom.css') }}">
+   
     </head>
     <body>
         <div class="container-scroller">
@@ -245,24 +237,19 @@
             <!-- page-body-wrapper ends -->
         </div>
         <!-- container-scroller -->
+        
         <!-- plugins:js -->
         <script src="{{ url('backend/vendors/js/vendor.bundle.base.js') }}"></script>
 
-
         <!-- ********* samer js  start **********-->
-
-        <!-- Include jQuery -->
-        {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> --}}
-
         <!-- Include Popper.js -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-
+        <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
         <script>
         $(document).ready(function() {
          
-    // Check if the current page is within the first-level menu
+        // Check if the current page is within the first-level menu
             $('.nav-item').each(function() {
                 if ($(this).find('.nav-link.active').length > 0) {
                     // Expand the parent first-level menu
@@ -274,18 +261,23 @@
         });
 
         </script>
-
         <!-- ********* samer js end *********** -->
        
-
-        <!-- endinject -->
-        <!-- Plugin js for this page -->
+        <!-- chart js -->
         <script src="{{ asset('backend/vendors/chart.js/Chart.min.js') }}"></script>
+
+        <!-- Samer Datatable start -->
+        {{-- <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script> --}}
+        {{-- <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script> --}}
+        {{-- <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script> --}}
+        {{-- <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script> --}}
+        <!-- Samer Datatable end -->
+
+        <!-- DataTables JS start-->
         <script src="{{ asset('backend/vendors/datatables.net/jquery.dataTables.js') }}"></script>
         <script src="{{ asset('backend/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
         <script src="{{ asset('backend/js/dataTables.select.min.js') }}"></script>
-        <!-- End plugin js for this page -->
-
+        <!-- DataTables JS end -->
 
         <!-- SweetAlert2 JS -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.13.3/dist/sweetalert2.all.min.js"></script>
@@ -295,19 +287,20 @@
         
         @stack('masterScripts')
 
-        <!-- inject:js -->
+        <!-- inject:js start-->
         <script src="{{ asset('backend/js/off-canvas.js') }}"></script>
         <script src="{{ asset('backend/js/hoverable-collapse.js') }}"></script>
         <script src="{{ asset('backend/js/template.js') }}"></script>
         <script src="{{ asset('backend/js/settings.js') }}"></script>
         <script src="{{ asset('backend/js/todolist.js') }}"></script>
-        <!-- endinject -->
-        <!-- Custom js for this page-->
-        <script src="{{ asset('backend/js/dashboard.js') }}"></script>
-        <script src="{{ asset('backend/js/Chart.roundedBarCharts.js') }}"></script>
+        <!-- inject:js end -->
 
+        <!-- dashboard js-->
+        <script src="{{ asset('backend/js/dashboard.js') }}"></script>
+        <!-- rounded bar chart js-->
+        <script src="{{ asset('backend/js/Chart.roundedBarCharts.js') }}"></script>
+        <!-- custom js-->
         <script src="{{ asset('backend/js/custom.js') }}"></script>
-        <!-- End custom js for this page-->
-         
+       
     </body>
 </html>

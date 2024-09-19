@@ -11,6 +11,7 @@ use Hash;
 use Auth;
 use DB;
 use App\Models\Admin;
+use Yajra\DataTables\Facades\DataTables;
 
 class EmployeeController extends Controller
 {
@@ -18,7 +19,18 @@ class EmployeeController extends Controller
     {
         // $employees = Employee::paginate(5);
         $employees = DB::table('hr_designations')->get();
-        return view('hr::employees.index', compact('employees'));
+        $dataTable = DataTables::collection($employees)
+        ->addColumn('action', function($row){
+            // Add an action column (like edit/delete buttons)
+            $btn = '<a href="edit/'.$row->id.'" class="edit btn btn-primary btn-sm">Edit</a>';
+            return $btn;
+        })
+        ->rawColumns(['action']) // Ensure action column supports raw HTML
+        ->make(true);
+
+        // dd($dataTable);
+
+     return view('hr::employees.index', ['employees' => $dataTable->getData()->data]);
     }
 
     public function create()
