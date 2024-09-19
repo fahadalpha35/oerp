@@ -13,16 +13,16 @@
         <!-- endinject -->
 
         <!-- Samer Datatable start -->
-        {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/> --}}
-        {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css"/> --}}
-        {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css"/> --}}
-        {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.7.0/css/select.dataTables.min.css"/> --}}
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.7.0/css/select.dataTables.min.css"/>
         <!-- Samer Datatable end -->
 
         <!-- Datatable start -->
-        <link rel="stylesheet" href="{{ asset('backend/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
-        <link rel="stylesheet" href="{{ asset('backend/vendors/ti-icons/css/themify-icons.css') }}">
-        <link rel="stylesheet"  href="{{ asset('backend/js/select.dataTables.min.css') }}">
+        {{-- <link rel="stylesheet" href="{{ asset('backend/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}"> --}}
+        {{-- <link rel="stylesheet" href="{{ asset('backend/vendors/ti-icons/css/themify-icons.css') }}"> --}}
+        {{-- <link rel="stylesheet"  href="{{ asset('backend/js/select.dataTables.min.css') }}"> --}}
         <!-- Datatable End -->
 
         <!-- inject:css -->
@@ -267,16 +267,16 @@
         <script src="{{ asset('backend/vendors/chart.js/Chart.min.js') }}"></script>
 
         <!-- Samer Datatable start -->
-        {{-- <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script> --}}
-        {{-- <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script> --}}
-        {{-- <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script> --}}
-        {{-- <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script> --}}
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+        <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
         <!-- Samer Datatable end -->
 
         <!-- DataTables JS start-->
-        <script src="{{ asset('backend/vendors/datatables.net/jquery.dataTables.js') }}"></script>
-        <script src="{{ asset('backend/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
-        <script src="{{ asset('backend/js/dataTables.select.min.js') }}"></script>
+        {{-- <script src="{{ asset('backend/vendors/datatables.net/jquery.dataTables.js') }}"></script> --}}
+        {{-- <script src="{{ asset('backend/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script> --}}
+        {{-- <script src="{{ asset('backend/js/dataTables.select.min.js') }}"></script> --}}
         <!-- DataTables JS end -->
 
         <!-- SweetAlert2 JS -->

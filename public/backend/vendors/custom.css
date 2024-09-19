@@ -20,8 +20,17 @@
 .btn-large {
     font-size: 18px; /* Adjust font size */
     padding: 10px 20px; /* Adjust padding */
-    margin: 5px; /* Adjust margin if needed */
+    margin: 1px; /* Adjust margin if needed */
 }
+
+
+.dataTable .btn {
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
 
 .content-wrapper1 {
     padding-top: 0;
