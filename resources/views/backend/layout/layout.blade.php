@@ -25,6 +25,10 @@
         {{-- <link rel="stylesheet"  href="{{ asset('backend/js/select.dataTables.min.css') }}"> --}}
         <!-- Datatable End -->
 
+           <!-- Select2 CSS -->
+            {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" rel="stylesheet" /> --}}
+            <link rel="stylesheet" href="{{ url('backend/vendors/select2/select2.min.css') }}">
+
         <!-- inject:css -->
         <link rel="stylesheet" href="{{ asset('backend/css/vertical-layout-light/style.css') }}">
         <!-- endinject -->
@@ -45,7 +49,7 @@
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="{{ asset('backend/vendors/custom.css') }}">
-   
+        {{-- @stack('css') --}}
     </head>
     <body>
         <div class="container-scroller">
@@ -263,6 +267,9 @@
         </script>
         <!-- ********* samer js end *********** -->
        
+        <!-- select2 js -->
+        <script src="{{ url('backend/vendors/select2/select2.min.js') }}"></script>
+
         <!-- chart js -->
         <script src="{{ asset('backend/vendors/chart.js/Chart.min.js') }}"></script>
 
