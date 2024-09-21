@@ -34,11 +34,10 @@
         </li>
 
 
-
-
         <li class="nav-item ">
             <a class="nav-link" href="#humanResource" data-toggle="collapse"  aria-expanded="@if(Request::is('employees')) true
                       @elseif(Request::is('designation')) true
+                      @elseif(Request::is('branches')) true
                       @else false
                       @endif">
                 <i class="mdi mdi-account-check menu-icon"></i>
@@ -49,6 +48,7 @@
             <!-- First-level sub-menu -->
             <ul class="collapse nav  @if(Request::is('employees')) show
                             @elseif(Request::is('designation')) show
+                            @elseif(Request::is('branches')) show
                             @endif" id="humanResource" style="margin-top: -2px;">
 
               <li class="nav-item @if(Request::is('employees')) active
@@ -67,6 +67,7 @@
                 <!-- Second-level sub-menu -->
                 <ul class="collapse nav flex-column ms-3 @if(Request::is('employees')) show
                             @elseif(Request::is('designation')) show
+                            @elseif(Request::is('branches')) show
                             @endif" id="Employee" style="margin-top: -2px;">
                   
                 <li class="nav-item">
@@ -89,6 +90,13 @@
                     <a href="{{ url('employees') }}" class="nav-link {{ Request::is('employees') ? 'active' : '' }}" style="{{ Request::is('employees') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('employees') ? 'color: white; !important' : ''}}"></i>
                         <span class="menu-arrow" style="{{ Request::is('employees') ? 'color: white; !important' : ''}}">Employee Profile</span>
+                      </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="{{ url('branches') }}" class="nav-link {{ Request::is('branches') ? 'active' : '' }}" style="{{ Request::is('branches') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('branches') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('branches') ? 'color: white; !important' : ''}}">Branch</span>
                       </a>
                   </li>
 
