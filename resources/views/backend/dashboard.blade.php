@@ -1,6 +1,5 @@
 @extends('backend.layout.layout')
 @section('content')
-
 <!-- partial -->
 <div class="main-panel">
                     <div class="content-wrapper">

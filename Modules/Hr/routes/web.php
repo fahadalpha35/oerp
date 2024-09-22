@@ -23,10 +23,11 @@ Route::group([], function () {
     // Route::resource('hr', HrController::class)->names('hr');
     // Route::get('/employees', [EmployeeController::class, 'index'])->name('index');
     Route::resource('branches', BranchController::class);
-    Route::get('department', [DepartmentController::class, 'index'])->name('index');
-    Route::get('designation', [DesignationController::class, 'index'])->name('index');
-    Route::resource('employees', EmployeeController::class);
-    Route::get('export/excel', [EmployeeController::class, 'exportExcel'])->name('export.excel');
-    Route::get('export/csv', [EmployeeController::class, 'exportCSV'])->name('export.csv');
+    Route::resource('departments', DepartmentController::class);
+    Route::resource('designations', DesignationController::class);
+    // Route::get('designation', [DesignationController::class, 'index'])->name('index');
+    // Route::resource('employees', EmployeeController::class);
+    // Route::get('export/excel', [EmployeeController::class, 'exportExcel'])->name('export.excel');
+    // Route::get('export/csv', [EmployeeController::class, 'exportCSV'])->name('export.csv');
 
 });
