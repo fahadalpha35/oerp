@@ -39,12 +39,17 @@
         <link rel="stylesheet" href="{{ asset('backend/vendors/mdi/css/materialdesignicons.min.css') }}">
 
         <!-- SweetAlert2 CSS -->
-        <link href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.13.3/dist/sweetalert2.min.css " rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.13.3/dist/sweetalert2.min.css " rel="stylesheet">
 
         <style>
         .nav-item .collapse {
             margin-bottom: -5px
         }
+
+        .my-swal-class {
+            padding-top: 30px; /* Adjust the padding as needed */
+        }
+
         </style>
 
         <!-- Custom CSS -->
@@ -287,7 +292,8 @@
         <!-- DataTables JS end -->
 
         <!-- SweetAlert2 JS -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.13.3/dist/sweetalert2.all.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
 
         <!-- Axios -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>

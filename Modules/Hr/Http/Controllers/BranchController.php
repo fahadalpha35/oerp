@@ -33,14 +33,6 @@ class BranchController extends Controller
                             ->leftJoin('companies','hr_branches.company_id','companies.id')
                             ->select('hr_branches.*','companies.company_name as company_name')
                             ->get();
-           // Check if there's a search term and apply it
-        if ($request->has('search') && $request->input('search.value')) {
-            $searchValue = $request->input('search.value');
-            $branches->where(function ($query) use ($searchValue) {
-                $query->where('hr_branches.br_name', 'LIKE', "%$searchValue%")
-                      ->orWhere('companies.company_name', 'LIKE', "%$searchValue%");
-            });
-        }
         
         return DataTables::of($branches)
             ->addColumn('branch_type_label', function ($row) {
@@ -51,13 +43,46 @@ class BranchController extends Controller
             })
             ->addColumn('action', function ($row) {
                 return '
-                    <a href="' . route('branches.edit', $row->id) . '" class="btn btn-primary">Edit</a>
-                    <form action="' . route('branches.destroy', $row->id) . '" method="POST" style="display:inline;">
-                        ' . csrf_field() . '
-                        ' . method_field('DELETE') . '
-                        <button type="submit" class="btn btn-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>
-                    </form>
+                    <a href="' . route('branches.edit', $row->id) . '" class="btn btn-warning">Edit</a>
+                    <a onclick="deleteBranch(' . $row->id . ')" class="btn btn-danger">Delete</a>
                 ';
+            })
+            ->filter(function ($query) use ($request) {
+                if ($request->has('search') && $request->search['value']) {
+                    $searchTerm = $request->search['value'];
+            
+                    // Check for Head Office/Single Branch search
+                    $branchType = null;
+                    if (strtolower($searchTerm) === 'head office') {
+                        $branchType = 1; // Head Office
+                    } elseif (strtolower($searchTerm) === 'single branch') {
+                        $branchType = 2; // Single Branch
+                    }
+            
+                    // Check for Active/Inactive search
+                    $searchStatus = null;
+                    if (strtolower($searchTerm) === 'active') {
+                        $searchStatus = 1; // Active
+                    } elseif (strtolower($searchTerm) === 'inactive') {
+                        $searchStatus = 2; // Inactive
+                    }
+            
+                    // Perform the search
+                    $query->where(function ($q) use ($searchTerm, $branchType, $searchStatus) {
+                        $q->where('hr_branches.br_name', 'like', "%{$searchTerm}%")
+                          ->orWhere('companies.company_name', 'like', "%{$searchTerm}%");
+            
+                        // If it's a search for Head Office/Single Branch, add type condition
+                        if (!is_null($branchType)) {
+                            $q->orWhere('hr_branches.br_type', 'like', "%{$branchType}%");
+                        }
+            
+                        // If it's a search for Active/Inactive, add status condition
+                        if (!is_null($searchStatus)) {
+                            $q->orWhere('hr_branches.br_status', 'like', "%{$searchStatus}%");
+                        }
+                    });
+                }
             })
             ->make(true);
 
@@ -67,15 +92,6 @@ class BranchController extends Controller
             ->select('hr_branches.*', 'companies.company_name as company_name')
             ->where('hr_branches.company_id', $user_company_id);
         
-        // Check if there's a search term and apply it
-        if ($request->has('search') && $request->input('search.value')) {
-            $searchValue = $request->input('search.value');
-            $branches->where(function ($query) use ($searchValue) {
-                $query->where('hr_branches.br_name', 'LIKE', "%$searchValue%")
-                      ->orWhere('companies.company_name', 'LIKE', "%$searchValue%");
-            });
-        }
-        
         return DataTables::of($branches)
             ->addColumn('branch_type_label', function ($row) {
                 return $row->br_type == 1 ? 'Head Office' : 'Single Branch';
@@ -85,13 +101,46 @@ class BranchController extends Controller
             })
             ->addColumn('action', function ($row) {
                 return '
-                    <a href="' . route('branches.edit', $row->id) . '" class="btn btn-primary">Edit</a>
-                    <form action="' . route('branches.destroy', $row->id) . '" method="POST" style="display:inline;">
-                        ' . csrf_field() . '
-                        ' . method_field('DELETE') . '
-                        <button type="submit" class="btn btn-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>
-                    </form>
+                    <a href="' . route('branches.edit', $row->id) . '" class="btn btn-warning"> Edit</a>
+                    <a onclick="deleteBranch(' . $row->id . ')" class="btn btn-danger"> Delete</a>
                 ';
+            })
+            ->filter(function ($query) use ($request) {
+                if ($request->has('search') && $request->search['value']) {
+                    $searchTerm = $request->search['value'];
+            
+                    // Check for Head Office/Single Branch search
+                    $branchType = null;
+                    if (strtolower($searchTerm) === 'head office') {
+                        $branchType = 1; // Head Office
+                    } elseif (strtolower($searchTerm) === 'single branch') {
+                        $branchType = 2; // Single Branch
+                    }
+            
+                    // Check for Active/Inactive search
+                    $searchStatus = null;
+                    if (strtolower($searchTerm) === 'active') {
+                        $searchStatus = 1; // Active
+                    } elseif (strtolower($searchTerm) === 'inactive') {
+                        $searchStatus = 2; // Inactive
+                    }
+            
+                    // Perform the search
+                    $query->where(function ($q) use ($searchTerm, $branchType, $searchStatus) {
+                        $q->where('hr_branches.br_name', 'like', "%{$searchTerm}%")
+                          ->orWhere('companies.company_name', 'like', "%{$searchTerm}%");
+            
+                        // If it's a search for Head Office/Single Branch, add type condition
+                        if (!is_null($branchType)) {
+                            $q->orWhere('hr_branches.br_type', 'like', "%{$branchType}%");
+                        }
+            
+                        // If it's a search for Active/Inactive, add status condition
+                        if (!is_null($searchStatus)) {
+                            $q->orWhere('hr_branches.br_status', 'like', "%{$searchStatus}%");
+                        }
+                    });
+                }
             })
             ->make(true);
         }

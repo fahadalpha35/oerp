@@ -32,7 +32,7 @@
                                 <table id="exampleTable" class="table table-bordered table-hover">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th>ID</th>
+                                            {{-- <th>ID</th> --}}
                                             <th>Company</th>
                                             <th>Branch Type</th>
                                             <th>Branch</th>
@@ -79,55 +79,19 @@
 const csrfToken = '{{ csrf_token() }}'; // Define csrfToken globally
 
 $(document).ready(function() {
-    // Initialize the DataTable
-    let table = $('#exampleTable').DataTable({
+
+    var table = $('#exampleTable').DataTable({
         responsive: true,
         processing: true,
         serverSide: true,
-        searching: true,
-        ajax: function(data, callback, settings) {
-            // Use Axios to fetch the data
-            axios.get('{{ route('branches.index') }}', {
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                },
-                params: {
-                    draw: data.draw, // Send the draw parameter for server-side processing
-                    start: data.start, // Pagination start
-                    length: data.length, // Number of records to return
-                    'search[value]': data.search.value // Include search term
-                }
-            })
-            .then(function(response) {
-                // Pass the response data to the callback
-                callback({
-                    draw: response.data.draw, // Must match the draw parameter from the request
-                    recordsTotal: response.data.recordsTotal, // Total records without filtering
-                    recordsFiltered: response.data.recordsFiltered, // Total records after filtering
-                    data: response.data.data.map(branch => [
-                        branch.id,
-                        branch.company_name,
-                        branch.branch_type_label,
-                        branch.br_name,
-                        branch.branch_status_label,
-                        `
-        <a href="/branches/${branch.id}/edit" class="btn btn-primary">Edit</a>
-        <button class="btn btn-danger" onclick="deleteBranch(${branch.id})">Delete</button>
-    `
-                    ]) // Map each branch to the expected array format
-                });
-            })
-            .catch(function(error) {
-                console.error('Error fetching branches:', error);
-            });
-        },
+        ajax: "{{ route('branches.index') }}",
         columns: [
-            { title: "ID" },
-            { title: "Company Name", searchable : true },
-            { title: "Branch Type" , searchable : true},
-            { title: "Branch Name" , searchable : true},
-            { title: "Branch Status" , searchable : true},
-            { title: "Action" }
+            // {data: 'id', name: 'id'},
+            {data: 'company_name', name: 'company_name',},
+            {data: 'branch_type_label', name: 'branch_type_label'},
+            {data: 'br_name', name: 'br_name'},
+            {data: 'branch_status_label', name: 'branch_status_label'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
 });
