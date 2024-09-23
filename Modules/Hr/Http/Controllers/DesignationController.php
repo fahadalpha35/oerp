@@ -16,7 +16,7 @@ class DesignationController extends Controller
      * Display a listing of the resource.
      */
 
-     use ValidatesRequests;
+    use ValidatesRequests;
     public function index()
     {
         

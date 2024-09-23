@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->foreignId('designation_id')->nullable()->constrained('hr_designations')->onDelete('cascade');
+            $table->foreignId('branch_id')->nullable()->constrained('hr_branches')->onDelete('cascade');
             $table->foreignId('department_id')->nullable()->constrained('hr_departments')->onDelete('cascade');
             $table->date('joining_date')->nullable();
             $table->string('monthly_salary')->nullable();

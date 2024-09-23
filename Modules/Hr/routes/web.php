@@ -19,15 +19,22 @@ use Modules\Hr\Http\Controllers\DesignationController;
 */
 
 
-Route::group([], function () {
-    // Route::resource('hr', HrController::class)->names('hr');
-    // Route::get('/employees', [EmployeeController::class, 'index'])->name('index');
+Route::middleware('auth')->group(function () {
+
+    //----------**** Dependancy route (start) *******--------------
+
+    //level and designation depedancy
+    Route::post('/level.designation.dependancy',[EmployeeController::class,'level_designation_dependancy']);
+    //branch and department depedancy
+    Route::post('/branch.department.dependancy',[EmployeeController::class,'branch_dpartment_dependancy']);
+    //----------**** Dependancy route (end) *******--------------
+
+    Route::resource('/employees', EmployeeController::class);
     Route::resource('branches', BranchController::class);
     Route::resource('departments', DepartmentController::class);
     Route::resource('designations', DesignationController::class);
-    // Route::get('designation', [DesignationController::class, 'index'])->name('index');
+
     // Route::resource('employees', EmployeeController::class);
     // Route::get('export/excel', [EmployeeController::class, 'exportExcel'])->name('export.excel');
     // Route::get('export/csv', [EmployeeController::class, 'exportCSV'])->name('export.csv');
-
 });
