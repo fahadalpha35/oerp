@@ -1,11 +1,11 @@
 <!-- partial:partials/_navbar.html -->
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="{{ url('backend/dashboard') }}">
+        <a class="navbar-brand brand-logo mr-5" href="{{ url('/dashboard') }}">
         &nbsp;&nbsp;&nbsp;&nbsp;<img src="{{ url('backend/images/oerp.png') }}" class="mr-2" alt="logo"/>
         </a>
-        <a class="navbar-brand brand-logo-mini" href="{{ url('backend/dashboard') }}">
-            <img src="{{ url('backend/images/t.png') }}" alt="logo"/>
+        <a class="navbar-brand brand-logo-mini" href="{{ url('/dashboard') }}">
+            <img src="{{ asset('backend/images/t.png') }}" alt="logo"/>
         </a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -75,15 +75,15 @@
             </li>
             <li class="nav-item nav-profile dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                <img src="{{ url('backend/images/profile/' . Auth::guard('admin')->user()->image) }}" alt="profile"/>
+                <img src="{{ asset('backend/images/profile/' . Auth::user()->image) }}" alt="profile"/>
 
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                    <a href="{{ url('backend/update-admin-password') }}" class="dropdown-item">
+                    <a href="{{ url('/update-admin-password') }}" class="dropdown-item">
                     <i class="ti-settings text-primary"></i>
                     Settings
                     </a>
-                    <a href="{{ url('backend/logout') }}" class="dropdown-item">
+                    <a href="{{ url('/logout') }}" class="dropdown-item">
                     <i class="ti-power-off text-primary"></i>
                     Logout
                     </a>

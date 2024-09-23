@@ -1,0 +1,13 @@
+{
+    "Hr": true,
+    "Inventory": true,
+    "Accountsphp": true,
+    "Artisan": true,
+    "Accounts": true,
+    "Pos": true,
+    "Ecommerce": true,
+    "Manufacturing": true,
+    "Supplychain": true,
+    "Crm": true,
+    "Reporting": true
+}

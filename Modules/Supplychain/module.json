@@ -1,0 +1,11 @@
+{
+    "name": "Supplychain",
+    "alias": "supplychain",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Supplychain\\Providers\\SupplychainServiceProvider"
+    ],
+    "files": []
+}

@@ -72,7 +72,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="admin_mobile">Mobile</label>
-                                <input type="text" class="form-control" id="admin_mobile" placeholder="Enter Mobile Number" name="admin_mobile" value="{{ Auth::guard('admin')->user()->mobile }}" maxlength="14" minlength="14">
+                                <input type="text" class="form-control" id="admin_mobile" placeholder="Enter Mobile Number" name="admin_mobile" value="{{ Auth::guard('admin')->user()->mobile }}" maxlength="14" minlength="8">
                             </div>
                             <div class="form-group">
                                 <label for="admin_image">Admin Image</label>

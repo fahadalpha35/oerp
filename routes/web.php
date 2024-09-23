@@ -2,40 +2,60 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\MasterAdminController;
+use App\Http\Controllers\Backend\EmployeeUsersController;
+
+// use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
-    return view('/backend/login');
+    return view('backend.login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+#### CLEAR ALL IN ONE ####
+Route::get('/clear-cache', function () {
+    Artisan::call('optimize:clear');
+    return 'Caches cleared and configuration files regenerated.';
 });
 
-require __DIR__.'/auth.php';
 
-Route::prefix('/backend')->namespace('App\Http\Controllers\Backend')->group(function() {
+// Route::prefix('/backend')->group(function() {
+
+    Route::get('/', [MasterAdminController::class, 'login'])->name('login');
+
     // Admin Login Route
-    Route::match(['get', 'post'], 'login', [AdminController::class, 'login']);
-    Route::match(['get', 'post'], 'register', [AdminController::class, 'register']);
+    Route::match(['get', 'post'], 'login', [MasterAdminController::class, 'login'])->name('login');
+    Route::match(['get', 'post'], 'register', [MasterAdminController::class, 'register'])->name('register');
 
-    Route::group(['middleware' => ['Admin']], function() {
-        // Admin Dashboard Route
-        Route::get('dashboard', [AdminController::class, 'dashboard']);    
-        // Update Admin Password
-        Route::match(['get', 'post'], 'update-admin-password', [AdminController::class, 'updateAdminPassword']);
-        // Check Admin Password
-        Route::post('check-admin-password', [AdminController::class, 'checkAdminPassword']);
-        // Update Admin Details
-        Route::match(['get', 'post'], 'update-admin-details', [AdminController::class, 'updateAdminDetails']);
+    //division and district depedancy
+    Route::post('/division',[MasterAdminController::class,'division']);
+
+    // Route::group(['middleware' => ['Admin']], function() {
+
+    // });
+
+    Route::middleware('auth')->group(function () {
+
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+        // Dashboard Route
+        Route::get('/dashboard', [MasterAdminController::class, 'dashboard']);  
+        // Update Password
+        Route::match(['get', 'post'], 'update-password', [MasterAdminController::class, 'updatePassword']);
+
+        // Update Personal Details
+        Route::match(['get', 'post'], 'update-personal-details', [MasterAdminController::class, 'updatePersonalDetails'])->name('update-personal-details');
+    
     });
 
     // Admin Logout
-    Route::get('logout', [AdminController::class, 'logout']);
-});
+    // Route::match(['get', 'post'], 'update-admin-details', [MasterAdminController::class, 'updateAdminDetails']);
+    Route::get('/logout', [MasterAdminController::class, 'logout']);
+// });
+
+
+
+
+

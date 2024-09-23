@@ -28469,7 +28469,7 @@ div.tagsinput span.tag a {
   font-family: "Nunito", sans-serif;
   font-weight: 500;
   padding: 0;
-  width: 235px;
+  width: 293px;
   z-index: 11;
   transition: width 0.25s ease, background 0.25s ease;
   -webkit-transition: width 0.25s ease, background 0.25s ease;
@@ -28503,7 +28503,7 @@ div.tagsinput span.tag a {
   -webkit-align-items: center;
   align-items: center;
   white-space: nowrap;
-  padding: 0.8125rem 1.937rem 0.8125rem 1rem;
+  padding: 0.7125rem 1.937rem 0.6125rem 1rem;
   color: #fff;
   border-radius: 8px;
   -webkit-transition-duration: 0.45s;
@@ -28761,7 +28761,7 @@ div.tagsinput span.tag a {
     top: 60px;
     bottom: 0;
     overflow: auto;
-    right: -235px;
+    right: -293px;
     -webkit-transition: all 0.25s ease-out;
     -o-transition: all 0.25s ease-out;
     transition: all 0.25s ease-out;
