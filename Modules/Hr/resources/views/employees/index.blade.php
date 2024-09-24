@@ -57,7 +57,7 @@
                               <td>{{$employee->joining_date}}</td>
                               <td>{{$employee->monthly_salary}}</td>
                               <td>
-                                <a href="{{route('employees.show',$employee->id)}}" style="color: white"><button class="btn btn-info"> View</button></a>
+                                <a href="/employees/{{ $employee->id }}/" style="color: white"><button class="btn btn-info"> View</button></a>
                                 <a href="{{route('employees.edit',$employee->id)}}" style="color: white"><button class="btn btn-warning"> Edit</button></a>
                                 <a onclick="deleteOperation({{$employee->id}})" style="color: white"><button class="btn btn-danger"> Delete</button></a>
                               </td>
