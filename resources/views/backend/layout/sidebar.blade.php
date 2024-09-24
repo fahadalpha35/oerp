@@ -69,31 +69,31 @@
                       </a>
                   </li>
 
-                  <li class="nav-item">
+                  {{-- <li class="nav-item">
                     <a href="{{ url('employees') }}" class="nav-link {{ Request::is('employees') ? 'active' : '' }}" style="{{ Request::is('employees') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('employees') ? 'color: white; !important' : ''}}"></i>
                         <span class="menu-arrow" style="{{ Request::is('employees') ? 'color: white; !important' : ''}}">Employee Profile</span>
                       </a>
-                  </li>
+                  </li> --}}
 
                   <li class="nav-item">
                     <a href="{{ url('branches') }}" class="nav-link {{ Request::is('branches') ? 'active' : '' }}" style="{{ Request::is('branches') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('branches') ? 'color: white; !important' : ''}}"></i>
-                        <span class="menu-arrow" style="{{ Request::is('branches') ? 'color: white; !important' : ''}}">Branch</span>
+                        <span class="menu-arrow" style="{{ Request::is('branches') ? 'color: white; !important' : ''}}">Branches</span>
                       </a>
                   </li>
 
                   <li class="nav-item">
                     <a href="{{ url('departments') }}" class="nav-link {{ Request::is('departments') ? 'active' : '' }}" style="{{ Request::is('departments') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('departments') ? 'color: white; !important' : ''}}"></i>
-                        <span class="menu-arrow" style="{{ Request::is('departments') ? 'color: white; !important' : ''}}">Department</span>
+                        <span class="menu-arrow" style="{{ Request::is('departments') ? 'color: white; !important' : ''}}">Departments</span>
                       </a>
                   </li>
 
                   <li class="nav-item">
                     <a href="{{ url('designations') }}" class="nav-link {{ Request::is('designations') ? 'active' : '' }}" style="{{ Request::is('designations') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('designations') ? 'color: white; !important' : ''}}"></i>
-                        <span class="menu-arrow" style="{{ Request::is('designations') ? 'color: white; !important' : ''}}">Designation</span>
+                        <span class="menu-arrow" style="{{ Request::is('designations') ? 'color: white; !important' : ''}}">Designations</span>
                       </a>
                   </li>
 

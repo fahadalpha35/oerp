@@ -44,7 +44,6 @@ Route::get('/clear-cache', function () {
         Route::get('/dashboard', [MasterAdminController::class, 'dashboard']);  
         // Update Password
         Route::match(['get', 'post'], 'update-password', [MasterAdminController::class, 'updatePassword']);
-
         // Update Personal Details
         Route::match(['get', 'post'], 'update-personal-details', [MasterAdminController::class, 'updatePersonalDetails'])->name('update-personal-details');
     
