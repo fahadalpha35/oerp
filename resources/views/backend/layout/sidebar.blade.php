@@ -267,16 +267,12 @@
             </a>
             <div class="collapse" id="manu">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="">Production Planning</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Quality Control</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Work Orders</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Bill of Materials (BOM)</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Routing</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Manufacturing Resources</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Maintenance</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Production Reporting</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Production Analytics</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Settings</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ url('manufacturing') }}">Clients</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ url('service') }}">Services</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ url('part') }}">Parts</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ url('order') }}">Orders</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ url('estimation') }}">Estimations</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ url('workorder') }}">Work Orders</a></li>
                 </ul>
             </div>
         </li>
@@ -310,17 +306,10 @@
             </a>
             <div class="collapse" id="scm">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="#">Supplier Management</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Logistics</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Inventory Management</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Order Management</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Procurement</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Demand Planning</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Supplier Performance</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Transport Management</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Warehouse Management</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Reports</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Settings</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Supplier Managements</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Purchases</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Purchase Returns</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Supplier Payments</a></li>
                 </ul>
             </div>
         </li>
