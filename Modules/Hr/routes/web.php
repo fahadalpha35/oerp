@@ -29,12 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/branch.department.dependancy',[EmployeeController::class,'branch_dpartment_dependancy']);
     //----------**** Dependancy route (end) *******--------------
 
-    Route::resource('/employees', EmployeeController::class);
+    Route::resource('employees', EmployeeController::class);
     Route::resource('branches', BranchController::class);
     Route::resource('departments', DepartmentController::class);
     Route::resource('designations', DesignationController::class);
-
-    // Route::resource('employees', EmployeeController::class);
-    // Route::get('export/excel', [EmployeeController::class, 'exportExcel'])->name('export.excel');
-    // Route::get('export/csv', [EmployeeController::class, 'exportCSV'])->name('export.csv');
 });

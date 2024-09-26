@@ -28,7 +28,6 @@
                             <span class="menu-arrow" style="{{ Request::is('update-personal-details') ? 'color: white; !important' : ''}}">Update Personal Details</span>
                         </a>
                     </li>
-                    {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('update-admin-details') }}">Update Personal Details</a></li> --}}
                 </ul>
             </div>
         </li>
@@ -68,13 +67,6 @@
                         <span class="menu-arrow" style="{{ Request::is('employees') ? 'color: white; !important' : ''}}">Employees</span>
                       </a>
                   </li>
-
-                  {{-- <li class="nav-item">
-                    <a href="{{ url('employees') }}" class="nav-link {{ Request::is('employees') ? 'active' : '' }}" style="{{ Request::is('employees') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('employees') ? 'color: white; !important' : ''}}"></i>
-                        <span class="menu-arrow" style="{{ Request::is('employees') ? 'color: white; !important' : ''}}">Employee Profile</span>
-                      </a>
-                  </li> --}}
 
                   <li class="nav-item">
                     <a href="{{ url('branches') }}" class="nav-link {{ Request::is('branches') ? 'active' : '' }}" style="{{ Request::is('branches') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
