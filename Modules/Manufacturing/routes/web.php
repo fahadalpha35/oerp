@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Manufacturing\Http\Controllers\ManufacturingController;
+use Modules\Manufacturing\Http\Controllers\EstimationController;
+use Modules\Manufacturing\Http\Controllers\OrderController;
+use Modules\Manufacturing\Http\Controllers\PartController;
+use Modules\Manufacturing\Http\Controllers\ServiceController;
+use Modules\Manufacturing\Http\Controllers\WorkOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,5 +20,10 @@ use Modules\Manufacturing\Http\Controllers\ManufacturingController;
 */
 
 Route::group([], function () {
-    Route::resource('manufacturing', ManufacturingController::class)->names('manufacturing');
+    Route::resource('manufacturing', ManufacturingController::class);
+    Route::resource('estimation', EstimationController::class);
+    Route::resource('order', OrderController::class);
+    Route::resource('part', PartController::class);
+    Route::resource('service', ServiceController::class);
+    Route::resource('workorder', WorkOrderController::class);
 });

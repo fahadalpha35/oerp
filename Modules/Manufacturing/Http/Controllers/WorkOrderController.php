@@ -7,15 +7,14 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class ManufacturingController extends Controller
+class WorkOrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('manufacturing::manufacturing.index');
-        // return view('manufacturing::index');
+        return view('manufacturing::workorder.index');
     }
 
     /**
