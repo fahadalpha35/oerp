@@ -3,18 +3,32 @@
 namespace Modules\Manufacturing\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use DB; // Import DB facade
+use DataTables;
 
 class ServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('manufacturing::service.index');
+        if ($request->ajax()) {
+            $data = DB::table('manufacture_services')->select('*'); // Use DB to get data
+
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $btn = '<a href="'.route('service.edit', $row->id).'" class="edit btn btn-warning btn-sm">Edit</a>';
+                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation('.$row->id.')">Delete</a>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('manufacturing::service.index'); // Render index view
     }
 
     /**
@@ -22,23 +36,29 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return view('manufacturing::create');
+        return view('manufacturing::service.create'); // Render create view
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'name' => 'required|string',
+            'price' => 'required|numeric',
+            'unit' => 'required|string',
+            'description' => 'nullable|string',
+        ]);
 
-    /**
-     * Show the specified resource.
-     */
-    public function show($id)
-    {
-        return view('manufacturing::show');
+        DB::table('manufacture_services')->insert([ // Use DB to insert data
+            'name' => $request->name,
+            'price' => $request->price,
+            'unit' => $request->unit,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->route('service.index')->with('success_message', 'Service added successfully!');
     }
 
     /**
@@ -46,15 +66,31 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-        return view('manufacturing::edit');
+        $service = DB::table('manufacture_services')->find($id); // Use DB to find service
+
+        return view('manufacturing::service.edit', compact('service')); // Render edit view
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'price' => 'required|numeric',
+            'unit' => 'required|string',
+            'description' => 'nullable|string',
+        ]);
+
+        DB::table('manufacture_services')->where('id', $id)->update([ // Use DB to update data
+            'name' => $request->name,
+            'price' => $request->price,
+            'unit' => $request->unit,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->route('service.index')->with('success_message', 'Service updated successfully!');
     }
 
     /**
@@ -62,6 +98,8 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('manufacture_services')->where('id', $id)->delete(); // Use DB to delete service
+
+        return response()->json(['success' => true, 'message' => 'Service deleted successfully!']);
     }
 }
