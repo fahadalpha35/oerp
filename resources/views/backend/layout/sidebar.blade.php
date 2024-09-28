@@ -258,13 +258,49 @@
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="manu">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ url('manufacturing') }}">Clients</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ url('service') }}">Services</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ url('part') }}">Parts</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ url('order') }}">Orders</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ url('estimation') }}">Estimations</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ url('workorder') }}">Work Orders</a></li>
+                <ul class="collapse nav  @if(Request::is('manufacturing')) show
+                            @elseif(Request::is('service')) show
+                            @elseif(Request::is('part')) show
+                            @elseif(Request::is('order')) show
+                            @elseif(Request::is('estimation')) show
+                            @elseif(Request::is('workorder')) show
+                            @endif" id="humanResource" style="margin-top: -2px;">
+                <li class="nav-item">
+                    <a href="{{ url('manufacturing') }}" class="nav-link {{ Request::is('manufacturing') ? 'active' : '' }}" style="{{ Request::is('manufacturing') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('manufacturing') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('manufacturing') ? 'color: white; !important' : ''}}">Clients</span>
+                      </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('service') }}" class="nav-link {{ Request::is('service') ? 'active' : '' }}" style="{{ Request::is('service') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('service') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('service') ? 'color: white; !important' : ''}}">Services</span>
+                      </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('part') }}" class="nav-link {{ Request::is('part') ? 'active' : '' }}" style="{{ Request::is('part') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('part') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('part') ? 'color: white; !important' : ''}}">Parts</span>
+                      </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('order') }}" class="nav-link {{ Request::is('order') ? 'active' : '' }}" style="{{ Request::is('order') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('order') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('order') ? 'color: white; !important' : ''}}">Orders</span>
+                      </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('estimation') }}" class="nav-link {{ Request::is('estimation') ? 'active' : '' }}" style="{{ Request::is('estimation') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('estimation') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('estimation') ? 'color: white; !important' : ''}}">estimation</span>
+                      </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('workorder') }}" class="nav-link {{ Request::is('workorder') ? 'active' : '' }}" style="{{ Request::is('workorder') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('workorder') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('workorder') ? 'color: white; !important' : ''}}">Work Orders</span>
+                      </a>
+                </li><br>
                 </ul>
             </div>
         </li>
