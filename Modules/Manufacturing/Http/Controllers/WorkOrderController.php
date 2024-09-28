@@ -4,7 +4,7 @@ namespace Modules\Manufacturing\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use DB; // Import DB facade
 use Yajra\DataTables\DataTables;
 
 class WorkOrderController extends Controller
@@ -16,22 +16,20 @@ class WorkOrderController extends Controller
     {
         if ($request->ajax()) {
             $data = DB::table('manufacture_work_orders')
-                ->join('manufacture_estimations', 'manufacture_work_orders.estimation_id', '=', 'manufacture_estimations.id')
-                ->select('manufacture_work_orders.*', 'manufacture_estimations.estimation_number') // Change according to your needs
-                ->get();
+                ->select('*'); // Fetch all data from work orders
 
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', function($row) {
-                    $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm" data-id="'.$row->id.'">Edit</a>';
-                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" data-id="'.$row->id.'">Delete</a>';
+                ->addColumn('action', function ($row) {
+                    $btn = '<a href="' . route('workorder.edit', $row->id) . '" class="edit btn btn-warning btn-sm">Edit</a>';
+                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(' . $row->id . ')">Delete</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
 
-        return view('manufacturing::workorder.index');
+        return view('manufacturing::workorder.index'); // Render index view
     }
 
     /**
@@ -39,8 +37,8 @@ class WorkOrderController extends Controller
      */
     public function create()
     {
-        $estimations = DB::table('manufacture_estimations')->get(); // Fetch all estimations for the dropdown
-        return view('manufacturing::workorder.create', compact('estimations'));
+        $estimations = DB::table('manufacture_estimations')->get(); // Fetch all estimations
+        return view('manufacturing::workorder.create', compact('estimations')); // Render create view
     }
 
     /**
@@ -48,6 +46,7 @@ class WorkOrderController extends Controller
      */
     public function store(Request $request)
     {
+        // Validate incoming request
         $request->validate([
             'estimation_id' => 'required|integer|exists:manufacture_estimations,id',
             'assign_manager' => 'nullable|string|max:255',
@@ -57,27 +56,23 @@ class WorkOrderController extends Controller
             'preference_note' => 'nullable|string',
         ]);
 
-        DB::table('manufacture_work_orders')->insert([
-            'estimation_id' => $request->estimation_id,
-            'assign_manager' => $request->assign_manager,
-            'priority' => $request->priority,
-            'notes' => $request->notes,
-            'preferred_date' => $request->preferred_date,
-            'preference_note' => $request->preference_note,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        // Insert data into manufacture_work_orders table
+        try {
+            DB::table('manufacture_work_orders')->insert([
+                'estimation_id' => $request->estimation_id,
+                'assign_manager' => $request->assign_manager,
+                'priority' => $request->priority,
+                'notes' => $request->notes,
+                'preferred_date' => $request->preferred_date,
+                'preference_note' => $request->preference_note,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
 
-        return response()->json(['success' => 'Work Order created successfully.']);
-    }
-
-    /**
-     * Show the specified resource.
-     */
-    public function show($id)
-    {
-        $workOrder = DB::table('manufacture_work_orders')->find($id);
-        return response()->json($workOrder);
+            return redirect()->route('workorder.index')->with('success_message', 'Work Order created successfully!'); // Redirect with success message
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Unable to create work order. Please try again.']);
+        }
     }
 
     /**
@@ -85,9 +80,14 @@ class WorkOrderController extends Controller
      */
     public function edit($id)
     {
-        $workOrder = DB::table('manufacture_work_orders')->find($id);
-        $estimations = DB::table('manufacture_estimations')->get(); // Fetch all estimations for the dropdown
-        return response()->json(['workOrder' => $workOrder, 'estimations' => $estimations]);
+        $workOrder = DB::table('manufacture_work_orders')->find($id); // Fetch work order by ID
+        $estimations = DB::table('manufacture_estimations')->get(); // Fetch all estimations
+
+        if ($workOrder) {
+            return view('manufacturing::workorder.edit', compact('workOrder', 'estimations')); // Render edit view
+        } else {
+            return back()->withErrors(['error' => 'Work Order not found.']);
+        }
     }
 
     /**
@@ -95,6 +95,7 @@ class WorkOrderController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Validate incoming request
         $request->validate([
             'estimation_id' => 'required|integer|exists:manufacture_estimations,id',
             'assign_manager' => 'nullable|string|max:255',
@@ -104,6 +105,7 @@ class WorkOrderController extends Controller
             'preference_note' => 'nullable|string',
         ]);
 
+        // Update work order in manufacture_work_orders table
         DB::table('manufacture_work_orders')->where('id', $id)->update([
             'estimation_id' => $request->estimation_id,
             'assign_manager' => $request->assign_manager,
@@ -114,7 +116,7 @@ class WorkOrderController extends Controller
             'updated_at' => now(),
         ]);
 
-        return response()->json(['success' => 'Work Order updated successfully.']);
+        return redirect()->route('workorder.index')->with('success_message', 'Work Order updated successfully!'); // Redirect with success message
     }
 
     /**
@@ -122,7 +124,8 @@ class WorkOrderController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('manufacture_work_orders')->where('id', $id)->delete();
-        return response()->json(['success' => 'Work Order deleted successfully.']);
+        DB::table('manufacture_work_orders')->where('id', $id)->delete(); // Delete work order by ID
+
+        return response()->json(['success' => true, 'message' => 'Work Order deleted successfully!']);
     }
 }

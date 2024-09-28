@@ -8,7 +8,7 @@
                 <a href="{{ route('manufacturing.create') }}" class="btn btn-success btn-sm">Add Client</a>
                 
                 <div class="col-md-12 col-sm-12">
-                    <h3 class="mt-2 text-center">Client List</h3>
+                    <h3 class="mt-2 text-center">Manufacture Clients List</h3>
                     <div class="card">
                         <div class="card-body">
                             @if(Session::has('error_message'))

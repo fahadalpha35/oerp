@@ -4,7 +4,7 @@ namespace Modules\Manufacturing\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use DB; // Import DB facade
 use Yajra\DataTables\DataTables;
 
 class EstimationController extends Controller
@@ -17,21 +17,20 @@ class EstimationController extends Controller
         if ($request->ajax()) {
             $data = DB::table('manufacture_estimations')
                 ->join('manufacture_orders', 'manufacture_estimations.order_id', '=', 'manufacture_orders.id')
-                ->select('manufacture_estimations.*', 'manufacture_orders.product_name') // Change according to your needs
-                ->get();
+                ->select('manufacture_estimations.*', 'manufacture_orders.product_name');
 
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', function($row) {
-                    $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm" data-id="'.$row->id.'">Edit</a>';
-                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" data-id="'.$row->id.'">Delete</a>';
+                ->addColumn('action', function ($row) {
+                    $btn = '<a href="' . route('estimation.edit', $row->id) . '" class="edit btn btn-warning btn-sm">Edit</a>';
+                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(' . $row->id . ')">Delete</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
 
-        return view('manufacturing::estimation.index');
+        return view('manufacturing::estimation.index'); // Render index view
     }
 
     /**
@@ -40,7 +39,7 @@ class EstimationController extends Controller
     public function create()
     {
         $orders = DB::table('manufacture_orders')->get(); // Fetch all orders for the dropdown
-        return view('manufacturing::estimation.create', compact('orders'));
+        return view('manufacturing::estimation.create', compact('orders')); // Render create view with orders
     }
 
     /**
@@ -48,30 +47,27 @@ class EstimationController extends Controller
      */
     public function store(Request $request)
     {
+        // Validate incoming request
         $request->validate([
             'order_id' => 'required|integer|exists:manufacture_orders,id',
             'estimation_number' => 'required|string|max:255',
             'estimation_date' => 'required|date',
         ]);
 
-        DB::table('manufacture_estimations')->insert([
-            'order_id' => $request->order_id,
-            'estimation_number' => $request->estimation_number,
-            'estimation_date' => $request->estimation_date,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        // Insert data into manufacture_estimations table
+        try {
+            DB::table('manufacture_estimations')->insert([
+                'order_id' => $request->order_id,
+                'estimation_number' => $request->estimation_number,
+                'estimation_date' => $request->estimation_date,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
 
-        return response()->json(['success' => 'Manufacture Estimation created successfully.']);
-    }
-
-    /**
-     * Show the specified resource.
-     */
-    public function show($id)
-    {
-        $estimation = DB::table('manufacture_estimations')->find($id);
-        return response()->json($estimation);
+            return redirect()->route('estimation.index')->with('success_message', 'Manufacture Estimation created successfully!'); // Redirect with success message
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Unable to create estimation. Please try again.']);
+        }
     }
 
     /**
@@ -79,9 +75,10 @@ class EstimationController extends Controller
      */
     public function edit($id)
     {
-        $estimation = DB::table('manufacture_estimations')->find($id);
+        $estimation = DB::table('manufacture_estimations')->find($id); // Use DB to find estimation
         $orders = DB::table('manufacture_orders')->get(); // Fetch all orders for the dropdown
-        return response()->json(['estimation' => $estimation, 'orders' => $orders]);
+
+        return view('manufacturing::estimation.edit', compact('estimation', 'orders')); // Render edit view with orders
     }
 
     /**
@@ -89,20 +86,26 @@ class EstimationController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Validate incoming request
         $request->validate([
             'order_id' => 'required|integer|exists:manufacture_orders,id',
             'estimation_number' => 'required|string|max:255',
             'estimation_date' => 'required|date',
         ]);
 
-        DB::table('manufacture_estimations')->where('id', $id)->update([
-            'order_id' => $request->order_id,
-            'estimation_number' => $request->estimation_number,
-            'estimation_date' => $request->estimation_date,
-            'updated_at' => now(),
-        ]);
+        // Update estimation in manufacture_estimations table
+        try {
+            DB::table('manufacture_estimations')->where('id', $id)->update([
+                'order_id' => $request->order_id,
+                'estimation_number' => $request->estimation_number,
+                'estimation_date' => $request->estimation_date,
+                'updated_at' => now(),
+            ]);
 
-        return response()->json(['success' => 'Manufacture Estimation updated successfully.']);
+            return redirect()->route('estimation.index')->with('success_message', 'Manufacture Estimation updated successfully!'); // Redirect with success message
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Unable to update estimation. Please try again.']);
+        }
     }
 
     /**
@@ -110,7 +113,12 @@ class EstimationController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('manufacture_estimations')->where('id', $id)->delete();
-        return response()->json(['success' => 'Manufacture Estimation deleted successfully.']);
+        try {
+            DB::table('manufacture_estimations')->where('id', $id)->delete(); // Use DB to delete estimation
+
+            return response()->json(['success' => true, 'message' => 'Manufacture Estimation deleted successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Failed to delete estimation.']);
+        }
     }
 }

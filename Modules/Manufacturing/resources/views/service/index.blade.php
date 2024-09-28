@@ -8,7 +8,7 @@
                 <a href="{{ route('service.create') }}" class="btn btn-success btn-sm">Add Service</a>
                 
                 <div class="col-md-12 col-sm-12">
-                    <h3 class="mt-2 text-center">Service List</h3>
+                    <h3 class="mt-2 text-center">Manufacture Services List</h3>
                     <div class="card">
                         <div class="card-body">
                             @if(Session::has('error_message'))
