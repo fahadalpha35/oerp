@@ -213,3 +213,12 @@
     </form>
 </div>
 @endsection
+
+@push('masterScripts')
+<script>
+$.noConflict(); // Ensures jQuery does not conflict with other libraries
+jQuery(document).ready(function($) {
+    $('.select2').select2();
+})
+</script>
+@endpush

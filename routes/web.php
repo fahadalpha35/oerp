@@ -19,7 +19,6 @@ Route::get('/clear-cache', function () {
 });
 
 
-// Route::prefix('/backend')->group(function() {
 
     Route::get('/', [MasterAdminController::class, 'login'])->name('login');
 
@@ -30,9 +29,6 @@ Route::get('/clear-cache', function () {
     //division and district depedancy
     Route::post('/division',[MasterAdminController::class,'division']);
 
-    // Route::group(['middleware' => ['Admin']], function() {
-
-    // });
 
     Route::middleware('auth')->group(function () {
 
@@ -44,16 +40,14 @@ Route::get('/clear-cache', function () {
         Route::get('/dashboard', [MasterAdminController::class, 'dashboard']);  
         // Update Password
         Route::match(['get', 'post'], 'update-password', [MasterAdminController::class, 'updatePassword']);
-
         // Update Personal Details
         Route::match(['get', 'post'], 'update-personal-details', [MasterAdminController::class, 'updatePersonalDetails'])->name('update-personal-details');
     
     });
 
-    // Admin Logout
-    // Route::match(['get', 'post'], 'update-admin-details', [MasterAdminController::class, 'updateAdminDetails']);
-    Route::get('/logout', [MasterAdminController::class, 'logout']);
-// });
+        // Admin Logout
+        Route::get('/logout', [MasterAdminController::class, 'logout']);
+
 
 
 
