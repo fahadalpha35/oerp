@@ -39,7 +39,7 @@
                 <span class="menu-title">Human Resource</span>
                 <i class="menu-arrow"></i>
             </a>
-            
+
             <!-- First-level sub-menu -->
             <ul class="collapse nav  @if(Request::is('employees')) show
                             @elseif(Request::is('designations')) show
@@ -47,8 +47,8 @@
                             @elseif(Request::is('departments')) show
                             @endif" id="humanResource" style="margin-top: -2px;">
 
-              <li class="nav-item">            
-                <a class="nav-link" href="#Employee" data-toggle="collapse" 
+              <li class="nav-item">
+                <a class="nav-link" href="#Employee" data-toggle="collapse"
                      aria-expanded="">
                   <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
                 <span class="menu-title">Employee</span>
@@ -60,7 +60,7 @@
                             @elseif(Request::is('branches')) show
                             @elseif(Request::is('departments')) show
                             @endif" id="Employee" style="margin-top: -2px;">
-                  
+
                 <li class="nav-item">
                     <a href="{{ url('employees') }}" class="nav-link {{ Request::is('employees') ? 'active' : '' }}" style="{{ Request::is('employees') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('employees') ? 'color: white; !important' : ''}}"></i>
@@ -124,7 +124,7 @@
                   </li>
                 </ul>
               </li>
-              
+
               <li class="nav-item">
                 <a class="nav-link" href="#AttendanceTracking" data-toggle="collapse" aria-expanded="false">
                   <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
@@ -174,54 +174,54 @@
                     </a>
                   </li>
                 </ul>
-              </li> 
-              
-                <li class="nav-item"> 
+              </li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">
                         <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
                     <span class="menu-title">Recruitment</span>
                     <i class="menu-arrow"></i>
-                    </a>         
+                    </a>
                 </li>
 
-                <li class="nav-item"> 
+                <li class="nav-item">
                     <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">
                         <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
                         <span class="menu-title">Performance</span>
                         <i class="menu-arrow"></i>
-                        </a>         
+                        </a>
                 </li>
 
-                <li class="nav-item"> 
+                <li class="nav-item">
                     <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">
                         <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
                         <span class="menu-title">Training & Development</span>
                         <i class="menu-arrow"></i>
-                        </a>         
+                        </a>
                 </li>
 
-                {{-- <li class="nav-item"> 
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">
                         <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
                         <span class="menu-title">Employee Self-Service</span>
                         <i class="menu-arrow"></i>
-                        </a>         
+                        </a>
                 </li> --}}
 
-                <li class="nav-item"> 
+                <li class="nav-item">
                     <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">
                         <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
                         <span class="menu-title">Documents</span>
                         <i class="menu-arrow"></i>
-                        </a>         
+                        </a>
                 </li>
 
-                <li class="nav-item"> 
+                <li class="nav-item">
                     <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">
                         <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
                         <span class="menu-title">Employee Benefits</span>
                         <i class="menu-arrow"></i>
-                        </a><br>         
+                        </a><br>
                 </li>
             </ul>
           </li>
@@ -334,7 +334,7 @@
             </a>
             <div class="collapse" id="scm">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="#">Supplier Managements</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ url('supplychain') }}">Supplier Managements</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Purchases</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Purchase Returns</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Supplier Payments</a></li>
@@ -636,7 +636,7 @@
         </li>
 
 
-        
+
         <!-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
             <i class="icon-columns menu-icon"></i>

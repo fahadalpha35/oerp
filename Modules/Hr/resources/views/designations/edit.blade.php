@@ -1,8 +1,7 @@
 @extends('backend.layout.layout')
-@section('content') 
-<div class="main-panel">
+@section('content')
     <div class="content-wrapper">
-      
+
          <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -11,7 +10,7 @@
                   <a class="btn btn-outline-info float-right" href="{{route('designations.index')}}">
                       <i class="fas fa-arrow-left"></i> Back
                   </a>
-              </div>         
+              </div>
               <div class="col-12">
                 <h3 class="mt-2 text-center">Edit Designation</h3>
                   <br>
@@ -39,7 +38,7 @@
                          <form action="{{route('designations.update',$designation->id)}}" method="POST" >
                             @csrf
                             @method('PUT')
-                            <div class="row">       
+                            <div class="row">
                                 <div class="col-md-12 col-sm-12">
                                     <div class="form-group mb-4">
                                         <label>Level <small style="color: red">*</small></label>
@@ -53,38 +52,36 @@
                                                 Support Level
                                                 @endif
                                             </option>
-                                            <option value="">Select Level</option>                                      
-                                            <option value="1">Managing Level</option>                                   
-                                            <option value="2">Operational Level</option>                                   
-                                            <option value="3">Support Level</option>    
+                                            <option value="">Select Level</option>
+                                            <option value="1">Managing Level</option>
+                                            <option value="2">Operational Level</option>
+                                            <option value="3">Support Level</option>
                                         </select>
-                                    </div> 
+                                    </div>
                                 </div>
-                    
+
                                 <div class="col-md-12 col-sm-12">
                                 <div  class="form-group mb-4">
                                     <label>Designation <small style="color: red">*</small></label>
                                     <input type="text" class="form-control" required id="designation_name" name="designation_name" value="{{$designation->designation_name}}">
-                                </div> 
-                                </div>                                     
+                                </div>
+                                </div>
                               </div>
 
                             <input type="hidden" value="{{$designation->id}}" name="id" id="designation_id">
                             <button type="submit" id="sub" class="btn btn-info float-right mr-4">Update</button>
-                          </form>  
+                          </form>
                       </div>
                       <!-- /.card-body -->
                     </div>
-              </div>           
-          </div>      
-          <br>      
+              </div>
+          </div>
+          <br>
         </div><!-- /.container-fluid -->
       </div>
       <!-- /.content-header -->
 
     </div>
-    @include('backend.layout.footer')
-</div>
 @endsection
 
 @push('masterScripts')

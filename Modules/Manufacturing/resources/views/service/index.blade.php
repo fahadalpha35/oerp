@@ -1,12 +1,11 @@
 @extends('backend.layout.layout')
 
 @section('content')
-<div class="main-panel">
     <div class="content-wrapper">
         <div style="background-color: #fff; border-radius: 20px;">
             <div class="mt-5 row" style="padding: 25px;">
                 <a href="{{ route('service.create') }}" class="btn btn-success btn-sm">Add Service</a>
-                
+
                 <div class="col-md-12 col-sm-12">
                     <h3 class="mt-2 text-center">Manufacture Services List</h3>
                     <div class="card">
@@ -47,8 +46,6 @@
             </div>
         </div>
     </div>
-    @include('backend.layout.footer')
-</div>
 @endsection
 
 @push('masterScripts')

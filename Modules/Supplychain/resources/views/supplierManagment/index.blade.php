@@ -1,13 +1,14 @@
 @extends('backend.layout.layout')
 
 @section('content')
+
     <div class="content-wrapper">
         <div style="background-color: #fff; border-radius: 20px;">
             <div class="mt-5 row" style="padding: 25px;">
-                <a href="{{ route('workorder.create') }}" class="btn btn-success btn-sm">Add Work Order</a>
+                <a href="{{ route('manufacturing.create') }}" class="btn btn-success btn-sm">Add Client</a>
 
                 <div class="col-md-12 col-sm-12">
-                    <h3 class="mt-2 text-center">Manufacture Work Orders List</h3>
+                    <h3 class="mt-2 text-center">Supplier List List</h3>
                     <div class="card">
                         <div class="card-body">
                             @if(Session::has('error_message'))
@@ -26,16 +27,14 @@
                                     </button>
                                 </div>
                             @endif
-                            <table id="workOrdersTable" class="table table-bordered table-hover">
+                            <table id="supplierTable" class="table table-bordered table-hover">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>Serial No.</th>
-                                        <th>Estimation ID</th>
-                                        <th>Assign Manager</th>
-                                        <th>Priority</th>
-                                        <th>Notes</th>
-                                        <th>Preferred Date</th>
-                                        <th>Preference Note</th>
+                                        <th>Client Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>City</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -49,23 +48,23 @@
         </div>
     </div>
 
+@endsection
+
 @push('masterScripts')
 <script>
 const csrfToken = '{{ csrf_token() }}'; // Define csrfToken globally
 
 $(document).ready(function() {
-    $('#workOrdersTable').DataTable({
+    $('#supplierTable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '{{ route('workorder.index') }}',
+        ajax: '{{ route('supplychain.index') }}',
         columns: [
-            { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-            { data: 'estimation_id', name: 'estimation_id' },
-            { data: 'assign_manager', name: 'assign_manager' },
-            { data: 'priority', name: 'priority' },
-            { data: 'notes', name: 'notes' },
-            { data: 'preferred_date', name: 'preferred_date' },
-            { data: 'preference_note', name: 'preference_note' },
+            { data: 'id', name: 'id' },
+            { data: 'name', name: 'name' },
+            { data: 'email', name: 'email' },
+            { data: 'phone', name: 'phone' },
+            { data: 'company', name: 'company' },
             { data: 'action', name: 'action', orderable: false, searchable: false }
         ],
         responsive: true
@@ -83,14 +82,14 @@ function deleteOperation(row_id) {
         confirmButtonText: "Yes, delete it!"
     }).then((result) => {
         if (result.isConfirmed) {
-            axios.delete('{{ route('workorder.destroy', ':id') }}'.replace(':id', row_id), {
+            axios.delete('{{ route('supplychain.destroy', ':id') }}'.replace(':id', row_id), {
                 headers: { 'X-CSRF-TOKEN': csrfToken }
             }).then(response => {
                 Swal.fire({
                     icon: "success",
-                    title: response.data.success,
+                    title: response.data.message,
                 });
-                $('#workOrdersTable').DataTable().ajax.reload();
+                $('#supplierTable').DataTable().ajax.reload();
             }).catch(error => {
                 Swal.fire(
                     'Error!',
@@ -103,4 +102,3 @@ function deleteOperation(row_id) {
 }
 </script>
 @endpush
-@endsection

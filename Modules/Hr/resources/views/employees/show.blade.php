@@ -1,6 +1,5 @@
 @extends('backend.layout.layout')
 @section('content')
-<div class="main-panel"> 
         <div class="content-wrapper">
             <div class="content-header">
                 <div class="container-fluid">
@@ -10,26 +9,26 @@
                                 <i class="fas fa-arrow-left"></i> Back
                             </a>
                         </div>
-    
+
                         <div class="col-12">
                             <h3 class="mt-2 text-center">Employee Details</h3>
                         <br>
                         <div class="card">
-                           
-                        
+
+
                             <div class="card-body">
                                 <div class="text-center">
-                                    <img src="{{ asset('/backend/images/' . $employee->profile_pic) }}" 
-                                         alt="&nbsp;no preview&nbsp;" 
-                                         height="150px" 
-                                         width="150px" 
-                                         style="border: 2px solid #9eb6c3; 
-                                                border-radius: 50%; 
+                                    <img src="{{ asset('/backend/images/' . $employee->profile_pic) }}"
+                                         alt="&nbsp;no preview&nbsp;"
+                                         height="150px"
+                                         width="150px"
+                                         style="border: 2px solid #9eb6c3;
+                                                border-radius: 50%;
                                                 box-shadow: 0 0 0 3px #fff, 0 0 0 5px #6eb9e5;"
                                                 onerror="this.onerror=null;this.src='{{ asset('/backend/images/avatar5.png') }}';">
                                     <br><br>
                                 </div>
-                            
+
                                 <h4 class="text-muted text-center">{{ $employee->full_name }}</h4>
                                 <h4 class="text-muted text-center">{{ $employee->designation }}</h4>
                                 <br>
@@ -64,7 +63,7 @@
                                         <h5 style="color: #0098ef">{{ $employee->department }}</h5>
                                     </div>
                                 </div>
-                        
+
                                 <h3 class="mb-3 text-center">Personal Details</h3>
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12 mb-4">
@@ -114,13 +113,11 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         </div>
                         </div>
-            
+
                 </div><!-- /.container-fluid -->
             </div><!-- /.content-header -->
-        </div>  <!-- /.content-wrapper -->
-        @include('backend.layout.footer')
-</div>
+        </div>
 @endsection

@@ -1,5 +1,4 @@
-@extends('supplychain::layouts.master')
-
+@extends('backend.layout.layout')
 @section('content')
     <h1>Hello World</h1>
 
