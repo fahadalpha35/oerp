@@ -252,19 +252,19 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#manu" aria-expanded="false" aria-controls="manu">
+            <a class="nav-link" data-toggle="collapse" href="#manufac" aria-expanded="false" aria-controls="manu">
                 <i class="mdi mdi-puzzle menu-icon"></i>
                 <span class="menu-title">Manufacture</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="manu">
+            
                 <ul class="collapse nav  @if(Request::is('manufacturing')) show
                             @elseif(Request::is('service')) show
                             @elseif(Request::is('part')) show
                             @elseif(Request::is('order')) show
                             @elseif(Request::is('estimation')) show
                             @elseif(Request::is('workorder')) show
-                            @endif" id="humanResource" style="margin-top: -2px;">
+                            @endif" id="manufac" style="margin-top: -2px;">
                 <li class="nav-item">
                     <a href="{{ url('manufacturing') }}" class="nav-link {{ Request::is('manufacturing') ? 'active' : '' }}" style="{{ Request::is('manufacturing') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('manufacturing') ? 'color: white; !important' : ''}}"></i>
@@ -302,7 +302,7 @@
                       </a>
                 </li><br>
                 </ul>
-            </div>
+            
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#prod" aria-expanded="false" aria-controls="prod">
