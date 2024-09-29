@@ -73,16 +73,8 @@
 @push('masterScripts')
 
 <script>
-const csrfToken = '{{ csrf_token() }}'; // Define csrfToken globally
-
-$(document).ready(function() {
-
-    var table = $('#exampleTable').DataTable({
-        responsive: true,
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('branches.index') }}",
-        columns: [
+    this.loadDataTable('exampleTable', '{{ route('branches.index') }}',
+        [
             // {data: 'id', name: 'id'},
             {data: 'company_name', name: 'company_name',},
             {data: 'branch_type_label', name: 'branch_type_label'},
@@ -90,46 +82,7 @@ $(document).ready(function() {
             {data: 'branch_status_label', name: 'branch_status_label'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
-    });
-});
-
-function deleteBranch(branchId) {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: 'You won’t be able to revert this!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Perform the delete action
-            axios.delete('{{ route('branches.destroy', ':id') }}'.replace(':id', branchId), {
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken // Include CSRF token
-                }
-            })
-            .then(response => {
-                Swal.fire(
-                    'Deleted!',
-                    'Your branch has been deleted.',
-                    'success'
-                );
-                // Reload or refresh the DataTable
-                $('#exampleTable').DataTable().ajax.reload();
-            })
-            .catch(error => {
-                Swal.fire(
-                    'Error!',
-                    'There was a problem deleting the branch.',
-                    'error'
-                );
-            });
-        }
-    });
-}
-
+);
 
 </script>
 @endpush

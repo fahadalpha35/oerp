@@ -21,7 +21,7 @@ class ServiceController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $btn = '<a href="'.route('service.edit', $row->id).'" class="edit btn btn-warning btn-sm">Edit</a>';
-                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation('.$row->id.')">Delete</a>';
+                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(\''.route('service.destroy', $row->id).'\', '.$row->id.', \'servicesTable\')">Delete</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])

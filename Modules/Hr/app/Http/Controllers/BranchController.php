@@ -102,7 +102,7 @@ class BranchController extends Controller
             ->addColumn('action', function ($row) {
                 return '
                     <a href="' . route('branches.edit', $row->id) . '" class="btn btn-warning"> Edit</a>
-                    <a onclick="deleteBranch(' . $row->id . ')" class="btn btn-danger"> Delete</a>
+                    <a onclick="deleteOperation(\''.route('branches.destroy', $row->id).'\', '.$row->id.', \'exampleTable\')" class="btn btn-danger"> Delete</a>
                 ';
             })
             ->filter(function ($query) use ($request) {

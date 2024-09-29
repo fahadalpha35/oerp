@@ -1,7 +1,5 @@
 @extends('backend.layout.layout')
 @section('content')
-<!-- partial -->
-<div class="main-panel">
                     <div class="content-wrapper">
                         <div class="row">
                             <div class="col-md-12 grid-margin">
@@ -669,12 +667,8 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
-                    <!-- content-wrapper ends -->
-                    @include('backend.layout.footer')
-                    <!-- partial -->
-                </div>
                 <!-- main-panel ends -->
 
 @endsection

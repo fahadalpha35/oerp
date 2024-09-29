@@ -299,6 +299,8 @@
         <!-- Axios -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
 
+   <!-- custom js-->
+   <script src="{{ asset('backend/js/custom.js') }}"></script>
         @stack('masterScripts')
 
         <!-- inject:js start-->
@@ -313,8 +315,6 @@
         <script src="{{ asset('backend/js/dashboard.js') }}"></script>
         <!-- rounded bar chart js-->
         <script src="{{ asset('backend/js/Chart.roundedBarCharts.js') }}"></script>
-        <!-- custom js-->
-        <script src="{{ asset('backend/js/custom.js') }}"></script>
 
     </body>
 </html>

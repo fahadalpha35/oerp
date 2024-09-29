@@ -23,7 +23,7 @@ class EstimationController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="' . route('estimation.edit', $row->id) . '" class="edit btn btn-warning btn-sm">Edit</a>';
-                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(' . $row->id . ')">Delete</a>';
+                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(\''.route('estimation.destroy', $row->id).'\', '.$row->id.', \'estimationsTable\')">Delete</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
