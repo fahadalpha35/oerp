@@ -20,7 +20,7 @@ class ManufacturingController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $btn = '<a href="'.route('manufacturing.edit', $row->id).'" class="edit btn btn-warning btn-sm">Edit</a>';
-                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation('.$row->id.')">Delete</a>';
+                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(\''.route('manufacturing.destroy', $row->id).'\', '.$row->id.', \'clientsTable\')">Delete</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])

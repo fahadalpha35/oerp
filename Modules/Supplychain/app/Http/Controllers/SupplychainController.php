@@ -18,12 +18,12 @@ class SupplychainController extends Controller
      public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data =  ScmSupplierManagement::get()->toArray();
+            $data =  ScmSupplierManagement::get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $btn = '<a href="'.route('supplychain.edit', $row->id).'" class="edit btn btn-warning btn-sm">Edit</a>';
-                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation('.$row->id.')">Delete</a>';
+                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(\''.route('supplychain.destroy', $row->id).'\', '.$row->id.', \'supplierTable\')">Delete</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -78,6 +78,7 @@ class SupplychainController extends Controller
      */
     public function destroy($id)
     {
-        //
+        ScmSupplierManagement::where('id',$id)->delete();
+        return response()->json(['success' => true, 'message' => 'Client deleted successfully!']);
     }
 }

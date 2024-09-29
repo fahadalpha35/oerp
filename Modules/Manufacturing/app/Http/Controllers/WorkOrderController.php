@@ -22,7 +22,7 @@ class WorkOrderController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="' . route('workorder.edit', $row->id) . '" class="edit btn btn-warning btn-sm">Edit</a>';
-                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(' . $row->id . ')">Delete</a>';
+                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(\''.route('workorder.destroy', $row->id).'\', '.$row->id.', \'workOrdersTable\')">Delete</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])

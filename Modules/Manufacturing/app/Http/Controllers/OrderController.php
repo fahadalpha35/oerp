@@ -21,7 +21,7 @@ class OrderController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="' . route('order.edit', $row->id) . '" class="edit btn btn-warning btn-sm">Edit</a>';
-                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(' . $row->id . ')">Delete</a>';
+                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(\''.route('order.destroy', $row->id).'\', '.$row->id.', \'ordersTable\')">Delete</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])

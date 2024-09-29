@@ -19,7 +19,7 @@ class DepartmentController extends Controller
 
     public function index()
     {
-        
+
         $user_company_id = Auth::user()->company_id;
         $user_role_id = Auth::user()->role_id;
 
@@ -32,18 +32,15 @@ class DepartmentController extends Controller
                             ->get();
 
             return view('hr::departments.index',compact('departments'));
-  
-        }else{
 
+        }else{
             $departments = DB::table('hr_departments')
                             ->leftJoin('companies','hr_departments.company_id','companies.id')
                             ->leftJoin('hr_branches','hr_departments.branch_id','hr_branches.id')
                             ->select('hr_departments.*','companies.company_name as company_name','hr_branches.br_name as branch_name')
                             ->where('hr_departments.company_id',$user_company_id)
                             ->get();
-
             return view('hr::departments.index',compact('departments'));
-
         }
     }
 
@@ -52,14 +49,14 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        
+
         $user_company_id = Auth::user()->company_id;
 
         $branches = DB::table('hr_branches')
                     ->where('hr_branches.company_id',$user_company_id)
                     ->where('br_status',1)
                     ->get();
-        
+
         return view('hr::departments.create',compact('branches'));
     }
 
@@ -68,7 +65,7 @@ class DepartmentController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        
+
         $rules = [
             'branch_id' => 'required|numeric',
             'dept_name' => 'required|string',
@@ -80,16 +77,16 @@ class DepartmentController extends Controller
         ];
 
         $this->validate($request, $rules, $customMessages);
-        
-         
+
+
         $user_company_id = Auth::user()->company_id;
 
         $department = DB::table('hr_departments')
                 ->insertGetId([
                 'company_id'=>$user_company_id,
                 'branch_id'=>$request->branch_id,
-                'dept_name'=>$request->dept_name,             
-                'dept_status'=>1            
+                'dept_name'=>$request->dept_name,
+                'dept_status'=>1
                 ]);
 
         return redirect()->route('departments.index')->with('success_message', 'Department is added successfully!');
@@ -108,7 +105,7 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
-        
+
         $user_company_id = Auth::user()->company_id;
 
         $branches = DB::table('hr_branches')
@@ -121,7 +118,7 @@ class DepartmentController extends Controller
                     ->select('hr_departments.*','hr_branches.br_name as branch_name')
                     ->where('hr_departments.id',$id)
                     ->first();
- 
+
         // dd($dept);
         return view('hr::departments.edit',compact('branches','dept'));
     }
@@ -160,14 +157,14 @@ class DepartmentController extends Controller
         try {
             // Check if the branch exists using Query Builder
             $department = DB::table('hr_departments')->where('id', $id)->first();
-    
+
             if (!$department) {
                 return response()->json(['success' => false, 'message' => 'Department not found.'], 404);
             }
-    
+
             // Delete the branch using Query Builder
             DB::table('hr_departments')->where('id', $id)->delete();
-    
+
             // Return a success response
             return response()->json(['success' => true, 'message' => 'Department has been deleted successfully!']);
         } catch (\Exception $e) {

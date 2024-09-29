@@ -2,12 +2,11 @@
 
 @section('content')
     <div class="content-wrapper">
-
-        <div style="background-color: #fff;border-radius: 20px;">
+        <div style="width: 100%; background-color: #fff;border-radius: 20px;">
             <div class="mt-5 row" style="padding: 25px;">
             <a href="{{ route('employees.create') }}" class="btn btn-success btn-sm">Add Employee</a>
 
-                <div class="col-md-12 col-sm-12">
+                <div class="col-md-12 col-xl-12 col-sm-12">
                     <h3 class="mt-2 text-center">Employee List</h3>
                     <div class="card">
                         <div class="card-body">
@@ -27,7 +26,7 @@
                                     </button>
                                 </div>
                          @endif
-                         <table id="exampleTable" class="table table-bordered table-hover">
+                         <table class="table table-bordered table-hover">
                             <thead class="thead-dark">
                             <tr>
                               <th>Serial No.</th>
@@ -86,7 +85,6 @@ $(document).ready(function() {
         responsive: true,
     });
 });
-
 
 function deleteOperation(row_id) {
     Swal.fire({

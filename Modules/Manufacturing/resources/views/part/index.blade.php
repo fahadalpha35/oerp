@@ -49,14 +49,9 @@
 
 @push('masterScripts')
 <script>
-const csrfToken = '{{ csrf_token() }}'; // Define csrfToken globally
 
-$(document).ready(function() {
-    $('#partsTable').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: '{{ route('part.index') }}',
-        columns: [
+this.loadDataTable('partsTable', '{{ route('part.index') }}',
+        [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
             { data: 'name', name: 'name' },
             { data: 'price', name: 'price' },
@@ -64,39 +59,7 @@ $(document).ready(function() {
             { data: 'description', name: 'description' },
             { data: 'action', name: 'action', orderable: false, searchable: false }
         ],
-        responsive: true
-    });
-});
-
-function deleteOperation(row_id) {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            axios.delete('{{ route('part.destroy', ':id') }}'.replace(':id', row_id), {
-                headers: { 'X-CSRF-TOKEN': csrfToken }
-            }).then(response => {
-                Swal.fire({
-                    icon: "success",
-                    title: response.data.message,
-                });
-                $('#partsTable').DataTable().ajax.reload();
-            }).catch(error => {
-                Swal.fire(
-                    'Error!',
-                    'There was an issue with deleting the data',
-                    'error'
-                );
-            });
-        }
-    });
-}
+);
 </script>
 @endpush
 @endsection

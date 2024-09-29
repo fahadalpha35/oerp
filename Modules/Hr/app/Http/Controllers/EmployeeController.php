@@ -36,16 +36,15 @@ class EmployeeController extends Controller
                             ->leftJoin('hr_branches','hr_employees.branch_id','hr_branches.id')
                             ->leftJoin('hr_departments','hr_employees.department_id','hr_departments.id')
                             ->select(
-                                'users.name as as employee_name',
+                                'users.name as employee_name',
                                 'companies.company_name as employee_company',
-                                'users.email as as employee_email',
+                                'users.email as employee_email',
                                 'hr_designations.designation_name as employee_designation',
                                 'hr_branches.br_name as employee_branch',
                                 'hr_departments.dept_name as employee_department',
                                 'hr_employees.*'
                                 )
                             ->get();
-
             return view('hr::employees.index',compact('employees'));
 
         }else{
@@ -67,8 +66,6 @@ class EmployeeController extends Controller
                                 )
                             ->where('users.company_id',$user_company_id)
                             ->get();
-
-            // dd($employees);
             return view('hr::employees.index',compact('employees'));
 
         }
