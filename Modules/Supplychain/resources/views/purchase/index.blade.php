@@ -5,10 +5,10 @@
     <div class="content-wrapper">
         <div style="background-color: #fff; border-radius: 20px;">
             <div class="mt-5 row" style="padding: 25px;">
-                <a href="{{ route('supplychain.create') }}" class="btn btn-success btn-sm">Add Client</a>
+                <a href="{{ route('purchase.create') }}" class="btn btn-success btn-sm">Add Client</a>
 
                 <div class="col-md-12 col-sm-12">
-                    <h3 class="mt-2 text-center">Supplier List List</h3>
+                    <h3 class="mt-2 text-center">Purchase List List</h3>
                     <div class="card">
                         <div class="card-body">
                             @if(Session::has('error_message'))
@@ -53,7 +53,7 @@
 @push('masterScripts')
 <script>
 
-this.loadDataTable('supplierTable', '{{ route('supplychain.index') }}',
+this.loadDataTable('supplierTable', '{{ route('purchase.index') }}',
         [
             { data: 'id', name: 'id' },
             { data: 'name', name: 'name' },
