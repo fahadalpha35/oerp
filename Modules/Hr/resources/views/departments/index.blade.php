@@ -1,13 +1,12 @@
 @extends('backend.layout.layout')
 
-@section('content') 
-<div class="main-panel">
+@section('content')
     <div class="content-wrapper">
-      
+
         <div style="background-color: #fff;border-radius: 20px;">
             <div class="mt-5 row" style="padding: 25px;">
             <a href="{{ route('departments.create') }}" class="btn btn-success btn-sm">Add Department</a>
-               
+
                 <div class="col-md-12 col-sm-12">
                     <h3 class="mt-2 text-center">Department List</h3>
                     <div class="card">
@@ -27,7 +26,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                         @endif           
+                         @endif
                          <table id="exampleTable" class="table table-bordered table-hover">
                             <thead class="thead-dark">
                             <tr>
@@ -62,21 +61,19 @@
                                 <a onclick="deleteOperation({{$department->id}})" style="color: white"><button class="btn btn-danger"> Delete</button></a>
                               </td>
                               @endif
-                            </tr> 
-                            @endforeach              
-                     
+                            </tr>
+                            @endforeach
+
                             </tfoot>
                           </table>
-                            
+
                         </div>
                     </div>
                 </div>
-              
+
             </div>
         </div>
     </div>
-    @include('backend.layout.footer')
-</div>
 @endsection
 
 
@@ -87,7 +84,7 @@ const csrfToken = '{{ csrf_token() }}'; // Define csrfToken globally
 
 $(document).ready(function() {
     var table = $('#exampleTable').DataTable({
-        responsive: true,       
+        responsive: true,
     });
 });
 
@@ -104,7 +101,7 @@ function deleteOperation(row_id) {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!"
-        
+
     }).then((result) => {
         if (result.isConfirmed) {
             // Perform the delete action
@@ -112,7 +109,7 @@ function deleteOperation(row_id) {
                 headers: {
                     'X-CSRF-TOKEN': csrfToken // Include CSRF token
                 }
-            }) 
+            })
             .then(response => {
              console.log(response);
               setTimeout(function() {
@@ -122,7 +119,7 @@ function deleteOperation(row_id) {
                           icon: "success",
                           title: ''+ response.data.message,
                         });
-                    return false; 
+                    return false;
             })
             .catch(error => {
                 Swal.fire(

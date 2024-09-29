@@ -1,13 +1,12 @@
 @extends('backend.layout.layout')
 
-@section('content') 
-<div class="main-panel">
+@section('content')
     <div class="content-wrapper">
-      
+
         <div style="background-color: #fff;border-radius: 20px;">
             <div class="mt-5 row" style="padding: 25px;">
             <a href="{{ route('branches.create') }}" class="btn btn-success btn-sm">Add Branch</a>
-               
+
                 <div class="col-md-12 col-sm-12">
                     <h3 class="mt-2 text-center">Branch List</h3>
                     <div class="card">
@@ -28,7 +27,7 @@
                                     </button>
                                 </div>
                          @endif
-                            <div class="">                
+                            <div class="">
                                 <table id="exampleTable" class="table table-bordered table-hover">
                                     <thead class="thead-dark">
                                         <tr>
@@ -64,12 +63,10 @@
                         </div>
                     </div>
                 </div>
-              
+
             </div>
         </div>
     </div>
-    @include('backend.layout.footer')
-</div>
 @endsection
 
 
@@ -112,7 +109,7 @@ function deleteBranch(branchId) {
                 headers: {
                     'X-CSRF-TOKEN': csrfToken // Include CSRF token
                 }
-            }) 
+            })
             .then(response => {
                 Swal.fire(
                     'Deleted!',

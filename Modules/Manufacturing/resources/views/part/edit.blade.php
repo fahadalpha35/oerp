@@ -1,7 +1,6 @@
 @extends('backend.layout.layout')
 
 @section('content')
-<div class="main-panel">
     <div class="content-wrapper"><br>
         <div style="background:#fff;border-radius:30px;padding:30px;">
             <div class="col-md-12 col-sm-12">
@@ -34,6 +33,4 @@
             </div>
         </div>
     </div>
-    @include('backend.layout.footer')
-</div>
 @endsection

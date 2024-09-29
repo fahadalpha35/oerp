@@ -6,15 +6,31 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Supplychain\Models\ScmSupplierManagement;
+use Yajra\DataTables\Facades\DataTables;
 
 class SupplychainController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+
+     public function index(Request $request)
     {
-        return view('supplychain::index');
+        if ($request->ajax()) {
+            $data =  ScmSupplierManagement::get()->toArray();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $btn = '<a href="'.route('supplychain.edit', $row->id).'" class="edit btn btn-warning btn-sm">Edit</a>';
+                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation('.$row->id.')">Delete</a>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('supplychain::supplierManagment.index');
     }
 
     /**

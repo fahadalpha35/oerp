@@ -238,15 +238,16 @@
                 </div>
                 <!-- partial -->
                 @include('backend.layout.sidebar')
-                
 
-                @yield('content')
-
+                <div class="main-panel">
+                    @yield('content')
+                    @include('backend.layout.footer')
+                </div>
             </div>
             <!-- page-body-wrapper ends -->
         </div>
         <!-- container-scroller -->
-        
+
         <!-- plugins:js -->
         <script src="{{ url('backend/vendors/js/vendor.bundle.base.js') }}"></script>
 
@@ -257,7 +258,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
         $(document).ready(function() {
-         
+
         // Check if the current page is within the first-level menu
             $('.nav-item').each(function() {
                 if ($(this).find('.nav-link.active').length > 0) {
@@ -271,7 +272,7 @@
 
         </script>
         <!-- ********* samer js end *********** -->
-       
+
         <!-- select2 js -->
         <script src="{{ url('backend/vendors/select2/select2.min.js') }}"></script>
 
@@ -293,11 +294,11 @@
 
         <!-- SweetAlert2 JS -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        
+
 
         <!-- Axios -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
-        
+
         @stack('masterScripts')
 
         <!-- inject:js start-->
@@ -314,6 +315,6 @@
         <script src="{{ asset('backend/js/Chart.roundedBarCharts.js') }}"></script>
         <!-- custom js-->
         <script src="{{ asset('backend/js/custom.js') }}"></script>
-       
+
     </body>
 </html>
