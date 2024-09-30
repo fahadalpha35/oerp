@@ -4,7 +4,7 @@
     <div class="content-wrapper">
         <div style="background-color: #fff; border-radius: 20px;">
             <div class="mt-5 row" style="padding: 25px;">
-                <a href="{{ route('part.create') }}" class="btn btn-success btn-sm">Add Part</a>
+                <a href="{{ route('parts.create') }}" class="btn btn-success btn-sm">Add Part</a>
 
                 <div class="col-md-12 col-sm-12">
                     <h3 class="mt-2 text-center">Manufacture Parts List</h3>
@@ -50,7 +50,7 @@
 @push('masterScripts')
 <script>
 
-this.loadDataTable('partsTable', '{{ route('part.index') }}',
+this.loadDataTable('partsTable', '{{ route('parts.index') }}',
         [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
             { data: 'name', name: 'name' },

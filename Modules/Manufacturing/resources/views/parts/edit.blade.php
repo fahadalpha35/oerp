@@ -8,7 +8,7 @@
                 @if(Session::has('success_message'))
                     <div class="alert alert-success">{{ Session::get('success_message') }}</div>
                 @endif
-                <form method="POST" action="{{ route('part.update', $part->id) }}">
+                <form method="POST" action="{{ route('parts.update', $part->id) }}">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
@@ -28,7 +28,7 @@
                         <textarea class="form-control" id="description" name="description">{{ $part->description }}</textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Update Part</button>
-                    <a href="{{ route('part.index') }}" class="btn btn-secondary">Back</a>
+                    <a href="{{ route('parts.index') }}" class="btn btn-secondary">Back</a>
                 </form>
             </div>
         </div>

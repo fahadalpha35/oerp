@@ -20,15 +20,15 @@ class PartController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row) {
-                    $btn = '<a href="'.route('part.edit', $row->id).'" class="edit btn btn-warning btn-sm">Edit</a>';
-                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(\''.route('part.destroy', $row->id).'\', '.$row->id.', \'partsTable\')">Delete</a>';
+                    $btn = '<a href="'.route('parts.edit', $row->id).'" class="edit btn btn-warning btn-sm">Edit</a>';
+                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(\''.route('parts.destroy', $row->id).'\', '.$row->id.', \'partsTable\')">Delete</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
 
-        return view('manufacturing::part.index'); // Render index view
+        return view('manufacturing::parts.index'); // Render index view
     }
 
     /**
@@ -36,7 +36,7 @@ class PartController extends Controller
      */
     public function create()
     {
-        return view('manufacturing::part.create'); // Render create view
+        return view('manufacturing::parts.create'); // Render create view
     }
 
     /**
@@ -60,7 +60,7 @@ class PartController extends Controller
             'updated_at' => now(),
         ]);
 
-        return redirect()->route('part.index')->with('success_message', 'Part added successfully!'); // Redirect with success message
+        return redirect()->route('parts.index')->with('success_message', 'Part added successfully!'); // Redirect with success message
     }
 
     /**
@@ -70,7 +70,7 @@ class PartController extends Controller
     {
         $part = DB::table('manufacture_parts')->find($id); // Use DB to find part
 
-        return view('manufacturing::part.edit', compact('part')); // Render edit view
+        return view('manufacturing::parts.edit', compact('part')); // Render edit view
     }
 
     /**
@@ -93,7 +93,7 @@ class PartController extends Controller
             'updated_at' => now(),
         ]);
 
-        return redirect()->route('part.index')->with('success_message', 'Part updated successfully!'); // Redirect with success message
+        return redirect()->route('parts.index')->with('success_message', 'Part updated successfully!'); // Redirect with success message
     }
 
     /**

@@ -260,7 +260,7 @@
             
                 <ul class="collapse nav  @if(Request::is('manufacturing')) show
                             @elseif(Request::is('service')) show
-                            @elseif(Request::is('part')) show
+                            @elseif(Request::is('parts')) show
                             @elseif(Request::is('order')) show
                             @elseif(Request::is('estimation')) show
                             @elseif(Request::is('workorder')) show
@@ -278,9 +278,9 @@
                       </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('part') }}" class="nav-link {{ Request::is('part') ? 'active' : '' }}" style="{{ Request::is('part') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('part') ? 'color: white; !important' : ''}}"></i>
-                        <span class="menu-arrow" style="{{ Request::is('part') ? 'color: white; !important' : ''}}">Parts</span>
+                    <a href="{{ url('parts') }}" class="nav-link {{ Request::is('parts') ? 'active' : '' }}" style="{{ Request::is('parts') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('parts') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('parts') ? 'color: white; !important' : ''}}">Parts</span>
                       </a>
                 </li>
                 <li class="nav-item">

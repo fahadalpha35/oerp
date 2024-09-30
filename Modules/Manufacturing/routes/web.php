@@ -23,7 +23,7 @@ Route::group([], function () {
     Route::resource('manufacturing', ManufacturingController::class);
     Route::resource('estimation', EstimationController::class);
     Route::resource('order', OrderController::class);
-    Route::resource('part', PartController::class);
+    Route::resource('parts', PartController::class);
     Route::resource('service', ServiceController::class);
     Route::resource('workorder', WorkOrderController::class);
 });
