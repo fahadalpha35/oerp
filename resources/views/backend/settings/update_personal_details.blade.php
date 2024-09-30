@@ -36,7 +36,7 @@
     <form action="{{route('update-personal-details')}}" method="POST" enctype="multipart/form-data">
         @csrf
 
-        <div class="mb-3 form-group">         
+        <div class="mb-3 form-group">
           <img src="{{asset('/backend/images/'. $personalDetails->profile_pic)}}" alt="&nbsp;no preview&nbsp;" height="auto" width="150px" style="border: 2px solid #000;">
         </div>
 
@@ -90,16 +90,16 @@
             <select required class="form-control select2" id="blood_group" name="blood_group" style="width: 100%;">
                 <option value="{{ $personalDetails->blood_group }}">{{ $personalDetails->blood_group }}</option>
                 <option value="A+">A+</option>
-                <option value="B+">B+</option>                                
-                <option value="AB+">AB+</option>                                
-                <option value="O+">O+</option>                            
+                <option value="B+">B+</option>
+                <option value="AB+">AB+</option>
+                <option value="O+">O+</option>
                 <option value="A-">A-</option>
-                <option value="B-">B-</option>                                
-                <option value="AB-">AB-</option>                                
-                <option value="O-">O-</option>   
+                <option value="B-">B-</option>
+                <option value="AB-">AB-</option>
+                <option value="O-">O-</option>
             </select>
         </div>
-        
+
         <div class="mb-3 form-group">
             <label for="nationality" class="form-label">Nationality <small style="color: red">*</small></label>
             <input type="text" required class="form-control" id="nationality" name="nationality" value="{{ $personalDetails->nationality }}">
@@ -111,7 +111,7 @@
                 <option value="{{ $personalDetails->marital_status }}">{{ $personalDetails->marital_status }}</option>
                 <option value="Single">Single</option>
                 <option value="Married">Married</option>
-                <option value="Divorced">Divorced</option>  
+                <option value="Divorced">Divorced</option>
             </select>
         </div>
 
@@ -126,11 +126,11 @@
             <select required class="form-control select2" id="gender" name="gender" style="width: 100%;">
                 <option value="{{ $personalDetails->gender }}">{{ $personalDetails->gender }}</option>
                 <option value="Male">Male</option>
-                <option value="Female">Female</option>   
+                <option value="Female">Female</option>
             </select>
         </div>
 
-       
+
         <div class="card">
             <div class="card-header">
               Emergency Contact Person Information

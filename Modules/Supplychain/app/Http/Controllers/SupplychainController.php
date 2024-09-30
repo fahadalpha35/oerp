@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 use Modules\Supplychain\Models\ScmSupplierManagement;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -38,15 +39,28 @@ class SupplychainController extends Controller
      */
     public function create()
     {
-        return view('supplychain::create');
+        return view('supplychain::supplierManagment.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:scm_supplier_managements',
+            'phone' => 'required|unique:scm_supplier_managements',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput($request->all());
+        }
+
+        ScmSupplierManagement::create($request->all());
+
+        return redirect()->route('supplychain.index')->with('success_message', 'Supply chain is added successfully!');
     }
 
     /**
@@ -62,15 +76,29 @@ class SupplychainController extends Controller
      */
     public function edit($id)
     {
-        return view('supplychain::edit');
+        $data = ScmSupplierManagement::where('id',$id)->first();
+        return view('supplychain::supplierManagment.edit',compact('data'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:scm_supplier_managements,email,' . $id,
+            'phone' => 'required|unique:scm_supplier_managements,phone,' . $id,
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+        
+        $updateData = array_filter($request->only(['name', 'email', 'phone', 'company', 'address', 'area']));
+
+        ScmSupplierManagement::where('id', $id)->update($updateData);
+
+        return redirect()->route('supplychain.index')->with('success_message', 'Supply chain is Update successfully!');
     }
 
     /**

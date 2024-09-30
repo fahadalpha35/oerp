@@ -257,7 +257,7 @@
                 <span class="menu-title">Manufacture</span>
                 <i class="menu-arrow"></i>
             </a>
-            
+
                 <ul class="collapse nav  @if(Request::is('manufacturing')) show
                             @elseif(Request::is('service')) show
                             @elseif(Request::is('parts')) show
@@ -302,7 +302,7 @@
                       </a>
                 </li><br>
                 </ul>
-            
+
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#prod" aria-expanded="false" aria-controls="prod">
@@ -326,20 +326,43 @@
                 </ul>
             </div>
         </li>
+
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#scm" aria-expanded="false" aria-controls="scm">
-                <i class="mdi mdi-file-tree menu-icon"></i>
-                <span class="menu-title">Supply Chain Management</span>
+            <a class="nav-link" data-toggle="collapse" href="#suppliChain" aria-expanded="false" aria-controls="suppliChain">
+                <i class="mdi mdi-puzzle menu-icon"></i>
+                <span class="menu-title">Supplychain Managment</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="scm">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ url('supplychain') }}">Supplier Managements</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Purchases</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Purchase Returns</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Supplier Payments</a></li>
-                </ul>
-            </div>
+
+                <ul class="collapse nav  @if(Request::is('supplychain')) show
+                            @elseif(Request::is('purchase')) show
+                            @endif" id="suppliChain" style="margin-top: -2px;">
+                <li class="nav-item">
+                    <a href="{{ url('supplychain') }}" class="nav-link {{ Request::is('supplychain') ? 'active' : '' }}" style="{{ Request::is('supplychain') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('supplychain') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('supplychain') ? 'color: white; !important' : ''}}">Supplier Managements</span>
+                      </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('purchase') }}" class="nav-link {{ Request::is('purchase') ? 'active' : '' }}" style="{{ Request::is('purchase') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('purchase') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('purchase') ? 'color: white; !important' : ''}}">Purchases</span>
+                      </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('part') }}" class="nav-link {{ Request::is('part') ? 'active' : '' }}" style="{{ Request::is('part') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('part') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('part') ? 'color: white; !important' : ''}}">Purchases Return</span>
+                      </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('order') }}" class="nav-link {{ Request::is('order') ? 'active' : '' }}" style="{{ Request::is('order') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('order') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('order') ? 'color: white; !important' : ''}}">Supplier Payment</span>
+                      </a>
+                </li>
+            </ul>
+
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#fa" aria-expanded="false" aria-controls="fa">
