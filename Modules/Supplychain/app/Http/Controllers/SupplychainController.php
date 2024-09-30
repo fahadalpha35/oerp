@@ -15,11 +15,10 @@ class SupplychainController extends Controller
     /**
      * Display a listing of the resource.
      */
-
-     public function index(Request $request)
+    public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data =  ScmSupplierManagement::get();
+            $data = ScmSupplierManagement::get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
@@ -47,20 +46,28 @@ class SupplychainController extends Controller
      */
     public function store(Request $request)
     {
+        // Validate input data
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:scm_supplier_managements',
             'phone' => 'required|unique:scm_supplier_managements',
+            'company' => 'nullable|string|max:255',
+            'address' => 'nullable|string',
+            'area' => 'nullable|string',
         ]);
+
         if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput($request->all());
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        ScmSupplierManagement::create($request->all());
+        // Create the supplier
+        $supplier = ScmSupplierManagement::create($request->all());
 
-        return redirect()->route('supplychain.index')->with('success_message', 'Supply chain is added successfully!');
+        return response()->json([
+            'success' => true,
+            'supplier' => $supplier,
+            'message' => 'Supplier added successfully!',
+        ]);
     }
 
     /**
@@ -68,7 +75,13 @@ class SupplychainController extends Controller
      */
     public function show($id)
     {
-        return view('supplychain::show');
+        $supplier = ScmSupplierManagement::find($id);
+
+        if (!$supplier) {
+            return response()->json(['error' => 'Supplier not found'], 404);
+        }
+
+        return response()->json($supplier);
     }
 
     /**
@@ -76,8 +89,8 @@ class SupplychainController extends Controller
      */
     public function edit($id)
     {
-        $data = ScmSupplierManagement::where('id',$id)->first();
-        return view('supplychain::supplierManagment.edit',compact('data'));
+        $data = ScmSupplierManagement::findOrFail($id);
+        return view('supplychain::supplierManagment.edit', compact('data'));
     }
 
     /**
@@ -90,15 +103,16 @@ class SupplychainController extends Controller
             'email' => 'required|email|unique:scm_supplier_managements,email,' . $id,
             'phone' => 'required|unique:scm_supplier_managements,phone,' . $id,
         ]);
+
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-        
+
         $updateData = array_filter($request->only(['name', 'email', 'phone', 'company', 'address', 'area']));
 
         ScmSupplierManagement::where('id', $id)->update($updateData);
 
-        return redirect()->route('supplychain.index')->with('success_message', 'Supply chain is Update successfully!');
+        return redirect()->route('supplychain.index')->with('success_message', 'Supply chain is updated successfully!');
     }
 
     /**
@@ -106,7 +120,7 @@ class SupplychainController extends Controller
      */
     public function destroy($id)
     {
-        ScmSupplierManagement::where('id',$id)->delete();
-        return response()->json(['success' => true, 'message' => 'Client deleted successfully!']);
+        ScmSupplierManagement::where('id', $id)->delete();
+        return response()->json(['success' => true, 'message' => 'Supplier deleted successfully!']);
     }
 }

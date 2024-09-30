@@ -5,10 +5,10 @@
     <div class="content-wrapper">
         <div style="background-color: #fff; border-radius: 20px;">
             <div class="mt-5 row" style="padding: 25px;">
-                <a href="{{ route('supplychain.create') }}" class="btn btn-success btn-sm">Add Client</a>
+                <a href="{{ route('supplychain.create') }}" class="btn btn-success btn-sm">Add Supplier</a>
 
                 <div class="col-md-12 col-sm-12">
-                    <h3 class="mt-2 text-center">Supplier List List</h3>
+                    <h3 class="mt-2 text-center">Supplier Lists</h3>
                     <div class="card">
                         <div class="card-body">
                             @if(Session::has('error_message'))

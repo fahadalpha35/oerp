@@ -18,4 +18,6 @@ use Modules\Supplychain\Http\Controllers\SupplychainController;
 Route::group([], function () {
     Route::resource('supplychain', SupplychainController::class)->names('supplychain');
     Route::resource('purchase', PurchaseController::class)->names('purchase');
+    Route::post('purchase/storeSupplier', [PurchaseController::class, 'storeSupplier'])->name('purchase.storeSupplier');
+    Route::get('purchase/supplierDetails/{id}', [PurchaseController::class, 'getSupplierDetails'])->name('purchase.getSupplierDetails');
 });
