@@ -4,10 +4,10 @@
     <div class="content-wrapper">
         <div style="background-color: #fff; border-radius: 20px;">
             <div class="mt-5 row" style="padding: 25px;">
-                <a href="{{ route('order.create') }}" class="btn btn-success btn-sm">Add Order</a>
+                <a href="{{ route('production.create') }}" class="btn btn-success btn-sm">Add Order</a>
 
                 <div class="col-md-12 col-sm-12">
-                    <h3 class="mt-2 text-center">Manufacture Orders List</h3>
+                    <h3 class="mt-2 text-center">Production Orders List</h3>
                     <div class="card">
                         <div class="card-body">
                             @if(Session::has('error_message'))
@@ -26,16 +26,13 @@
                                     </button>
                                 </div>
                             @endif
-                            <table id="ordersTable" class="table table-bordered table-hover">
+                            <table id="productionTable" class="table table-bordered table-hover">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>Serial No.</th>
-                                        <th>Client Name</th>
-                                        <th>Product Name</th>
-                                        <th>Quantity</th>
-                                        <th>Total Amount</th>
-                                        <th>Delivery Date</th>
-                                        <th>Internal Notes</th>
+                                        <th>Order Number</th>
+                                        <th>Total Worker</th>
+                                        <th>Duration</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -52,15 +49,12 @@
 @push('masterScripts')
 <script>
 
-this.loadDataTable('ordersTable', '{{ route('order.index') }}',
+this.loadDataTable('productionTable', '{{ route('production.index') }}',
         [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-            { data: 'client.name', name: 'client.name' },
-            { data: 'product.name', name: 'product.name' },
-            { data: 'quantity', name: 'quantity' },
-            { data: 'total', name: 'total' },
-            { data: 'delivery_date', name: 'delivery_date' },
-            { data: 'internal_notes', name: 'internal_notes' },
+            {data: 'order_number',name: 'order_number'},
+            { data: 'worker', name: 'worker'},
+            { data: 'duration', name: 'duration' },
             { data: 'action', name: 'action', orderable: false, searchable: false }
         ],
 );

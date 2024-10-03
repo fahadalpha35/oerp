@@ -6,7 +6,7 @@
             <div class="mt-5 row" style="padding: 25px;">
                 <div class="col-md-12 col-sm-12">
                     <h3 class="mt-2 text-center">Add New Order</h3>
-                    <form action="{{ route('order.update', $order->id) }}" method="POST">
+                    <form action="{{ route('production.update', $production->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         @if($errors->any())
@@ -20,42 +20,28 @@
                         @endif
 
                         <div class="row">
-                            <div class="form-group col-md-6 col-sm-6">
-                                <label for="client_id">Client Name <small style="color: red">*</small></label>
-                                <select  class="form-control select2" id="client_id" name="client_id" required>
-                                <option value="">Select Client</option>
-                                    @foreach ($clint as $data)
-                                        <option value="{{$data->id}}" @if ($data->id == $order->client_id) selected @endif>{{$data->name}}</option>
-                                    @endforeach
+                            <div class="form-group col-md-3 col-sm-3">
+                                <label for="order_id">Work Order <small style="color: red">*</small></label>
+                                <select  class="form-control select2" id="order_id" name="order_id" required>
+                                    <option value="{{$production->order->id}}" selected readonly># {{$production->order->id .'-'. $production->order->client->name}}</option>
                                 </select>
                             </div>
-
-                            <div class="form-group col-md-6 col-sm-6">
-                                <label for="product_name">Product Name <small style="color: red">*</small></label>
-                                <select  class="form-control select2" id="product_id" name="product_id" required>
-                                    <option value="">Select Product</option>
-                                    @foreach ($product as $data)
-                                        <option value="{{$data->id}}" @if ($data->id == $order->product_id) selected @endif>{{$data->name}}</option>
-                                    @endforeach
-                                </select>
+                            <div class="form-group col-md-3 col-sm-3">
+                                <label for="number_of_worker"> Number of Worker <small style="color: red">*</small></label>
+                                <input type="number" class="form-control" name="worker" placeholder="Number of Worker" value="{{$production->worker}}">
+                            </div>
+                            <div class="form-group col-md-3 col-sm-3">
+                                <label for="working_day">Working Day <small style="color: red">*</small></label>
+                                <input type="number" class="form-control" name="duration" placeholder="Number of day" value="{{$production->duration}}">
+                            </div>
+                            <div class="form-group col-md-3 col-sm-3">
+                                <label for="working_day">Total</label>
+                                <input type="number" id="totalAmount" class="form-control" value="{{$production->total}}" name="total" placeholder="Total Cost Amount" readonly>
+                            </div>
+                            <div id="work_order_cost" class="form-group col-md-6 col-sm-6">
+                                <h3 class="mb-4">Select Work Order</h3>
                             </div>
                             <div class="form-group col-md-6 col-sm-6">
-                                <label for="quantity">Quantity</label>
-                                <input type="text" class="form-control" name="quantity" value="{{$order->quantity}}" required>
-                            </div>
-                            <div class="form-group col-md-6 col-sm-6 total">
-                                <label for="total">Total</label>
-                                <input id="totalAmount" type="text" step="0.01" class="form-control" value="{{$order->total}}" name="total" required readonly>
-                            </div>
-                            <div class="form-group col-md-6 col-sm-6">
-                                <label for="delivery_date">Delivery Date</label>
-                                <input type="date" class="form-control" name="delivery_date" value="{{$order->delivery_date}}" required>
-                            </div>
-                            <div class="form-group col-md-6 col-sm-6">
-                                <label for="internal_notes">Internal Notes</label>
-                                <textarea class="form-control" rows="1" cols="5" name="internal_notes">{{$order->internal_notes}}</textarea>
-                            </div>
-                            <div class="form-group col-md-12 col-sm-12">
                                 <h3 class="mb-4">Cost Calculation</h3>
                                 <table id="dynamicTable" class="table table-bordered table-hover">
                                     <thead>
@@ -66,8 +52,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if (isset($order->order_cost))
-                                            @foreach ($order->order_cost as $item)
+                                        @if (isset($production->production_cost))
+                                            @foreach ($production->production_cost as $item)
                                                 <tr>
                                                     <input type="hidden" name="id[]" value="{{$item->id}}">
                                                     <td class="form-group">
@@ -87,7 +73,6 @@
                                         <tr>
                                             <input type="hidden" name="id[]">
                                             <td class="form-group">
-
                                                 <input type="text" name="name[]" class="name form-control" required>
                                             </td>
                                             <td class="form-group">
@@ -103,7 +88,7 @@
                                 </table>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Update Order</button>
+                        <button type="submit" class="btn btn-primary">Create Order</button>
                     </form>
                 </div>
             </div>
@@ -112,7 +97,7 @@
 @endsection
 @push('masterScripts')
 <script>
-    $.noConflict(); // Ensures jQuery does not conflict with other libraries
+    $.noConflict();
     jQuery(document).ready(function($) {
         $('.select2').select2();
     });
@@ -120,7 +105,33 @@
 
 <script>
     $(document).ready(function() {
-        // Function to calculate the total amount
+        $('#order_id').on('change', function(event) {
+        event.preventDefault();
+        var order_id = $('#order_id').val();
+        if (order_id == '') {
+            $('#work_order_cost').html('');
+            return false;
+        }
+
+        $.ajax({
+            url: '/get-order-details',
+            type: 'POST',
+            data: {
+                id: order_id
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                $('#work_order_cost').html(response);
+            },
+            error: function(xhr, status, error) {
+                console.log('Error:', error);
+            }
+        });
+    });
+
+    $('#order_id').trigger('change');
         function calculateTotal() {
             let total = 0;
             $('.amount').each(function() {
@@ -130,29 +141,25 @@
             $('#totalAmount').val(total.toFixed(2));
         }
 
-        // Add new row
         $('#addRow').on('click', function() {
             let newRow = `<tr>
                             <input type="hidden" name="id[]">
                             <td class="form-group"><input type="text" name="name[]" class="name form-control" required></td>
-                            <td class="form-group"><input type="number" name="amount[]" class="amount form-control" min="0" step="0.01" required></td>
+                            <td class="form-group"><input type="number" name="amount[]" class="amount form-control" min="0" step="1" required></td>
                             <td class="form-group"><button type="button" class="btn btn-danger removeRow">Remove</button></td>
                           </tr>`;
             $('#dynamicTable tbody').append(newRow);
         });
 
-        // Remove row
         $(document).on('click', '.removeRow', function() {
             $(this).closest('tr').remove();
-            calculateTotal(); // Recalculate total after removal
+            calculateTotal();
         });
 
-        // Update total when amount changes
         $(document).on('input', '.amount', function() {
             calculateTotal();
         });
 
-        // Calculate total on page load
         calculateTotal();
     });
 </script>

@@ -5,6 +5,7 @@ use Modules\Manufacturing\Http\Controllers\ManufacturingController;
 use Modules\Manufacturing\Http\Controllers\EstimationController;
 use Modules\Manufacturing\Http\Controllers\OrderController;
 use Modules\Manufacturing\Http\Controllers\PartController;
+use Modules\Manufacturing\Http\Controllers\ProductionController;
 use Modules\Manufacturing\Http\Controllers\ServiceController;
 use Modules\Manufacturing\Http\Controllers\WorkOrderController;
 
@@ -26,4 +27,6 @@ Route::group([], function () {
     Route::resource('parts', PartController::class);
     Route::resource('service', ServiceController::class);
     Route::resource('workorder', WorkOrderController::class);
+    Route::resource('production', ProductionController::class);
+    Route::post('get-order-details',[ProductionController::class,'getOrderDetails']);
 });
