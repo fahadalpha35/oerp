@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use DataTables;
+use Modules\Manufacturing\Models\ManufactureClient;
 
 class ManufacturingController extends Controller
 {
@@ -15,12 +16,14 @@ class ManufacturingController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = DB::table('manufacture_clients')->select('*');
+            $data = ManufactureClient::with('order')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $btn = '<a href="'.route('manufacturing.edit', $row->id).'" class="edit btn btn-warning btn-sm">Edit</a>';
-                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(\''.route('manufacturing.destroy', $row->id).'\', '.$row->id.', \'clientsTable\')">Delete</a>';
+                    if(!$row->order){
+                        $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(\''.route('manufacturing.destroy', $row->id).'\', '.$row->id.', \'clientsTable\')">Delete</a>';
+                    }
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -35,6 +38,7 @@ class ManufacturingController extends Controller
      */
     public function create()
     {
+
         return view('manufacturing::manufacturing.create');
     }
 

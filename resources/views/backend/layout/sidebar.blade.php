@@ -262,7 +262,7 @@
                             @elseif(Request::is('service')) show
                             @elseif(Request::is('parts')) show
                             @elseif(Request::is('order')) show
-                            @elseif(Request::is('estimation')) show
+                            @elseif(Request::is('production')) show
                             @elseif(Request::is('workorder')) show
                             @endif" id="manufac" style="margin-top: -2px;">
                 <li class="nav-item">
@@ -290,9 +290,9 @@
                       </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('estimation') }}" class="nav-link {{ Request::is('estimation') ? 'active' : '' }}" style="{{ Request::is('estimation') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('estimation') ? 'color: white; !important' : ''}}"></i>
-                        <span class="menu-arrow" style="{{ Request::is('estimation') ? 'color: white; !important' : ''}}">estimation</span>
+                    <a href="{{ url('production') }}" class="nav-link {{ Request::is('production') ? 'active' : '' }}" style="{{ Request::is('production') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('production') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('production') ? 'color: white; !important' : ''}}">Production</span>
                       </a>
                 </li>
                 <li class="nav-item">

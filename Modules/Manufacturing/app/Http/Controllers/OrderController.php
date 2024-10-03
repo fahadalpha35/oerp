@@ -5,6 +5,10 @@ namespace Modules\Manufacturing\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB; // Import DB facade
+use Modules\Inventory\Models\InventoryProduct;
+use Modules\Manufacturing\Models\ManufactureClient;
+use Modules\Manufacturing\Models\ManufactureOrder;
+use Modules\Manufacturing\Models\ManufactureOrderCostcalculation;
 use Yajra\DataTables\DataTables;
 
 class OrderController extends Controller
@@ -15,13 +19,20 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = DB::table('manufacture_orders')->select('*'); // Use DB to get data
+            $data = ManufactureOrder::with('client:id,name')
+                    ->with('product:id,name')
+                    ->with('production')
+                    ->get();
 
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="' . route('order.edit', $row->id) . '" class="edit btn btn-warning btn-sm">Edit</a>';
-                    $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(\''.route('order.destroy', $row->id).'\', '.$row->id.', \'ordersTable\')">Delete</a>';
+                    $btn .= ' <a href="' . route('order.show', $row->id) . '" class="edit btn btn-info btn-sm">View</a>';
+
+                    if (!$row->production) {
+                        $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(\''.route('order.destroy', $row->id).'\', '.$row->id.', \'ordersTable\')">Delete</a>';
+                    }
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -36,7 +47,18 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('manufacturing::order.create'); // Render create view
+        $clint = ManufactureClient::get();
+        $product = InventoryProduct::get();
+        return view('manufacturing::order.create',compact('clint','product')); // Render create view
+    }
+
+    public function show($id){
+        $data = ManufactureOrder::with('client:id,name')
+                ->with('product:id,name')
+                ->with('order_cost')
+                ->where('id',$id)
+                ->first();
+        return view('manufacturing::order.show',compact('data')); // Render create view
     }
 
     /**
@@ -44,41 +66,26 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate incoming request
         $request->validate([
             'client_id' => 'required|integer|exists:manufacture_clients,id',
-            'product_name' => 'required|string|max:255',
-            'unit_of_measure' => 'required|string',
-            'purchase_unit_of_measure' => 'required|string',
-            'sales_price' => 'required|numeric',
-            'cost' => 'required|numeric',
-            'quantity' => 'required|integer',
-            'delivery_date' => 'nullable|date',
-            'internal_notes' => 'nullable|string',
-            'barcode' => 'nullable|string',
-            'sku_code' => 'nullable|string',
-            'image' => 'nullable|string',
+            'product_id' => 'required|integer|exists:inventory_products,id',
         ]);
 
-        // Insert data into manufacture_orders table
         try {
-            DB::table('manufacture_orders')->insert([
-                'client_id' => $request->client_id,
-                'product_name' => $request->product_name,
-                'unit_of_measure' => $request->unit_of_measure,
-                'purchase_unit_of_measure' => $request->purchase_unit_of_measure,
-                'sales_price' => $request->sales_price,
-                'cost' => $request->cost,
-                'quantity' => $request->quantity,
-                'delivery_date' => $request->delivery_date,
-                'internal_notes' => $request->internal_notes,
-                'barcode' => $request->barcode,
-                'sku_code' => $request->sku_code,
-                'image' => $request->image,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            $data = array_filter($request->only(['client_id', 'product_id', 'quantity', 'total', 'delivery_date', 'internal_notes']));
+            $oreder = ManufactureOrder::create($data);
 
+            $names = $request->input('name');
+            $amounts = $request->input('amount');
+            if(isset($names)){
+                foreach ($names as $key => $name) {
+                    ManufactureOrderCostcalculation::create([
+                        'order_id' => $oreder->id,
+                        'name' => $name,
+                        'amount' => $amounts[$key],
+                    ]);
+                }
+            }
             return redirect()->route('order.index')->with('success_message', 'Manufacture Order created successfully!'); // Redirect with success message
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'Unable to create order. Please try again.']);
@@ -90,9 +97,14 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        $order = DB::table('manufacture_orders')->find($id); // Use DB to find order
-
-        return view('manufacturing::order.edit', compact('order')); // Render edit view
+        $clint = ManufactureClient::get();
+        $product = InventoryProduct::get();
+        $order = ManufactureOrder::with('client:id,name')
+            ->with('product:id,name')
+            ->with('order_cost')
+            ->where('id',$id)
+            ->first();
+        return view('manufacturing::order.edit', compact('order','clint','product')); // Render edit view
     }
 
     /**
@@ -100,40 +112,31 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Validate incoming request
         $request->validate([
             'client_id' => 'required|integer|exists:manufacture_clients,id',
-            'product_name' => 'required|string|max:255',
-            'unit_of_measure' => 'required|string',
-            'purchase_unit_of_measure' => 'required|string',
-            'sales_price' => 'required|numeric',
-            'cost' => 'required|numeric',
-            'quantity' => 'required|integer',
-            'delivery_date' => 'nullable|date',
-            'internal_notes' => 'nullable|string',
-            'barcode' => 'nullable|string',
-            'sku_code' => 'nullable|string',
-            'image' => 'nullable|string',
+            'product_id' => 'required|integer|exists:inventory_products,id',
         ]);
 
-        // Update order in manufacture_orders table
-        DB::table('manufacture_orders')->where('id', $id)->update([
-            'client_id' => $request->client_id,
-            'product_name' => $request->product_name,
-            'unit_of_measure' => $request->unit_of_measure,
-            'purchase_unit_of_measure' => $request->purchase_unit_of_measure,
-            'sales_price' => $request->sales_price,
-            'cost' => $request->cost,
-            'quantity' => $request->quantity,
-            'delivery_date' => $request->delivery_date,
-            'internal_notes' => $request->internal_notes,
-            'barcode' => $request->barcode,
-            'sku_code' => $request->sku_code,
-            'image' => $request->image,
-            'updated_at' => now(),
-        ]);
+            $data = array_filter($request->only(['client_id', 'product_id', 'quantity', 'total', 'delivery_date', 'internal_notes']));
+            ManufactureOrder::where('id',$id)->update($data);
 
-        return redirect()->route('order.index')->with('success_message', 'Manufacture Order updated successfully!'); // Redirect with success message
+            $ids = $request->input('id');
+            $names = $request->input('name');
+            $amounts = $request->input('amount');
+            if(isset($names)){
+                foreach ($names as $key => $name) {
+                    ManufactureOrderCostcalculation::updateOrCreate(
+                        [
+                            'order_id' => $id,
+                            'id' => $ids[$key],
+                        ],
+                        [
+                        'name' => $name,
+                        'amount' => $amounts[$key],
+                    ]);
+                }
+            }
+            return redirect()->route('order.index')->with('success_message', 'Manufacture Order updated successfully!');
     }
 
     /**
@@ -141,8 +144,12 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('manufacture_orders')->where('id', $id)->delete(); // Use DB to delete order
+        $manufactureOrder = ManufactureOrder::find($id);
 
-        return response()->json(['success' => true, 'message' => 'Manufacture Order deleted successfully!']);
+        if ($manufactureOrder) {
+            $manufactureOrder->order_cost()->delete();
+            $manufactureOrder->delete();
+            return response()->json(['success' => true, 'message' => 'Manufacture Order deleted successfully!']);
+        }
     }
 }

@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
 	// Check Admin Password is correct or not
 	$("#current_password").keyup(function(){
@@ -68,3 +69,6 @@ function deleteOperation(routeName, row_id, tableId) {
         }
     });
 }
+
+
+

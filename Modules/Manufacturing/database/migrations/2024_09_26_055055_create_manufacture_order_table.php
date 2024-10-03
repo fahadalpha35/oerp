@@ -14,17 +14,11 @@ return new class extends Migration
         Schema::create('manufacture_orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')->reference('id')->on('manufacture_clients');
-            $table->string('product_name');
-            $table->text('internal_notes')->nullable();
-            $table->string('unit_of_measure');
-            $table->string('purchase_unit_of_measure');
-            $table->decimal('sales_price', 10, 2);
-            $table->decimal('cost', 10, 2);
-            $table->string('barcode')->nullable();
-            $table->string('sku_code')->nullable();
-            $table->string('image')->nullable();
+            $table->foreignId('product_id')->reference('id')->on('inventory_products');
+            $table->string('quantity');
+            $table->decimal('total', 10, 2);
             $table->date('delivery_date')->nullable();
-            $table->integer('quantity');
+            $table->text('internal_notes')->nullable();
             $table->timestamps();
         });
     }

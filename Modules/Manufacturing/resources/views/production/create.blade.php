@@ -6,7 +6,7 @@
             <div class="mt-5 row" style="padding: 25px;">
                 <div class="col-md-12 col-sm-12">
                     <h3 class="mt-2 text-center">Add New Order</h3>
-                    <form action="{{ route('order.store') }}" method="POST">
+                    <form action="{{ route('production.store') }}" method="POST">
                         @csrf
 
                         @if($errors->any())
@@ -20,42 +20,31 @@
                         @endif
 
                         <div class="row">
-                            <div class="form-group col-md-6 col-sm-6">
-                                <label for="client_id">Client Name <small style="color: red">*</small></label>
-                                <select  class="form-control select2" id="client_id" name="client_id" required>
-                                <option value="">Select Client</option>
-                                    @foreach ($clint as $data)
-                                        <option value="{{$data->id}}">{{$data->name}}</option>
+                            <div class="form-group col-md-3 col-sm-3">
+                                <label for="order_id">Work Order <small style="color: red">*</small></label>
+                                <select  class="form-control select2" id="order_id" name="order_id" required>
+                                <option value="">Select Work Order</option>
+                                    @foreach ($order as $data)
+                                        <option value="{{$data->id}}"># {{$data->id .'-'. $data->client->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
-
-                            <div class="form-group col-md-6 col-sm-6">
-                                <label for="product_name">Product Name <small style="color: red">*</small></label>
-                                <select  class="form-control select2" id="product_id" name="product_id" required>
-                                    <option value="">Select Product</option>
-                                    @foreach ($product as $data)
-                                        <option value="{{$data->id}}">{{$data->name}}</option>
-                                    @endforeach
-                                </select>
+                            <div class="form-group col-md-3 col-sm-3">
+                                <label for="number_of_worker"> Number of Worker <small style="color: red">*</small></label>
+                                <input type="number" class="form-control" name="worker" placeholder="Number of Worker">
+                            </div>
+                            <div class="form-group col-md-3 col-sm-3">
+                                <label for="working_day">Working Day <small style="color: red">*</small></label>
+                                <input type="number" class="form-control" name="duration" placeholder="Number of day">
+                            </div>
+                            <div class="form-group col-md-3 col-sm-3">
+                                <label for="working_day">Total</label>
+                                <input type="number" id="totalAmount" class="form-control" name="total" placeholder="Total Cost Amount" readonly>
+                            </div>
+                            <div id="work_order_cost" class="form-group col-md-6 col-sm-6">
+                                <h3 class="mb-4">Select Work Order</h3>
                             </div>
                             <div class="form-group col-md-6 col-sm-6">
-                                <label for="quantity">Quantity</label>
-                                <input type="text" class="form-control" name="quantity" required>
-                            </div>
-                            <div class="form-group col-md-6 col-sm-6 total">
-                                <label for="total">Total</label>
-                                <input id="totalAmount" type="text" step="0.01" class="form-control" name="total" required readonly>
-                            </div>
-                            <div class="form-group col-md-6 col-sm-6">
-                                <label for="delivery_date">Delivery Date</label>
-                                <input type="date" class="form-control" name="delivery_date" required>
-                            </div>
-                            <div class="form-group col-md-6 col-sm-6">
-                                <label for="internal_notes">Internal Notes</label>
-                                <textarea class="form-control" rows="1" cols="5" name="internal_notes"></textarea>
-                            </div>
-                            <div class="form-group col-md-12 col-sm-12">
                                 <h3 class="mb-4">Cost Calculation</h3>
                                 <table id="dynamicTable" class="table table-bordered table-hover">
                                     <thead>
@@ -93,6 +82,30 @@
     $.noConflict(); // Ensures jQuery does not conflict with other libraries
     jQuery(document).ready(function($) {
         $('.select2').select2();
+        $('#order_id').on('change',function(event){
+            event.preventDefault();
+            var order_id = $('#order_id').val();
+            if (order_id == '') {
+                $('#work_order_cost').html('');
+                    return false;
+                }
+            $.ajax({
+                url: '/get-order-details',
+                type: 'POST',
+                data: {
+                    id: order_id
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    $('#work_order_cost').html(response);
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error:', error);
+                }
+            });
+        });
     });
 </script>
 

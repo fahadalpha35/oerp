@@ -275,7 +275,7 @@
 
         <!-- select2 js -->
         <script src="{{ url('backend/vendors/select2/select2.min.js') }}"></script>
-
+        
         <!-- chart js -->
         <script src="{{ asset('backend/vendors/chart.js/Chart.min.js') }}"></script>
 
