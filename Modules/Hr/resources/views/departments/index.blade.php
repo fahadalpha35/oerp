@@ -27,7 +27,7 @@
                                     </button>
                                 </div>
                          @endif
-                         <table id="exampleTable" class="table table-bordered table-hover">
+                         <table id="exampleTableWithoutYajra" class="table table-bordered table-hover">
                             <thead class="thead-dark">
                             <tr>
                               <th>Serial No.</th>
@@ -58,13 +58,13 @@
                               @if( (auth()->user()->role_id == 1) || (auth()->user()->role_id == 2))
                               <td>
                                 <a href="{{route('departments.edit',$department->id)}}" style="color: white"><button class="btn btn-warning"> Edit</button></a>
-                                <a onclick="deleteOperation({{$department->id}})" style="color: white"><button class="btn btn-danger"> Delete</button></a>
+                                <a onclick="deleteOperationWithoutYajra('{{ route('departments.destroy', ':id') }}', {{$department->id}})" style="color: white"><button class="btn btn-danger"> Delete</button></a>
                               </td>
                               @endif
                             </tr>
                             @endforeach
 
-                            </tfoot>
+                            </tbody>
                           </table>
 
                         </div>
@@ -78,59 +78,11 @@
 
 
 @push('masterScripts')
-
 <script>
-const csrfToken = '{{ csrf_token() }}'; // Define csrfToken globally
-
 $(document).ready(function() {
-    var table = $('#exampleTable').DataTable({
+    var table = $('#exampleTableWithoutYajra').DataTable({
         responsive: true,
     });
 });
-
-
-function deleteOperation(row_id) {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        customClass: {
-            popup: 'my-swal-class'
-        },
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Perform the delete action
-            axios.delete('{{ route('departments.destroy', ':id') }}'.replace(':id', row_id), {
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken // Include CSRF token
-                }
-            })
-            .then(response => {
-             console.log(response);
-              setTimeout(function() {
-                  window.location.reload();
-              }, 2000);
-              Swal.fire({
-                          icon: "success",
-                          title: ''+ response.data.message,
-                        });
-                    return false;
-            })
-            .catch(error => {
-                Swal.fire(
-                    'Error!',
-                    'There was an issue with deleting the data',
-                    'error'
-                );
-            });
-        }
-    });
-}
-
 </script>
 @endpush

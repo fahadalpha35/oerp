@@ -31,8 +31,19 @@
                             @endif
                             <form action="{{ route('employees.store') }}" method="POST">
                                 @csrf
-                                    <!-- Name input -->
-                                    <div class="form-group mb-4">
+
+                                 <!-- User Type input -->
+                                 <div class="form-group mb-4">
+                                    <label for="Type">Type <small style="color: red">*</small></label>
+                                    <select  class="form-control select2" id="user_type" name="user_type" style="width: 100%;">
+                                        <option value="">Select Type</option>
+                                        <option value="3">Admin</option>
+                                        <option value="4">Employee</option>
+                                    </select>
+                                </div>
+
+                                <!-- Name input -->
+                                <div class="form-group mb-4">
                                     <label for="Name">Full Name <small style="color: red">*</small></label>
                                     <input type="text"  placeholder="Full Name" id="name" name="name" value="{{ old('name') }}" class="form-control form-control-lg" />
                                 </div>
