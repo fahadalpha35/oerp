@@ -26,6 +26,7 @@ $(document).ready(function(){
 
 
 const csrfToken = '{{ csrf_token() }}';
+
 // Datatable Data Load
 function loadDataTable(tableId, ajaxUrl, columns) {
     $(document).ready(function() {
@@ -39,11 +40,14 @@ function loadDataTable(tableId, ajaxUrl, columns) {
     });
 }
 
-// Datatable Data delete
+// Yajra Datatable Data delete
 function deleteOperation(routeName, row_id, tableId) {
     Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
+        customClass: {
+            popup: 'my-swal-class'
+        },
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -69,6 +73,44 @@ function deleteOperation(routeName, row_id, tableId) {
         }
     });
 }
+
+
+
+// Datatable Data delete
+function deleteOperationWithoutYajra(routeName, row_id) {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        customClass: {
+            popup: 'my-swal-class'
+        },
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            axios.delete(routeName.replace(':id', row_id), {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }).then(response => {
+                Swal.fire({
+                    icon: "success",
+                    title: response.data.message,
+                });
+                window.location.reload();
+            }).catch(error => {
+                Swal.fire(
+                    'Error!',
+                    'There was an issue with deleting the data',
+                    'error'
+                );
+            });
+        }
+    });
+}
+
+
 
 
 

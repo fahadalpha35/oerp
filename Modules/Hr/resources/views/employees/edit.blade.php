@@ -82,11 +82,35 @@
                                 <form action="{{ route('employees.update',$employee->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
-                                    <!-- Monthly Salary -->
-                                    <div  class="form-group mb-4">
-                                        <label >Monthly Salary <small style="color: red">*</small></label>
-                                    <input type="number"  step="0.01" value="{{$employee->monthly_salary}}"  id="monthly_salary" name="monthly_salary" value="{{ old('monthly_salary') }}" class="form-control form-control-lg" />
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <!-- Type select -->
+                                        <div  class="form-group mb-4">
+                                            <label >Type <small style="color: red">*</small></label>
+                                            <select  class="form-control select2" id="type" name="type" style="width: 100%;">
+                                            <option value="{{$employee->user_role}}">
+                                                @if($employee->user_role == 3)
+                                                Admin
+                                                @else
+                                                Employee
+                                                @endif
+                                            </option>
+                                            <option value="3">Admin</option>
+                                            <option value="4">Employee</option>
+                                            </select>
+                                        </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-sm-12">
+                                            <!-- Monthly Salary -->
+                                            <div  class="form-group mb-4">
+                                                <label >Monthly Salary <small style="color: red">*</small></label>
+                                            <input type="number"  step="0.01" value="{{$employee->monthly_salary}}"  id="monthly_salary" name="monthly_salary" value="{{ old('monthly_salary') }}" class="form-control form-control-lg" />
+                                            </div>
+                                        </div>
                                     </div>
+                                    
 
                                     <div class="row">
                                     <div class="col-md-6 col-sm-12">

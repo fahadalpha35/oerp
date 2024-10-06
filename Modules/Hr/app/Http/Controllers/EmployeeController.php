@@ -130,10 +130,12 @@ class EmployeeController extends Controller
             'monthly_salary' => 'required|numeric',
             'designation_id' => 'required|numeric',
             'branch_id' => 'required|numeric',
+            'user_type' => 'required|numeric',
             'department_id' => 'required|numeric',
         ];
 
         $customMessages = [
+            'user_type.required' => 'User Type is required',
             'name.required' => 'Full Name is required',
             'designation_id.required' => 'Designation is required',
             'branch_id.required' => 'Branch Name is required',
@@ -142,12 +144,13 @@ class EmployeeController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
+       
 
         $company_id = Auth::user()->company_id;
         $company_business_type = Auth::user()->company_business_type;
         $user = new User();
         $user->name = $request->name;
-        $user->role_id = 4;
+        $user->role_id = $request->user_type;
         $user->company_id = $company_id;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
@@ -155,7 +158,6 @@ class EmployeeController extends Controller
         $user->company_business_type = $company_business_type;
         $user->registration_date = Carbon::now()->toDateString();
         $user->save();
-
 
         $employee = DB::table('hr_employees')
                     ->insertGetId([
@@ -176,23 +178,24 @@ class EmployeeController extends Controller
 
         $employee = DB::table('hr_employees')
                         ->leftJoin('users','hr_employees.user_id','users.id')
-                        ->leftJoin('companies','users.company_id','companies.id')
-                        ->leftJoin('hr_designations','hr_employees.designation_id','hr_designations.id')
-                        ->leftJoin('hr_branches','hr_employees.branch_id','hr_branches.id')
-                        ->leftJoin('hr_departments','hr_employees.department_id','hr_departments.id')
+                        // ->leftJoin('companies','users.company_id','companies.id')
+                        // ->leftJoin('hr_designations','hr_employees.designation_id','hr_designations.id')
+                        // ->leftJoin('hr_branches','hr_employees.branch_id','hr_branches.id')
+                        // ->leftJoin('hr_departments','hr_employees.department_id','hr_departments.id')
                         ->select(
                             'users.name as full_name',
-                            'companies.company_name as company_name',
-                            'users.email as email',
-                            'hr_designations.designation_name as designation',
-                            'hr_branches.br_name as branch',
-                            'hr_departments.dept_name as department',
+                            'users.role_id as user_role',
+                            // 'companies.company_name as company_name',
+                            // 'users.email as email',
+                            // 'hr_designations.designation_name as designation',
+                            // 'hr_branches.br_name as branch',
+                            // 'hr_departments.dept_name as department',
                             'hr_employees.*'
                             )
                         ->where('hr_employees.id',$id)
                         ->first();
 
-
+         dd($employee);
         return view('hr::employees.show', compact('employee'));
     }
 
@@ -208,6 +211,7 @@ class EmployeeController extends Controller
                         ->leftJoin('hr_departments','hr_employees.department_id','hr_departments.id')
                         ->select(
                             'users.name as full_name',
+                            'users.role_id as user_role',
                             'companies.company_name as company_name',
                             'users.email as email',
                             'hr_designations.designation_name as designation',
@@ -247,7 +251,7 @@ class EmployeeController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
-        $user_company_id = Auth::user()->company_id;
+        $user_role = $request->input('type');
 
         $data = array();
         $data['monthly_salary'] = $request->input('monthly_salary');
@@ -255,12 +259,23 @@ class EmployeeController extends Controller
         $data['branch_id'] = $request->input('branch_id');
         $data['department_id'] = $request->input('department_id');
 
+        $user_id = DB::table('hr_employees')
+                       ->select('user_id')
+                       ->where('id',$id)
+                       ->first();
+
+        $emp_user_id = $user_id->user_id;
+
+        $updated_user = DB::table('users')
+                        ->where('id', $emp_user_id)
+                        ->update(['role_id' => $user_role]);
+        
         $updated = DB::table('hr_employees')
                         ->where('id', $id)
                         ->update($data);
 
          // Check if the update was successful
-         if ($updated) {
+         if ($updated_user || $updated) {
             // Return a success response
             return redirect()->back()->with('success_message', 'Employee Information is updated successfully!');
         } else {
@@ -272,15 +287,18 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         try {
+            
             // Check if the branch exists using Query Builder
-            $department = DB::table('hr_employees')->where('id', $id)->first();
+            $employee = DB::table('hr_employees')->where('id', $id)->first();
+            $emp_user_id = $employee->user_id;
 
-            if (!$department) {
+            if (!$employee) {
                 return response()->json(['success' => false, 'message' => 'Employee not found.'], 404);
             }
 
             // Delete the branch using Query Builder
             DB::table('hr_employees')->where('id', $id)->delete();
+            DB::table('users')->where('id', $emp_user_id)->delete();
 
             // Return a success response
             return response()->json(['success' => true, 'message' => 'Employee has been deleted successfully!']);

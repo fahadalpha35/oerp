@@ -26,11 +26,11 @@
                                     </button>
                                 </div>
                          @endif
-                         <table class="table table-bordered table-hover">
+                         <table id="exampleTableWithoutYajra" class="table table-bordered table-hover">
                             <thead class="thead-dark">
                             <tr>
                               <th>Serial No.</th>
-                              <th>Company</th>
+                              <th>Company sd</th>
                               <th>Name</th>
                               <th>Email</th>
                               <th>Designation</th>
@@ -57,7 +57,7 @@
                               <td>
                                 <a href="/employees/{{ $employee->id }}/" style="color: white"><button class="btn btn-info"> View</button></a>
                                 <a href="{{route('employees.edit',$employee->id)}}" style="color: white"><button class="btn btn-warning"> Edit</button></a>
-                                <a onclick="deleteOperation({{$employee->id}})" style="color: white"><button class="btn btn-danger"> Delete</button></a>
+                                <a onclick="deleteOperationWithoutYajra('{{ route('employees.destroy', ':id') }}', {{$employee->id}})" style="color: white"><button class="btn btn-danger"> Delete</button></a>
                               </td>
                             </tr>
                             @endforeach
@@ -76,58 +76,11 @@
 
 
 @push('masterScripts')
-
 <script>
-const csrfToken = '{{ csrf_token() }}'; // Define csrfToken globally
-
 $(document).ready(function() {
-    var table = $('#exampleTable').DataTable({
+    var table = $('#exampleTableWithoutYajra').DataTable({
         responsive: true,
     });
 });
-
-function deleteOperation(row_id) {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        customClass: {
-            popup: 'my-swal-class'
-        },
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Perform the delete action
-            axios.delete('{{ route('employees.destroy', ':id') }}'.replace(':id', row_id), {
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken // Include CSRF token
-                }
-            })
-            .then(response => {
-             console.log(response);
-              setTimeout(function() {
-                  window.location.reload();
-              }, 2000);
-              Swal.fire({
-                          icon: "success",
-                          title: ''+ response.data.message,
-                        });
-                    return false;
-            })
-            .catch(error => {
-                Swal.fire(
-                    'Error!',
-                    'There was an issue with deleting the data',
-                    'error'
-                );
-            });
-        }
-    });
-}
-
 </script>
 @endpush
