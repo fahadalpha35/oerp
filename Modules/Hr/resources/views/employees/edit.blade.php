@@ -36,7 +36,7 @@
                                 <div class="row">
                                     <div class="col-md-4 col-sm-12 mb-4">
                                         <label>Full Name:</label>
-                                        <h5 style="color: #0098ef">{{ $employee->full_name }}</h5>
+                                        <h5 style="color: #0098ef">{{ $employee->emp_name }}</h5>
                                     </div>
                                     <div class="col-md-4 col-sm-12 mb-4">
                                         <label>Email:</label>

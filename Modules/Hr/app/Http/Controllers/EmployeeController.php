@@ -178,24 +178,23 @@ class EmployeeController extends Controller
 
         $employee = DB::table('hr_employees')
                         ->leftJoin('users','hr_employees.user_id','users.id')
-                        // ->leftJoin('companies','users.company_id','companies.id')
-                        // ->leftJoin('hr_designations','hr_employees.designation_id','hr_designations.id')
-                        // ->leftJoin('hr_branches','hr_employees.branch_id','hr_branches.id')
-                        // ->leftJoin('hr_departments','hr_employees.department_id','hr_departments.id')
+                        ->leftJoin('companies','users.company_id','companies.id')
+                        ->leftJoin('hr_designations','hr_employees.designation_id','hr_designations.id')
+                        ->leftJoin('hr_branches','hr_employees.branch_id','hr_branches.id')
+                        ->leftJoin('hr_departments','hr_employees.department_id','hr_departments.id')
                         ->select(
-                            'users.name as full_name',
+                            'users.name as emp_name',
                             'users.role_id as user_role',
-                            // 'companies.company_name as company_name',
-                            // 'users.email as email',
-                            // 'hr_designations.designation_name as designation',
-                            // 'hr_branches.br_name as branch',
-                            // 'hr_departments.dept_name as department',
+                            'companies.company_name as company_name',
+                            'users.email as email',
+                            'hr_designations.designation_name as designation',
+                            'hr_branches.br_name as branch',
+                            'hr_departments.dept_name as department',
                             'hr_employees.*'
                             )
                         ->where('hr_employees.id',$id)
                         ->first();
 
-         dd($employee);
         return view('hr::employees.show', compact('employee'));
     }
 
@@ -210,7 +209,7 @@ class EmployeeController extends Controller
                         ->leftJoin('hr_branches','hr_employees.branch_id','hr_branches.id')
                         ->leftJoin('hr_departments','hr_employees.department_id','hr_departments.id')
                         ->select(
-                            'users.name as full_name',
+                            'users.name as emp_name',
                             'users.role_id as user_role',
                             'companies.company_name as company_name',
                             'users.email as email',

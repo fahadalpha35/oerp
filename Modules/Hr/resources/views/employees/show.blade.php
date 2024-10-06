@@ -29,14 +29,14 @@
                                     <br><br>
                                 </div>
 
-                                <h4 class="text-muted text-center">{{ $employee->full_name }}</h4>
+                                <h4 class="text-muted text-center">{{ $employee->emp_name }}</h4>
                                 <h4 class="text-muted text-center">{{ $employee->designation }}</h4>
                                 <br>
                                 <h3 class="mb-4 text-center">Official Details</h3>
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12 mb-4">
                                         <label>Full Name:</label>
-                                        <h5 style="color: #0098ef">{{ $employee->full_name }}</h5>
+                                        <h5 style="color: #0098ef">{{ $employee->emp_name }}</h5>
                                     </div>
                                     <div class="col-md-6 col-sm-12 mb-4">
                                         <label>Email:</label>

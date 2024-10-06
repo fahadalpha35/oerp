@@ -45,6 +45,9 @@
                             @elseif(Request::is('designations')) show
                             @elseif(Request::is('branches')) show
                             @elseif(Request::is('departments')) show
+                            @elseif(Request::is('leave_types')) show
+                            @elseif(Request::is('apply_leave')) show
+                            @elseif(Request::is('leave_applications')) show
                             @endif" id="humanResource" style="margin-top: -2px;">
 
               <li class="nav-item">
@@ -99,13 +102,23 @@
                 <i class="menu-arrow"></i>
                 </a>
                 <!-- Second-level sub-menu -->
-                <ul class="collapse nav flex-column ms-3" id="LeaveApplication" style="margin-top: -2px;">
+                <ul class="collapse nav flex-column ms-3 @if(Request::is('leave_types')) show
+                            @elseif(Request::is('apply_leave')) show
+                            @elseif(Request::is('leave_applications')) show
+                            @endif" id="LeaveApplication" style="margin-top: -2px;">
+
+                {{-- <ul class="collapse nav flex-column ms-3" id="LeaveApplication" style="margin-top: -2px;"> --}}
                   <li class="nav-item">
-                    <a class="nav-link" href="#">
-                    <i class="mdi mdi-adjust menu-icon"></i>
-                    <span class="menu-title">Apply For Leave</span>
-                    <i class="menu-arrow"></i>
-                    </a>
+                    <a href="{{ url('leave_types') }}" class="nav-link {{ Request::is('leave_types') ? 'active' : '' }}" style="{{ Request::is('leave_types') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('leave_types') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('leave_types') ? 'color: white; !important' : ''}}">Leave Types</span>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ url('apply_leave') }}" class="nav-link {{ Request::is('apply_leave') ? 'active' : '' }}" style="{{ Request::is('apply_leave') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('apply_leave') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('apply_leave') ? 'color: white; !important' : ''}}">Apply For Leave</span>
+                      </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">
@@ -116,11 +129,10 @@
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link" href="#">
-                    <i class="mdi mdi-adjust menu-icon"></i>
-                    <span class="menu-title">Leave Application List</span>
-                    <i class="menu-arrow"></i>
-                    </a>
+                    <a href="{{ url('leave_applications') }}" class="nav-link {{ Request::is('leave_applications') ? 'active' : '' }}" style="{{ Request::is('leave_applications') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('leave_applications') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('leave_applications') ? 'color: white; !important' : ''}}">Leave Application List</span>
+                      </a>
                   </li>
                 </ul>
               </li>
