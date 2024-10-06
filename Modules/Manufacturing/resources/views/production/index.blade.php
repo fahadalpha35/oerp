@@ -4,7 +4,7 @@
     <div class="content-wrapper">
         <div style="background-color: #fff; border-radius: 20px;">
             <div class="mt-5 row" style="padding: 25px;">
-                <a href="{{ route('production.create') }}" class="btn btn-success btn-sm">Add Order</a>
+                <a href="{{ route('production.create') }}" class="btn btn-success btn-sm">Add Production Order</a>
 
                 <div class="col-md-12 col-sm-12">
                     <h3 class="mt-2 text-center">Production Orders List</h3>

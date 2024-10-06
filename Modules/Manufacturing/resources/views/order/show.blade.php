@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="content-wrapper">
+<a href="{{ url()->previous() }}" class="btn btn-secondary mb-3">Back</a>
     <div style="background-color: #fff; border-radius: 20px;">
         <div class="mt-5 ml-4 row" style="padding: 25px;">
             <div class="col-md-5">

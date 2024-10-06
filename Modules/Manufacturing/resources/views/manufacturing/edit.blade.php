@@ -28,6 +28,7 @@
                     <input type="text" class="form-control" id="city" name="city" value="{{ $client->city }}">
                 </div>
                 <button type="submit" class="btn btn-primary">Update Client</button>
+                <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
             </form>
         </div>
     </div>

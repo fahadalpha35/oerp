@@ -5,7 +5,7 @@
         <div style="background-color: #fff; border-radius: 20px;">
             <div class="mt-5 row" style="padding: 25px;">
                 <div class="col-md-12 col-sm-12">
-                    <h3 class="mt-2 text-center">Add New Order</h3>
+                    <h3 class="mt-2 text-center">Edit Work Order</h3>
                     <form action="{{ route('order.update', $order->id) }}" method="POST">
                         @csrf
                         @method('PUT')
@@ -104,6 +104,7 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Update Order</button>
+                        <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
                     </form>
                 </div>
             </div>

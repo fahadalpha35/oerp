@@ -271,7 +271,7 @@
                         <span class="menu-arrow" style="{{ Request::is('manufacturing') ? 'color: white; !important' : ''}}">Clients</span>
                       </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="{{ url('service') }}" class="nav-link {{ Request::is('service') ? 'active' : '' }}" style="{{ Request::is('service') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('service') ? 'color: white; !important' : ''}}"></i>
                         <span class="menu-arrow" style="{{ Request::is('service') ? 'color: white; !important' : ''}}">Services</span>
@@ -282,11 +282,11 @@
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('parts') ? 'color: white; !important' : ''}}"></i>
                         <span class="menu-arrow" style="{{ Request::is('parts') ? 'color: white; !important' : ''}}">Parts</span>
                       </a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a href="{{ url('order') }}" class="nav-link {{ Request::is('order') ? 'active' : '' }}" style="{{ Request::is('order') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('order') ? 'color: white; !important' : ''}}"></i>
-                        <span class="menu-arrow" style="{{ Request::is('order') ? 'color: white; !important' : ''}}">Orders</span>
+                        <span class="menu-arrow" style="{{ Request::is('order') ? 'color: white; !important' : ''}}">Work Orders</span>
                       </a>
                 </li>
                 <li class="nav-item">
@@ -294,13 +294,13 @@
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('production') ? 'color: white; !important' : ''}}"></i>
                         <span class="menu-arrow" style="{{ Request::is('production') ? 'color: white; !important' : ''}}">Production</span>
                       </a>
-                </li>
-                <li class="nav-item">
+                </li><br>
+                <!-- <li class="nav-item">
                     <a href="{{ url('workorder') }}" class="nav-link {{ Request::is('workorder') ? 'active' : '' }}" style="{{ Request::is('workorder') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('workorder') ? 'color: white; !important' : ''}}"></i>
                         <span class="menu-arrow" style="{{ Request::is('workorder') ? 'color: white; !important' : ''}}">Work Orders</span>
                       </a>
-                </li><br>
+                </li><br> -->
                 </ul>
 
         </li>
