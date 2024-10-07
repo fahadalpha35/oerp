@@ -1,17 +1,4 @@
-@extends('master')
-
-@section('title')
-Edit Leave Application
-@endsection
-
-@push('css')
-<style>
-#for_permission_review{
-    display: none;
-}
-</style>
-@endpush
-
+@extends('backend.layout.layout')
 @section('content')
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -26,12 +13,9 @@ Edit Leave Application
             </div>
             
             <div class="col-12">
+              <h3 class="mt-2 text-center">Edit Leave Application</h3>
                 <br>
                 <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-title">Leave Application Details</h3>
-                  </div>        
-
                     <div class="card-body">
                         <form id="updateLeaveApplicationForm">
                           <div class="row">
@@ -39,8 +23,8 @@ Edit Leave Application
                               <!-- Application Type -->
                                 <div class="form-group mb-4">
                                   <label>Leave Type <small style="color: red">*</small></label>
-                                  <select required class="form-control select2bs4" id="leave_type" name="leave_type" style="width: 100%;">                                  
-                                      <option value="{{$leaveApplication->leave_type}}">{{$leaveApplication->leave_type_name}}</option>
+                                  <select required class="form-control select2" id="leave_type" name="leave_type" style="width: 100%;">                                  
+                                      <option value="{{$leaveApplication->leave_type_id}}">{{$leaveApplication->leave_type_name}}</option>
                                       @foreach ($leave_types as $leave_type)
                                       <option value="{{$leave_type->id}}">{{$leave_type->type_name}}</option>
                                       @endforeach                                                             
@@ -102,12 +86,10 @@ Edit Leave Application
 @push('masterScripts')
 <script>
  
- $(document).ready(function() {
-    // Initialize Select2 Elements
-    $('.select2bs4').select2({
-        theme: 'bootstrap4'
-    });
-});
+ $.noConflict(); // Ensures jQuery does not conflict with other libraries
+jQuery(document).ready(function($) {
+  $('.select2').select2();
+})
 
 
 // Execute the function (duration between application from and application to) when the page loads
@@ -197,7 +179,7 @@ document.getElementById('updateLeaveApplicationForm').addEventListener('submit',
     axios.defaults.withCredentials = true;
     axios.defaults.headers.common['X-CSRF-TOKEN'] = getCsrfToken();
 
-    axios.post('/api/update_leave_application/' + leave_application_id, updateLeaveApplicationFormData).then(response => {
+    axios.post('/update_leave_application_form_fillup/' + leave_application_id, updateLeaveApplicationFormData).then(response => {
         console.log(response);
         setTimeout(function() {
             // window.location.reload();

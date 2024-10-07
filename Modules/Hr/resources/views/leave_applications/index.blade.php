@@ -28,7 +28,7 @@
                                         </button>
                                     </div>
                             @endif
-                            <table id="exampleTableWithoutYajra" class="table table-bordered table-hover">
+                            <table id="leave_application_table" class="table table-bordered table-hover">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>Serial No.</th>
@@ -43,71 +43,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php $i = 1 @endphp
-                                    @foreach($leaveApplications as $application)
-                                    <tr>
-                                        <td>{{ $i++ }}</td>
-                                        <td>{{ $application->name }}</td>
-                                        <td>
-                                            @if($application->application_type == 1)
-                                            <span class="badge badge-info">File Attachment</span>
-                                            @else
-                                            <span class="badge badge-success">Application Form</span>
-                                            @endif
-                                        </td>
-                                        <td>{{ $application->leave_type_name }}</td>
-                                        <td>{{ $application->application_date }}</td>
-                                        <td>
-                                            @if($application->application_status == 1)
-                                            <span class="badge badge-warning">Pending</span>
-                                            @elseif($application->application_status == 2)
-                                            <span class="badge badge-success">Approved</span>
-                                            @else
-                                            <span class="badge badge-danger">Declined</span>
-                                            @endif
-                                        </td>
-                                        <td>{{ $application->application_approved_date }}</td>
-                                        <td>{{ $application->application_decline_date }}</td>
-                                        <td>
-                                            
-                                            <!-- Application way is 'file attachment' -->
-                                            @if($application->application_type == 1)
-                                            <!-- File Attachment is pending/submitted start -->
-                                            @if($application->application_status == 1)
-                                            <a href="" style="color: white">
-                                                <button class="btn btn-outline-primary">
-                                                    <i class="fa-solid fa-pen-to-square"></i> Edit
-                                                </button>
-                                            </a>
-                                            @else
-                                            <a href="#" style="color: white">
-                                                <button disabled class="btn btn-outline-secondary">Submitted</button>
-                                            </a>
-                                            @endif
-                                            <!-- File Attachment is pending/submitted end -->
-
-                                            <!-- Application way is 'Leave Application Form' -->
-                                            @else
-                                            <!-- Leave Application Form is pending/submitted start -->
-                                            @if($application->application_status == 1)
-                                            <a href="" style="color: white">
-                                                <button class="btn btn-outline-primary">
-                                                    <i class="fa-solid fa-pen-to-square"></i> Edit
-                                                </button>
-                                            </a>
-                                            @else
-                                            <a href="#" style="color: white">
-                                                <button disabled class="btn btn-outline-secondary">Submitted</button>
-                                            </a>
-                                            @endif
-                                            <!-- Leave Application Form is pending/submitted end -->
-
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                                
+                                </tbody>                            
                             </table>
                         </div>
                         <!-- /.card-body -->
@@ -122,10 +58,18 @@
 
 @push('masterScripts')
 <script>
-$(document).ready(function() {
-    var table = $('#exampleTableWithoutYajra').DataTable({
-        responsive: true,
-    });
-});
+this.loadDataTable('leave_application_table', '{{ route('leave_applications') }}',
+        [
+            { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+            { data: 'name', name: 'name' },
+            { data: 'application_type_label', name: 'application_type_label', orderable: false, searchable: true },
+            { data: 'leave_type_name', name: 'leave_type_name' },
+            { data: 'application_date', name: 'application_date' },
+            { data: 'application_status_label', name: 'application_status_label',searchable: true },
+            { data: 'application_approved_date', name: 'application_approved_date' },
+            { data: 'application_decline_date', name: 'application_decline_date' },
+            { data: 'action', name: 'action', orderable: false, searchable: false }
+        ],
+);
 </script>
 @endpush
