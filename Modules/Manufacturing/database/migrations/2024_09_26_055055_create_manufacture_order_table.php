@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('client_id')->reference('id')->on('manufacture_clients');
             $table->foreignId('product_id')->reference('id')->on('inventory_products');
+            $table->foreignId('service_id')->reference('id')->on('manufacture_services');
             $table->string('quantity');
             $table->decimal('total', 10, 2);
             $table->date('delivery_date')->nullable();

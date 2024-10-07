@@ -12,18 +12,6 @@
                             <label for="name">Service Name</label>
                             <input type="text" class="form-control" name="name" required>
                         </div>
-                        <div class="form-group">
-                            <label for="price">Price</label>
-                            <input type="number" step="0.01" class="form-control" name="price" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="unit">Unit</label>
-                            <input type="text" class="form-control" name="unit" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea class="form-control" name="description"></textarea>
-                        </div>
                         <button type="submit" class="btn btn-primary">Add Service</button>
                         <a href="{{ route('service.index') }}" class="btn btn-secondary">Back</a>
                     </form>

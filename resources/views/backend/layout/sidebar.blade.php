@@ -278,18 +278,18 @@
                             @elseif(Request::is('workorder')) show
                             @endif" id="manufac" style="margin-top: -2px;">
                 <li class="nav-item">
+                    <a href="{{ url('service') }}" class="nav-link {{ Request::is('service') ? 'active' : '' }}" style="{{ Request::is('service') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('service') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('service') ? 'color: white; !important' : ''}}">Service Type</span>
+                      </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ url('manufacturing') }}" class="nav-link {{ Request::is('manufacturing') ? 'active' : '' }}" style="{{ Request::is('manufacturing') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('manufacturing') ? 'color: white; !important' : ''}}"></i>
                         <span class="menu-arrow" style="{{ Request::is('manufacturing') ? 'color: white; !important' : ''}}">Clients</span>
                       </a>
-                </li>
+                </li>   
                 <!-- <li class="nav-item">
-                    <a href="{{ url('service') }}" class="nav-link {{ Request::is('service') ? 'active' : '' }}" style="{{ Request::is('service') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('service') ? 'color: white; !important' : ''}}"></i>
-                        <span class="menu-arrow" style="{{ Request::is('service') ? 'color: white; !important' : ''}}">Services</span>
-                      </a>
-                </li>
-                <li class="nav-item">
                     <a href="{{ url('parts') }}" class="nav-link {{ Request::is('parts') ? 'active' : '' }}" style="{{ Request::is('parts') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('parts') ? 'color: white; !important' : ''}}"></i>
                         <span class="menu-arrow" style="{{ Request::is('parts') ? 'color: white; !important' : ''}}">Parts</span>
@@ -347,6 +347,8 @@
             </a>
 
                 <ul class="collapse nav  @if(Request::is('supplychain')) show
+                            @elseif(Request::is('purchase')) show
+                            @elseif(Request::is('purchase')) show
                             @elseif(Request::is('purchase')) show
                             @endif" id="suppliChain" style="margin-top: -2px;">
                 <li class="nav-item">

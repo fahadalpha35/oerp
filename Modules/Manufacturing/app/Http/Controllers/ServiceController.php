@@ -46,16 +46,10 @@ class ServiceController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'price' => 'required|numeric',
-            'unit' => 'required|string',
-            'description' => 'nullable|string',
         ]);
 
-        DB::table('manufacture_services')->insert([ // Use DB to insert data
+        DB::table('manufacture_services')->insert([ // Use DB to insert only name
             'name' => $request->name,
-            'price' => $request->price,
-            'unit' => $request->unit,
-            'description' => $request->description,
         ]);
 
         return redirect()->route('service.index')->with('success_message', 'Service added successfully!');
@@ -78,16 +72,10 @@ class ServiceController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'price' => 'required|numeric',
-            'unit' => 'required|string',
-            'description' => 'nullable|string',
         ]);
 
-        DB::table('manufacture_services')->where('id', $id)->update([ // Use DB to update data
+        DB::table('manufacture_services')->where('id', $id)->update([ // Use DB to update only name
             'name' => $request->name,
-            'price' => $request->price,
-            'unit' => $request->unit,
-            'description' => $request->description,
         ]);
 
         return redirect()->route('service.index')->with('success_message', 'Service updated successfully!');

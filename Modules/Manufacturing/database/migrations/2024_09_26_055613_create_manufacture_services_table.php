@@ -14,9 +14,6 @@ return new class extends Migration
         Schema::create('manufacture_services', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->decimal('price', 10, 2);
-            $table->string('unit');
-            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
