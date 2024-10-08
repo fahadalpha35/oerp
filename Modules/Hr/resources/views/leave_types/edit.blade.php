@@ -12,7 +12,7 @@
             </div>
 
             <div class="col-12">
-              <h3 class="mt-2 text-center">Edit Designation</h3>
+              <h3 class="mt-2 text-center">Edit Leave Type</h3>
                 <br>
                 <div class="card">
                     {{-- <div class="card-header">

@@ -48,6 +48,7 @@
                             @elseif(Request::is('leave_types')) show
                             @elseif(Request::is('apply_leave')) show
                             @elseif(Request::is('leave_applications')) show
+                            @elseif(Request::is('leave_application_approval_list')) show
                             @endif" id="humanResource" style="margin-top: -2px;">
 
               <li class="nav-item">
@@ -105,33 +106,37 @@
                 <ul class="collapse nav flex-column ms-3 @if(Request::is('leave_types')) show
                             @elseif(Request::is('apply_leave')) show
                             @elseif(Request::is('leave_applications')) show
+                            @elseif(Request::is('leave_application_approval_list')) show
                             @endif" id="LeaveApplication" style="margin-top: -2px;">
 
                 {{-- <ul class="collapse nav flex-column ms-3" id="LeaveApplication" style="margin-top: -2px;"> --}}
+                @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2) || (Auth::user()->role_id == 3))
                   <li class="nav-item">
                     <a href="{{ url('leave_types') }}" class="nav-link {{ Request::is('leave_types') ? 'active' : '' }}" style="{{ Request::is('leave_types') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('leave_types') ? 'color: white; !important' : ''}}"></i>
                         <span class="menu-arrow" style="{{ Request::is('leave_types') ? 'color: white; !important' : ''}}">Leave Types</span>
                       </a>
                   </li>
+                @endif
                   <li class="nav-item">
                     <a href="{{ url('apply_leave') }}" class="nav-link {{ Request::is('apply_leave') ? 'active' : '' }}" style="{{ Request::is('apply_leave') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('apply_leave') ? 'color: white; !important' : ''}}"></i>
                         <span class="menu-arrow" style="{{ Request::is('apply_leave') ? 'color: white; !important' : ''}}">Apply For Leave</span>
                       </a>
                   </li>
+                  @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2) || (Auth::user()->role_id == 3))
                   <li class="nav-item">
-                    <a class="nav-link" href="#">
-                    <i class="mdi mdi-adjust menu-icon"></i>
-                    <span class="menu-title">Review Application</span>
-                    <i class="menu-arrow"></i>
-                    </a>
+                    <a href="{{ url('leave_application_approval_list') }}" class="nav-link {{ Request::is('leave_application_approval_list') ? 'active' : '' }}" style="{{ Request::is('leave_application_approval_list') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('leave_application_approval_list') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('leave_application_approval_list') ? 'color: white; !important' : ''}}">Review Application</span>
+                      </a>
                   </li>
+                @endif
 
                   <li class="nav-item">
                     <a href="{{ url('leave_applications') }}" class="nav-link {{ Request::is('leave_applications') ? 'active' : '' }}" style="{{ Request::is('leave_applications') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('leave_applications') ? 'color: white; !important' : ''}}"></i>
-                        <span class="menu-arrow" style="{{ Request::is('leave_applications') ? 'color: white; !important' : ''}}">Leave Application List</span>
+                        <span class="menu-arrow" style="{{ Request::is('leave_applications') ? 'color: white; !important' : ''}}">Leave Applications</span>
                       </a>
                   </li>
                 </ul>

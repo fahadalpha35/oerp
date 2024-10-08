@@ -1,23 +1,10 @@
-@extends('master')
-
-@section('title')
-Edit Leave Application
-@endsection
-
-@push('css')
-<style>
-#for_permission_review{
-    display: none;
-}
-</style>
-@endpush
+@extends('backend.layout.layout')
 
 @section('content')
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
-        <br>
         <div class="row">
             <div class="col-12">
                 <a class="btn btn-outline-info float-right" href="{{route('leave_applications')}}">
@@ -26,12 +13,10 @@ Edit Leave Application
             </div>
             
             <div class="col-12">
+              <h3 class="mt-2 text-center">Edit Leave Application</h3>
                 <br>
                 <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-title">Leave Application Details</h3>
-                  </div>        
-
+          
                     <div class="card-body">
                         <form id="updateLeaveApplicationForm">
                           <div class="row">
@@ -39,8 +24,8 @@ Edit Leave Application
                               <!-- Application Type -->
                                 <div class="form-group mb-4">
                                   <label>Leave Type <small style="color: red">*</small></label>
-                                  <select required class="form-control select2bs4" id="leave_type" name="leave_type" style="width: 100%;">                                  
-                                      <option value="{{$leaveApplication->leave_type}}">{{$leaveApplication->leave_type_name}}</option>
+                                  <select required class="form-control select2" id="leave_type" name="leave_type" style="width: 100%;">                                  
+                                      <option value="{{$leaveApplication->leave_type_id}}">{{$leaveApplication->leave_type_name}}</option>
                                       @foreach ($leave_types as $leave_type)
                                       <option value="{{$leave_type->id}}">{{$leave_type->type_name}}</option>
                                       @endforeach                                                             
@@ -73,7 +58,7 @@ Edit Leave Application
                             </div>
 
                             <div class="col-md-12 col-sm-12">
-                              <label style="display: flex; margin-top: 20px"><strong>Application File @if(!empty($leaveApplication->application_file)) (<a href="{{ asset('/uploads/'.$leaveApplication->application_file) }}" download >Download Previous</a>) @endif</strong></label>
+                              <label style="display: flex; margin-top: 20px"><strong>Application File @if(!empty($leaveApplication->application_file)) (<a href="{{ asset('/backend/images/application_files/'.$leaveApplication->application_file) }}" download >Download Previous</a>) @endif</strong></label>
                             <br>
                               <div class="form-group">
                               <label>Attach Your Application</label>
@@ -104,13 +89,12 @@ Edit Leave Application
 
 @push('masterScripts')
 <script>
+
+$.noConflict(); // Ensures jQuery does not conflict with other libraries
+jQuery(document).ready(function($) {
+  $('.select2').select2();
+})
  
- $(document).ready(function() {
-    // Initialize Select2 Elements
-    $('.select2bs4').select2({
-        theme: 'bootstrap4'
-    });
-});
 
 
 // Execute the function (duration between application from and application to) when the page loads
@@ -224,7 +208,7 @@ document.getElementById('updateLeaveApplicationForm').addEventListener('submit',
     axios.defaults.withCredentials = true;
     axios.defaults.headers.common['X-CSRF-TOKEN'] = getCsrfToken();
 
-    axios.post('/api/update_leave_application_with_attachment/' + leave_application_id, updateLeaveApplicationFormData).then(response => {
+    axios.post('/update_leave_application_with_attachment/' + leave_application_id, updateLeaveApplicationFormData).then(response => {
         console.log(response);
         setTimeout(function() {
             // window.location.reload();

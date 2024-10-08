@@ -1,39 +1,17 @@
-@extends('master')
-
-@section('title')
-Review Leave Application
-@endsection
-
-@push('css')
-<style>
-#for_permission_review{
-    display: none;
-}
-</style>
-@endpush
+@extends('backend.layout.layout')
 
 @section('content')
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <br>
-        <div class="row">
-            <div class="col-12">
-                <a class="btn btn-outline-info float-right" href="{{route('leave_application_approval_list')}}">
-                    <i class="fas fa-arrow-left"></i> Back
-                </a>
-            </div>
+    <div style="width: 100%; background-color: #fff;border-radius: 20px;">
+        
+        <div class="mt-5 row" style="padding: 25px;">
+          <a href="{{ route('leave_application_approval_list') }}" class="btn btn-success btn-sm"><i class="fas fa-arrow-left"></i> Back</a>  
             
-            <div class="col-12">
-                <br>
+            <div class="col-md-12 col-xl-12 col-sm-12">
+              <h3 class="mt-2 text-center">Review Leave Applications</h3>
                 <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-title">Leave Application Details</h3>
-                  </div>        
-
-                    <div class="card-body">
-                        
+                    <div class="card-body">      
                           <div class="row">
                             <div class="col-md-6 col-sm-6">
                               <!-- Application Type -->
@@ -77,7 +55,7 @@ Review Leave Application
 
                             <div class="col-md-12 col-sm-12">
                               @if($leaveApplication->application_type == 1)
-                                <label style="display: flex; margin-top: 20px"><strong>Application File @if(!empty($leaveApplication->application_file)) (<a href="{{ asset('/uploads/'.$leaveApplication->application_file) }}" download >Download Leave Application</a>) @endif</strong></label>
+                                <label style="display: flex; margin-top: 20px"><strong>Application File @if(!empty($leaveApplication->application_file)) (<a href="{{ asset('/backend/images/application_files/'.$leaveApplication->application_file) }}" download >Download Leave Application</a>) @endif</strong></label>
                               @else
                                 <!-- Application Body -->
                                 <div class="form-group mb-4">
@@ -135,9 +113,7 @@ Review Leave Application
                   </div>
             </div>           
         </div>      
-        <br>
-         
-      </div><!-- /.container-fluid -->
+
     </div>
     <!-- /.content-header -->
 
