@@ -8,6 +8,7 @@ use Modules\Hr\Http\Controllers\DesignationController;
 use Modules\Hr\Http\Controllers\EmployeeController;
 use Modules\Hr\Http\Controllers\PostsController;
 use Modules\Hr\Http\Controllers\LeaveController;
+use Modules\Hr\Http\Controllers\PayrollController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,10 +58,18 @@ Route::middleware('auth')->group(function () {
     //leave application list
     Route::get('/leave_applications', [LeaveController::class, 'leave_applications'])->name('leave_applications');
 
-    // //leave application (approval)
+    //leave application (approval)
     Route::get('/leave_application_approval_list', [LeaveController::class, 'leave_application_approval_list'])->name('leave_application_approval_list');
     Route::get('/review_leave/{leave_id}', [LeaveController::class, 'review_leave'])->name('review_leave');
     Route::post('/approve_leave', [LeaveController::class, 'approve_leave'])->name('approve_leave');
     Route::post('/decline_leave', [LeaveController::class, 'decline_leave'])->name('decline_leave');
+
+    //payroll
+    Route::resource('payrolls', PayrollController::class);
+
+    //dependencies (payroll)
+    Route::post('/member_details_dependancy', [PayrollController::class, 'member_details_dependancy']);
+    
+    Route::get('/payroll_show_data/{payroll_id}', [PayrollController::class, 'payroll_show_data'])->name('payroll_show_data');
 
 });

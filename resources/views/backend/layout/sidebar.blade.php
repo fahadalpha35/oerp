@@ -49,6 +49,7 @@
                             @elseif(Request::is('apply_leave')) show
                             @elseif(Request::is('leave_applications')) show
                             @elseif(Request::is('leave_application_approval_list')) show
+                            @elseif(Request::is('payrolls')) show
                             @endif" id="humanResource" style="margin-top: -2px;">
 
               <li class="nav-item">
@@ -169,13 +170,20 @@
               </li>
 
               <li class="nav-item">
+                <a href="{{ url('payrolls') }}" class="nav-link {{ Request::is('payrolls') ? 'active' : '' }}" style="{{ Request::is('payrolls') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                    <i class="mdi mdi-checkbox-blank-circle-outline menu-icon" style="{{ Request::is('payrolls') ? 'color: white; !important' : ''}}"></i>
+                    <span class="menu-arrow" style="{{ Request::is('payrolls') ? 'color: white; !important' : ''}}">Payrolls</span>
+                  </a>
+              </li>
+
+              {{-- <li class="nav-item">
                 <a class="nav-link" href="#Payroll" data-toggle="collapse" aria-expanded="false">
                   <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
                 <span class="menu-title">Payroll</span>
                 <i class="menu-arrow"></i>
                 </a>
                 <!-- Second-level sub-menu -->
-                <ul class="collapse nav flex-column ms-3" id="Payroll" style="margin-top: -2px;">
+                <ul class="collapse nav flex-column ms-3 " id="Payroll" style="margin-top: -2px;">
                   <li class="nav-item">
                     <a class="nav-link" href="#">
                     <i class="mdi mdi-adjust menu-icon"></i>
@@ -191,7 +199,7 @@
                     </a>
                   </li>
                 </ul>
-              </li>
+              </li> --}}
 
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">
