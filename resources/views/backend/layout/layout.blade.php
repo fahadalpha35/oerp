@@ -29,6 +29,7 @@
             {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" rel="stylesheet" /> --}}
             <link rel="stylesheet" href="{{ url('backend/vendors/select2/select2.min.css') }}">
 
+            <link rel="stylesheet" href="{{ asset('backend/vendors/custom-payroll.css') }}">
         <!-- inject:css -->
         <link rel="stylesheet" href="{{ asset('backend/css/vertical-layout-light/style.css') }}">
         <!-- endinject -->
@@ -54,7 +55,8 @@
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="{{ asset('backend/vendors/custom.css') }}">
-        {{-- @stack('css') --}}
+        
+        @stack('css')
     </head>
     <body>
         <div class="container-scroller">
