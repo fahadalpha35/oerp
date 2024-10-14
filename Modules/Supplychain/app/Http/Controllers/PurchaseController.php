@@ -8,6 +8,8 @@ use Modules\Supplychain\Models\ScmPurchases;
 use Modules\Supplychain\Models\ScmSupplierManagement;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\JsonResponse;
+use Modules\Inventory\Models\InventoryProduct;
+use Modules\Supplychain\Models\ScmPurchaseInfo;
 
 class PurchaseController extends Controller
 {
@@ -17,7 +19,7 @@ class PurchaseController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data =  ScmPurchases::get();
+            $data =  ScmPurchases::with('supplier:id,name')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
@@ -36,27 +38,29 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        $suppliers = ScmSupplierManagement::all();
-        return view('supplychain::purchase.create', compact('suppliers'));
+        $suppliers = ScmSupplierManagement::get();
+        $product = InventoryProduct::get();
+        return view('supplychain::purchase.create', compact('suppliers','product'));
     }
-
-    
 
     public function store(Request $request)
     {
-        $request->validate([
-            'supplier_id' => 'required|exists:scm_supplier_managements,id',
-            'purchase_date' => 'required|date',
-            // Add validation rules for other fields
-        ]);
+        $data = array_filter($request->only(['supplier_id', 'purchase_date','service_cost','total','sub_total','invoice_no', 'discount', 'delivary_cost', 'service_cost','tax','due','paid']));
+        $purchase = ScmPurchases::create($data);
 
-        // Save purchase data
-        $purchase = new ScmPurchases(); // Ensure to use the correct model name
-        $purchase->supplier_id = $request->supplier_id;
-        $purchase->purchase_date = $request->purchase_date;
-        // Add other purchase data saving logic
-        $purchase->save();
-
+        $products = $request->input('products');
+        if(isset($products)){
+            foreach ($products as $key => $data) {
+                ScmPurchaseInfo::create([
+                    'purchase_id' => $purchase->id,
+                    'product_id' => $key,
+                    'quantity' => $data['quantity'],
+                    'sale_price' => $data['sale_price'],
+                    'purchase_price' => $data['purchase_price'],
+                    'total' => $data['total'],
+                ]);
+            }
+        }
         return redirect()->route('purchase.index')->with('success_message', 'Purchase created successfully!');
     }
 
@@ -96,10 +100,11 @@ class PurchaseController extends Controller
      */
     public function edit($id)
     {
-        $purchase = ScmPurchases::findOrFail($id);
-        $suppliers = ScmSupplierManagement::all();
+        $suppliers = ScmSupplierManagement::get();
+        $product = InventoryProduct::get();
 
-        return view('supplychain::purchase.edit', compact('purchase', 'suppliers'));
+        $purchase = ScmPurchases::where('id',$id)->with('purchase_info.product:id,name')->first();
+        return view('supplychain::purchase.edit', compact('suppliers', 'product','purchase'));
     }
 
     /**
@@ -147,7 +152,6 @@ class PurchaseController extends Controller
     {
         $purchase = ScmPurchases::findOrFail($id);
         $purchase->delete();
-
         return redirect()->route('purchase.index')->with('success', 'Purchase deleted successfully!');
     }
 

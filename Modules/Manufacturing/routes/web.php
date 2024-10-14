@@ -20,7 +20,7 @@ use Modules\Manufacturing\Http\Controllers\WorkOrderController;
 |
 */
 
-Route::group([], function () {
+Route::middleware('auth')->group(function () {
     Route::resource('manufacturing', ManufacturingController::class);
     Route::resource('estimation', EstimationController::class);
     Route::resource('order', OrderController::class);

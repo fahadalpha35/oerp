@@ -63,11 +63,8 @@ class SupplychainController extends Controller
         // Create the supplier
         $supplier = ScmSupplierManagement::create($request->all());
 
-        return response()->json([
-            'success' => true,
-            'supplier' => $supplier,
-            'message' => 'Supplier added successfully!',
-        ]);
+        return redirect()->route('supplychain.index')->with('success_message', 'Supplier added successfully!');
+
     }
 
     /**
