@@ -112,37 +112,25 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $purchase = ScmPurchases::findOrFail($id);
+        $data = array_filter($request->only(['supplier_id', 'purchase_date','service_cost','total','sub_total','invoice_no', 'discount', 'delivary_cost', 'service_cost','tax','due','paid']));
+        $purchase = ScmPurchases::where('id',$id)->update($data);
 
-        $request->validate([
-            'supplier_id' => 'required|exists:scm_supplier_managements,id',
-            'purchase_date' => 'required|date',
-            'invoice_no' => 'required|string|max:100',
-            'sub_total' => 'required|numeric',
-            'delivary_cost' => 'nullable|numeric',
-            'service_cost' => 'nullable|numeric',
-            'total' => 'required|numeric',
-            'discount' => 'nullable|numeric',
-            'tax' => 'nullable|numeric',
-            'due' => 'nullable|numeric',
-            'paid' => 'nullable|numeric',
-        ]);
-
-        $purchase->update([
-            'supplier_id' => $request->supplier_id,
-            'purchase_date' => $request->purchase_date,
-            'invoice_no' => $request->invoice_no,
-            'sub_total' => $request->sub_total,
-            'delivary_cost' => $request->delivary_cost,
-            'service_cost' => $request->service_cost,
-            'total' => $request->total,
-            'discount' => $request->discount,
-            'tax' => $request->tax,
-            'due' => $request->due,
-            'paid' => $request->paid,
-        ]);
-
-        return redirect()->route('purchase.index')->with('success', 'Purchase updated successfully!');
+        $products = $request->input('products');
+        if(isset($products)){
+            foreach ($products as $key => $data) {
+                ScmPurchaseInfo::updateOrCreate([
+                    'id' => $data['id'],
+                    'purchase_id' => $id,
+                ],[
+                    'product_id' => $key,
+                    'quantity' => $data['quantity'],
+                    'sale_price' => $data['sale_price'],
+                    'purchase_price' => $data['purchase_price'],
+                    'total' => $data['total'],
+                ]);
+            }
+        }
+        return redirect()->route('purchase.index')->with('success_message', 'Purchase created successfully!');
     }
 
     /**

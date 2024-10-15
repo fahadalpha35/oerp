@@ -23,7 +23,7 @@
                     @csrf
                     @method('PUT')
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <label for="product">Products</label>
                                 <div class="input-group">
@@ -61,7 +61,7 @@
                                         <th>Sale Price</th>
                                         <th>Purchase Price</th>
                                         <th>Total</th>
-                                        <th>Action</th>
+                                        {{-- <th>Action</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -69,17 +69,19 @@
                                         @foreach ($purchase->purchase_info as $data)
                                             <tr data-product-id="{{$data->product_id}}">
                                                 <td>{{ $data->product->name }}</td>
+                                                <td style="display: none"><input type="hidden" name="products[{{$data->product_id}}][id]" value="{{$data->id}}">{{$data->id}}</td>
                                                 <td><input type="hidden" name="products[{{$data->product_id}}][quantity]" value="{{$data->quantity}}">{{$data->quantity}}</td>
                                                 <td><input type="hidden" name="products[{{$data->product_id}}][sale_price]" value="{{$data->sale_price}}">{{$data->sale_price}}</td>
                                                 <td><input type="hidden" name="products[{{$data->product_id}}][purchase_price]" value="{{$data->purchase_price}}">{{$data->purchase_price}}</td>
                                                 <td class="product-total"><input type="hidden" name="products[{{$data->product_id}}][total]" value="{{$data->total}}"> {{$data->total}}</td>
-                                                <td><button type="button" class="btn btn-danger btn-sm remove-btn">Remove</button></td>
+                                                {{-- <td><button type="button" class="btn btn-danger btn-sm remove-btn">Remove</button></td> --}}
                                             </tr>
                                         @endforeach
                                     @endif
                                 </tbody>
                             </table>
                         </div>
+                        <div class="col-md-1"></div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="supplier_id">Supplier Name</label>
