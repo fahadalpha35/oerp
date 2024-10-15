@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('purchase_id')->reference('id')->on('scm_purchases');
             $table->foreignId('product_id')->reference('id')->on('products');
-            $table->decimal('price', 10, 2);
-            $table->decimal('Quantity', 10, 2);
+            $table->decimal('sale_price', 10, 2);
+            $table->decimal('purchase_price', 10, 2);
+            $table->decimal('quantity', 10, 2);
             $table->decimal('total', 10, 2);
             $table->timestamps();
         });

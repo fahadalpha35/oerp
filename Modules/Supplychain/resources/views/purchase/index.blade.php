@@ -31,10 +31,13 @@
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>Serial No.</th>
-                                        <th>Client Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>City</th>
+                                        <th>Supplier Name</th>
+                                        <th>Purchase Date</th>
+                                        <th>Invoice No</th>
+                                        <th>Sub Total</th>
+                                        <th>Paid</th>
+                                        <th>Due</th>
+                                        <th>Total</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -55,11 +58,14 @@
 
 this.loadDataTable('supplierTable', '{{ route('purchase.index') }}',
         [
-            { data: 'id', name: 'id' },
-            { data: 'name', name: 'name' },
-            { data: 'email', name: 'email' },
-            { data: 'phone', name: 'phone' },
-            { data: 'company', name: 'company' },
+            { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+            { data: 'supplier.name', name: 'supplier.name' },
+            {data: 'purchase_date', name:'purchase_date'},
+            {data: 'invoice_no', name:'invoice_no'},
+            {data: 'sub_total', name:'sub_total'},
+            {data: 'paid', name:'paid'},
+            {data: 'due', name:'due'},
+            {data: 'total', name:'total'},
             { data: 'action', name: 'action', orderable: false, searchable: false }
         ],
 );
