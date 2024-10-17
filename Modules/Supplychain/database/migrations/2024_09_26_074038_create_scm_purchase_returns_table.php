@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('purchase_id')->reference('id')->on('scm_purchases');
             $table->decimal('total', 10, 2);
             $table->text('note');
+            $table->date('purchase_return_date');
             $table->timestamps();
         });
     }

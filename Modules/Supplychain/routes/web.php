@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Supplychain\Http\Controllers\PurchaseController;
+use Modules\Supplychain\Http\Controllers\PurchasesReturnController;
 use Modules\Supplychain\Http\Controllers\SupplychainController;
 
 /*
@@ -20,4 +21,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('purchase', PurchaseController::class)->names('purchase');
     Route::post('purchase/storeSupplier', [PurchaseController::class, 'storeSupplier'])->name('purchase.storeSupplier');
     Route::get('purchase/supplierDetails/{id}', [PurchaseController::class, 'getSupplierDetails'])->name('purchase.getSupplierDetails');
+    Route::resource('purchase-return',PurchasesReturnController::class)->names('purchase-return');
 });
