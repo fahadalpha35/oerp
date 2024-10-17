@@ -301,9 +301,9 @@
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('manufacturing') ? 'color: white; !important' : ''}}"></i>
                         <span class="menu-arrow" style="{{ Request::is('manufacturing') ? 'color: white; !important' : ''}}">Clients</span>
                       </a>
-                </li>   
+                </li>
                 <!-- <li class="nav-item">
-                    <a href="{{ url('parts') }}" class="nav-link {{ Request::is('parts') ? 'active' : '' }}" style="{{ Request::is('parts') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                    <a href="{{ url('purchase-return') }}" class="nav-link {{ Request::is('parts') ? 'active' : '' }}" style="{{ Request::is('parts') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('parts') ? 'color: white; !important' : ''}}"></i>
                         <span class="menu-arrow" style="{{ Request::is('parts') ? 'color: white; !important' : ''}}">Parts</span>
                       </a>
@@ -361,8 +361,8 @@
 
                 <ul class="collapse nav  @if(Request::is('supplychain')) show
                             @elseif(Request::is('purchase')) show
-                            @elseif(Request::is('purchase')) show
-                            @elseif(Request::is('purchase')) show
+                            @elseif(Request::is('purchase-return')) show
+                            @elseif(Request::is('supplychain')) show
                             @endif" id="suppliChain" style="margin-top: -2px;">
                 <li class="nav-item">
                     <a href="{{ url('supplychain') }}" class="nav-link {{ Request::is('supplychain') ? 'active' : '' }}" style="{{ Request::is('supplychain') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
@@ -377,9 +377,9 @@
                       </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('part') }}" class="nav-link {{ Request::is('part') ? 'active' : '' }}" style="{{ Request::is('part') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('part') ? 'color: white; !important' : ''}}"></i>
-                        <span class="menu-arrow" style="{{ Request::is('part') ? 'color: white; !important' : ''}}">Purchases Return</span>
+                    <a href="{{ url('purchase-return') }}" class="nav-link {{ Request::is('purchase-return') ? 'active' : '' }}" style="{{ Request::is('purchase-return') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('purchase-return') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('purchase-return') ? 'color: white; !important' : ''}}">Purchases Return</span>
                       </a>
                 </li>
                 <li class="nav-item">
