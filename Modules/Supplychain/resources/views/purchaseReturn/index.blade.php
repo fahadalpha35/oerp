@@ -4,7 +4,7 @@
 <div class="content-wrapper">
     <div style="background-color: #fff; border-radius: 20px;">
         <div class="mt-5 row" style="padding: 25px;">
-            <a href="{{ route('purchase.create') }}" class="btn btn-success btn-sm">Add Purchase Return</a>
+            <a href="{{ route('purchase-return.create') }}" class="btn btn-success btn-sm">Add Purchase Return</a>
             <div class="col-md-12 col-sm-12">
                 <h3 class="mt-2 text-center">Purchase Return Lists</h3>
                 <div class="card">

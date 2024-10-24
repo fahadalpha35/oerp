@@ -5,6 +5,7 @@ namespace Modules\Supplychain\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\Supplychain\Models\ScmPurchaseReturn;
+use Modules\Supplychain\Models\ScmPurchases;
 use Yajra\DataTables\Facades\DataTables;
 
 class PurchasesReturnController extends Controller
@@ -37,8 +38,25 @@ class PurchasesReturnController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
+        if ($request->ajax()) {
+            $data = ScmPurchases::where('has_return',0)
+                        ->with('supplier:id,name')
+                        ->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('Pur_ret_id', function($row) {
+                    return '# Purchase ' . $row->id;
+                })
+                ->addColumn('action', function($row){
+                    $btn = '<a href="'.route('purchase.show', $row->id).'" class="edit btn btn-warning btn-sm">View</a>';
+                    $btn .= '  <a href="'.route('supplychain.edit', $row->id).'" class="edit btn btn-info btn-sm">Make Return</a>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
         return view('supplychain::purchaseReturn.create');
     }
 
