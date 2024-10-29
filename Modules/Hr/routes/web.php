@@ -8,6 +8,7 @@ use Modules\Hr\Http\Controllers\DesignationController;
 use Modules\Hr\Http\Controllers\EmployeeController;
 use Modules\Hr\Http\Controllers\PostsController;
 use Modules\Hr\Http\Controllers\LeaveController;
+use Modules\Hr\Http\Controllers\AttendanceController;
 use Modules\Hr\Http\Controllers\PayrollController;
 
 /*
@@ -63,6 +64,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/review_leave/{leave_id}', [LeaveController::class, 'review_leave'])->name('review_leave');
     Route::post('/approve_leave', [LeaveController::class, 'approve_leave'])->name('approve_leave');
     Route::post('/decline_leave', [LeaveController::class, 'decline_leave'])->name('decline_leave');
+
+    //attendance (geo-location)
+    Route::get('/give_attendance', [AttendanceController::class, 'give_attendance'])->name('give_attendance');
+    Route::post('/submit_attendance', [AttendanceController::class, 'submit_attendance'])->name('submit_attendance');
+    Route::get('/exit_attendance', [AttendanceController::class, 'exit_attendance'])->name('exit_attendance');
+    Route::post('/submit_exit_time/{attendance_id}', [AttendanceController::class, 'submit_exit_time'])->name('submit_exit_time');
+
+    Route::resource('attendances', AttendanceController::class);
 
     //payroll
     Route::resource('payrolls', PayrollController::class);

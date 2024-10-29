@@ -86,8 +86,33 @@
                                   </select>
                                   </div>
                                 </div>
-
                             </div>
+
+                            
+                            <br>
+                            <h4>Set Office Geolocation</h4>
+                            <div class="row" id="locationDisplay">
+                                <div class="col-md-5 col-sm-12">
+                                  <div class="form-group ">
+                                    <label>Latitude <small style="color: red">*</small></label>
+                                    <input readonly required type="text" id="currentLat" name="latitude" value="{{$branch->latitude}}" class="form-control">
+                                  </div> 
+                                </div>
+
+                                <div class="col-md-5 col-sm-12">
+                                  <div class="form-group ">
+                                    <label>Longitude <small style="color: red">*</small></label>
+                                    <input readonly required type="text" id="currentLon" name="longitude" value="{{$branch->longitude}}" class="form-control">
+                                  </div> 
+                                </div>
+                                
+                                <div class="col-md-2 col-sm-12">
+                                  <div class="form-group mb-4">
+                                <button type="button" id="getLocationBtn" class="btn btn-primary mt-4">Get Current Location</button>
+                                  </div>                          
+                                </div>                          
+                            </div>
+                            
                             <button type="submit" class="btn btn-success float-right">Submit</button>
                           </form>
                       </div>
