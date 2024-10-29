@@ -59,7 +59,7 @@
 this.loadDataTable('supplierTable', '{{ route('purchase.index') }}',
         [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-            { data: 'supplier.name', name: 'supplier.name' },
+            { data: 'supplier.name', name: 'supplier.name'},  
             {data: 'purchase_date', name:'purchase_date'},
             {data: 'invoice_no', name:'invoice_no'},
             {data: 'sub_total', name:'sub_total'},

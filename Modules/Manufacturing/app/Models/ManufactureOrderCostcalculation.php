@@ -14,7 +14,7 @@ class ManufactureOrderCostcalculation extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'order_id','name','amount'
+        'order_id','name','amount','service_id'
     ];
 
     // protected static function newFactory(): ManufactureOrderCostcalculationFactory

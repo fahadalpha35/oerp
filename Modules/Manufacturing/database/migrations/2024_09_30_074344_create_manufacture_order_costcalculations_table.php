@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('manufacture_order_costcalculations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->reference('id')->on('manufacture_orders');
+            $table->foreignId('service_id')->reference('id')->on('manufacture_services');
             $table->string('name');
             $table->decimal('amount', 10, 2);
             $table->timestamps();
