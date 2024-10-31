@@ -49,8 +49,12 @@
                             @elseif(Request::is('apply_leave')) show
                             @elseif(Request::is('leave_applications')) show
                             @elseif(Request::is('leave_application_approval_list')) show
+                            @elseif(Request::is('give_attendance')) show
+                            @elseif(Request::is('exit_attendance')) show
+                            @elseif(Request::is('attendances')) show
                             @elseif(Request::is('payrolls')) show
                             @endif" id="humanResource" style="margin-top: -2px;">
+
 
               <li class="nav-item">
                 <a class="nav-link" href="#Employee" data-toggle="collapse"
@@ -150,21 +154,33 @@
                 <i class="menu-arrow"></i>
                 </a>
                 <!-- Second-level sub-menu -->
-                <ul class="collapse nav flex-column ms-3" id="AttendanceTracking" style="margin-top: -2px;">
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">
-                    <i class="mdi mdi-adjust menu-icon"></i>
-                    <span class="menu-title">Give Attendance</span>
-                    <i class="menu-arrow"></i>
+                <ul class="collapse nav flex-column ms-3 @if(Request::is('give_attendance')) show
+                            @elseif(Request::is('exit_attendance')) show
+                            @elseif(Request::is('attendances')) show
+                            @endif" id="AttendanceTracking" style="margin-top: -2px;">
+
+            @if((Auth::user()->role_id != 1) && (Auth::user()->role_id != 2))
+                <li class="nav-item">
+                    <a href="{{ url('give_attendance') }}" class="nav-link {{ Request::is('give_attendance') ? 'active' : '' }}" style="{{ Request::is('give_attendance') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('give_attendance') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('give_attendance') ? 'color: white; !important' : ''}}">Entry</span>
                     </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">
-                    <i class="mdi mdi-adjust menu-icon"></i>
-                    <span class="menu-title">Attendance List</span>
-                    <i class="menu-arrow"></i>
+                </li>
+
+                <li class="nav-item">
+                 <a href="{{ url('exit_attendance') }}" class="nav-link {{ Request::is('exit_attendance') ? 'active' : '' }}" style="{{ Request::is('exit_attendance') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                    <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('exit_attendance') ? 'color: white; !important' : ''}}"></i>
+                    <span class="menu-arrow" style="{{ Request::is('exit_attendance') ? 'color: white; !important' : ''}}">Exit</span>
+                </a>
+                </li>
+            @endif   
+
+                <li class="nav-item">
+                  <a href="{{ url('attendances') }}" class="nav-link {{ Request::is('attendances') ? 'active' : '' }}" style="{{ Request::is('attendances') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                      <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('attendances') ? 'color: white; !important' : ''}}"></i>
+                      <span class="menu-arrow" style="{{ Request::is('attendances') ? 'color: white; !important' : ''}}">Attendances</span>
                     </a>
-                  </li>
+                </li>
 
                 </ul>
               </li>

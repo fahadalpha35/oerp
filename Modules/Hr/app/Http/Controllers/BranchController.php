@@ -189,7 +189,9 @@ class BranchController extends Controller
         'br_name'=>$request->br_name,
         'br_address'=>$request->br_address,
         'br_type'=>$request->br_type,
-        'br_status'=>$request->br_status
+        'br_status'=>$request->br_status,
+        'longitude'=>$request->longitude,
+        'latitude'=>$request->latitude
         ]);
 
         return redirect()->route('branches.index')->with('success_message', 'Branch is added successfully!');
@@ -230,6 +232,8 @@ class BranchController extends Controller
         $data['br_address'] = $request->input('br_address');
         $data['br_type'] = $request->input('br_type');
         $data['br_status'] = $request->input('br_status');
+        $data['longitude'] = $request->input('longitude');
+        $data['latitude'] = $request->input('latitude');
 
         $updated = DB::table('hr_branches')
                         ->where('id', $id)
