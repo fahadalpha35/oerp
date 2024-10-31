@@ -52,6 +52,7 @@
                             @elseif(Request::is('give_attendance')) show
                             @elseif(Request::is('exit_attendance')) show
                             @elseif(Request::is('attendances')) show
+                            @elseif(Request::is('fingerprint_portal')) show
                             @elseif(Request::is('payrolls')) show
                             @endif" id="humanResource" style="margin-top: -2px;">
 
@@ -148,7 +149,7 @@
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="#AttendanceTracking" data-toggle="collapse" aria-expanded="false">
+                <a class="nav-link" href="#attendanceTrackingMenu" data-toggle="collapse" aria-expanded="false">
                   <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
                 <span class="menu-title">Attendance Tracking</span>
                 <i class="menu-arrow"></i>
@@ -157,33 +158,63 @@
                 <ul class="collapse nav flex-column ms-3 @if(Request::is('give_attendance')) show
                             @elseif(Request::is('exit_attendance')) show
                             @elseif(Request::is('attendances')) show
-                            @endif" id="AttendanceTracking" style="margin-top: -2px;">
+                            @elseif(Request::is('fingerprint_portal')) show
+                            @endif" id="attendanceTrackingMenu" style="margin-top: -2px;">
 
-            @if((Auth::user()->role_id != 1) && (Auth::user()->role_id != 2))
-                <li class="nav-item">
-                    <a href="{{ url('give_attendance') }}" class="nav-link {{ Request::is('give_attendance') ? 'active' : '' }}" style="{{ Request::is('give_attendance') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('give_attendance') ? 'color: white; !important' : ''}}"></i>
-                        <span class="menu-arrow" style="{{ Request::is('give_attendance') ? 'color: white; !important' : ''}}">Entry</span>
+                @if((Auth::user()->role_id != 1) && (Auth::user()->role_id != 2))
+                    <li class="nav-item">
+                        <a href="{{ url('give_attendance') }}" class="nav-link {{ Request::is('give_attendance') ? 'active' : '' }}" style="{{ Request::is('give_attendance') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                            <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('give_attendance') ? 'color: white; !important' : ''}}"></i>
+                            <span class="menu-arrow" style="{{ Request::is('give_attendance') ? 'color: white; !important' : ''}}">Entry</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                    <a href="{{ url('exit_attendance') }}" class="nav-link {{ Request::is('exit_attendance') ? 'active' : '' }}" style="{{ Request::is('exit_attendance') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('exit_attendance') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('exit_attendance') ? 'color: white; !important' : ''}}">Exit</span>
                     </a>
-                </li>
-
-                <li class="nav-item">
-                 <a href="{{ url('exit_attendance') }}" class="nav-link {{ Request::is('exit_attendance') ? 'active' : '' }}" style="{{ Request::is('exit_attendance') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                    <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('exit_attendance') ? 'color: white; !important' : ''}}"></i>
-                    <span class="menu-arrow" style="{{ Request::is('exit_attendance') ? 'color: white; !important' : ''}}">Exit</span>
-                </a>
-                </li>
-            @endif   
-
+                    </li>
+                @endif  
+                           
                 <li class="nav-item">
                   <a href="{{ url('attendances') }}" class="nav-link {{ Request::is('attendances') ? 'active' : '' }}" style="{{ Request::is('attendances') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                       <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('attendances') ? 'color: white; !important' : ''}}"></i>
                       <span class="menu-arrow" style="{{ Request::is('attendances') ? 'color: white; !important' : ''}}">Attendances</span>
                     </a>
                 </li>
-
+                @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2) || (Auth::user()->role_id == 3))
+                <li class="nav-item">
+                    <a href="{{ url('fingerprint_portal') }}" class="nav-link {{ Request::is('fingerprint_portal') ? 'active' : '' }}" style="{{ Request::is('fingerprint_portal') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('fingerprint_portal') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('fingerprint_portal') ? 'color: white; !important' : ''}}">FingerPrint</span>
+                      </a>
+                  </li>
+                  @endif
                 </ul>
               </li>
+
+
+              {{-- @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2) || (Auth::user()->role_id == 3))
+              <!--fingerprint -->
+              <li class="nav-item">
+                <a class="nav-link" href="#fingerPrint" data-toggle="collapse" aria-expanded="false">
+                  <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
+                <span class="menu-title">FingerPrint</span>
+                <i class="menu-arrow"></i>
+                </a>
+                <!-- Second-level sub-menu -->
+                <ul class="collapse nav flex-column ms-3 @if(Request::is('fingerprint_portal')) show
+                            @endif" id="fingerPrint" style="margin-top: -2px;">               
+                <li class="nav-item">
+                  <a href="{{ url('fingerprint_portal') }}" class="nav-link {{ Request::is('fingerprint_portal') ? 'active' : '' }}" style="{{ Request::is('fingerprint_portal') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                      <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('fingerprint_portal') ? 'color: white; !important' : ''}}"></i>
+                      <span class="menu-arrow" style="{{ Request::is('fingerprint_portal') ? 'color: white; !important' : ''}}">Finger</span>
+                    </a>
+                </li>
+                </ul>
+              </li>
+              @endif --}}
 
               <li class="nav-item">
                 <a href="{{ url('payrolls') }}" class="nav-link {{ Request::is('payrolls') ? 'active' : '' }}" style="{{ Request::is('payrolls') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
@@ -192,30 +223,8 @@
                   </a>
               </li>
 
-              {{-- <li class="nav-item">
-                <a class="nav-link" href="#Payroll" data-toggle="collapse" aria-expanded="false">
-                  <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
-                <span class="menu-title">Payroll</span>
-                <i class="menu-arrow"></i>
-                </a>
-                <!-- Second-level sub-menu -->
-                <ul class="collapse nav flex-column ms-3 " id="Payroll" style="margin-top: -2px;">
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">
-                    <i class="mdi mdi-adjust menu-icon"></i>
-                    <span class="menu-title">Add Pyroll</span>
-                    <i class="menu-arrow"></i>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">
-                    <i class="mdi mdi-adjust menu-icon"></i>
-                    <span class="menu-title">Payroll List</span>
-                    <i class="menu-arrow"></i>
-                    </a>
-                  </li>
-                </ul>
-              </li> --}}
+
+        
 
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">
@@ -230,7 +239,7 @@
                         <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
                         <span class="menu-title">Performance</span>
                         <i class="menu-arrow"></i>
-                        </a>
+                    </a>
                 </li>
 
                 <li class="nav-item">
@@ -238,23 +247,15 @@
                         <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
                         <span class="menu-title">Training & Development</span>
                         <i class="menu-arrow"></i>
-                        </a>
+                    </a>
                 </li>
-
-                {{-- <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">
-                        <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
-                        <span class="menu-title">Employee Self-Service</span>
-                        <i class="menu-arrow"></i>
-                        </a>
-                </li> --}}
 
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">
                         <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
                         <span class="menu-title">Documents</span>
                         <i class="menu-arrow"></i>
-                        </a>
+                    </a>
                 </li>
 
                 <li class="nav-item">
