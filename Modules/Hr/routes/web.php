@@ -9,6 +9,7 @@ use Modules\Hr\Http\Controllers\EmployeeController;
 use Modules\Hr\Http\Controllers\PostsController;
 use Modules\Hr\Http\Controllers\LeaveController;
 use Modules\Hr\Http\Controllers\AttendanceController;
+use Modules\Hr\Http\Controllers\ZKTecoController;
 use Modules\Hr\Http\Controllers\PayrollController;
 
 /*
@@ -70,8 +71,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/submit_attendance', [AttendanceController::class, 'submit_attendance'])->name('submit_attendance');
     Route::get('/exit_attendance', [AttendanceController::class, 'exit_attendance'])->name('exit_attendance');
     Route::post('/submit_exit_time/{attendance_id}', [AttendanceController::class, 'submit_exit_time'])->name('submit_exit_time');
-
     Route::resource('attendances', AttendanceController::class);
+
+    //attendance (fingerprint machine)
+    Route::get('/fingerprint_portal', [ZKTecoController::class, 'fingerprint_portal'])->name('fingerprint_portal');
+    Route::get('/set_fingerprint_device_ip', [ZKTecoController::class, 'set_fingerprint_device_ip'])->name('set_fingerprint_device_ip');
+    Route::post('/submit_fingerprint_device_ip', [ZKTecoController::class, 'store_ip'])->name('store_ip');
+    Route::get('/add_fingerprint_user', [ZKTecoController::class, 'add_fingerprint_user'])->name('add_fingerprint_user');
+    Route::post('/user_fingerprint_data_store',[ZKTecoController::class,'user_fingerprint_data_store']);
+    Route::get('/system_fingerprint_attendances_today', [ZKTecoController::class, 'system_fingerprint_attendances_today'])->name('system_fingerprint_attendances_today');
+    Route::get('/system_attendances', [ZKTecoController::class, 'system_attendances'])->name('system_attendances');
 
     //payroll
     Route::resource('payrolls', PayrollController::class);

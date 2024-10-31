@@ -8,14 +8,15 @@ use Auth;
 use DB;
 use Carbon\Carbon;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Session;
 
 class AttendanceController extends Controller
 {
     
+    //------------ ****** Attendance (Geo-Location) (start) *******-------------
    public function give_attendance(){
     
         $user_id = Auth::user()->id;
-
         //get profile picture
         $personalDetails = DB::table('hr_employees')
                             ->select('profile_pic')
@@ -81,7 +82,6 @@ class AttendanceController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-
         $user_company_id = Auth::user()->company_id;
         $user_id = Auth::user()->id;
         $user_role_id = Auth::user()->role_id;
@@ -110,14 +110,10 @@ class AttendanceController extends Controller
                                     )
                                 ->where('users.id',$user_id)
                                 ->orderBy('hr_attendances.id', 'DESC')
-                                ->get();    
-                                
+                                ->get();                            
         }
-
         return DataTables::of($attendances)->addIndexColumn()->make(true);
-    }
-        
-        
+    }     
         return view('hr::attendances.index');
     }
 
@@ -126,7 +122,6 @@ class AttendanceController extends Controller
     public function exit_attendance(){
 
         $user_id = Auth::user()->id;
-
         //get profile picture
         $personalDetails = DB::table('hr_employees')
                             ->select('profile_pic')
@@ -156,7 +151,6 @@ class AttendanceController extends Controller
     }
 
 
-
     public function submit_exit_time(Request $request, $id){
 
         $user_id = Auth::user()->id;
@@ -167,62 +161,13 @@ class AttendanceController extends Controller
         $attendance = DB::table('hr_attendances')
                          ->where('id',$id)
                          ->update(['exit_time' => $currentTime]);
-
         $response = [
             'success' => true,
             'message' => 'Check-out successfully'
         ];
-
         return response()->json($response,200);
-
-    }
-    
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('hr::create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+     //------------ ****** Attendance (Geo-Location) (end) *******-------------
 
-    /**
-     * Show the specified resource.
-     */
-    public function show($id)
-    {
-        return view('hr::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-        return view('hr::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
