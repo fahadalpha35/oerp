@@ -1,0 +1,11 @@
+{
+    "name": "SocietyManagement",
+    "alias": "societymanagement",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\SocietyManagement\\Providers\\SocietyManagementServiceProvider"
+    ],
+    "files": []
+}

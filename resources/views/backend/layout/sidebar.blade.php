@@ -195,27 +195,6 @@
               </li>
 
 
-              {{-- @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2) || (Auth::user()->role_id == 3))
-              <!--fingerprint -->
-              <li class="nav-item">
-                <a class="nav-link" href="#fingerPrint" data-toggle="collapse" aria-expanded="false">
-                  <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
-                <span class="menu-title">FingerPrint</span>
-                <i class="menu-arrow"></i>
-                </a>
-                <!-- Second-level sub-menu -->
-                <ul class="collapse nav flex-column ms-3 @if(Request::is('fingerprint_portal')) show
-                            @endif" id="fingerPrint" style="margin-top: -2px;">               
-                <li class="nav-item">
-                  <a href="{{ url('fingerprint_portal') }}" class="nav-link {{ Request::is('fingerprint_portal') ? 'active' : '' }}" style="{{ Request::is('fingerprint_portal') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                      <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('fingerprint_portal') ? 'color: white; !important' : ''}}"></i>
-                      <span class="menu-arrow" style="{{ Request::is('fingerprint_portal') ? 'color: white; !important' : ''}}">Finger</span>
-                    </a>
-                </li>
-                </ul>
-              </li>
-              @endif --}}
-
               <li class="nav-item">
                 <a href="{{ url('payrolls') }}" class="nav-link {{ Request::is('payrolls') ? 'active' : '' }}" style="{{ Request::is('payrolls') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                     <i class="mdi mdi-checkbox-blank-circle-outline menu-icon" style="{{ Request::is('payrolls') ? 'color: white; !important' : ''}}"></i>
@@ -223,8 +202,6 @@
                   </a>
               </li>
 
-
-        
 
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false">
@@ -268,6 +245,54 @@
             </ul>
           </li>
 
+
+
+          <!-- Society Management (start)-->
+          <li class="nav-item">
+            <a class="nav-link" href="#societyManagement" data-toggle="collapse" aria-expanded="false">
+                <i class="mdi mdi-account-check menu-icon"></i>
+                <span class="menu-title">Society Management</span>
+                <i class="menu-arrow"></i>
+            </a>
+
+            <!-- First-level sub-menu -->
+            <ul class="collapse nav  @if(Request::is('society_members')) show               
+                            @endif" id="societyManagement" style="margin-top: -2px;">
+
+            @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2) || (Auth::user()->role_id == 3))
+            <li class="nav-item">
+                <a href="{{ url('society_members') }}" class="nav-link {{ Request::is('society_members') ? 'active' : '' }}" style="{{ Request::is('society_members') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_members') ? 'color: white; !important' : ''}}"></i>
+                <span class="menu-arrow" style="{{ Request::is('society_members') ? 'color: white; !important' : ''}}">Society Members</span>
+                </a>
+            </li>
+            @endif
+
+              {{-- <li class="nav-item">
+                <a class="nav-link" href="#societyMember" data-toggle="collapse" aria-expanded="false">
+                  <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
+                <span class="menu-title">Society Members</span>
+                <i class="menu-arrow"></i>
+                </a>
+                <!-- Second-level sub-menu -->
+                <ul class="collapse nav flex-column ms-3 @if(Request::is('society_members')) show
+                            @endif" id="societyMember" style="margin-top: -2px;">  
+                               
+                @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2) || (Auth::user()->role_id == 3))
+                <li class="nav-item">
+                    <a href="{{ url('society_members') }}" class="nav-link {{ Request::is('society_members') ? 'active' : '' }}" style="{{ Request::is('society_members') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_members') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('society_members') ? 'color: white; !important' : ''}}">Members</span>
+                      </a>
+                  </li>
+                  @endif
+                </ul>
+              </li> --}}
+
+            </ul>
+          </li>
+
+          <!-- Society Member (end)-->
 
 
           <li class="nav-item">

@@ -9,5 +9,6 @@
     "Manufacturing": true,
     "Supplychain": true,
     "Crm": true,
-    "Reporting": true
+    "Reporting": true,
+    "SocietyManagement": true
 }
