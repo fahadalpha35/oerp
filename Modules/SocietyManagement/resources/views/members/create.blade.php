@@ -30,7 +30,6 @@
                             <form action="{{route('society_members.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                             <div class="row">
-
                                 <div class="col-md-12 col-sm-12">
                                     <div class="form-group mb-4">
                                         <label>Image </label>
@@ -42,6 +41,13 @@
                                     <div  class="form-group mb-4">
                                         <label>Full Name <small style="color: red">*</small></label>
                                         <input type="text" required placeholder="Full Name" id="name" name="name" value="{{old('name')}}" class="form-control form-control-lg" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12">
+                                    <div  class="form-group mb-4">
+                                        <label>Designation <small style="color: red">*</small></label>
+                                        <input type="text" required placeholder="Example : General Secretary" id="designation" name="designation" value="{{old('designation')}}" class="form-control form-control-lg" />
                                     </div>
                                 </div>
 

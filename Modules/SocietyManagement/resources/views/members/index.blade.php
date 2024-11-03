@@ -31,12 +31,15 @@
                                 <table id="exampleTable" class="table table-bordered table-hover">
                                     <thead class="thead-dark">
                                         <tr>
+                                            <th>Member ID</th>
                                             <th>Member Name</th>
+                                            <th>Designation</th>
                                             <th>Email</th>
                                             <th>Contact Number</th>
                                             <th>Joining Date</th>
                                             <th>Expiration Date</th>
                                             <th>Membership Type</th>
+                                            <th>Membership Fee (BDT)</th>
                                             <th>Action</th> <!-- Added Action column -->
                                         </tr>
                                     </thead>
@@ -59,12 +62,15 @@
 <script>
     this.loadDataTable('exampleTable', '{{ route('society_members.index') }}',
         [
+            {data: 'member_unique_id', name: 'member_unique_id'},
             {data: 'name', name: 'name'},
+            {data: 'designation', name: 'designation'},
             {data: 'email', name: 'email'},
             {data: 'contact_number', name: 'contact_number'},
             {data: 'joining_date', name: 'joining_date'},
             {data: 'expiration_date', name: 'expiration_date'},
             {data: 'membership_type_label', name: 'membership_type_label'},
+            {data: 'membership_fee', name: 'membership_fee'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
 );
