@@ -1,13 +1,13 @@
 @extends('backend.layout.layout')
-
 @section('content')
     <div class="content-wrapper">
-        <div style="width: 100%; background-color: #fff;border-radius: 20px;">
-            <div class="mt-5 row" style="padding: 25px;">
-            <a href="{{ route('employees.create') }}" class="btn btn-success btn-sm">Add Employee</a>
 
-                <div class="col-md-12 col-xl-12 col-sm-12">
-                    <h3 class="mt-2 text-center">Employee List</h3>
+        <div style="background-color: #fff;border-radius: 20px;">
+            <div class="mt-5 row" style="padding: 25px;">
+            <a href="{{ route('society_committees.create') }}" class="btn btn-success btn-sm">Add Committee</a>
+
+                <div class="col-md-12 col-sm-12">
+                    <h3 class="mt-2 text-center">committee List</h3>
                     <div class="card">
                         <div class="card-body">
                         @if(Session::has('error_message'))
@@ -30,35 +30,38 @@
                             <thead class="thead-dark">
                             <tr>
                               <th>Serial No.</th>
-                              <th>Company</th>
-                              <th>Name</th>
-                              <th>Email</th>
-                              <th>Designation</th>
-                              <th>Branch</th>
-                              <th>Department</th>
-                              <th>Joining Date</th>
-                              <th>Monthly Salary (BDT)</th>
+                              {{-- <th>Company Name</th> --}}
+                              <th>Committee Name</th>
+                              <th>Start Date</th>
+                              <th>End Date</th>
+                              <th>Status</th>
+                              @if( (auth()->user()->role_id == 1) || (auth()->user()->role_id == 2)|| (auth()->user()->role_id == 3))
                               <th>Action</th>
+                              @endif
                             </tr>
                             </thead>
                             <tbody>
                                 @php $i = 1 @endphp
-                                @foreach($employees as $employee)
+                                @foreach($committees as $committee)
                             <tr>
                               <td>{{$i++}}</td>
-                              <td>{{$employee->employee_company}}</td>
-                              <td>{{$employee->employee_name}}</td>
-                              <td>{{$employee->employee_email}}</td>
-                              <td>{{$employee->employee_designation}}</td>
-                              <td>{{$employee->employee_branch}}</td>
-                              <td>{{$employee->employee_department}}</td>
-                              <td>{{$employee->joining_date}}</td>
-                              <td>{{$employee->monthly_salary}}</td>
+                              {{-- <td>{{$committee->company_name}}</td> --}}
+                              <td>{{$committee->name}}</td>
+                              <td>{{$committee->start_date}}</td>
+                              <td>{{$committee->end_date}}</td>
                               <td>
-                                <a href="/employees/{{ $employee->id }}/" style="color: white"><button class="btn btn-info"> View</button></a>
-                                <a href="{{route('employees.edit',$employee->id)}}" style="color: white"><button class="btn btn-warning"> Edit</button></a>
-                                <a onclick="deleteOperationWithoutYajra('{{ route('employees.destroy', ':id') }}', {{$employee->id}})" style="color: white"><button class="btn btn-danger"> Delete</button></a>
+                                @if($committee->active_status == 1)
+                                Active
+                                @else
+                                Inactive
+                                @endif
                               </td>
+                              @if( (auth()->user()->role_id == 1) || (auth()->user()->role_id == 2))
+                              <td>
+                                <a href="{{route('society_committees.edit',$committee->id)}}" style="color: white"><button class="btn btn-warning"> Edit</button></a>
+                                <a onclick="deleteOperationWithoutYajra('{{ route('society_committees.destroy', ':id') }}', {{$committee->id}})" style="color: white"><button class="btn btn-danger"> Delete</button></a>
+                              </td>
+                              @endif
                             </tr>
                             @endforeach
 
