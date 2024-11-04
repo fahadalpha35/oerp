@@ -92,7 +92,7 @@ class PurchaseController extends Controller
      */
     public function show($id)
     {
-        $purchase = ScmPurchases::with('purchase_info')->get();
+        $purchase = ScmPurchases::where('id',$id)->with('purchase_info')->first();
         return view('supplychain::purchase.show',compact('purchase'));
     }
 
