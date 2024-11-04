@@ -249,15 +249,17 @@
 
           <!-- Society Management (start)-->
           <li class="nav-item">
-            <a class="nav-link" href="#societyManagement" data-toggle="collapse" aria-expanded="false">
+            <a class="nav-link" href="#societyManagement" data-toggle="collapse" aria-expanded="">
                 <i class="mdi mdi-account-check menu-icon"></i>
                 <span class="menu-title">Society Management</span>
                 <i class="menu-arrow"></i>
             </a>
 
             <!-- First-level sub-menu -->
-            <ul class="collapse nav  @if(Request::is('society_members')) show               
-                            @endif" id="societyManagement" style="margin-top: -2px;">
+            <ul class="collapse nav  @if(Request::is('society_members')) show  
+                                    @elseif(Request::is('society_committees')) show             
+                                    @elseif(Request::is('leave_applications')) show             
+                            @endif" id="societyManagement" style="margin-top: -2px; padding-bottom : 10px">
 
             @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2) || (Auth::user()->role_id == 3))
             <li class="nav-item">
@@ -266,6 +268,35 @@
                 <span class="menu-arrow" style="{{ Request::is('society_members') ? 'color: white; !important' : ''}}">Society Members</span>
                 </a>
             </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="#Committee" data-toggle="collapse" aria-expanded="false">
+                  <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
+                <span class="menu-title">Committee</span>
+                <i class="menu-arrow"></i>
+                </a>
+                <!-- Second-level sub-menu -->
+                <ul class="collapse nav flex-column ms-3 @if(Request::is('society_committees')) show
+                            @elseif(Request::is('leave_applications')) show
+                            @endif" id="Committee" style="margin-top: -2px; padding-bottom : 10px">
+                
+                  <li class="nav-item">
+                    <a href="{{ url('society_committees') }}" class="nav-link {{ Request::is('society_committees') ? 'active' : '' }}" style="{{ Request::is('society_committees') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_committees') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('society_committees') ? 'color: white; !important' : ''}}">Committees</span>
+                      </a>
+                  </li>
+                 
+                  <li class="nav-item">
+                    <a href="{{ url('leave_applications') }}" class="nav-link {{ Request::is('leave_applications') ? 'active' : '' }}" style="{{ Request::is('leave_applications') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('leave_applications') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('leave_applications') ? 'color: white; !important' : ''}}">Committee Members</span>
+                      </a>
+                  </li>
+
+                </ul>
+              </li>
             @endif
 
               {{-- <li class="nav-item">

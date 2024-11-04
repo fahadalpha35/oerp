@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\SocietyManagement\Http\Controllers\SocietyManagementController;
 use Modules\SocietyManagement\Http\Controllers\SocietyMemberController;
+use Modules\SocietyManagement\Http\Controllers\CommitteeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +19,5 @@ use Modules\SocietyManagement\Http\Controllers\SocietyMemberController;
 Route::middleware('auth')->group(function () {
     // Route::resource('societymanagement', SocietyManagementController::class)->names('societymanagement');
     Route::resource('society_members', SocietyMemberController::class);
+    Route::resource('society_committees', CommitteeController::class);
 });
