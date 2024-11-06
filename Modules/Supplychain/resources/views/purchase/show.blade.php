@@ -15,17 +15,23 @@
                 <table class="table table-bordered">
                     <tbody>
                         <tr>
-                          <th>Clinte Order Code</th>
-                          <td> {{  ' # ' . $purchase->invoice . ' - ' . $purchase->order->client->name }} </td>
+                          <th>Purchase Invoice No </th>
+                          <td> {{  ' # ' . $purchase->invoice_no}} </td>
                         </tr>
                         <tr>
-                          <th>Total Worker</th>
-                          <td> {{ $purchase->worker }} </td>
+                          <th>Purchase Date</th>
+                          <td> {{ $purchase->purchase_date }} </td>
                         </tr>
                         <tr>
-                          <th>Production Duration</th>
-                          <td> {{ $purchase->duration }} </td>
+                          <th>Sub Total</th>
+                          <td> {{ $purchase->sub_total }} </td>
                         </tr>
+                        @if ($purchase->delivary_cost)
+                        <tr>
+                          <th>Total Amount</th>
+                          <td> {{ $purchase->delivary_cost }} </td>
+                        </tr>
+                        @endif
                         <tr>
                           <th>Total Amount</th>
                           <td> {{ $purchase->total }} </td>
@@ -33,20 +39,24 @@
                     </tbody>
                 </table>
             </div>
-            @if (isset($purchase->production_cost))
+            @if (isset($purchase->purchase_info))
             <div class="col-md-7">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                          <th scope="col">Description</th>
-                          <th scope="col">Amount</th>
+                          <th scope="col">Sale Price</th>
+                          <th scope="col">Purchase Price</th>
+                          <th scope="col">Quantity</th>
+                          <th scope="col">Total</th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($purchase->production_cost as $item)
+                        @foreach ($purchase->purchase_info as $item)
                             <tr>
-                              <td>{{$item->name}}</td>
-                              <td>{{$item->amount}}</td>
+                              <td>{{$item->sale_price}}</td>
+                              <td>{{$item->purchase_price}}</td>
+                              <td>{{$item->quantity}}</td>
+                              <td>{{$item->total}}</td>
                             </tr>
                         @endforeach
                       </tbody>

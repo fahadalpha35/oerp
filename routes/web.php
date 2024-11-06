@@ -31,18 +31,16 @@ Route::get('/clear-cache', function () {
 
 
     Route::middleware('auth')->group(function () {
-
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
         // Dashboard Route
-        Route::get('/dashboard', [MasterAdminController::class, 'dashboard']);  
+        Route::get('/dashboard', [MasterAdminController::class, 'dashboard']);
         // Update Password
         Route::match(['get', 'post'], 'update-password', [MasterAdminController::class, 'updatePassword']);
         // Update Personal Details
         Route::match(['get', 'post'], 'update-personal-details', [MasterAdminController::class, 'updatePersonalDetails'])->name('update-personal-details');
-    
+
     });
 
         // Admin Logout
