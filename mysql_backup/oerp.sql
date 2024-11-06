@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2024 at 11:53 AM
+-- Generation Time: Nov 04, 2024 at 01:38 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1299,7 +1299,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (62, '2024_10_01_063845_create_manufacture_productions_table', 1),
 (63, '2024_10_22_063606_add_has_return_to_scm_purchases_table', 1),
 (64, '2024_10_29_053100_create_hr_attendance_users', 2),
-(65, '2024_10_29_085622_add_longitude_to_hr_branches_table', 3);
+(65, '2024_10_29_085622_add_longitude_to_hr_branches_table', 3),
+(66, '2024_11_02_154945_create_society_members_table', 4),
+(67, '2024_11_02_161653_add_company_id_to_society_members_table', 5),
+(68, '2024_11_02_175023_add_member_image_to_society_members_table', 6),
+(69, '2024_11_03_131117_add_designation_to_society_members_table', 7),
+(70, '2024_11_04_144220_create_society_committees_table', 8),
+(71, '2024_11_04_150635_create_society_committee_members_table', 9);
 
 -- --------------------------------------------------------
 
@@ -1465,8 +1471,73 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('xmHO2t9q77tT4wbWeuqwLEw0SxEvqWX5WvQwNuuQ', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoia2tpbTB1NVBMSGFydVNrcFdEV2NzWEdiaE5DdGtWMlhtMTlDQmk0diI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zeXN0ZW1fYXR0ZW5kYW5jZXMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyO3M6OToiemt0ZWNvX2lwIjtzOjE0OiIxOTIuMTY4LjY4LjIwMSI7fQ==', 1730371593),
-('z4lbLkC2DXFIXYkRl0lxgUeLbOAWKsTXG1i2Vuey', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWHNDYk1WRldxcFoxSUpqWTNodWNPZGJvTlZXYWhZakNkdW5Yb1kzUSI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0MDoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2ZpbmdlcnByaW50X3BvcnRhbCI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQwOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvZmluZ2VycHJpbnRfcG9ydGFsIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1730365674);
+('2flOA0civLOn8QaEo9XpOV4VjbH3HfqBGW0MuCta', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSnV1WHBDckQxNUk0WncxcmpqS3JWN3RPVkplNDBWZEF5UkdmeU5JWiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1730723908);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `society_committees`
+--
+
+CREATE TABLE `society_committees` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `active_status` int(11) NOT NULL COMMENT '1 for active, 2 for inactive',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `society_committee_members`
+--
+
+CREATE TABLE `society_committee_members` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `member_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `committee_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `committee_member_designation` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `society_members`
+--
+
+CREATE TABLE `society_members` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `contact_number` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `joining_date` date DEFAULT NULL,
+  `expiration_date` date DEFAULT NULL,
+  `membership_fee` decimal(10,2) DEFAULT NULL,
+  `membership_type` int(11) NOT NULL COMMENT 'Status of the role: 1 for regular, 2 for premium, 3 for honorary',
+  `active_status` int(11) NOT NULL COMMENT 'Status of the role: 1 for active, 2 for inactive',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `permanent_address` text DEFAULT NULL,
+  `member_image` varchar(255) DEFAULT NULL,
+  `member_unique_id` varchar(255) DEFAULT NULL,
+  `designation` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `society_members`
+--
+
+INSERT INTO `society_members` (`id`, `name`, `email`, `contact_number`, `address`, `joining_date`, `expiration_date`, `membership_fee`, `membership_type`, `active_status`, `created_at`, `updated_at`, `company_id`, `permanent_address`, `member_image`, `member_unique_id`, `designation`) VALUES
+(9, 'Shuvo Mahmud', 'shuvo@gmail.com', '01514470118', 'middle badda, dhaka, bangladesh', '2024-11-01', NULL, 2500.00, 1, 1, '2024-11-03 09:08:01', '2024-11-03 10:43:30', 2, 'middle badda, dhaka, bangladesh', 'society_members/202411031730630610.jpg', 'MEM0001', 'General Member');
 
 -- --------------------------------------------------------
 
@@ -2012,6 +2083,29 @@ ALTER TABLE `sessions`
   ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
+-- Indexes for table `society_committees`
+--
+ALTER TABLE `society_committees`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `society_committees_company_id_foreign` (`company_id`);
+
+--
+-- Indexes for table `society_committee_members`
+--
+ALTER TABLE `society_committee_members`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `society_committee_members_member_id_foreign` (`member_id`),
+  ADD KEY `society_committee_members_committee_id_foreign` (`committee_id`);
+
+--
+-- Indexes for table `society_members`
+--
+ALTER TABLE `society_members`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `society_members_email_unique` (`email`),
+  ADD KEY `society_members_company_id_foreign` (`company_id`);
+
+--
 -- Indexes for table `super_admins`
 --
 ALTER TABLE `super_admins`
@@ -2361,7 +2455,7 @@ ALTER TABLE `master_admins`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -2404,6 +2498,24 @@ ALTER TABLE `scm_supplier_managements`
 --
 ALTER TABLE `scm_supplier_payments`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `society_committees`
+--
+ALTER TABLE `society_committees`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `society_committee_members`
+--
+ALTER TABLE `society_committee_members`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `society_members`
+--
+ALTER TABLE `society_members`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `super_admins`
@@ -2588,6 +2700,25 @@ ALTER TABLE `master_admins`
 --
 ALTER TABLE `sessions`
   ADD CONSTRAINT `sessions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `society_committees`
+--
+ALTER TABLE `society_committees`
+  ADD CONSTRAINT `society_committees_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `society_committee_members`
+--
+ALTER TABLE `society_committee_members`
+  ADD CONSTRAINT `society_committee_members_committee_id_foreign` FOREIGN KEY (`committee_id`) REFERENCES `society_committees` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `society_committee_members_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `society_members` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `society_members`
+--
+ALTER TABLE `society_members`
+  ADD CONSTRAINT `society_members_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `super_admins`

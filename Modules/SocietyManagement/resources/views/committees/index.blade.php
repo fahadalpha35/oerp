@@ -7,7 +7,7 @@
             <a href="{{ route('society_committees.create') }}" class="btn btn-success btn-sm">Add Committee</a>
 
                 <div class="col-md-12 col-sm-12">
-                    <h3 class="mt-2 text-center">committee List</h3>
+                    <h3 class="mt-2 text-center">Committee List</h3>
                     <div class="card">
                         <div class="card-body">
                         @if(Session::has('error_message'))
@@ -58,6 +58,7 @@
                               </td>
                               @if( (auth()->user()->role_id == 1) || (auth()->user()->role_id == 2))
                               <td>
+                                <a href="/society_committees/{{ $committee->id }}/" style="color: white"><button class="btn btn-success"> View</button></a>
                                 <a href="{{route('society_committees.edit',$committee->id)}}" style="color: white"><button class="btn btn-warning"> Edit</button></a>
                                 <a onclick="deleteOperationWithoutYajra('{{ route('society_committees.destroy', ':id') }}', {{$committee->id}})" style="color: white"><button class="btn btn-danger"> Delete</button></a>
                               </td>

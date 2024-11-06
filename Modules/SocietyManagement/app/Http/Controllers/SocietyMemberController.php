@@ -169,13 +169,11 @@ class SocietyMemberController extends Controller
      * Show the specified resource.
      */
     public function show($id)
-    {
-        
+    {       
         $member = DB::table('society_members')
                   ->where('id',$id)
                   ->first();
-          
-        
+                  
         return view('societymanagement::members.show',compact('member'));
     }
 
@@ -347,7 +345,7 @@ class SocietyMemberController extends Controller
             return response()->json(['success' => true, 'message' => 'Member has been deleted successfully!']);
         } catch (\Exception $e) {
             // If an error occurs, return an error response
-            return response()->json(['success' => false, 'message' => 'Member deleting branch.']);
+            return response()->json(['success' => false, 'message' => 'Error deleting Member.']);
         }
     }
 }

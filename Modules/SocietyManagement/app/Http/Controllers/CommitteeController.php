@@ -85,7 +85,24 @@ class CommitteeController extends Controller
      */
     public function show($id)
     {
-        return view('societymanagement::show');
+        
+        $committee = DB::table('society_committees')
+                        ->select('id','name','active_status')
+                        ->where('id',$id)
+                        ->first();
+
+        $committee_id = $committee->id;
+                        
+        $committee_members = DB::table('society_committee_members') 
+                                ->leftJoin('society_members','society_committee_members.member_id','society_members.id')
+                                ->select(
+                                    'society_committee_members.committee_member_designation',
+                                    'society_members.name as member_name'
+                                    )
+                                ->where('society_committee_members.committee_id',$committee_id)
+                                ->get();
+        
+        return view('societymanagement::committees.view',compact('committee','committee_members'));
     }
 
     /**
@@ -149,14 +166,11 @@ class CommitteeController extends Controller
         try {
             // Check if the branch exists using Query Builder
             $department = DB::table('society_committees')->where('id', $id)->first();
-
             if (!$department) {
                 return response()->json(['success' => false, 'message' => 'Committee not found.'], 404);
             }
-
             // Delete the branch using Query Builder
             DB::table('society_committees')->where('id', $id)->delete();
-
             // Return a success response
             return response()->json(['success' => true, 'message' => 'Committee has been deleted successfully!']);
         } catch (\Exception $e) {
