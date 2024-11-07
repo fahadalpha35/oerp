@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2024 at 01:38 PM
+-- Generation Time: Nov 05, 2024 at 01:34 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -541,6 +541,13 @@ CREATE TABLE `hr_leave_types` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `hr_leave_types`
+--
+
+INSERT INTO `hr_leave_types` (`id`, `company_id`, `type_name`, `created_at`, `updated_at`) VALUES
+(1, 2, 'Sick Leave', '2024-11-05 09:01:14', '2024-11-05 09:01:14');
 
 -- --------------------------------------------------------
 
@@ -1471,7 +1478,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('2flOA0civLOn8QaEo9XpOV4VjbH3HfqBGW0MuCta', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSnV1WHBDckQxNUk0WncxcmpqS3JWN3RPVkplNDBWZEF5UkdmeU5JWiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1730723908);
+('9yzTYgOrZ3iNKwjqZXvHe2x9Ul8e9jCGafTQpbK7', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiNG93a0tHU3FiQ0VUNHUyMWdjSUFrT3lNaURyR2o5ekZwMjduTDdPeSI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0NjoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2NvbW1pdHRlZV9tZW1iZXJzLzEvZWRpdCI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ2OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvY29tbWl0dGVlX21lbWJlcnMvMS9lZGl0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1730797683),
+('N26eikrhbTAs7IiqItDyC0Alatie99oxI6QQ48eX', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZnY3YWJzZjFUcW9lZWdvanVPdEZZRjkyTjFBSUo4SGVrangwWElGOCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1730809963);
 
 -- --------------------------------------------------------
 
@@ -1490,6 +1498,13 @@ CREATE TABLE `society_committees` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `society_committees`
+--
+
+INSERT INTO `society_committees` (`id`, `company_id`, `name`, `description`, `start_date`, `end_date`, `active_status`, `created_at`, `updated_at`) VALUES
+(2, 2, 'Event Planning Committee', 'planning upcoming and ongoing events', '2024-11-01', NULL, 1, '2024-11-05 07:35:09', '2024-11-05 07:35:09');
 
 -- --------------------------------------------------------
 
@@ -1537,7 +1552,7 @@ CREATE TABLE `society_members` (
 --
 
 INSERT INTO `society_members` (`id`, `name`, `email`, `contact_number`, `address`, `joining_date`, `expiration_date`, `membership_fee`, `membership_type`, `active_status`, `created_at`, `updated_at`, `company_id`, `permanent_address`, `member_image`, `member_unique_id`, `designation`) VALUES
-(9, 'Shuvo Mahmud', 'shuvo@gmail.com', '01514470118', 'middle badda, dhaka, bangladesh', '2024-11-01', NULL, 2500.00, 1, 1, '2024-11-03 09:08:01', '2024-11-03 10:43:30', 2, 'middle badda, dhaka, bangladesh', 'society_members/202411031730630610.jpg', 'MEM0001', 'General Member');
+(9, 'Shuvo Mahmud', 'shuvo@gmail.com', '01514470118', 'middle badda, dhaka, bangladesh', '2024-11-01', NULL, 2500.00, 1, 1, '2024-11-03 09:08:01', '2024-11-05 09:18:34', 2, 'middle badda, dhaka, bangladesh', 'society_members/202411051730798314.png', 'MEM0001', 'General Member');
 
 -- --------------------------------------------------------
 
@@ -2239,7 +2254,7 @@ ALTER TABLE `hr_leave_applications`
 -- AUTO_INCREMENT for table `hr_leave_types`
 --
 ALTER TABLE `hr_leave_types`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `hr_managers`
@@ -2503,13 +2518,13 @@ ALTER TABLE `scm_supplier_payments`
 -- AUTO_INCREMENT for table `society_committees`
 --
 ALTER TABLE `society_committees`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `society_committee_members`
 --
 ALTER TABLE `society_committee_members`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `society_members`
