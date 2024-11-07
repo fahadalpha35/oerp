@@ -260,6 +260,7 @@
                                     @elseif(Request::is('society_committees')) show             
                                     @elseif(Request::is('committee_members')) show             
                                     @elseif(Request::is('society_events')) show             
+                                    @elseif(Request::is('fund_collections')) show             
                             @endif" id="societyManagement" style="margin-top: -2px; padding-bottom : 10px">
 
             @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2) || (Auth::user()->role_id == 3))
@@ -298,15 +299,18 @@
 
                 </ul>
               </li>
-
-
               <li class="nav-item">
                 <a href="{{ url('society_events') }}" class="nav-link {{ Request::is('society_events') ? 'active' : '' }}" style="{{ Request::is('society_events') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                 <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_events') ? 'color: white; !important' : ''}}"></i>
                 <span class="menu-arrow" style="{{ Request::is('society_events') ? 'color: white; !important' : ''}}">Society Events</span>
                 </a>
              </li>
-
+             <li class="nav-item">
+                <a href="{{ url('fund_collections') }}" class="nav-link {{ Request::is('fund_collections') ? 'active' : '' }}" style="{{ Request::is('fund_collections') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('fund_collections') ? 'color: white; !important' : ''}}"></i>
+                <span class="menu-arrow" style="{{ Request::is('fund_collections') ? 'color: white; !important' : ''}}">Fund Collections</span>
+                </a>
+             </li>
            
             @endif
 
