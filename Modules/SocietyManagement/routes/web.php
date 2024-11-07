@@ -6,6 +6,7 @@ use Modules\SocietyManagement\Http\Controllers\SocietyMemberController;
 use Modules\SocietyManagement\Http\Controllers\CommitteeController;
 use Modules\SocietyManagement\Http\Controllers\CommitteeMemberController;
 use Modules\SocietyManagement\Http\Controllers\SocietyEventController;
+use Modules\SocietyManagement\Http\Controllers\FundCollectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +25,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('society_committees', CommitteeController::class);
     Route::resource('committee_members', CommitteeMemberController::class);
     Route::resource('society_events', SocietyEventController::class);
+    Route::resource('fund_collections', FundCollectionController::class);
 });
