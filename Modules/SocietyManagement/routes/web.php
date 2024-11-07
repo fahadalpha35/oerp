@@ -19,7 +19,7 @@ use Modules\SocietyManagement\Http\Controllers\SocietyEventController;
 */
 
 Route::middleware('auth')->group(function () {
-    // Route::resource('societymanagement', SocietyManagementController::class)->names('societymanagement');
+    Route::resource('societymanagement', SocietyManagementController::class)->names('societymanagement');
     Route::resource('society_members', SocietyMemberController::class);
     Route::resource('society_committees', CommitteeController::class);
     Route::resource('committee_members', CommitteeMemberController::class);

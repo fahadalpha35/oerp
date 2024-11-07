@@ -156,10 +156,6 @@ class ComposerStaticInit2d0804ca2ba9334bf587d45ac0575239
             'Modules\\Crm\\Database\\Seeders\\' => 29,
             'Modules\\Crm\\Database\\Factories\\' => 31,
             'Modules\\Crm\\' => 12,
-            'Modules\\Blog\\Tests\\' => 19,
-            'Modules\\Blog\\Database\\Seeders\\' => 30,
-            'Modules\\Blog\\Database\\Factories\\' => 32,
-            'Modules\\Blog\\' => 13,
             'Modules\\Accounts\\Tests\\' => 23,
             'Modules\\Accounts\\Database\\Seeders\\' => 34,
             'Modules\\Accounts\\Database\\Factories\\' => 36,
@@ -583,22 +579,6 @@ class ComposerStaticInit2d0804ca2ba9334bf587d45ac0575239
         'Modules\\Crm\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Modules/Crm/app',
-        ),
-        'Modules\\Blog\\Tests\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/Modules/Blog/tests',
-        ),
-        'Modules\\Blog\\Database\\Seeders\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/Modules/Blog/database/seeders',
-        ),
-        'Modules\\Blog\\Database\\Factories\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/Modules/Blog/database/factories',
-        ),
-        'Modules\\Blog\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/Modules/Blog/app',
         ),
         'Modules\\Accounts\\Tests\\' => 
         array (
@@ -3836,11 +3816,6 @@ class ComposerStaticInit2d0804ca2ba9334bf587d45ac0575239
         'Modules\\Accounts\\Providers\\AccountsServiceProvider' => __DIR__ . '/../..' . '/Modules/Accounts/app/Providers/AccountsServiceProvider.php',
         'Modules\\Accounts\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/Accounts/app/Providers/EventServiceProvider.php',
         'Modules\\Accounts\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/Accounts/app/Providers/RouteServiceProvider.php',
-        'Modules\\Blog\\Database\\Seeders\\BlogDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/Blog/database/seeders/BlogDatabaseSeeder.php',
-        'Modules\\Blog\\Http\\Controllers\\BlogController' => __DIR__ . '/../..' . '/Modules/Blog/app/Http/Controllers/BlogController.php',
-        'Modules\\Blog\\Providers\\BlogServiceProvider' => __DIR__ . '/../..' . '/Modules/Blog/app/Providers/BlogServiceProvider.php',
-        'Modules\\Blog\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/Blog/app/Providers/EventServiceProvider.php',
-        'Modules\\Blog\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/Blog/app/Providers/RouteServiceProvider.php',
         'Modules\\Crm\\Database\\Seeders\\CrmDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/Crm/database/seeders/CrmDatabaseSeeder.php',
         'Modules\\Crm\\Http\\Controllers\\CrmController' => __DIR__ . '/../..' . '/Modules/Crm/app/Http/Controllers/CrmController.php',
         'Modules\\Crm\\Providers\\CrmServiceProvider' => __DIR__ . '/../..' . '/Modules/Crm/app/Providers/CrmServiceProvider.php',
