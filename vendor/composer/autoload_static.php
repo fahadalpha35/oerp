@@ -156,6 +156,10 @@ class ComposerStaticInit2d0804ca2ba9334bf587d45ac0575239
             'Modules\\Crm\\Database\\Seeders\\' => 29,
             'Modules\\Crm\\Database\\Factories\\' => 31,
             'Modules\\Crm\\' => 12,
+            'Modules\\Blog\\Tests\\' => 19,
+            'Modules\\Blog\\Database\\Seeders\\' => 30,
+            'Modules\\Blog\\Database\\Factories\\' => 32,
+            'Modules\\Blog\\' => 13,
             'Modules\\Accounts\\Tests\\' => 23,
             'Modules\\Accounts\\Database\\Seeders\\' => 34,
             'Modules\\Accounts\\Database\\Factories\\' => 36,
@@ -579,6 +583,22 @@ class ComposerStaticInit2d0804ca2ba9334bf587d45ac0575239
         'Modules\\Crm\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Modules/Crm/app',
+        ),
+        'Modules\\Blog\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/Blog/tests',
+        ),
+        'Modules\\Blog\\Database\\Seeders\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/Blog/database/seeders',
+        ),
+        'Modules\\Blog\\Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/Blog/database/factories',
+        ),
+        'Modules\\Blog\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/Blog/app',
         ),
         'Modules\\Accounts\\Tests\\' => 
         array (
@@ -3816,6 +3836,11 @@ class ComposerStaticInit2d0804ca2ba9334bf587d45ac0575239
         'Modules\\Accounts\\Providers\\AccountsServiceProvider' => __DIR__ . '/../..' . '/Modules/Accounts/app/Providers/AccountsServiceProvider.php',
         'Modules\\Accounts\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/Accounts/app/Providers/EventServiceProvider.php',
         'Modules\\Accounts\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/Accounts/app/Providers/RouteServiceProvider.php',
+        'Modules\\Blog\\Database\\Seeders\\BlogDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/Blog/database/seeders/BlogDatabaseSeeder.php',
+        'Modules\\Blog\\Http\\Controllers\\BlogController' => __DIR__ . '/../..' . '/Modules/Blog/app/Http/Controllers/BlogController.php',
+        'Modules\\Blog\\Providers\\BlogServiceProvider' => __DIR__ . '/../..' . '/Modules/Blog/app/Providers/BlogServiceProvider.php',
+        'Modules\\Blog\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/Blog/app/Providers/EventServiceProvider.php',
+        'Modules\\Blog\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/Blog/app/Providers/RouteServiceProvider.php',
         'Modules\\Crm\\Database\\Seeders\\CrmDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/Crm/database/seeders/CrmDatabaseSeeder.php',
         'Modules\\Crm\\Http\\Controllers\\CrmController' => __DIR__ . '/../..' . '/Modules/Crm/app/Http/Controllers/CrmController.php',
         'Modules\\Crm\\Providers\\CrmServiceProvider' => __DIR__ . '/../..' . '/Modules/Crm/app/Providers/CrmServiceProvider.php',
@@ -3841,7 +3866,11 @@ class ComposerStaticInit2d0804ca2ba9334bf587d45ac0575239
         'Modules\\Hr\\Providers\\HrServiceProvider' => __DIR__ . '/../..' . '/Modules/Hr/app/Providers/HrServiceProvider.php',
         'Modules\\Hr\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/Hr/app/Providers/RouteServiceProvider.php',
         'Modules\\Inventory\\Database\\Seeders\\InventoryDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/Inventory/database/seeders/InventoryDatabaseSeeder.php',
+        'Modules\\Inventory\\Http\\Controllers\\CategoryController' => __DIR__ . '/../..' . '/Modules/Inventory/app/Http/Controllers/CategoryController.php',
         'Modules\\Inventory\\Http\\Controllers\\InventoryController' => __DIR__ . '/../..' . '/Modules/Inventory/app/Http/Controllers/InventoryController.php',
+        'Modules\\Inventory\\Http\\Controllers\\ItemController' => __DIR__ . '/../..' . '/Modules/Inventory/app/Http/Controllers/ItemController.php',
+        'Modules\\Inventory\\Http\\Controllers\\ProductController' => __DIR__ . '/../..' . '/Modules/Inventory/app/Http/Controllers/ProductController.php',
+        'Modules\\Inventory\\Models\\InventoryCategorie' => __DIR__ . '/../..' . '/Modules/Inventory/app/Models/InventoryCategorie.php',
         'Modules\\Inventory\\Models\\InventoryProduct' => __DIR__ . '/../..' . '/Modules/Inventory/app/Models/InventoryProduct.php',
         'Modules\\Inventory\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/Inventory/app/Providers/EventServiceProvider.php',
         'Modules\\Inventory\\Providers\\InventoryServiceProvider' => __DIR__ . '/../..' . '/Modules/Inventory/app/Providers/InventoryServiceProvider.php',
@@ -3874,7 +3903,11 @@ class ComposerStaticInit2d0804ca2ba9334bf587d45ac0575239
         'Modules\\Reporting\\Providers\\ReportingServiceProvider' => __DIR__ . '/../..' . '/Modules/Reporting/app/Providers/ReportingServiceProvider.php',
         'Modules\\Reporting\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/Reporting/app/Providers/RouteServiceProvider.php',
         'Modules\\SocietyManagement\\Database\\Seeders\\SocietyManagementDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/SocietyManagement/database/seeders/SocietyManagementDatabaseSeeder.php',
+        'Modules\\SocietyManagement\\Http\\Controllers\\CommitteeController' => __DIR__ . '/../..' . '/Modules/SocietyManagement/app/Http/Controllers/CommitteeController.php',
+        'Modules\\SocietyManagement\\Http\\Controllers\\CommitteeMemberController' => __DIR__ . '/../..' . '/Modules/SocietyManagement/app/Http/Controllers/CommitteeMemberController.php',
+        'Modules\\SocietyManagement\\Http\\Controllers\\SocietyEventController' => __DIR__ . '/../..' . '/Modules/SocietyManagement/app/Http/Controllers/SocietyEventController.php',
         'Modules\\SocietyManagement\\Http\\Controllers\\SocietyManagementController' => __DIR__ . '/../..' . '/Modules/SocietyManagement/app/Http/Controllers/SocietyManagementController.php',
+        'Modules\\SocietyManagement\\Http\\Controllers\\SocietyMemberController' => __DIR__ . '/../..' . '/Modules/SocietyManagement/app/Http/Controllers/SocietyMemberController.php',
         'Modules\\SocietyManagement\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/SocietyManagement/app/Providers/EventServiceProvider.php',
         'Modules\\SocietyManagement\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/SocietyManagement/app/Providers/RouteServiceProvider.php',
         'Modules\\SocietyManagement\\Providers\\SocietyManagementServiceProvider' => __DIR__ . '/../..' . '/Modules/SocietyManagement/app/Providers/SocietyManagementServiceProvider.php',
