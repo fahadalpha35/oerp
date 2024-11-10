@@ -175,8 +175,8 @@
                         <span class="menu-arrow" style="{{ Request::is('exit_attendance') ? 'color: white; !important' : ''}}">Exit</span>
                     </a>
                     </li>
-                @endif  
-                           
+                @endif
+
                 <li class="nav-item">
                   <a href="{{ url('attendances') }}" class="nav-link {{ Request::is('attendances') ? 'active' : '' }}" style="{{ Request::is('attendances') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                       <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('attendances') ? 'color: white; !important' : ''}}"></i>
@@ -256,10 +256,10 @@
             </a>
 
             <!-- First-level sub-menu -->
-            <ul class="collapse nav  @if(Request::is('society_members')) show  
-                                    @elseif(Request::is('society_committees')) show             
-                                    @elseif(Request::is('committee_members')) show             
-                                    @elseif(Request::is('society_events')) show             
+            <ul class="collapse nav  @if(Request::is('society_members')) show
+                                    @elseif(Request::is('society_committees')) show
+                                    @elseif(Request::is('committee_members')) show
+                                    @elseif(Request::is('society_events')) show
                             @endif" id="societyManagement" style="margin-top: -2px; padding-bottom : 10px">
 
             @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2) || (Auth::user()->role_id == 3))
@@ -281,14 +281,14 @@
                 <ul class="collapse nav flex-column ms-3 @if(Request::is('society_committees')) show
                             @elseif(Request::is('committee_members')) show
                             @endif" id="Committee" style="margin-top: -2px; padding-bottom : 10px">
-                
+
                   <li class="nav-item">
                     <a href="{{ url('society_committees') }}" class="nav-link {{ Request::is('society_committees') ? 'active' : '' }}" style="{{ Request::is('society_committees') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_committees') ? 'color: white; !important' : ''}}"></i>
                         <span class="menu-arrow" style="{{ Request::is('society_committees') ? 'color: white; !important' : ''}}">Committees</span>
                       </a>
                   </li>
-                 
+
                   <li class="nav-item">
                     <a href="{{ url('committee_members') }}" class="nav-link {{ Request::is('committee_members') ? 'active' : '' }}" style="{{ Request::is('committee_members') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('committee_members') ? 'color: white; !important' : ''}}"></i>
@@ -307,7 +307,7 @@
                 </a>
              </li>
 
-           
+
             @endif
 
               {{-- <li class="nav-item">
@@ -318,8 +318,8 @@
                 </a>
                 <!-- Second-level sub-menu -->
                 <ul class="collapse nav flex-column ms-3 @if(Request::is('society_members')) show
-                            @endif" id="societyMember" style="margin-top: -2px;">  
-                               
+                            @endif" id="societyMember" style="margin-top: -2px;">
+
                 @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2) || (Auth::user()->role_id == 3))
                 <li class="nav-item">
                     <a href="{{ url('society_members') }}" class="nav-link {{ Request::is('society_members') ? 'active' : '' }}" style="{{ Request::is('society_members') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
@@ -339,15 +339,13 @@
 
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#im" aria-expanded="false" aria-controls="im">
-
                 <i class="mdi mdi-warehouse menu-icon"></i>
-
                 <span class="menu-title">Inventory</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="im">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="">Stock Levels</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('item.index') }}">Item Category</a></li>
                     <li class="nav-item"> <a class="nav-link" href="">Reorder Points</a></li>
                     <li class="nav-item"> <a class="nav-link" href="">Product Catalog</a></li>
                     <li class="nav-item"> <a class="nav-link" href="">Suppliers</a></li>
@@ -359,6 +357,45 @@
                     <li class="nav-item"> <a class="nav-link" href="">Settings</a></li>
                 </ul>
             </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#suppliChain" aria-expanded="false" aria-controls="suppliChain">
+                <i class="mdi mdi-puzzle menu-icon"></i>
+                <span class="menu-title">Supplychain Managment</span>
+                <i class="menu-arrow"></i>
+            </a>
+
+                <ul class="collapse nav  @if(Request::is('supplychain')) show
+                            @elseif(Request::is('purchase')) show
+                            @elseif(Request::is('purchase-return')) show
+                            @elseif(Request::is('supplychain')) show
+                            @endif" id="suppliChain" style="margin-top: -2px;">
+                <li class="nav-item">
+                    <a href="{{ url('supplychain') }}" class="nav-link {{ Request::is('supplychain') ? 'active' : '' }}" style="{{ Request::is('supplychain') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('supplychain') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('supplychain') ? 'color: white; !important' : ''}}">Supplier Managements</span>
+                      </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('purchase') }}" class="nav-link {{ Request::is('purchase') ? 'active' : '' }}" style="{{ Request::is('purchase') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('purchase') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('purchase') ? 'color: white; !important' : ''}}">Purchases</span>
+                      </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('purchase-return') }}" class="nav-link {{ Request::is('purchase-return') ? 'active' : '' }}" style="{{ Request::is('purchase-return') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('purchase-return') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('purchase-return') ? 'color: white; !important' : ''}}">Purchases Return</span>
+                      </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('order') }}" class="nav-link {{ Request::is('order') ? 'active' : '' }}" style="{{ Request::is('order') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('order') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('order') ? 'color: white; !important' : ''}}">Supplier Payment</span>
+                      </a>
+                </li>
+            </ul>
+
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#manufac" aria-expanded="false" aria-controls="manu">
