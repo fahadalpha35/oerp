@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 05, 2024 at 01:34 PM
+-- Generation Time: Nov 07, 2024 at 12:57 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1312,7 +1312,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (68, '2024_11_02_175023_add_member_image_to_society_members_table', 6),
 (69, '2024_11_03_131117_add_designation_to_society_members_table', 7),
 (70, '2024_11_04_144220_create_society_committees_table', 8),
-(71, '2024_11_04_150635_create_society_committee_members_table', 9);
+(71, '2024_11_04_150635_create_society_committee_members_table', 9),
+(72, '2024_11_07_111729_create_society_events_table', 10),
+(73, '2024_11_07_131153_create_society_fund_collections_table', 11);
 
 -- --------------------------------------------------------
 
@@ -1478,8 +1480,9 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('9yzTYgOrZ3iNKwjqZXvHe2x9Ul8e9jCGafTQpbK7', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiNG93a0tHU3FiQ0VUNHUyMWdjSUFrT3lNaURyR2o5ekZwMjduTDdPeSI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0NjoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2NvbW1pdHRlZV9tZW1iZXJzLzEvZWRpdCI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ2OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvY29tbWl0dGVlX21lbWJlcnMvMS9lZGl0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1730797683),
-('N26eikrhbTAs7IiqItDyC0Alatie99oxI6QQ48eX', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZnY3YWJzZjFUcW9lZWdvanVPdEZZRjkyTjFBSUo4SGVrangwWElGOCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1730809963);
+('BqlmgLuEDPSIs3vXU5ynvCLGoLHoEFCuGmANA6v3', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoicnRZdnlUenhWeDV2dUt1aFltNE5OZ0RZaGRaYzc2OUJvNHBVQjlWbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyO30=', 1730980617),
+('HaHSNjybrcor5lkhysuCEugtbFIYbizLSPHmd7TA', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWkJXNWFWc0U2M2J5SXJ4NHlOelpINktoZFZ3TjRTVktpWnRhbkVESCI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozODoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2Z1bmRfY29sbGVjdGlvbnMiO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozODoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2Z1bmRfY29sbGVjdGlvbnMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1730973566),
+('sy9svZLYlckAjBNcGNeIXf3Zutm4961qaeAgbhEe', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiSTVwZ3U5c2hyQnhjUXgxYnB0OHB3ck4zWHBxN0d3emh5N01oZ0VlViI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0NToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2Z1bmRfY29sbGVjdGlvbnMvY3JlYXRlIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9mdW5kX2NvbGxlY3Rpb25zL2NyZWF0ZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1730969340);
 
 -- --------------------------------------------------------
 
@@ -1519,6 +1522,63 @@ CREATE TABLE `society_committee_members` (
   `committee_member_designation` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `society_committee_members`
+--
+
+INSERT INTO `society_committee_members` (`id`, `member_id`, `committee_id`, `committee_member_designation`, `created_at`, `updated_at`) VALUES
+(2, 9, 2, 'Chairman', '2024-11-07 06:50:10', '2024-11-07 06:50:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `society_events`
+--
+
+CREATE TABLE `society_events` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `committee_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `event_name` varchar(255) DEFAULT NULL,
+  `event_budget` varchar(255) DEFAULT NULL,
+  `event_start_date` date DEFAULT NULL,
+  `event_end_date` date DEFAULT NULL,
+  `event_start_time` time DEFAULT NULL,
+  `event_end_time` time DEFAULT NULL,
+  `event_description` text DEFAULT NULL,
+  `event_status` int(11) NOT NULL COMMENT '1 = upcoming, 2 = ongoing, 3 = completed',
+  `event_loaction` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `society_events`
+--
+
+INSERT INTO `society_events` (`id`, `company_id`, `committee_id`, `event_name`, `event_budget`, `event_start_date`, `event_end_date`, `event_start_time`, `event_end_time`, `event_description`, `event_status`, `event_loaction`, `created_at`, `updated_at`) VALUES
+(2, 2, 2, 'Cultural Festival', '45500.00', '2024-11-15', '2024-11-15', '15:00:00', '18:00:00', NULL, 1, 'Dhanmondi, Dhaka, Bangladesh', '2024-11-07 06:40:31', '2024-11-07 07:06:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `society_fund_collections`
+--
+
+CREATE TABLE `society_fund_collections` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `event_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `society_member_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `purpose` int(11) NOT NULL COMMENT '1 = event, 2 = others',
+  `description` text DEFAULT NULL,
+  `fund_amount` decimal(10,2) DEFAULT NULL,
+  `fund_collection_date` date DEFAULT NULL,
+  `fund_collection_status` int(11) NOT NULL COMMENT '1 = pending, 2 = collected',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2113,6 +2173,23 @@ ALTER TABLE `society_committee_members`
   ADD KEY `society_committee_members_committee_id_foreign` (`committee_id`);
 
 --
+-- Indexes for table `society_events`
+--
+ALTER TABLE `society_events`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `society_events_company_id_foreign` (`company_id`),
+  ADD KEY `society_events_committee_id_foreign` (`committee_id`);
+
+--
+-- Indexes for table `society_fund_collections`
+--
+ALTER TABLE `society_fund_collections`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `society_fund_collections_company_id_foreign` (`company_id`),
+  ADD KEY `society_fund_collections_event_id_foreign` (`event_id`),
+  ADD KEY `society_fund_collections_society_member_id_foreign` (`society_member_id`);
+
+--
 -- Indexes for table `society_members`
 --
 ALTER TABLE `society_members`
@@ -2470,7 +2547,7 @@ ALTER TABLE `master_admins`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -2524,6 +2601,18 @@ ALTER TABLE `society_committees`
 -- AUTO_INCREMENT for table `society_committee_members`
 --
 ALTER TABLE `society_committee_members`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `society_events`
+--
+ALTER TABLE `society_events`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `society_fund_collections`
+--
+ALTER TABLE `society_fund_collections`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
@@ -2728,6 +2817,21 @@ ALTER TABLE `society_committees`
 ALTER TABLE `society_committee_members`
   ADD CONSTRAINT `society_committee_members_committee_id_foreign` FOREIGN KEY (`committee_id`) REFERENCES `society_committees` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `society_committee_members_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `society_members` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `society_events`
+--
+ALTER TABLE `society_events`
+  ADD CONSTRAINT `society_events_committee_id_foreign` FOREIGN KEY (`committee_id`) REFERENCES `society_committees` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `society_events_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `society_fund_collections`
+--
+ALTER TABLE `society_fund_collections`
+  ADD CONSTRAINT `society_fund_collections_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `society_fund_collections_event_id_foreign` FOREIGN KEY (`event_id`) REFERENCES `society_events` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `society_fund_collections_society_member_id_foreign` FOREIGN KEY (`society_member_id`) REFERENCES `society_members` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `society_members`
