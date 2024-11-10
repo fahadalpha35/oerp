@@ -346,15 +346,6 @@
             <div class="collapse" id="im">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('item.index') }}">Item Category</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Reorder Points</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Product Catalog</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Suppliers</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Purchase Orders</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Sales Orders</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Inventory Adjustments</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Stock Transfers</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Reports</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Settings</a></li>
                 </ul>
             </div>
         </li>
