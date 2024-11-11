@@ -13,7 +13,13 @@ class InventoryProduct extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'name', 'company_id', 'category_id', 'brand_id', 'description', 'cost_price', 'selling_price',
+    ];
+
+    public function category(){
+        return $this->hasOne(InventoryCategorie::class,'id','category_id');
+    }
 
     // protected static function newFactory(): InventoryProductFactory
     // {

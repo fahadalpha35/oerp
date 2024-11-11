@@ -5,7 +5,6 @@ namespace Modules\Inventory\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Modules\Inventory\Models\InventoryCategorie;
 use Modules\Inventory\Models\InventoryItemCategory;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -76,7 +75,8 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
-        return view('inventory::edit');
+        $item = InventoryItemCategory::find($id);
+        return view('inventory::item.edit',compact('item'));
     }
 
     /**
@@ -84,7 +84,11 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        InventoryItemCategory::where('id',$id)->update([
+            'name' => $request->name,
+            'active_status' => $request->active_status,
+        ]);
+        return redirect()->route('item.index')->with('success_message', 'Item Category Updated successfully!');
     }
 
     /**
@@ -92,6 +96,7 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        InventoryItemCategory::where('id', $id)->delete();
+        return response()->json(['success' => true, 'message' => 'Item deleted successfully!']);
     }
 }

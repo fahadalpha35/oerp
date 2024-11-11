@@ -18,7 +18,7 @@ use Modules\Inventory\Http\Controllers\ProductController;
 */
 
 Route::middleware('auth')->group(function () {
-    Route::resource('inventory', InventoryController::class)->names('inventory');
+    Route::resource('purchase', InventoryController::class)->names('inventory');
     Route::resource('product', ProductController::class)->names('product');
     Route::resource('item', ItemController::class)->names('item');
     Route::resource('category', CategoryController::class)->names('category');
