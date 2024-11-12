@@ -7,6 +7,8 @@ use Modules\SocietyManagement\Http\Controllers\CommitteeController;
 use Modules\SocietyManagement\Http\Controllers\CommitteeMemberController;
 use Modules\SocietyManagement\Http\Controllers\SocietyEventController;
 use Modules\SocietyManagement\Http\Controllers\FundCollectionController;
+use Modules\SocietyManagement\Http\Controllers\SocietyTicketController;
+use Modules\SocietyManagement\Http\Controllers\SocietySoldTicketController;
 use Modules\SocietyManagement\Http\Controllers\SocietyExpenseController;
 
 /*
@@ -27,6 +29,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('committee_members', CommitteeMemberController::class);
     Route::resource('society_events', SocietyEventController::class);
     Route::resource('fund_collections', FundCollectionController::class);
+    Route::resource('event_tickets', SocietyTicketController::class);
+    Route::resource('sold_event_tickets', SocietySoldTicketController::class);
+    //event and ticket depedancy
+    Route::post('/event.ticket.dependancy',[SocietySoldTicketController::class,'event_ticket_dependancy']);
+    //ticket and price depedancy
+    Route::post('/ticket.price.dependancy',[SocietySoldTicketController::class,'ticket_price_dependancy']);
     Route::resource('society_expenses', SocietyExpenseController::class);
 
     Route::get('/society_expense_type_list', [SocietyExpenseController::class, 'society_expense_type_list'])->name('society_expense_type_list');

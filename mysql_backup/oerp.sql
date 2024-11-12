@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2024 at 02:11 PM
+-- Generation Time: Nov 12, 2024 at 02:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1316,7 +1316,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (72, '2024_11_07_111729_create_society_events_table', 10),
 (73, '2024_11_07_131153_create_society_fund_collections_table', 11),
 (74, '2024_11_10_131207_create_society_expense_types_table', 12),
-(75, '2024_11_10_160523_create_society_expenses_table', 13);
+(75, '2024_11_10_160523_create_society_expenses_table', 13),
+(76, '2024_11_12_124716_create_society_tickets_table', 14),
+(77, '2024_11_12_165501_create_society_sold_tickets_table', 15);
 
 -- --------------------------------------------------------
 
@@ -1482,12 +1484,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('BkXFgaQw5QFpo5qH95rhyK9QnCmGkZU6gQjIblZU', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiamVHdzIzOXBKczRLT2dXRklPSHR1RExscFVlaTN6RTlKU1BNQ3BwYSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1731318831),
-('lgrpd7PXIAgradVTUAVxWBywEC4L0GVBOBUKKG1X', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiTTBYN0VwMVZEbzNJWnZ3bFFFUElrTzVSc0p6T1JLUzNPYVFwZkdWWSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zb2NpZXR5X2V4cGVuc2VzL2NyZWF0ZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1731310528),
-('ORMwb0cDFQiPJnMwmHgWtypV3Zy0v392l2KzamdI', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiNnpJNWV0dHRYbUkxV0x5QkI4dnF5TEFtUnNFc1hNWjZOem5NYUQxdCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6Mzg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9mdW5kX2NvbGxlY3Rpb25zIjt9fQ==', 1731242816),
-('rfKuZ9BPCqiFBvbwT08oLW7ECyeKPhzfV8ZZqiuK', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiOGVhZmpITURRUDV1QmVrUGtQNUh3YVcxSzVTUlhPOXlhNUxkdEt1SiI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozODoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3NvY2lldHlfZXhwZW5zZXMiO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozODoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3NvY2lldHlfZXhwZW5zZXMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyO30=', 1731330678),
-('Tbayx8o4HDfEAgkmPJCtr7a1vp4fUOuEVSFSy7wN', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWlEwTVUzUURwZGhBWVNURmxMeE91cWNucE9XSkI1RWdwV01BRnNkeCI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0NzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3NvY2lldHlfZXhwZW5zZV90eXBlX2xpc3QiO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo0NzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3NvY2lldHlfZXhwZW5zZV90eXBlX2xpc3QiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1731237943),
-('XAm5Ep3U3PagxpbROlonOUAU0vqzle1gSjbXySIu', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiV1hUaDJqRk1DSUY3QXpDU01ONURxUkVPVW5ROVZTcHZHVkVTTk43dCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1731237944);
+('nJGsPtF5g1OFs6TcDYuvTGWeqiB4z1WaJeegOQZx', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUzV0TVVmcG9LenZQUzZndXVNVUJ4Q1lhVGxqMkVHWnFMa3Zlc0d5diI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zb2xkX2V2ZW50X3RpY2tldHMvY3JlYXRlIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1731418186);
 
 -- --------------------------------------------------------
 
@@ -1564,7 +1561,7 @@ CREATE TABLE `society_events` (
 --
 
 INSERT INTO `society_events` (`id`, `company_id`, `committee_id`, `event_name`, `event_budget`, `event_start_date`, `event_end_date`, `event_start_time`, `event_end_time`, `event_description`, `event_status`, `event_loaction`, `created_at`, `updated_at`) VALUES
-(2, 2, 2, 'Cultural Festival', '45500.00', '2024-11-15', '2024-11-15', '15:00:00', '18:00:00', NULL, 1, 'Dhanmondi, Dhaka, Bangladesh', '2024-11-07 06:40:31', '2024-11-07 07:06:42');
+(2, 2, 2, 'Cultural Festival', '45500.00', '2024-11-15', '2024-11-15', '15:00:00', '18:00:00', NULL, 1, 'Dhanmondi, Dhaka, Bangladesh', '2024-11-07 06:40:31', '2024-11-12 07:32:52');
 
 -- --------------------------------------------------------
 
@@ -1658,6 +1655,57 @@ CREATE TABLE `society_members` (
 
 INSERT INTO `society_members` (`id`, `name`, `email`, `contact_number`, `address`, `joining_date`, `expiration_date`, `membership_fee`, `membership_type`, `active_status`, `created_at`, `updated_at`, `company_id`, `permanent_address`, `member_image`, `member_unique_id`, `designation`) VALUES
 (9, 'Shuvo Mahmud', 'shuvo@gmail.com', '01514470118', 'middle badda, dhaka, bangladesh', '2024-11-01', NULL, 2500.00, 1, 1, '2024-11-03 09:08:01', '2024-11-05 09:18:34', 2, 'middle badda, dhaka, bangladesh', 'society_members/202411051730798314.png', 'MEM0001', 'General Member');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `society_sold_tickets`
+--
+
+CREATE TABLE `society_sold_tickets` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `event_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ticket_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ticket_selling_date` date DEFAULT NULL,
+  `sold_ticket_quantity` int(11) DEFAULT NULL,
+  `total_revenue` decimal(10,2) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `society_sold_tickets`
+--
+
+INSERT INTO `society_sold_tickets` (`id`, `company_id`, `event_id`, `ticket_id`, `ticket_selling_date`, `sold_ticket_quantity`, `total_revenue`, `created_at`, `updated_at`) VALUES
+(1, 2, 2, 2, '2024-11-12', 5, 750.00, '2024-11-12 13:29:46', '2024-11-12 13:29:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `society_tickets`
+--
+
+CREATE TABLE `society_tickets` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `event_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ticket_type` int(11) NOT NULL COMMENT '1 = regular, 2 = vip',
+  `ticket_price` decimal(10,2) DEFAULT NULL,
+  `ticket_quantity` int(11) DEFAULT NULL,
+  `ticket_status` int(11) NOT NULL COMMENT '1 = available, 2 = not available',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `society_tickets`
+--
+
+INSERT INTO `society_tickets` (`id`, `company_id`, `event_id`, `ticket_type`, `ticket_price`, `ticket_quantity`, `ticket_status`, `created_at`, `updated_at`) VALUES
+(2, 2, 2, 1, 150.00, 45, 1, '2024-11-12 10:14:11', '2024-11-12 13:29:46'),
+(3, 2, 2, 2, 500.00, 20, 1, '2024-11-12 10:14:21', '2024-11-12 10:14:21');
 
 -- --------------------------------------------------------
 
@@ -2258,6 +2306,23 @@ ALTER TABLE `society_members`
   ADD KEY `society_members_company_id_foreign` (`company_id`);
 
 --
+-- Indexes for table `society_sold_tickets`
+--
+ALTER TABLE `society_sold_tickets`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `society_sold_tickets_company_id_foreign` (`company_id`),
+  ADD KEY `society_sold_tickets_event_id_foreign` (`event_id`),
+  ADD KEY `society_sold_tickets_ticket_id_foreign` (`ticket_id`);
+
+--
+-- Indexes for table `society_tickets`
+--
+ALTER TABLE `society_tickets`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `society_tickets_company_id_foreign` (`company_id`),
+  ADD KEY `society_tickets_event_id_foreign` (`event_id`);
+
+--
 -- Indexes for table `super_admins`
 --
 ALTER TABLE `super_admins`
@@ -2607,7 +2672,7 @@ ALTER TABLE `master_admins`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -2692,6 +2757,18 @@ ALTER TABLE `society_fund_collections`
 --
 ALTER TABLE `society_members`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `society_sold_tickets`
+--
+ALTER TABLE `society_sold_tickets`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `society_tickets`
+--
+ALTER TABLE `society_tickets`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `super_admins`
@@ -2923,6 +3000,21 @@ ALTER TABLE `society_fund_collections`
 --
 ALTER TABLE `society_members`
   ADD CONSTRAINT `society_members_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `society_sold_tickets`
+--
+ALTER TABLE `society_sold_tickets`
+  ADD CONSTRAINT `society_sold_tickets_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `society_sold_tickets_event_id_foreign` FOREIGN KEY (`event_id`) REFERENCES `society_events` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `society_sold_tickets_ticket_id_foreign` FOREIGN KEY (`ticket_id`) REFERENCES `society_tickets` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `society_tickets`
+--
+ALTER TABLE `society_tickets`
+  ADD CONSTRAINT `society_tickets_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `society_tickets_event_id_foreign` FOREIGN KEY (`event_id`) REFERENCES `society_events` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `super_admins`
