@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2024 at 12:57 PM
+-- Generation Time: Nov 11, 2024 at 02:11 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1314,7 +1314,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (70, '2024_11_04_144220_create_society_committees_table', 8),
 (71, '2024_11_04_150635_create_society_committee_members_table', 9),
 (72, '2024_11_07_111729_create_society_events_table', 10),
-(73, '2024_11_07_131153_create_society_fund_collections_table', 11);
+(73, '2024_11_07_131153_create_society_fund_collections_table', 11),
+(74, '2024_11_10_131207_create_society_expense_types_table', 12),
+(75, '2024_11_10_160523_create_society_expenses_table', 13);
 
 -- --------------------------------------------------------
 
@@ -1480,9 +1482,12 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('BqlmgLuEDPSIs3vXU5ynvCLGoLHoEFCuGmANA6v3', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoicnRZdnlUenhWeDV2dUt1aFltNE5OZ0RZaGRaYzc2OUJvNHBVQjlWbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyO30=', 1730980617),
-('HaHSNjybrcor5lkhysuCEugtbFIYbizLSPHmd7TA', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWkJXNWFWc0U2M2J5SXJ4NHlOelpINktoZFZ3TjRTVktpWnRhbkVESCI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozODoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2Z1bmRfY29sbGVjdGlvbnMiO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozODoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2Z1bmRfY29sbGVjdGlvbnMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1730973566),
-('sy9svZLYlckAjBNcGNeIXf3Zutm4961qaeAgbhEe', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiSTVwZ3U5c2hyQnhjUXgxYnB0OHB3ck4zWHBxN0d3emh5N01oZ0VlViI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0NToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2Z1bmRfY29sbGVjdGlvbnMvY3JlYXRlIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9mdW5kX2NvbGxlY3Rpb25zL2NyZWF0ZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1730969340);
+('BkXFgaQw5QFpo5qH95rhyK9QnCmGkZU6gQjIblZU', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiamVHdzIzOXBKczRLT2dXRklPSHR1RExscFVlaTN6RTlKU1BNQ3BwYSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1731318831),
+('lgrpd7PXIAgradVTUAVxWBywEC4L0GVBOBUKKG1X', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiTTBYN0VwMVZEbzNJWnZ3bFFFUElrTzVSc0p6T1JLUzNPYVFwZkdWWSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zb2NpZXR5X2V4cGVuc2VzL2NyZWF0ZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1731310528),
+('ORMwb0cDFQiPJnMwmHgWtypV3Zy0v392l2KzamdI', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiNnpJNWV0dHRYbUkxV0x5QkI4dnF5TEFtUnNFc1hNWjZOem5NYUQxdCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6Mzg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9mdW5kX2NvbGxlY3Rpb25zIjt9fQ==', 1731242816),
+('rfKuZ9BPCqiFBvbwT08oLW7ECyeKPhzfV8ZZqiuK', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiOGVhZmpITURRUDV1QmVrUGtQNUh3YVcxSzVTUlhPOXlhNUxkdEt1SiI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozODoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3NvY2lldHlfZXhwZW5zZXMiO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozODoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3NvY2lldHlfZXhwZW5zZXMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyO30=', 1731330678),
+('Tbayx8o4HDfEAgkmPJCtr7a1vp4fUOuEVSFSy7wN', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWlEwTVUzUURwZGhBWVNURmxMeE91cWNucE9XSkI1RWdwV01BRnNkeCI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0NzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3NvY2lldHlfZXhwZW5zZV90eXBlX2xpc3QiO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo0NzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3NvY2lldHlfZXhwZW5zZV90eXBlX2xpc3QiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1731237943),
+('XAm5Ep3U3PagxpbROlonOUAU0vqzle1gSjbXySIu', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiV1hUaDJqRk1DSUY3QXpDU01ONURxUkVPVW5ROVZTcHZHVkVTTk43dCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1731237944);
 
 -- --------------------------------------------------------
 
@@ -1560,6 +1565,46 @@ CREATE TABLE `society_events` (
 
 INSERT INTO `society_events` (`id`, `company_id`, `committee_id`, `event_name`, `event_budget`, `event_start_date`, `event_end_date`, `event_start_time`, `event_end_time`, `event_description`, `event_status`, `event_loaction`, `created_at`, `updated_at`) VALUES
 (2, 2, 2, 'Cultural Festival', '45500.00', '2024-11-15', '2024-11-15', '15:00:00', '18:00:00', NULL, 1, 'Dhanmondi, Dhaka, Bangladesh', '2024-11-07 06:40:31', '2024-11-07 07:06:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `society_expenses`
+--
+
+CREATE TABLE `society_expenses` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `expense_type_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `expense_name` varchar(255) DEFAULT NULL,
+  `expense_date` date DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `expense_amount` decimal(10,2) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `society_expense_types`
+--
+
+CREATE TABLE `society_expense_types` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `type_name` varchar(255) DEFAULT NULL,
+  `active_status` int(11) NOT NULL COMMENT '1 = active, 2 = inactive',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `society_expense_types`
+--
+
+INSERT INTO `society_expense_types` (`id`, `company_id`, `type_name`, `active_status`, `created_at`, `updated_at`) VALUES
+(2, 2, 'Utilities', 1, '2024-11-11 12:47:31', '2024-11-11 12:47:31');
 
 -- --------------------------------------------------------
 
@@ -2181,6 +2226,21 @@ ALTER TABLE `society_events`
   ADD KEY `society_events_committee_id_foreign` (`committee_id`);
 
 --
+-- Indexes for table `society_expenses`
+--
+ALTER TABLE `society_expenses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `society_expenses_company_id_foreign` (`company_id`),
+  ADD KEY `society_expenses_expense_type_id_foreign` (`expense_type_id`);
+
+--
+-- Indexes for table `society_expense_types`
+--
+ALTER TABLE `society_expense_types`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `society_expense_types_company_id_foreign` (`company_id`);
+
+--
 -- Indexes for table `society_fund_collections`
 --
 ALTER TABLE `society_fund_collections`
@@ -2547,7 +2607,7 @@ ALTER TABLE `master_admins`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -2607,6 +2667,18 @@ ALTER TABLE `society_committee_members`
 -- AUTO_INCREMENT for table `society_events`
 --
 ALTER TABLE `society_events`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `society_expenses`
+--
+ALTER TABLE `society_expenses`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `society_expense_types`
+--
+ALTER TABLE `society_expense_types`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -2824,6 +2896,19 @@ ALTER TABLE `society_committee_members`
 ALTER TABLE `society_events`
   ADD CONSTRAINT `society_events_committee_id_foreign` FOREIGN KEY (`committee_id`) REFERENCES `society_committees` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `society_events_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `society_expenses`
+--
+ALTER TABLE `society_expenses`
+  ADD CONSTRAINT `society_expenses_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `society_expenses_expense_type_id_foreign` FOREIGN KEY (`expense_type_id`) REFERENCES `society_expense_types` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `society_expense_types`
+--
+ALTER TABLE `society_expense_types`
+  ADD CONSTRAINT `society_expense_types_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `society_fund_collections`

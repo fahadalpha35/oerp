@@ -89,10 +89,10 @@ class SocietyExpenseController extends Controller
         // Check if the update was successful
      if ($updated){
         // Return a success response
-            return redirect()->back()->with('success_message', 'Society Expense Type is updated successfully!');
+            return redirect()->back()->with('success_message', 'Expense Type is updated successfully!');
         }else{
         // Return a failure response
-            return redirect()->back()->with('error_message', 'Society Expense Type failed or no changes were made');
+            return redirect()->back()->with('error_message', 'Expense Type failed or no changes were made');
         }
     }
 
@@ -101,15 +101,15 @@ class SocietyExpenseController extends Controller
             // Check if the branch exists using Query Builder
             $society_expense_type = DB::table('society_expense_types')->where('id', $id)->first();
             if (!$society_expense_type) {
-                return response()->json(['success' => false, 'message' => 'Society Expense Type is not found.'], 404);
+                return response()->json(['success' => false, 'message' => 'Expense Type is not found.'], 404);
             }
             // Delete the branch using Query Builder
             DB::table('society_expense_types')->where('id', $id)->delete();
             // Return a success response
-            return response()->json(['success' => true, 'message' => 'Society Expense Type has been deleted successfully!']);
+            return response()->json(['success' => true, 'message' => 'Expense Type has been deleted successfully!']);
             } catch (\Exception $e) {
                 // If an error occurs, return an error response
-                return response()->json(['success' => false, 'message' => 'Error deleting Society Expense Type.']);
+                return response()->json(['success' => false, 'message' => 'Error deleting Expense Type.']);
             }
             
     }
@@ -158,7 +158,15 @@ class SocietyExpenseController extends Controller
      */
     public function create()
     {
-        return view('societymanagement::create');
+        $user_company_id = Auth::user()->company_id;
+        
+        $society_expense_types = DB::table('society_expense_types')
+                                   ->select('id','company_id','type_name','active_status')
+                                   ->where('active_status',1)
+                                   ->where('company_id',$user_company_id)
+                                   ->get();
+        
+        return view('societymanagement::expenses.create',compact('society_expense_types'));
     }
 
     /**
@@ -166,7 +174,34 @@ class SocietyExpenseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'expense_type_id' => 'required|numeric',
+            'expense_name' => 'required|string',
+            'expense_date' => 'required|date',
+            'expense_amount' => 'required|numeric'
+        ];
+
+        $customMessages = [
+            'expense_type_id.required' => 'Expense Type is required',
+            'expense_name.required' => 'Expense Name is required',
+            'expense_date.required' => 'Date of Expense is required',
+            'expense_amount.required' => 'Expense Amount is required'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
+        $user_company_id = Auth::user()->company_id;
+        $society_expense = DB::table('society_expenses')
+                            ->insertGetId([
+                            'company_id'=>$user_company_id,
+                            'expense_type_id'=>$request->expense_type_id,
+                            'expense_name'=>$request->expense_name,
+                            'expense_date'=>$request->expense_date,
+                            'description'=>$request->description,
+                            'expense_amount'=>$request->expense_amount
+                            ]);
+
+        return redirect()->route('society_expenses.index')->with('success_message', 'Expense is added successfully!');
     }
 
     /**
@@ -182,7 +217,21 @@ class SocietyExpenseController extends Controller
      */
     public function edit($id)
     {
-        return view('societymanagement::edit');
+        $expense = DB::table('society_expenses')
+                      ->leftJoin('society_expense_types','society_expenses.expense_type_id','society_expense_types.id')
+                      ->select('society_expense_types.type_name as expense_type_name','society_expenses.*')
+                      ->where('society_expenses.id',$id)
+                      ->first();
+
+        $user_company_id = Auth::user()->company_id;
+        
+        $society_expense_types = DB::table('society_expense_types')
+                                    ->select('id','company_id','type_name','active_status')
+                                    ->where('active_status',1)
+                                    ->where('company_id',$user_company_id)
+                                    ->get();
+        
+        return view('societymanagement::expenses.edit',compact('expense','society_expense_types'));
     }
 
     /**
@@ -190,7 +239,41 @@ class SocietyExpenseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'expense_type_id' => 'required|numeric',
+            'expense_name' => 'required|string',
+            'expense_date' => 'required|date',
+            'expense_amount' => 'required|numeric'
+        ];
+
+        $customMessages = [
+            'expense_type_id.required' => 'Expense Type is required',
+            'expense_name.required' => 'Expense Name is required',
+            'expense_date.required' => 'Date of Expense is required',
+            'expense_amount.required' => 'Expense Amount is required'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
+        $data = array();
+        $data['expense_type_id'] = $request->expense_type_id;
+        $data['expense_name'] = $request->expense_name;
+        $data['expense_date'] = $request->expense_date;
+        $data['description'] = $request->description;
+        $data['expense_amount'] = $request->expense_amount;
+        
+        $updated = DB::table('society_expenses')
+                        ->where('id', $id)
+                        ->update($data);
+
+        // Check if the update was successful
+     if ($updated){
+        // Return a success response
+            return redirect()->back()->with('success_message', 'Expense is updated successfully!');
+        }else{
+        // Return a failure response
+            return redirect()->back()->with('error_message', 'Expense failed or no changes were made');
+        }
     }
 
     /**
@@ -198,6 +281,19 @@ class SocietyExpenseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            // Check if the branch exists using Query Builder
+            $expense = DB::table('society_expenses')->where('id', $id)->first();
+            if (!$expense) {
+                return response()->json(['success' => false, 'message' => 'Expense not found.'], 404);
+            }
+            // Delete the branch using Query Builder
+            DB::table('society_expenses')->where('id', $id)->delete();
+            // Return a success response
+            return response()->json(['success' => true, 'message' => 'Expense has been deleted successfully!']);
+        } catch (\Exception $e) {
+            // If an error occurs, return an error response
+            return response()->json(['success' => false, 'message' => 'Error deleting Expense.']);
+        }
     }
 }
