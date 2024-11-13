@@ -256,15 +256,16 @@
             </a>
 
             <!-- First-level sub-menu -->
-            <ul class="collapse nav  @if(Request::is('society_members')) show  
-                                    @elseif(Request::is('society_committees')) show             
-                                    @elseif(Request::is('committee_members')) show             
-                                    @elseif(Request::is('society_events')) show             
-                                    @elseif(Request::is('fund_collections')) show           
-                                    @elseif(Request::is('event_tickets')) show           
-                                    @elseif(Request::is('sold_event_tickets/create')) show           
-                                    @elseif(Request::is('society_expense_type_list')) show         
-                                    @elseif(Request::is('society_expenses')) show         
+            <ul class="collapse nav  @if(Request::is('society_members')) show
+                                    @elseif(Request::is('society_committees')) show
+                                    @elseif(Request::is('committee_members')) show
+                                    @elseif(Request::is('society_events')) show
+                                    @elseif(Request::is('fund_collections')) show
+                                    @elseif(Request::is('event_sponsorships')) show
+                                    @elseif(Request::is('event_tickets')) show
+                                    @elseif(Request::is('sold_event_tickets')) show
+                                    @elseif(Request::is('society_expense_type_list')) show
+                                    @elseif(Request::is('society_expenses')) show
                             @endif" id="societyManagement" style="margin-top: -2px; padding-bottom : 10px">
 
             @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2) || (Auth::user()->role_id == 3))
@@ -316,6 +317,13 @@
                 </a>
              </li>
 
+             <li class="nav-item">
+                <a href="{{ url('event_sponsorships') }}" class="nav-link {{ Request::is('event_sponsorships') ? 'active' : '' }}" style="{{ Request::is('event_sponsorships') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('event_sponsorships') ? 'color: white; !important' : ''}}"></i>
+                <span class="menu-arrow" style="{{ Request::is('event_sponsorships') ? 'color: white; !important' : ''}}">Sponsorships</span>
+                </a>
+             </li>
+
              <!-- ticket -->
              <li class="nav-item">
                 <a class="nav-link" href="#SocietyEventTicket" data-toggle="collapse" aria-expanded="false">
@@ -325,7 +333,7 @@
                 </a>
                 <!-- Second-level sub-menu -->
                 <ul class="collapse nav flex-column ms-3 @if(Request::is('event_tickets')) show
-                            @elseif(Request::is('sold_event_tickets/create')) show
+                            @elseif(Request::is('sold_event_tickets')) show
                             @endif" id="SocietyEventTicket" style="margin-top: -2px; padding-bottom : 10px">
                 
                   <li class="nav-item">
@@ -336,9 +344,9 @@
                   </li>
                  
                   <li class="nav-item">
-                    <a href="{{ url('sold_event_tickets/create') }}" class="nav-link {{ Request::is('sold_event_tickets/create') ? 'active' : '' }}" style="{{ Request::is('sold_event_tickets/create') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('sold_event_tickets/create') ? 'color: white; !important' : ''}}"></i>
-                        <span class="menu-arrow" style="{{ Request::is('sold_event_tickets/create') ? 'color: white; !important' : ''}}">Sold Tickets</span>
+                    <a href="{{ url('sold_event_tickets') }}" class="nav-link {{ Request::is('sold_event_tickets') ? 'active' : '' }}" style="{{ Request::is('sold_event_tickets') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('sold_event_tickets') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('sold_event_tickets') ? 'color: white; !important' : ''}}">Sold Tickets</span>
                       </a>
                   </li>
 

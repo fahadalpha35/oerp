@@ -64,7 +64,7 @@
 
                                 <div class="col-md-12 col-sm-12">
                                     <div  class="form-group mb-4">
-                                        <label>Fund Amount (BDT) <small style="color: red">*</small></label>
+                                        <label>Expense Amount (BDT) <small style="color: red">*</small></label>
                                         <input type="number" step="0.01" required id="expense_amount" name="expense_amount" value="{{old('expense_amount')}}" class="form-control form-control-lg" />
                                     </div>
                                 </div>

@@ -94,7 +94,7 @@
                                 </div>
 
                               </div>
-                              <button type="submit" class="btn btn-success float-right">Submit</button>
+                              <button type="submit" class="btn btn-success float-right">Sale Ticket</button>
                             </form>
                         </div>
                       <!-- /.card-body -->
@@ -175,6 +175,5 @@ jQuery(document).ready(function($) {
 
 })
 
-  
 </script>
 @endpush

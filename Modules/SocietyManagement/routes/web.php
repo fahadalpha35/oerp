@@ -7,6 +7,7 @@ use Modules\SocietyManagement\Http\Controllers\CommitteeController;
 use Modules\SocietyManagement\Http\Controllers\CommitteeMemberController;
 use Modules\SocietyManagement\Http\Controllers\SocietyEventController;
 use Modules\SocietyManagement\Http\Controllers\FundCollectionController;
+use Modules\SocietyManagement\Http\Controllers\SocietyEventSponsorshipController;
 use Modules\SocietyManagement\Http\Controllers\SocietyTicketController;
 use Modules\SocietyManagement\Http\Controllers\SocietySoldTicketController;
 use Modules\SocietyManagement\Http\Controllers\SocietyExpenseController;
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('committee_members', CommitteeMemberController::class);
     Route::resource('society_events', SocietyEventController::class);
     Route::resource('fund_collections', FundCollectionController::class);
+    Route::resource('event_sponsorships', SocietyEventSponsorshipController::class);
     Route::resource('event_tickets', SocietyTicketController::class);
     Route::resource('sold_event_tickets', SocietySoldTicketController::class);
     //event and ticket depedancy

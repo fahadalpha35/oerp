@@ -1,14 +1,13 @@
 @extends('backend.layout.layout')
-
 @section('content')
     <div class="content-wrapper">
 
         <div style="background-color: #fff;border-radius: 20px;">
             <div class="mt-5 row" style="padding: 25px;">
-            <a href="{{ route('sold_event_tickets.create') }}" class="btn btn-success btn-sm">Sale Ticket</a>
+            <a href="{{ route('event_sponsorships.create') }}" class="btn btn-success btn-sm">Add Sponsorship</a>
 
                 <div class="col-md-12 col-sm-12">
-                    <h3 class="mt-2 text-center">Sold Ticket List</h3>
+                    <h3 class="mt-2 text-center">Sponsorship List</h3>
                     <div class="card">
                         <div class="card-body">
                         @if(Session::has('error_message'))
@@ -32,12 +31,12 @@
                                     <thead class="thead-dark">
                                         <tr>
                                             <th>Event Name</th>
-                                            <th>Ticket Selling Date</th>
-                                            <th>Ticket Type</th>
-                                            <th>Ticket Price (BDT)</th>
-                                            <th>Sold Ticket Quantity</th>
-                                            <th>Total Revenue</th>
-                                            {{-- <th>Action</th> --}}
+                                            <th>Sponsor Name</th>
+                                            <th>Contact Number</th>
+                                            <th>Contribution Amount (BDT)</th>
+                                            <th>Amount Collection Date</th>
+                                            <th>Payment Status</th>
+                                            <th>Action</th> <!-- Added Action column -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -53,17 +52,20 @@
     </div>
 @endsection
 
+
 @push('masterScripts')
+
 <script>
-    this.loadDataTable('exampleTable', '{{ route('sold_event_tickets.index') }}',
+    this.loadDataTable('exampleTable', '{{ route('event_sponsorships.index') }}',
         [
+    
             {data: 'event_name', name: 'event_name'},
-            {data: 'ticket_selling_date', name: 'ticket_selling_date'},
-            {data: 'ticket_type_label', name: 'ticket_type_label'},
-            {data: 'ticket_price', name: 'ticket_price'},
-            {data: 'sold_ticket_quantity', name: 'sold_ticket_quantity'},
-            {data: 'total_revenue', name: 'total_revenue'},
-            // {data: 'action', name: 'action', orderable: false, searchable: false},
+            {data: 'sponsor_name', name: 'sponsor_name'},
+            {data: 'contact_number', name: 'contact_number'},
+            {data: 'contribution_amount', name: 'contribution_amount'},
+            {data: 'money_collection_date', name: 'money_collection_date'},
+            {data: 'payment_status_label', name: 'payment_status_label'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
 );
 

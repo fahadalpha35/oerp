@@ -14,9 +14,48 @@ class SocietySoldTicketController extends Controller
 {
     use ValidatesRequests;
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('societymanagement::index');
+        if ($request->ajax()) {
+      
+            $user_company_id = Auth::user()->company_id;
+
+            $sold_tickets = DB::table('society_sold_tickets')
+                          ->leftJoin('society_events','society_sold_tickets.event_id','society_events.id')
+                          ->leftJoin('society_tickets','society_sold_tickets.ticket_id','society_tickets.id')
+                        ->select(
+                            'society_events.event_name',
+                            'society_tickets.ticket_type',
+                            'society_tickets.ticket_price',
+                            'society_sold_tickets.id',
+                            'society_sold_tickets.ticket_selling_date',
+                            'society_sold_tickets.sold_ticket_quantity',
+                            'society_sold_tickets.total_revenue'                    
+                            )
+                        ->where('society_sold_tickets.company_id', $user_company_id)
+                        ->get();
+
+        
+        return DataTables::of($sold_tickets)
+        ->addIndexColumn()
+        ->addColumn('ticket_type_label', function ($row) {
+            if($row->ticket_type == 1){
+                return '<span style = "color : #2b0d99;">Regular</span>';
+            }else{
+                return '<span style = "color : green;">VIP</span>';
+            }
+        })
+        // ->addColumn('action', function($row){
+        //     $btn = '<a href="'.route('sold_event_tickets.edit', $row->id).'" class="edit btn btn-warning btn-sm">Edit</a>';   
+        //     $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(\''.route('sold_event_tickets.destroy', $row->id).'\', '.$row->id.', \'exampleTable\')">Delete</a>';
+
+        //     return $btn;
+        // })
+        ->rawColumns(['ticket_type_label'])
+        ->make(true);
+        }
+
+        return view('societymanagement::sold_tickets.index');
     }
 
     /**
