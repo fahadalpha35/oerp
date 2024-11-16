@@ -122,7 +122,7 @@ class SocietyEventController extends Controller
                             'event_status'=>$request->event_status
                             ]);
 
-        return redirect()->route('society_events.index')->with('success_message', 'Events is added successfully!');
+        return redirect()->route('society_events.index')->with('success_message', 'Event is added successfully!');
     }
 
     /**
