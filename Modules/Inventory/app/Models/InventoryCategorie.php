@@ -13,8 +13,11 @@ class InventoryCategorie extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = [];
+    protected $fillable = ['name','item_id','status'];
 
+    public function item(){
+        return $this->hasOne(InventoryItemCategory::class,'id','item_id');
+    }
     // protected static function newFactory(): InventoryCategorieFactory
     // {
     //     // return InventoryCategorieFactory::new();

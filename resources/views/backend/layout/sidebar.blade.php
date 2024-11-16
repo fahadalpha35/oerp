@@ -175,8 +175,8 @@
                         <span class="menu-arrow" style="{{ Request::is('exit_attendance') ? 'color: white; !important' : ''}}">Exit</span>
                     </a>
                     </li>
-                @endif  
-                           
+                @endif
+
                 <li class="nav-item">
                   <a href="{{ url('attendances') }}" class="nav-link {{ Request::is('attendances') ? 'active' : '' }}" style="{{ Request::is('attendances') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                       <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('attendances') ? 'color: white; !important' : ''}}"></i>
@@ -286,14 +286,14 @@
                 <ul class="collapse nav flex-column ms-3 @if(Request::is('society_committees')) show
                             @elseif(Request::is('committee_members')) show
                             @endif" id="Committee" style="margin-top: -2px; padding-bottom : 10px">
-                
+
                   <li class="nav-item">
                     <a href="{{ url('society_committees') }}" class="nav-link {{ Request::is('society_committees') ? 'active' : '' }}" style="{{ Request::is('society_committees') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_committees') ? 'color: white; !important' : ''}}"></i>
                         <span class="menu-arrow" style="{{ Request::is('society_committees') ? 'color: white; !important' : ''}}">Committees</span>
                       </a>
                   </li>
-                 
+
                   <li class="nav-item">
                     <a href="{{ url('committee_members') }}" class="nav-link {{ Request::is('committee_members') ? 'active' : '' }}" style="{{ Request::is('committee_members') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('committee_members') ? 'color: white; !important' : ''}}"></i>
@@ -350,6 +350,7 @@
                       </a>
                   </li>
 
+
                 </ul>
               </li>
 
@@ -382,6 +383,7 @@
                 </ul>
               </li>
            
+
             @endif
 
               {{-- <li class="nav-item">
@@ -392,8 +394,8 @@
                 </a>
                 <!-- Second-level sub-menu -->
                 <ul class="collapse nav flex-column ms-3 @if(Request::is('society_members')) show
-                            @endif" id="societyMember" style="margin-top: -2px;">  
-                               
+                            @endif" id="societyMember" style="margin-top: -2px;">
+
                 @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2) || (Auth::user()->role_id == 3))
                 <li class="nav-item">
                     <a href="{{ url('society_members') }}" class="nav-link {{ Request::is('society_members') ? 'active' : '' }}" style="{{ Request::is('society_members') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
@@ -413,24 +415,15 @@
 
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#im" aria-expanded="false" aria-controls="im">
-
                 <i class="mdi mdi-warehouse menu-icon"></i>
-
                 <span class="menu-title">Inventory</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="im">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="">Stock Levels</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Reorder Points</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Product Catalog</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Suppliers</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Purchase Orders</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Sales Orders</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Inventory Adjustments</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Stock Transfers</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Reports</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Settings</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('item.index') }}">Item Category</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('category.index') }}">Product Category</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('product.index') }}">Product Managment</a></li>
                 </ul>
             </div>
         </li>

@@ -70,7 +70,6 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate incoming request data
         $request->validate([
             'client_id' => 'required|integer|exists:manufacture_clients,id',
             'product_id' => 'required|integer|exists:inventory_products,id',
