@@ -42,6 +42,8 @@
         <!-- SweetAlert2 CSS -->
         <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.13.3/dist/sweetalert2.min.css " rel="stylesheet">
 
+        <!-- Timepicker CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <style>
         .nav-item .collapse {
             margin-bottom: -5px
@@ -296,6 +298,9 @@
 
         <!-- SweetAlert2 JS -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <!-- Timepicker JS -->
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 
         <!-- Axios -->
