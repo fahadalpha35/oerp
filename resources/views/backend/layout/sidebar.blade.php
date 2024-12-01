@@ -324,6 +324,13 @@
                 </a>
              </li>
 
+             <li class="nav-item">
+                <a href="{{ url('society_insurances') }}" class="nav-link {{ Request::is('society_insurances') ? 'active' : '' }}" style="{{ Request::is('society_insurances') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_insurances') ? 'color: white; !important' : ''}}"></i>
+                <span class="menu-arrow" style="{{ Request::is('society_insurances') ? 'color: white; !important' : ''}}">Insurances</span>
+                </a>
+             </li>
+
              <!-- ticket -->
              <li class="nav-item">
                 <a class="nav-link" href="#SocietyEventTicket" data-toggle="collapse" aria-expanded="false">
