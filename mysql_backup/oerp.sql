@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2024 at 10:14 AM
+-- Generation Time: Dec 01, 2024 at 01:57 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -807,6 +807,21 @@ CREATE TABLE `inventory_damage_and_burned_products` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `inventory_item_categories`
+--
+
+CREATE TABLE `inventory_item_categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` int(11) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `active_status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `inventory_log`
 --
 
@@ -905,6 +920,24 @@ CREATE TABLE `inventory_stock` (
   `warehouse_id` int(11) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
   `unit_price` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inventory_stocks`
+--
+
+CREATE TABLE `inventory_stocks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `purchase` int(11) NOT NULL,
+  `stock` int(11) NOT NULL,
+  `purchase_return` int(11) DEFAULT NULL,
+  `sale` int(11) DEFAULT NULL,
+  `sale_return` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1320,7 +1353,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (76, '2024_11_12_124716_create_society_tickets_table', 14),
 (77, '2024_11_12_165501_create_society_sold_tickets_table', 15),
 (78, '2024_11_13_143233_create_society_event_sponsorships_table', 16),
-(79, '2024_11_13_145100_add_sponsorship_collection_date_to_society_event_sponsorships_table', 17);
+(79, '2024_11_13_145100_add_sponsorship_collection_date_to_society_event_sponsorships_table', 17),
+(80, '2024_11_10_105706_create_inventory_item_categories_table', 18),
+(81, '2024_11_11_135505_create_inventory_stocks_table', 18),
+(82, '2024_12_01_141246_create_society_insurances_table', 19);
 
 -- --------------------------------------------------------
 
@@ -1486,7 +1522,9 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('lLCjeqMtcQTOr0pJ8otzaO6uUosGHeX0k1Td6yDJ', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVXY5Qk94ZTN4NVlXNWFaVXV4TTFFSUU2SXdia0llUlRJaFNFUkNJZiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zb2NpZXR5X2V4cGVuc2VzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1732954705),
+('GDQ8crlX4ODTOR5O5OvFEz36x8FBxkYuVI9Htf9X', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoic3RzTXFRUTZ2UHN1SjRZZlNySVlZWmFQV3pXYzFBWnZRU1dwdUt6MCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jbGVhci1jYWNoZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1733036020),
+('hG59iwr8ZFdXl3qGemx6EOuOIarTIPZhz4U5QAXJ', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiRHluRkJSbXFlYW15S1VqOWpqOVZlU2MzQWR2bXhUanhUeEVzTlVGMSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zb2NpZXR5X2luc3VyYW5jZXMvY3JlYXRlIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2Rhc2hib2FyZCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1733057745),
+('lLCjeqMtcQTOr0pJ8otzaO6uUosGHeX0k1Td6yDJ', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVXY5Qk94ZTN4NVlXNWFaVXV4TTFFSUU2SXdia0llUlRJaFNFUkNJZiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1732970094),
 ('nDNKJdIfYz2wkKbw03eOuNJNW5Kf4DileR5sRcsu', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNGtaUkVZMWJLaWlQVnNOa2xveGVWeFAzNGg2WlNsYkdNbkR0am1TbCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1732439859);
 
 -- --------------------------------------------------------
@@ -1658,6 +1696,27 @@ CREATE TABLE `society_fund_collections` (
 
 INSERT INTO `society_fund_collections` (`id`, `company_id`, `event_id`, `society_member_id`, `purpose`, `description`, `fund_amount`, `fund_collection_date`, `fund_collection_status`, `created_at`, `updated_at`) VALUES
 (3, 2, 2, 9, 1, NULL, 250.00, '2024-11-13', 2, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `society_insurances`
+--
+
+CREATE TABLE `society_insurances` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `member_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `policy_number` varchar(255) NOT NULL,
+  `provider` varchar(255) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `premium_amount` decimal(10,2) DEFAULT NULL,
+  `coverage_details` text DEFAULT NULL,
+  `status` int(11) DEFAULT NULL COMMENT '1 = Active, 2 = Expired',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -2078,6 +2137,12 @@ ALTER TABLE `inventory_damage_and_burned_products`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `inventory_item_categories`
+--
+ALTER TABLE `inventory_item_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `inventory_log`
 --
 ALTER TABLE `inventory_log`
@@ -2111,6 +2176,12 @@ ALTER TABLE `inventory_purchase_returns`
 -- Indexes for table `inventory_stock`
 --
 ALTER TABLE `inventory_stock`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inventory_stocks`
+--
+ALTER TABLE `inventory_stocks`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2340,6 +2411,14 @@ ALTER TABLE `society_fund_collections`
   ADD KEY `society_fund_collections_company_id_foreign` (`company_id`),
   ADD KEY `society_fund_collections_event_id_foreign` (`event_id`),
   ADD KEY `society_fund_collections_society_member_id_foreign` (`society_member_id`);
+
+--
+-- Indexes for table `society_insurances`
+--
+ALTER TABLE `society_insurances`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `society_insurances_company_id_foreign` (`company_id`),
+  ADD KEY `society_insurances_member_id_foreign` (`member_id`);
 
 --
 -- Indexes for table `society_members`
@@ -2575,6 +2654,12 @@ ALTER TABLE `inventory_damage_and_burned_products`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `inventory_item_categories`
+--
+ALTER TABLE `inventory_item_categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `inventory_log`
 --
 ALTER TABLE `inventory_log`
@@ -2608,6 +2693,12 @@ ALTER TABLE `inventory_purchase_returns`
 -- AUTO_INCREMENT for table `inventory_stock`
 --
 ALTER TABLE `inventory_stock`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `inventory_stocks`
+--
+ALTER TABLE `inventory_stocks`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -2716,7 +2807,7 @@ ALTER TABLE `master_admins`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -2801,6 +2892,12 @@ ALTER TABLE `society_expense_types`
 --
 ALTER TABLE `society_fund_collections`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `society_insurances`
+--
+ALTER TABLE `society_insurances`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `society_members`
@@ -3051,6 +3148,13 @@ ALTER TABLE `society_fund_collections`
   ADD CONSTRAINT `society_fund_collections_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `society_fund_collections_event_id_foreign` FOREIGN KEY (`event_id`) REFERENCES `society_events` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `society_fund_collections_society_member_id_foreign` FOREIGN KEY (`society_member_id`) REFERENCES `society_members` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `society_insurances`
+--
+ALTER TABLE `society_insurances`
+  ADD CONSTRAINT `society_insurances_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `society_insurances_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `society_members` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `society_members`
