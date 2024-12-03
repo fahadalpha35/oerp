@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\SocietyManagement\Http\Controllers\SocietyManagementController;
 use Modules\SocietyManagement\Http\Controllers\SocietyMemberController;
+use Modules\SocietyManagement\Http\Controllers\RenewalFeeController;
 use Modules\SocietyManagement\Http\Controllers\CommitteeController;
 use Modules\SocietyManagement\Http\Controllers\CommitteeMemberController;
 use Modules\SocietyManagement\Http\Controllers\SocietyEventController;
@@ -27,6 +28,9 @@ use Modules\SocietyManagement\Http\Controllers\SocietyInsuranceController;
 Route::middleware('auth')->group(function () {
     Route::resource('societymanagement', SocietyManagementController::class)->names('societymanagement');
     Route::resource('society_members', SocietyMemberController::class);
+    Route::resource('renewal_fees', RenewalFeeController::class);
+    Route::get('/generate_renewal_fees', [RenewalFeeController::class, 'generateRenewalFees']);
+    Route::get('/update_member_status', [RenewalFeeController::class, 'updateMemberStatus']);
     Route::resource('society_committees', CommitteeController::class);
     Route::resource('committee_members', CommitteeMemberController::class);
     Route::resource('society_events', SocietyEventController::class);
