@@ -264,6 +264,7 @@
                                     @elseif(Request::is('fund_collections')) show
                                     @elseif(Request::is('event_sponsorships')) show
                                     @elseif(Request::is('society_insurances')) show
+                                    @elseif(Request::is('society_member_loans')) show
                                     @elseif(Request::is('event_tickets')) show
                                     @elseif(Request::is('sold_event_tickets')) show
                                     @elseif(Request::is('society_expense_type_list')) show
@@ -337,6 +338,13 @@
                 <a href="{{ url('society_insurances') }}" class="nav-link {{ Request::is('society_insurances') ? 'active' : '' }}" style="{{ Request::is('society_insurances') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                 <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_insurances') ? 'color: white; !important' : ''}}"></i>
                 <span class="menu-arrow" style="{{ Request::is('society_insurances') ? 'color: white; !important' : ''}}">Insurances</span>
+                </a>
+             </li>
+
+             <li class="nav-item">
+                <a href="{{ url('society_member_loans') }}" class="nav-link {{ Request::is('society_member_loans') ? 'active' : '' }}" style="{{ Request::is('society_member_loans') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_member_loans') ? 'color: white; !important' : ''}}"></i>
+                <span class="menu-arrow" style="{{ Request::is('society_member_loans') ? 'color: white; !important' : ''}}">Member Loans</span>
                 </a>
              </li>
 

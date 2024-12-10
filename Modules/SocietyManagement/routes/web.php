@@ -13,6 +13,7 @@ use Modules\SocietyManagement\Http\Controllers\SocietyTicketController;
 use Modules\SocietyManagement\Http\Controllers\SocietySoldTicketController;
 use Modules\SocietyManagement\Http\Controllers\SocietyExpenseController;
 use Modules\SocietyManagement\Http\Controllers\SocietyInsuranceController;
+use Modules\SocietyManagement\Http\Controllers\SocietyLoanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('event_tickets', SocietyTicketController::class);
     Route::resource('sold_event_tickets', SocietySoldTicketController::class);
     Route::resource('society_insurances', SocietyInsuranceController::class);
+    Route::resource('society_member_loans', SocietyLoanController::class);
     //event and ticket depedancy
     Route::post('/event.ticket.dependancy',[SocietySoldTicketController::class,'event_ticket_dependancy']);
     //ticket and price depedancy

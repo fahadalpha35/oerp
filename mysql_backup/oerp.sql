@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2024 at 01:57 PM
+-- Generation Time: Dec 10, 2024 at 01:25 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1356,7 +1356,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (79, '2024_11_13_145100_add_sponsorship_collection_date_to_society_event_sponsorships_table', 17),
 (80, '2024_11_10_105706_create_inventory_item_categories_table', 18),
 (81, '2024_11_11_135505_create_inventory_stocks_table', 18),
-(82, '2024_12_01_141246_create_society_insurances_table', 19);
+(82, '2024_12_01_141246_create_society_insurances_table', 19),
+(83, '2024_12_03_150408_create_society_renewal_fees_table', 20),
+(84, '2024_12_10_164339_create_society_member_loans_table', 21),
+(85, '2024_12_10_164922_create_society_loan_repayments_table', 22);
 
 -- --------------------------------------------------------
 
@@ -1522,10 +1525,9 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('GDQ8crlX4ODTOR5O5OvFEz36x8FBxkYuVI9Htf9X', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoic3RzTXFRUTZ2UHN1SjRZZlNySVlZWmFQV3pXYzFBWnZRU1dwdUt6MCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jbGVhci1jYWNoZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1733036020),
-('hG59iwr8ZFdXl3qGemx6EOuOIarTIPZhz4U5QAXJ', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiRHluRkJSbXFlYW15S1VqOWpqOVZlU2MzQWR2bXhUanhUeEVzTlVGMSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zb2NpZXR5X2luc3VyYW5jZXMvY3JlYXRlIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2Rhc2hib2FyZCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1733057745),
-('lLCjeqMtcQTOr0pJ8otzaO6uUosGHeX0k1Td6yDJ', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVXY5Qk94ZTN4NVlXNWFaVXV4TTFFSUU2SXdia0llUlRJaFNFUkNJZiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1732970094),
-('nDNKJdIfYz2wkKbw03eOuNJNW5Kf4DileR5sRcsu', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNGtaUkVZMWJLaWlQVnNOa2xveGVWeFAzNGg2WlNsYkdNbkR0am1TbCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1732439859);
+('5zp05jKB8Qmn0LOTz0A99KeyOnOX5GVFT6k8Zgfk', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMzB2M0J6RUFtUzlXS1l3ZXpHZ2RPRWpXak9lR0VreVRNZEhzMFNKZiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1733833112),
+('q2HJ2889CZl3PGcyB9qGJ4SW5EFZFUxqcXcMAaMH', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZWV1dXN5cGU3VEhVMmZjZEpTdjN2aXdyZzZ0Y2lvdWFhUXNJRzBteCI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0MjoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3NvY2lldHlfbWVtYmVyX2xvYW5zIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zb2NpZXR5X21lbWJlcl9sb2FucyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1733833112),
+('x4ol1eEPOzbP6k7ZleTDZNbUNrG7fHqgFqTjjaDT', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUFgzRGV2U2tFTkxKSFVmYnFPSXRPdTlLVVpWcHZPUEdBQUlsTFVPMyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozNDoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3JlbmV3YWxfZmVlcyI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI3OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1733833510);
 
 -- --------------------------------------------------------
 
@@ -1721,6 +1723,23 @@ CREATE TABLE `society_insurances` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `society_loan_repayments`
+--
+
+CREATE TABLE `society_loan_repayments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `loan_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `due_date` date DEFAULT NULL,
+  `amount_due` decimal(10,2) DEFAULT NULL,
+  `amount_paid` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `status` int(11) DEFAULT NULL COMMENT '1 = unpaid, 2 = paid',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `society_members`
 --
 
@@ -1750,6 +1769,52 @@ CREATE TABLE `society_members` (
 
 INSERT INTO `society_members` (`id`, `name`, `email`, `contact_number`, `address`, `joining_date`, `expiration_date`, `membership_fee`, `membership_type`, `active_status`, `created_at`, `updated_at`, `company_id`, `permanent_address`, `member_image`, `member_unique_id`, `designation`) VALUES
 (9, 'Shuvo Mahmud', 'shuvo@gmail.com', '01514470118', 'middle badda, dhaka, bangladesh', '2024-11-01', NULL, 2500.00, 1, 1, '2024-11-03 09:08:01', '2024-11-05 09:18:34', 2, 'middle badda, dhaka, bangladesh', 'society_members/202411051730798314.png', 'MEM0001', 'General Member');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `society_member_loans`
+--
+
+CREATE TABLE `society_member_loans` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `member_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `loan_amount` decimal(10,2) DEFAULT NULL,
+  `interest_rate` decimal(5,2) DEFAULT NULL,
+  `total_amount_due` decimal(10,2) DEFAULT NULL,
+  `repayment_term` int(11) DEFAULT NULL COMMENT 'Number of months',
+  `loan_start_date` date DEFAULT NULL,
+  `loan_end_date` date DEFAULT NULL,
+  `status` int(11) DEFAULT NULL COMMENT '1 = pending, 2 = approved, 3 = rejected, 4 = completed',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `society_member_loans`
+--
+
+INSERT INTO `society_member_loans` (`id`, `company_id`, `member_id`, `loan_amount`, `interest_rate`, `total_amount_due`, `repayment_term`, `loan_start_date`, `loan_end_date`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2, 9, 120.00, 10.00, 122.00, 2, '2024-12-10', '2025-02-10', 1, '2024-12-10 12:15:32', '2024-12-10 12:20:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `society_renewal_fees`
+--
+
+CREATE TABLE `society_renewal_fees` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `member_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
+  `due_date` date DEFAULT NULL,
+  `payment_date` date DEFAULT NULL,
+  `status` int(11) DEFAULT NULL COMMENT '1 = unpaid, 2 = paid, 3 = overdue',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -2421,12 +2486,35 @@ ALTER TABLE `society_insurances`
   ADD KEY `society_insurances_member_id_foreign` (`member_id`);
 
 --
+-- Indexes for table `society_loan_repayments`
+--
+ALTER TABLE `society_loan_repayments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `society_loan_repayments_loan_id_foreign` (`loan_id`);
+
+--
 -- Indexes for table `society_members`
 --
 ALTER TABLE `society_members`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `society_members_email_unique` (`email`),
   ADD KEY `society_members_company_id_foreign` (`company_id`);
+
+--
+-- Indexes for table `society_member_loans`
+--
+ALTER TABLE `society_member_loans`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `society_member_loans_company_id_foreign` (`company_id`),
+  ADD KEY `society_member_loans_member_id_foreign` (`member_id`);
+
+--
+-- Indexes for table `society_renewal_fees`
+--
+ALTER TABLE `society_renewal_fees`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `society_renewal_fees_company_id_foreign` (`company_id`),
+  ADD KEY `society_renewal_fees_member_id_foreign` (`member_id`);
 
 --
 -- Indexes for table `society_sold_tickets`
@@ -2807,7 +2895,7 @@ ALTER TABLE `master_admins`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -2897,6 +2985,12 @@ ALTER TABLE `society_fund_collections`
 -- AUTO_INCREMENT for table `society_insurances`
 --
 ALTER TABLE `society_insurances`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `society_loan_repayments`
+--
+ALTER TABLE `society_loan_repayments`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -2904,6 +2998,18 @@ ALTER TABLE `society_insurances`
 --
 ALTER TABLE `society_members`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `society_member_loans`
+--
+ALTER TABLE `society_member_loans`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `society_renewal_fees`
+--
+ALTER TABLE `society_renewal_fees`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `society_sold_tickets`
@@ -3157,10 +3263,30 @@ ALTER TABLE `society_insurances`
   ADD CONSTRAINT `society_insurances_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `society_members` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `society_loan_repayments`
+--
+ALTER TABLE `society_loan_repayments`
+  ADD CONSTRAINT `society_loan_repayments_loan_id_foreign` FOREIGN KEY (`loan_id`) REFERENCES `society_member_loans` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `society_members`
 --
 ALTER TABLE `society_members`
   ADD CONSTRAINT `society_members_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `society_member_loans`
+--
+ALTER TABLE `society_member_loans`
+  ADD CONSTRAINT `society_member_loans_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `society_member_loans_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `society_members` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `society_renewal_fees`
+--
+ALTER TABLE `society_renewal_fees`
+  ADD CONSTRAINT `society_renewal_fees_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `society_renewal_fees_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `society_members` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `society_sold_tickets`
