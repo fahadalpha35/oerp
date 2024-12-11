@@ -44,6 +44,13 @@
 
                                 <div class="col-md-12 col-sm-12">
                                     <div  class="form-group mb-4">
+                                    <label for="loan_start_date" class="form-label">Loan Start Date <small style="color: red">*</small></label>
+                                    <input type="date" name="loan_start_date" id="loan_start_date" value="{{old('loan_start_date')}}" class="form-control form-control-lg" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12">
+                                    <div  class="form-group mb-4">
                                     <label for="loan_amount" class="form-label">Loan Amount <small style="color: red">*</small></label>
                                     <input type="number" name="loan_amount" id="loan_amount" value="{{old('loan_amount')}}" class="form-control form-control-lg" required>
                                     </div>

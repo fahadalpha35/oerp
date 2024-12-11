@@ -4,10 +4,8 @@
 
         <div style="background-color: #fff;border-radius: 20px;">
             <div class="mt-5 row" style="padding: 25px;">
-            <a href="{{ route('society_member_loans.create') }}" class="btn btn-success btn-sm">Add Loan</a>
-
                 <div class="col-md-12 col-sm-12">
-                    <h3 class="mt-2 text-center">Members Loan List</h3>
+                    <h3 class="mt-2 text-center">Loan Repayments List</h3>
                     <div class="card">
                         <div class="card-body">
                         @if(Session::has('error_message'))
@@ -30,14 +28,10 @@
                                 <table id="exampleTable" class="table table-bordered table-hover">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th>Member Name</th>
                                             <th>Loan Number</th>
-                                            <th>Loan Amount (BDT)</th>
-                                            <th>Interest Rate</th>
-                                            <th>Total Amount Due (BDT)</th>
-                                            <th>Repayment Term</th>                                           
-                                            <th>Loan Start Date</th>                                           
-                                            <th>Loan End Date</th>                                           
+                                            <th>Due Date</th>
+                                            <th>Amount Due (BDT)</th>
+                                            <th>Amount Paid (BDT)</th>                                   
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -59,17 +53,13 @@
 @push('masterScripts')
 
 <script>
-    this.loadDataTable('exampleTable', '{{ route('society_member_loans.index') }}',
+    this.loadDataTable('exampleTable', '{{ route('loan_repayment_list') }}',
         [
     
-            {data: 'member_name', name: 'member_name'},
             {data: 'loan_number', name: 'loan_number'},
-            {data: 'loan_amount', name: 'loan_amount'},
-            {data: 'interest_rate', name: 'interest_rate'},
-            {data: 'total_amount_due', name: 'total_amount_due'},
-            {data: 'repayment_term', name: 'repayment_term'},
-            {data: 'loan_start_date', name: 'loan_start_date'},
-            {data: 'loan_end_date', name: 'loan_end_date'},
+            {data: 'due_date', name: 'due_date'},
+            {data: 'amount_due', name: 'amount_due'},
+            {data: 'amount_paid', name: 'amount_paid'},
             {data: 'status_label', name: 'status_label'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2024 at 01:25 PM
+-- Generation Time: Dec 11, 2024 at 01:19 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1359,7 +1359,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (82, '2024_12_01_141246_create_society_insurances_table', 19),
 (83, '2024_12_03_150408_create_society_renewal_fees_table', 20),
 (84, '2024_12_10_164339_create_society_member_loans_table', 21),
-(85, '2024_12_10_164922_create_society_loan_repayments_table', 22);
+(85, '2024_12_10_164922_create_society_loan_repayments_table', 22),
+(86, '2024_12_11_164456_add_loan_number_to_society_member_loans_table', 23),
+(87, '2024_12_11_175518_add_repayment_status_to_society_loan_repayments_table', 24);
 
 -- --------------------------------------------------------
 
@@ -1525,9 +1527,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('5zp05jKB8Qmn0LOTz0A99KeyOnOX5GVFT6k8Zgfk', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMzB2M0J6RUFtUzlXS1l3ZXpHZ2RPRWpXak9lR0VreVRNZEhzMFNKZiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1733833112),
-('q2HJ2889CZl3PGcyB9qGJ4SW5EFZFUxqcXcMAaMH', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZWV1dXN5cGU3VEhVMmZjZEpTdjN2aXdyZzZ0Y2lvdWFhUXNJRzBteCI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0MjoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3NvY2lldHlfbWVtYmVyX2xvYW5zIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zb2NpZXR5X21lbWJlcl9sb2FucyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1733833112),
-('x4ol1eEPOzbP6k7ZleTDZNbUNrG7fHqgFqTjjaDT', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUFgzRGV2U2tFTkxKSFVmYnFPSXRPdTlLVVpWcHZPUEdBQUlsTFVPMyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozNDoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3JlbmV3YWxfZmVlcyI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI3OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1733833510);
+('txrQ12smwM95wW3ylJ0kOkMrYsGqzYhfeGNsvitk', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidFhDWUQ3Tkw0WG5BUFBRQzhVWmI2QjczZ2FPQnpGM0Jydjd4Sm1QayI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0MjoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3NvY2lldHlfbWVtYmVyX2xvYW5zIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2FuX3JlcGF5bWVudF9saXN0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1733919549);
 
 -- --------------------------------------------------------
 
@@ -1734,8 +1734,36 @@ CREATE TABLE `society_loan_repayments` (
   `amount_paid` decimal(10,2) NOT NULL DEFAULT 0.00,
   `status` int(11) DEFAULT NULL COMMENT '1 = unpaid, 2 = paid',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `repayment_status` int(11) DEFAULT NULL COMMENT '1 = unpaid, 2 = partially_paid, 3 = paid'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `society_loan_repayments`
+--
+
+INSERT INTO `society_loan_repayments` (`id`, `loan_id`, `due_date`, `amount_due`, `amount_paid`, `status`, `created_at`, `updated_at`, `repayment_status`) VALUES
+(2, 7, '2025-01-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:36', 1),
+(3, 7, '2025-02-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:39', 1),
+(4, 7, '2025-03-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:41', 1),
+(5, 7, '2025-04-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:44', 1),
+(6, 7, '2025-05-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:46', 1),
+(7, 7, '2025-06-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:48', 1),
+(8, 7, '2025-07-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:50', 1),
+(9, 7, '2025-08-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:53', 1),
+(10, 7, '2025-09-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:55', 1),
+(11, 8, '2025-01-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(12, 8, '2025-02-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(13, 8, '2025-03-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(14, 8, '2025-04-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(15, 8, '2025-05-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(16, 8, '2025-06-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(17, 8, '2025-07-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(18, 8, '2025-08-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(19, 8, '2025-09-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(20, 8, '2025-10-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(21, 8, '2025-11-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(22, 8, '2025-12-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1);
 
 -- --------------------------------------------------------
 
@@ -1788,15 +1816,17 @@ CREATE TABLE `society_member_loans` (
   `loan_end_date` date DEFAULT NULL,
   `status` int(11) DEFAULT NULL COMMENT '1 = pending, 2 = approved, 3 = rejected, 4 = completed',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `loan_number` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `society_member_loans`
 --
 
-INSERT INTO `society_member_loans` (`id`, `company_id`, `member_id`, `loan_amount`, `interest_rate`, `total_amount_due`, `repayment_term`, `loan_start_date`, `loan_end_date`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 9, 120.00, 10.00, 122.00, 2, '2024-12-10', '2025-02-10', 1, '2024-12-10 12:15:32', '2024-12-10 12:20:55');
+INSERT INTO `society_member_loans` (`id`, `company_id`, `member_id`, `loan_amount`, `interest_rate`, `total_amount_due`, `repayment_term`, `loan_start_date`, `loan_end_date`, `status`, `created_at`, `updated_at`, `loan_number`) VALUES
+(7, 2, 9, 580.00, 7.00, 610.45, 9, '2024-12-13', '2025-09-13', 1, '2024-12-11 11:43:01', '2024-12-11 11:43:01', 'LN-9-20241211174301'),
+(8, 2, 9, 1250.00, 4.00, 1300.00, 12, '2024-12-23', '2025-12-23', 1, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 'LN-9-20241211175712');
 
 -- --------------------------------------------------------
 
@@ -2895,7 +2925,7 @@ ALTER TABLE `master_admins`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -2991,7 +3021,7 @@ ALTER TABLE `society_insurances`
 -- AUTO_INCREMENT for table `society_loan_repayments`
 --
 ALTER TABLE `society_loan_repayments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `society_members`
@@ -3003,7 +3033,7 @@ ALTER TABLE `society_members`
 -- AUTO_INCREMENT for table `society_member_loans`
 --
 ALTER TABLE `society_member_loans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `society_renewal_fees`

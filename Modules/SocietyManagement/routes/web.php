@@ -41,6 +41,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('sold_event_tickets', SocietySoldTicketController::class);
     Route::resource('society_insurances', SocietyInsuranceController::class);
     Route::resource('society_member_loans', SocietyLoanController::class);
+
+    //loan repayment
+    Route::get('/loan_repayment_list', [SocietyLoanController::class, 'loan_repayment_list'])->name('loan_repayment_list');
+    Route::post('/repay_loan/{repayment_id}', [SocietyLoanController::class, 'repay_loan'])->name('repay_loan');
+
     //event and ticket depedancy
     Route::post('/event.ticket.dependancy',[SocietySoldTicketController::class,'event_ticket_dependancy']);
     //ticket and price depedancy
