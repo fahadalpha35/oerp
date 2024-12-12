@@ -40,7 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('event_tickets', SocietyTicketController::class);
     Route::resource('sold_event_tickets', SocietySoldTicketController::class);
     Route::resource('society_insurances', SocietyInsuranceController::class);
+    //member loans
     Route::resource('society_member_loans', SocietyLoanController::class);
+    Route::get('/society_member_loan_approval/{loan_id}', [SocietyLoanController::class, 'loan_approval'])->name('loan_approval');
 
     //loan repayment
     Route::get('/loan_repayment_list', [SocietyLoanController::class, 'loan_repayment_list'])->name('loan_repayment_list');
