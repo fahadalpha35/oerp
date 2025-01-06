@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2024 at 01:19 PM
+-- Generation Time: Dec 12, 2024 at 12:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1527,7 +1527,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('txrQ12smwM95wW3ylJ0kOkMrYsGqzYhfeGNsvitk', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidFhDWUQ3Tkw0WG5BUFBRQzhVWmI2QjczZ2FPQnpGM0Jydjd4Sm1QayI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0MjoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3NvY2lldHlfbWVtYmVyX2xvYW5zIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2FuX3JlcGF5bWVudF9saXN0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1733919549);
+('BmsU7juv8GtBvIJOtImwJxtTNfbXM8nDV2KwxV2K', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoid1ZLSk8wemN6amllc2Rjb1ptOGdhM2dHc0JVMWhaZHZyWXNQTDlwOSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zb2NpZXR5X21lbWJlcl9sb2FucyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1734001917);
 
 -- --------------------------------------------------------
 
@@ -1743,27 +1743,10 @@ CREATE TABLE `society_loan_repayments` (
 --
 
 INSERT INTO `society_loan_repayments` (`id`, `loan_id`, `due_date`, `amount_due`, `amount_paid`, `status`, `created_at`, `updated_at`, `repayment_status`) VALUES
-(2, 7, '2025-01-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:36', 1),
-(3, 7, '2025-02-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:39', 1),
-(4, 7, '2025-03-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:41', 1),
-(5, 7, '2025-04-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:44', 1),
-(6, 7, '2025-05-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:46', 1),
-(7, 7, '2025-06-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:48', 1),
-(8, 7, '2025-07-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:50', 1),
-(9, 7, '2025-08-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:53', 1),
-(10, 7, '2025-09-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:55', 1),
-(11, 8, '2025-01-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
-(12, 8, '2025-02-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
-(13, 8, '2025-03-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
-(14, 8, '2025-04-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
-(15, 8, '2025-05-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
-(16, 8, '2025-06-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
-(17, 8, '2025-07-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
-(18, 8, '2025-08-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
-(19, 8, '2025-09-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
-(20, 8, '2025-10-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
-(21, 8, '2025-11-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
-(22, 8, '2025-12-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1);
+(1, 9, '2025-01-12', 5625.00, 0.00, NULL, '2024-12-12 10:46:22', '2024-12-12 10:46:22', 1),
+(2, 9, '2025-02-12', 5625.00, 0.00, NULL, '2024-12-12 10:46:22', '2024-12-12 10:46:22', 1),
+(3, 9, '2025-03-12', 5625.00, 5000.00, NULL, '2024-12-12 10:46:22', '2024-12-12 10:46:37', 2),
+(4, 9, '2025-04-12', 5625.00, 0.00, NULL, '2024-12-12 10:46:22', '2024-12-12 10:46:22', 1);
 
 -- --------------------------------------------------------
 
@@ -1825,8 +1808,8 @@ CREATE TABLE `society_member_loans` (
 --
 
 INSERT INTO `society_member_loans` (`id`, `company_id`, `member_id`, `loan_amount`, `interest_rate`, `total_amount_due`, `repayment_term`, `loan_start_date`, `loan_end_date`, `status`, `created_at`, `updated_at`, `loan_number`) VALUES
-(7, 2, 9, 580.00, 7.00, 610.45, 9, '2024-12-13', '2025-09-13', 1, '2024-12-11 11:43:01', '2024-12-11 11:43:01', 'LN-9-20241211174301'),
-(8, 2, 9, 1250.00, 4.00, 1300.00, 12, '2024-12-23', '2025-12-23', 1, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 'LN-9-20241211175712');
+(9, 2, 9, 22500.00, 12.00, 23400.00, 4, '2024-12-12', '2025-04-12', 2, '2024-12-12 10:44:54', '2024-12-12 10:46:22', 'LN-9-20241212164454'),
+(10, 2, 9, 1500.00, 8.00, 1570.00, 7, '2024-12-16', '2025-07-16', 1, '2024-12-12 10:47:23', '2024-12-12 11:11:52', 'LN-9-20241212164723');
 
 -- --------------------------------------------------------
 
@@ -3021,7 +3004,7 @@ ALTER TABLE `society_insurances`
 -- AUTO_INCREMENT for table `society_loan_repayments`
 --
 ALTER TABLE `society_loan_repayments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `society_members`
@@ -3033,7 +3016,7 @@ ALTER TABLE `society_members`
 -- AUTO_INCREMENT for table `society_member_loans`
 --
 ALTER TABLE `society_member_loans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `society_renewal_fees`

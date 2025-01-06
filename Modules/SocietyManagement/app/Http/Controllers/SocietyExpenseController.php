@@ -174,32 +174,45 @@ class SocietyExpenseController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'expense_type_id' => 'required|numeric',
-            'expense_name' => 'required|string',
-            'expense_date' => 'required|date',
-            'expense_amount' => 'required|numeric'
-        ];
+        // $rules = [
+        //     'expense_type_id' => 'required|numeric',
+        //     'expense_name' => 'required|string',
+        //     'expense_date' => 'required|date',
+        //     'expense_amount' => 'required|numeric'
+        // ];
 
-        $customMessages = [
-            'expense_type_id.required' => 'Expense Type is required',
-            'expense_name.required' => 'Expense Name is required',
-            'expense_date.required' => 'Date of Expense is required',
-            'expense_amount.required' => 'Expense Amount is required'
-        ];
+        // $customMessages = [
+        //     'expense_type_id.required' => 'Expense Type is required',
+        //     'expense_name.required' => 'Expense Name is required',
+        //     'expense_date.required' => 'Date of Expense is required',
+        //     'expense_amount.required' => 'Expense Amount is required'
+        // ];
 
-        $this->validate($request, $rules, $customMessages);
+        // $this->validate($request, $rules, $customMessages);
 
         $user_company_id = Auth::user()->company_id;
-        $society_expense = DB::table('society_expenses')
-                            ->insertGetId([
-                            'company_id'=>$user_company_id,
-                            'expense_type_id'=>$request->expense_type_id,
-                            'expense_name'=>$request->expense_name,
-                            'expense_date'=>$request->expense_date,
-                            'description'=>$request->description,
-                            'expense_amount'=>$request->expense_amount
-                            ]);
+        $expense_type_ids = $request->expense_type_id;
+        $expense_names = $request->expense_name;
+        $expense_dates = $request->expense_date;
+        $descriptions = $request->description;
+        $expense_amounts = $request->expense_amount;   
+
+        foreach ($expense_type_ids as $key => $expense_type_id) {
+                $expense_name = $expense_names[$key] ?? null;
+                $expense_date = $expense_dates[$key] ?? null;
+                $description = $descriptions[$key] ?? null; 
+                $expense_amount = $expense_amounts[$key] ?? null;
+
+            $society_expense = DB::table('society_expenses')
+                                    ->insertGetId([
+                                    'company_id'=>$user_company_id,
+                                    'expense_type_id'=>$expense_type_id,
+                                    'expense_name'=>$expense_name,
+                                    'expense_date'=>$expense_date,
+                                    'description'=>$description,
+                                    'expense_amount'=>$expense_amount
+                                    ]);
+        }
 
         return redirect()->route('society_expenses.index')->with('success_message', 'Expense is added successfully!');
     }
