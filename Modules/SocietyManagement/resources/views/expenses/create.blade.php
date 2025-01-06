@@ -26,53 +26,73 @@
                                     </button>
                                 </div>
                             @endif
+
                             <form action="{{route('society_expenses.store')}}" method="POST">
                                 @csrf
-                            <div class="row">
+                                <div class="table-responsive">
+                                <table id="dynamicTable" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Expense Type</th>
+                                            <th>Expense Name</th>
+                                            <th>Expense Date</th>
+                                            <th>Description</th>
+                                            <th>Expense Amount (BDT)</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>                                       
+                                        <!-- Expense Type Select -->
+                                        <td class="form-group">
+                                            <select name="expense_type_id[]" class="form-control select2" required>
+                                                <option value="">Select</option>
+                                                @foreach($society_expense_types as $society_expense_type)
+                                                    <option value="{{$society_expense_type->id}}">{{$society_expense_type->type_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
 
-                                <div class="col-md-12 col-sm-12">
-                                    <div class="form-group mb-4">
-                                        <label>Expense Type <small style="color: red">*</small></label>
-                                        <select required  class="form-control select2" id="expense_type_id" name="expense_type_id" style="width: 100%;">
-                                         @foreach($society_expense_types as $society_expense_type)
-                                          <option value="{{$society_expense_type->id}}">{{$society_expense_type->type_name}}</option>
-                                          @endforeach
-                                      </select>
-                                      </div>
+                                        <!-- Expense Name Input -->
+                                        <td class="form-group">
+                                            <input type="text" name="expense_name[]" class="name form-control" required>
+                                        </td>
+
+                                        <!-- Expense Date -->
+                                        <td class="form-group">
+                                            <input type="date" name="expense_date[]" class="name form-control" required>
+                                        </td>
+
+                                        <!-- Description -->
+                                        <td class="form-group">
+                                            <input type="text" name="description[]" class="name form-control" required>
+                                        </td>
+                                        
+                                        <!-- Amount Input -->
+                                        <td class="form-group">
+                                            <input type="number" name="expense_amount[]" class="amount form-control" min="0" step="0.01" required>
+                                        </td>
+                                                                                                                         
+                                        <!-- Action Buttons -->
+                                        <td class="form-group">
+                                            <button type="button" class="btn btn-info addRow">Add Row</button>
+                                        </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                                 </div>
+                                <br>
 
-                                <div class="col-md-12 col-sm-12">
-                                    <div  class="form-group mb-4">
-                                        <label>Expense Name <small style="color: red">*</small></label>
-                                        <input type="text" placeholder="Expense Name" required id="expense_name" name="expense_name" value="{{old('type_name')}}" class="form-control form-control-lg" />
-                                    </div>
+                                <!-- Total Amount -->
+                                <div class="form-row">
+                                <div class="form-group col-md-6 col-sm-6 total">
+                                    <label for="total">Total</label>
+                                    <input id="totalAmount" type="text" step="0.01" class="form-control" name="" readonly>
                                 </div>
-
-                                <div class="col-md-12 col-sm-12">
-                                    <div  class="form-group mb-4">
-                                        <label>Expense Date <small style="color: red">*</small></label>
-                                        <input type="date" required id="expense_date" name="expense_date" value="{{old('expense_date')}}" class="form-control form-control-lg" />
-                                    </div>
                                 </div>
-
-                                <div class="col-md-12 col-sm-12">
-                                    <div  class="form-group mb-4">
-                                        <label>Description </label>
-                                        <textarea name="description" id="description" class="form-control">{{old('description')}}</textarea>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12 col-sm-12">
-                                    <div  class="form-group mb-4">
-                                        <label>Expense Amount (BDT) <small style="color: red">*</small></label>
-                                        <input type="number" step="0.01" required id="expense_amount" name="expense_amount" value="{{old('expense_amount')}}" class="form-control form-control-lg" />
-                                    </div>
-                                </div>
-
-                              </div>
                               <button type="submit" class="btn btn-success float-right">Submit</button>
-                            </form>
-                        </div>
+                            </form>                            
+                      </div>
                       <!-- /.card-body -->
                     </div>
               </div>
@@ -91,6 +111,73 @@
 $.noConflict(); // Ensures jQuery does not conflict with other libraries
 jQuery(document).ready(function($) {
     $('.select2').select2();
+
+
+        // Function to calculate the total amount
+        function calculateTotal() {
+            let total = 0;
+            $('.amount').each(function() {
+                let amount = parseFloat($(this).val()) || 0;
+                total += amount;
+            });
+            $('#totalAmount').val(total.toFixed(2));
+        }
+
+        // Initialize total on page load
+        calculateTotal();
+
+         // Add new row
+         $('.addRow').on('click', function() {
+            let newRow = `<tr>
+                           <!-- Expense Type Select -->
+                            <td class="form-group">
+                                <select name="expense_type_id[]" class="form-control select2" required>
+                                    <option value="">Select</option>
+                                    @foreach($society_expense_types as $society_expense_type)
+                                        <option value="{{$society_expense_type->id}}">{{$society_expense_type->type_name}}</option>
+                                    @endforeach
+                                </select>
+                            </td>
+
+                            <!-- Expense Name Input -->
+                            <td class="form-group">
+                                <input type="text" name="expense_name[]" class="name form-control" required>
+                            </td>
+
+                            <!-- Expense Date -->
+                            <td class="form-group">
+                                <input type="date" name="expense_date[]" class="name form-control" required>
+                            </td>
+
+                            <!-- Description -->
+                            <td class="form-group">
+                                <input type="text" name="description[]" class="name form-control" required>
+                            </td>
+                            
+                            <!-- Amount Input -->
+                            <td class="form-group">
+                                <input type="number" name="expense_amount[]" class="amount form-control" min="0" step="0.01" required>
+                            </td>
+                            
+                            <!-- Remove Button -->
+                            <td class="form-group">
+                                <button type="button" class="btn btn-danger removeRow">Remove</button>
+                            </td>
+                          </tr>`;
+            $('#dynamicTable tbody').append(newRow);
+            $('.select2').select2();  // Re-initialize select2 for the new select
+        });
+
+        // Remove row
+        $(document).on('click', '.removeRow', function() {
+            $(this).closest('tr').remove();
+            calculateTotal(); // Recalculate total after removal
+        });
+
+        // Update total when amount changes
+        $(document).on('input', '.amount', function() {
+            calculateTotal();
+        });
 })
 </script>
 @endpush
