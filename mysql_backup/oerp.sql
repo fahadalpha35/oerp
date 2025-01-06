@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2024 at 02:30 PM
+-- Generation Time: Dec 11, 2024 at 01:19 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -807,6 +807,21 @@ CREATE TABLE `inventory_damage_and_burned_products` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `inventory_item_categories`
+--
+
+CREATE TABLE `inventory_item_categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` int(11) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `active_status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `inventory_log`
 --
 
@@ -905,6 +920,24 @@ CREATE TABLE `inventory_stock` (
   `warehouse_id` int(11) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
   `unit_price` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inventory_stocks`
+--
+
+CREATE TABLE `inventory_stocks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `purchase` int(11) NOT NULL,
+  `stock` int(11) NOT NULL,
+  `purchase_return` int(11) DEFAULT NULL,
+  `sale` int(11) DEFAULT NULL,
+  `sale_return` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1318,7 +1351,17 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (74, '2024_11_10_131207_create_society_expense_types_table', 12),
 (75, '2024_11_10_160523_create_society_expenses_table', 13),
 (76, '2024_11_12_124716_create_society_tickets_table', 14),
-(77, '2024_11_12_165501_create_society_sold_tickets_table', 15);
+(77, '2024_11_12_165501_create_society_sold_tickets_table', 15),
+(78, '2024_11_13_143233_create_society_event_sponsorships_table', 16),
+(79, '2024_11_13_145100_add_sponsorship_collection_date_to_society_event_sponsorships_table', 17),
+(80, '2024_11_10_105706_create_inventory_item_categories_table', 18),
+(81, '2024_11_11_135505_create_inventory_stocks_table', 18),
+(82, '2024_12_01_141246_create_society_insurances_table', 19),
+(83, '2024_12_03_150408_create_society_renewal_fees_table', 20),
+(84, '2024_12_10_164339_create_society_member_loans_table', 21),
+(85, '2024_12_10_164922_create_society_loan_repayments_table', 22),
+(86, '2024_12_11_164456_add_loan_number_to_society_member_loans_table', 23),
+(87, '2024_12_11_175518_add_repayment_status_to_society_loan_repayments_table', 24);
 
 -- --------------------------------------------------------
 
@@ -1484,7 +1527,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('nJGsPtF5g1OFs6TcDYuvTGWeqiB4z1WaJeegOQZx', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUzV0TVVmcG9LenZQUzZndXVNVUJ4Q1lhVGxqMkVHWnFMa3Zlc0d5diI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zb2xkX2V2ZW50X3RpY2tldHMvY3JlYXRlIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1731418186);
+('txrQ12smwM95wW3ylJ0kOkMrYsGqzYhfeGNsvitk', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidFhDWUQ3Tkw0WG5BUFBRQzhVWmI2QjczZ2FPQnpGM0Jydjd4Sm1QayI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0MjoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3NvY2lldHlfbWVtYmVyX2xvYW5zIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2FuX3JlcGF5bWVudF9saXN0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1733919549);
 
 -- --------------------------------------------------------
 
@@ -1566,6 +1609,32 @@ INSERT INTO `society_events` (`id`, `company_id`, `committee_id`, `event_name`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `society_event_sponsorships`
+--
+
+CREATE TABLE `society_event_sponsorships` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `event_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `sponsor_name` varchar(255) DEFAULT NULL,
+  `contact_number` varchar(255) DEFAULT NULL,
+  `contribution_amount` decimal(10,2) DEFAULT NULL,
+  `payment_status` int(11) DEFAULT NULL COMMENT '1 = pending, 2 = collected',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `money_collection_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `society_event_sponsorships`
+--
+
+INSERT INTO `society_event_sponsorships` (`id`, `company_id`, `event_id`, `sponsor_name`, `contact_number`, `contribution_amount`, `payment_status`, `created_at`, `updated_at`, `money_collection_date`) VALUES
+(3, 2, 2, 'Nipa Khatun', '01514470118', 450.00, 2, '2024-11-13 09:38:33', '2024-11-13 09:38:50', '2024-11-13');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `society_expenses`
 --
 
@@ -1623,6 +1692,79 @@ CREATE TABLE `society_fund_collections` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `society_fund_collections`
+--
+
+INSERT INTO `society_fund_collections` (`id`, `company_id`, `event_id`, `society_member_id`, `purpose`, `description`, `fund_amount`, `fund_collection_date`, `fund_collection_status`, `created_at`, `updated_at`) VALUES
+(3, 2, 2, 9, 1, NULL, 250.00, '2024-11-13', 2, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `society_insurances`
+--
+
+CREATE TABLE `society_insurances` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `member_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `policy_number` varchar(255) NOT NULL,
+  `provider` varchar(255) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `premium_amount` decimal(10,2) DEFAULT NULL,
+  `coverage_details` text DEFAULT NULL,
+  `status` int(11) DEFAULT NULL COMMENT '1 = Active, 2 = Expired',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `society_loan_repayments`
+--
+
+CREATE TABLE `society_loan_repayments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `loan_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `due_date` date DEFAULT NULL,
+  `amount_due` decimal(10,2) DEFAULT NULL,
+  `amount_paid` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `status` int(11) DEFAULT NULL COMMENT '1 = unpaid, 2 = paid',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `repayment_status` int(11) DEFAULT NULL COMMENT '1 = unpaid, 2 = partially_paid, 3 = paid'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `society_loan_repayments`
+--
+
+INSERT INTO `society_loan_repayments` (`id`, `loan_id`, `due_date`, `amount_due`, `amount_paid`, `status`, `created_at`, `updated_at`, `repayment_status`) VALUES
+(2, 7, '2025-01-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:36', 1),
+(3, 7, '2025-02-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:39', 1),
+(4, 7, '2025-03-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:41', 1),
+(5, 7, '2025-04-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:44', 1),
+(6, 7, '2025-05-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:46', 1),
+(7, 7, '2025-06-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:48', 1),
+(8, 7, '2025-07-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:50', 1),
+(9, 7, '2025-08-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:53', 1),
+(10, 7, '2025-09-13', 64.44, 0.00, 1, '2024-12-11 11:43:01', '2024-12-11 12:12:55', 1),
+(11, 8, '2025-01-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(12, 8, '2025-02-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(13, 8, '2025-03-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(14, 8, '2025-04-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(15, 8, '2025-05-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(16, 8, '2025-06-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(17, 8, '2025-07-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(18, 8, '2025-08-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(19, 8, '2025-09-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(20, 8, '2025-10-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(21, 8, '2025-11-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1),
+(22, 8, '2025-12-23', 104.17, 0.00, NULL, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -1655,6 +1797,54 @@ CREATE TABLE `society_members` (
 
 INSERT INTO `society_members` (`id`, `name`, `email`, `contact_number`, `address`, `joining_date`, `expiration_date`, `membership_fee`, `membership_type`, `active_status`, `created_at`, `updated_at`, `company_id`, `permanent_address`, `member_image`, `member_unique_id`, `designation`) VALUES
 (9, 'Shuvo Mahmud', 'shuvo@gmail.com', '01514470118', 'middle badda, dhaka, bangladesh', '2024-11-01', NULL, 2500.00, 1, 1, '2024-11-03 09:08:01', '2024-11-05 09:18:34', 2, 'middle badda, dhaka, bangladesh', 'society_members/202411051730798314.png', 'MEM0001', 'General Member');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `society_member_loans`
+--
+
+CREATE TABLE `society_member_loans` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `member_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `loan_amount` decimal(10,2) DEFAULT NULL,
+  `interest_rate` decimal(5,2) DEFAULT NULL,
+  `total_amount_due` decimal(10,2) DEFAULT NULL,
+  `repayment_term` int(11) DEFAULT NULL COMMENT 'Number of months',
+  `loan_start_date` date DEFAULT NULL,
+  `loan_end_date` date DEFAULT NULL,
+  `status` int(11) DEFAULT NULL COMMENT '1 = pending, 2 = approved, 3 = rejected, 4 = completed',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `loan_number` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `society_member_loans`
+--
+
+INSERT INTO `society_member_loans` (`id`, `company_id`, `member_id`, `loan_amount`, `interest_rate`, `total_amount_due`, `repayment_term`, `loan_start_date`, `loan_end_date`, `status`, `created_at`, `updated_at`, `loan_number`) VALUES
+(7, 2, 9, 580.00, 7.00, 610.45, 9, '2024-12-13', '2025-09-13', 1, '2024-12-11 11:43:01', '2024-12-11 11:43:01', 'LN-9-20241211174301'),
+(8, 2, 9, 1250.00, 4.00, 1300.00, 12, '2024-12-23', '2025-12-23', 1, '2024-12-11 11:57:12', '2024-12-11 11:57:12', 'LN-9-20241211175712');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `society_renewal_fees`
+--
+
+CREATE TABLE `society_renewal_fees` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `member_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
+  `due_date` date DEFAULT NULL,
+  `payment_date` date DEFAULT NULL,
+  `status` int(11) DEFAULT NULL COMMENT '1 = unpaid, 2 = paid, 3 = overdue',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -2042,6 +2232,12 @@ ALTER TABLE `inventory_damage_and_burned_products`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `inventory_item_categories`
+--
+ALTER TABLE `inventory_item_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `inventory_log`
 --
 ALTER TABLE `inventory_log`
@@ -2075,6 +2271,12 @@ ALTER TABLE `inventory_purchase_returns`
 -- Indexes for table `inventory_stock`
 --
 ALTER TABLE `inventory_stock`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inventory_stocks`
+--
+ALTER TABLE `inventory_stocks`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2274,6 +2476,14 @@ ALTER TABLE `society_events`
   ADD KEY `society_events_committee_id_foreign` (`committee_id`);
 
 --
+-- Indexes for table `society_event_sponsorships`
+--
+ALTER TABLE `society_event_sponsorships`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `society_event_sponsorships_company_id_foreign` (`company_id`),
+  ADD KEY `society_event_sponsorships_event_id_foreign` (`event_id`);
+
+--
 -- Indexes for table `society_expenses`
 --
 ALTER TABLE `society_expenses`
@@ -2298,12 +2508,43 @@ ALTER TABLE `society_fund_collections`
   ADD KEY `society_fund_collections_society_member_id_foreign` (`society_member_id`);
 
 --
+-- Indexes for table `society_insurances`
+--
+ALTER TABLE `society_insurances`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `society_insurances_company_id_foreign` (`company_id`),
+  ADD KEY `society_insurances_member_id_foreign` (`member_id`);
+
+--
+-- Indexes for table `society_loan_repayments`
+--
+ALTER TABLE `society_loan_repayments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `society_loan_repayments_loan_id_foreign` (`loan_id`);
+
+--
 -- Indexes for table `society_members`
 --
 ALTER TABLE `society_members`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `society_members_email_unique` (`email`),
   ADD KEY `society_members_company_id_foreign` (`company_id`);
+
+--
+-- Indexes for table `society_member_loans`
+--
+ALTER TABLE `society_member_loans`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `society_member_loans_company_id_foreign` (`company_id`),
+  ADD KEY `society_member_loans_member_id_foreign` (`member_id`);
+
+--
+-- Indexes for table `society_renewal_fees`
+--
+ALTER TABLE `society_renewal_fees`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `society_renewal_fees_company_id_foreign` (`company_id`),
+  ADD KEY `society_renewal_fees_member_id_foreign` (`member_id`);
 
 --
 -- Indexes for table `society_sold_tickets`
@@ -2531,6 +2772,12 @@ ALTER TABLE `inventory_damage_and_burned_products`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `inventory_item_categories`
+--
+ALTER TABLE `inventory_item_categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `inventory_log`
 --
 ALTER TABLE `inventory_log`
@@ -2564,6 +2811,12 @@ ALTER TABLE `inventory_purchase_returns`
 -- AUTO_INCREMENT for table `inventory_stock`
 --
 ALTER TABLE `inventory_stock`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `inventory_stocks`
+--
+ALTER TABLE `inventory_stocks`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -2672,7 +2925,7 @@ ALTER TABLE `master_admins`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -2735,6 +2988,12 @@ ALTER TABLE `society_events`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `society_event_sponsorships`
+--
+ALTER TABLE `society_event_sponsorships`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `society_expenses`
 --
 ALTER TABLE `society_expenses`
@@ -2750,13 +3009,37 @@ ALTER TABLE `society_expense_types`
 -- AUTO_INCREMENT for table `society_fund_collections`
 --
 ALTER TABLE `society_fund_collections`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `society_insurances`
+--
+ALTER TABLE `society_insurances`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `society_loan_repayments`
+--
+ALTER TABLE `society_loan_repayments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `society_members`
 --
 ALTER TABLE `society_members`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `society_member_loans`
+--
+ALTER TABLE `society_member_loans`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `society_renewal_fees`
+--
+ALTER TABLE `society_renewal_fees`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `society_sold_tickets`
@@ -2975,6 +3258,13 @@ ALTER TABLE `society_events`
   ADD CONSTRAINT `society_events_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `society_event_sponsorships`
+--
+ALTER TABLE `society_event_sponsorships`
+  ADD CONSTRAINT `society_event_sponsorships_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `society_event_sponsorships_event_id_foreign` FOREIGN KEY (`event_id`) REFERENCES `society_events` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `society_expenses`
 --
 ALTER TABLE `society_expenses`
@@ -2996,10 +3286,37 @@ ALTER TABLE `society_fund_collections`
   ADD CONSTRAINT `society_fund_collections_society_member_id_foreign` FOREIGN KEY (`society_member_id`) REFERENCES `society_members` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `society_insurances`
+--
+ALTER TABLE `society_insurances`
+  ADD CONSTRAINT `society_insurances_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `society_insurances_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `society_members` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `society_loan_repayments`
+--
+ALTER TABLE `society_loan_repayments`
+  ADD CONSTRAINT `society_loan_repayments_loan_id_foreign` FOREIGN KEY (`loan_id`) REFERENCES `society_member_loans` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `society_members`
 --
 ALTER TABLE `society_members`
   ADD CONSTRAINT `society_members_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `society_member_loans`
+--
+ALTER TABLE `society_member_loans`
+  ADD CONSTRAINT `society_member_loans_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `society_member_loans_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `society_members` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `society_renewal_fees`
+--
+ALTER TABLE `society_renewal_fees`
+  ADD CONSTRAINT `society_renewal_fees_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `society_renewal_fees_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `society_members` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `society_sold_tickets`

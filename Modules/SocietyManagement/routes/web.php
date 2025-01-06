@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\SocietyManagement\Http\Controllers\SocietyManagementController;
 use Modules\SocietyManagement\Http\Controllers\SocietyMemberController;
+use Modules\SocietyManagement\Http\Controllers\RenewalFeeController;
 use Modules\SocietyManagement\Http\Controllers\CommitteeController;
 use Modules\SocietyManagement\Http\Controllers\CommitteeMemberController;
 use Modules\SocietyManagement\Http\Controllers\SocietyEventController;
@@ -11,6 +12,8 @@ use Modules\SocietyManagement\Http\Controllers\SocietyEventSponsorshipController
 use Modules\SocietyManagement\Http\Controllers\SocietyTicketController;
 use Modules\SocietyManagement\Http\Controllers\SocietySoldTicketController;
 use Modules\SocietyManagement\Http\Controllers\SocietyExpenseController;
+use Modules\SocietyManagement\Http\Controllers\SocietyInsuranceController;
+use Modules\SocietyManagement\Http\Controllers\SocietyLoanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +29,9 @@ use Modules\SocietyManagement\Http\Controllers\SocietyExpenseController;
 Route::middleware('auth')->group(function () {
     Route::resource('societymanagement', SocietyManagementController::class)->names('societymanagement');
     Route::resource('society_members', SocietyMemberController::class);
+    Route::resource('renewal_fees', RenewalFeeController::class);
+    Route::get('/generate_renewal_fees', [RenewalFeeController::class, 'generateRenewalFees']);
+    Route::get('/update_member_status', [RenewalFeeController::class, 'updateMemberStatus']);
     Route::resource('society_committees', CommitteeController::class);
     Route::resource('committee_members', CommitteeMemberController::class);
     Route::resource('society_events', SocietyEventController::class);
@@ -33,6 +39,15 @@ Route::middleware('auth')->group(function () {
     Route::resource('event_sponsorships', SocietyEventSponsorshipController::class);
     Route::resource('event_tickets', SocietyTicketController::class);
     Route::resource('sold_event_tickets', SocietySoldTicketController::class);
+    Route::resource('society_insurances', SocietyInsuranceController::class);
+    //member loans
+    Route::resource('society_member_loans', SocietyLoanController::class);
+    Route::get('/society_member_loan_approval/{loan_id}', [SocietyLoanController::class, 'loan_approval'])->name('loan_approval');
+
+    //loan repayment
+    Route::get('/loan_repayment_list', [SocietyLoanController::class, 'loan_repayment_list'])->name('loan_repayment_list');
+    Route::post('/repay_loan/{repayment_id}', [SocietyLoanController::class, 'repay_loan'])->name('repay_loan');
+
     //event and ticket depedancy
     Route::post('/event.ticket.dependancy',[SocietySoldTicketController::class,'event_ticket_dependancy']);
     //ticket and price depedancy

@@ -257,11 +257,15 @@
 
             <!-- First-level sub-menu -->
             <ul class="collapse nav  @if(Request::is('society_members')) show
+                                    @elseif(Request::is('renewal_fees')) show
                                     @elseif(Request::is('society_committees')) show
                                     @elseif(Request::is('committee_members')) show
                                     @elseif(Request::is('society_events')) show
                                     @elseif(Request::is('fund_collections')) show
                                     @elseif(Request::is('event_sponsorships')) show
+                                    @elseif(Request::is('society_insurances')) show
+                                    @elseif(Request::is('society_member_loans')) show
+                                    @elseif(Request::is('loan_repayment_list')) show
                                     @elseif(Request::is('event_tickets')) show
                                     @elseif(Request::is('sold_event_tickets')) show
                                     @elseif(Request::is('society_expense_type_list')) show
@@ -275,6 +279,13 @@
                 <span class="menu-arrow" style="{{ Request::is('society_members') ? 'color: white; !important' : ''}}">Society Members</span>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a href="{{ url('renewal_fees') }}" class="nav-link {{ Request::is('renewal_fees') ? 'active' : '' }}" style="{{ Request::is('renewal_fees') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('renewal_fees') ? 'color: white; !important' : ''}}"></i>
+                <span class="menu-arrow" style="{{ Request::is('renewal_fees') ? 'color: white; !important' : ''}}">Renewal Fees</span>
+                </a>
+             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="#Committee" data-toggle="collapse" aria-expanded="false">
@@ -321,6 +332,27 @@
                 <a href="{{ url('event_sponsorships') }}" class="nav-link {{ Request::is('event_sponsorships') ? 'active' : '' }}" style="{{ Request::is('event_sponsorships') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                 <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('event_sponsorships') ? 'color: white; !important' : ''}}"></i>
                 <span class="menu-arrow" style="{{ Request::is('event_sponsorships') ? 'color: white; !important' : ''}}">Sponsorships</span>
+                </a>
+             </li>
+
+             <li class="nav-item">
+                <a href="{{ url('society_insurances') }}" class="nav-link {{ Request::is('society_insurances') ? 'active' : '' }}" style="{{ Request::is('society_insurances') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_insurances') ? 'color: white; !important' : ''}}"></i>
+                <span class="menu-arrow" style="{{ Request::is('society_insurances') ? 'color: white; !important' : ''}}">Insurances</span>
+                </a>
+             </li>
+
+             <li class="nav-item">
+                <a href="{{ url('society_member_loans') }}" class="nav-link {{ Request::is('society_member_loans') ? 'active' : '' }}" style="{{ Request::is('society_member_loans') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_member_loans') ? 'color: white; !important' : ''}}"></i>
+                <span class="menu-arrow" style="{{ Request::is('society_member_loans') ? 'color: white; !important' : ''}}">Member Loans</span>
+                </a>
+             </li>
+
+             <li class="nav-item">
+                <a href="{{ url('loan_repayment_list') }}" class="nav-link {{ Request::is('loan_repayment_list') ? 'active' : '' }}" style="{{ Request::is('loan_repayment_list') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('loan_repayment_list') ? 'color: white; !important' : ''}}"></i>
+                <span class="menu-arrow" style="{{ Request::is('loan_repayment_list') ? 'color: white; !important' : ''}}">Loan Repayments</span>
                 </a>
              </li>
 
