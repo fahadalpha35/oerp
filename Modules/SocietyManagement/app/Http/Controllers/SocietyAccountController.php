@@ -15,9 +15,10 @@ class SocietyAccountController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function society_profit_and_loss()
     {
-        return view('societymanagement::index');
+        dd('test');
+        return view('societymanagement::accounts.profit_and_loss');
     }
 
     /**
