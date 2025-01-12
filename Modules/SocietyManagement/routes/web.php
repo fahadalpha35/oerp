@@ -14,6 +14,7 @@ use Modules\SocietyManagement\Http\Controllers\SocietySoldTicketController;
 use Modules\SocietyManagement\Http\Controllers\SocietyExpenseController;
 use Modules\SocietyManagement\Http\Controllers\SocietyInsuranceController;
 use Modules\SocietyManagement\Http\Controllers\SocietyLoanController;
+use Modules\SocietyManagement\Http\Controllers\SocietyAccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,5 +62,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/update_society_expense_type/{expense_id}', [SocietyExpenseController::class, 'update_society_expense_type'])->name('update_society_expense_type');
     // Route::post('/destroy_society_expense_type/{expense_id}', [SocietyExpenseController::class, 'destroy_society_expense_type'])->name('destroy_society_expense_type');
     Route::delete('/destroy_society_expense_type/{expense_id}', [SocietyExpenseController::class, 'destroy_society_expense_type'])->name('destroy_society_expense_type');
+
+
+    //accounts
+
+    //profit and loss
+    Route::get('/society_profit_and_loss', [SocietyAccountController::class, 'society_profit_and_loss'])->name('society_profit_and_loss');
 
 });
