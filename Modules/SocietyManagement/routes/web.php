@@ -67,6 +67,7 @@ Route::middleware('auth')->group(function () {
     //accounts
 
     //profit and loss
-    Route::get('/society_profit_and_loss', [SocietyAccountController::class, 'society_profit_and_loss'])->name('society_profit_and_loss');
+    Route::get('/society_profit_and_loss', [SocietyAccountController::class, 'profit_and_loss']);
+    Route::post('/society_profit_and_loss_submit', [SocietyAccountController::class, 'profit_and_loss_data'])->name('society_profit_and_loss_submit');
 
 });
