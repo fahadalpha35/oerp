@@ -21,15 +21,34 @@
           <div class="row">
              
               <div class="col-12">
-                <h3 class="mt-2 text-center">Profit And Loss Report</h3>
-                  <br>
                   <div class="card">          
                         <div class="card-body">
 
                     <!-- print section (start) -->
                     <div id="print-section">
                         <h2 align = "center">Profit and Loss Report</h2>
-                        
+                        <h6><strong>Report Generation Date:</strong> {{ \Carbon\Carbon::now()->format('F j, Y') }}</h6>
+                        <h6 >Reporting Year: <span style="color: blue">{{$year}}</span></h6>
+                        <h6>Reporting Month: <span style="color: blue">
+                            @php
+                                $monthNames = [
+                                    '01' => 'January',
+                                    '02' => 'February',
+                                    '03' => 'March',
+                                    '04' => 'April',
+                                    '05' => 'May',
+                                    '06' => 'June',
+                                    '07' => 'July',
+                                    '08' => 'August',
+                                    '09' => 'September',
+                                    '10' => 'October',
+                                    '11' => 'November',
+                                    '12' => 'December',
+                                ];
+                            @endphp
+                            {{ $monthNames[str_pad($month, 2, '0', STR_PAD_LEFT)] }}
+                        </span></h6>
+                        <br>
                         <h4>Income</h4>
                         <table >
                             <thead>
@@ -46,27 +65,27 @@
 
                                 <tr>
                                     <td>Total Renewal Fees</td>
-                                    <td class="text-right" id="total_renewal_fee">0.00</td>
+                                    <td class="text-right" id="total_renewal_fee">{{ number_format($total_renewal_fee, 2) }}</td>
                                 </tr>
                                 
                                 <tr>
                                     <td>Total Fund Collection</td>
-                                    <td class="text-right" id="total_fund_collection">0.00</td>
+                                    <td class="text-right" id="total_fund_collection">{{ number_format($total_fund_collection, 2) }}</td>
                                 </tr>
 
                                 <tr>
                                     <td>Total Member Loan Repayment</td>
-                                    <td class="text-right" id="total_loan_repay">0.00</td>
+                                    <td class="text-right" id="total_loan_repay">{{ number_format($total_member_loan_repayment, 2) }}</td>
                                 </tr>
 
                                 <tr>
                                     <td>Total Event Ticket Sales</td>
-                                    <td class="text-right" id="total_ticket_sale">0.00</td>
+                                    <td class="text-right" id="total_ticket_sale">{{ number_format($total_event_ticket_sale, 2) }}</td>
                                 </tr>
                                
                                 <tr class="total-row">
                                     <td>Total Income</td>
-                                    <td class="text-right" id="total_income">0.00</td>
+                                    <td class="text-right" id="total_income">{{ number_format($total_income, 2) }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -81,48 +100,39 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($expenses as $expense)
                                 <tr>
-                                    <td>Total Daily Expenses</td>
-                                    <td class="text-right" id="total_daily_expense">0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Total Monthly Other Expenses</td>
-                                    <td class="text-right" id="total_monthly_other_expense">0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Yearly Expenses</td>
-                                    <td class="text-right" id="total_yearly_expense">0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Rent</td>
-                                    <td class="text-right" id="total_rent">0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Utilities</td>
-                                    <td class="text-right" id="total_utility">0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Salaries</td>
-                                    <td class="text-right" id="total_salary">0.00</td>
-                                </tr>
-            
-                                <tr>
-                                    <td>Total Burned/Damaged product value</td>
-                                    <td class="text-right" id="total_damaged_product_value">0.00</td>
-                                </tr>
-            
-            
+                                    <td>{{$expense->type_name}}</td>
+                                    <td class="text-right" id="total_daily_expense">{{ number_format($expense->total_expense_amount, 2) }}</td>
+                                </tr> 
+                                @endforeach         
                                 <tr class="total-row">
                                     <td>Total Expenses</td>
-                                    <td class="text-right" id="total_expense">0.00</td>
+                                    <td class="text-right" id="total_expense">{{ number_format($total_expense, 2) }}</td>
                                 </tr>
+                            </tbody>
+                        </table>
+
+
+                        <br>
+                    
+                        <h4 style="color: blue">Profit And Loss</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th class="text-right">Amount (BDT)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               
                                 <tr class="total-row">
                                     <td>Net Profit</td>
-                                    <td class="text-right" id="net_profit">0.00</td>
+                                    <td class="text-right" id="net_profit">{{ number_format($profit, 2) }}</td>
                                 </tr>
                                 <tr class="total-row">
                                     <td>Net Loss</td>
-                                    <td class="text-right" id="net_loss">0.00</td>
+                                    <td class="text-right" id="net_loss">{{ number_format($loss, 2) }}</td>
                                 </tr>
                             </tbody>
                         </table>

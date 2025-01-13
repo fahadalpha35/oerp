@@ -28,6 +28,39 @@ class SocietyAccountController extends Controller
         $year = $request->input('year');
         $month = $request->input('month');
 
+
+        $total_renewal_fee = DB::table('society_renewal_fees')
+                               ->where('company_id',$user_company_id)
+                               ->whereYear('payment_date', $year)
+                               ->whereMonth('payment_date', $month)
+                               ->sum('amount');
+
+        $total_fund_collection = DB::table('society_fund_collections')
+                                    ->where('company_id',$user_company_id)
+                                    ->whereYear('fund_collection_date', $year)
+                                    ->whereMonth('fund_collection_date', $month)
+                                    ->sum('fund_amount');
+
+
+        $total_member_loan_repayment = DB::table('society_loan_repayments')
+                                          ->leftJoin('society_member_loans','society_loan_repayments.loan_id','society_member_loans.id')
+                                          ->where('society_member_loans.company_id',$user_company_id)
+                                          ->whereIn('society_loan_repayments.repayment_status', [2, 3])
+                                          ->whereYear('society_loan_repayments.updated_at', $year)
+                                          ->whereMonth('society_loan_repayments.updated_at', $month)
+                                          ->sum('amount_paid');
+
+
+        $total_event_ticket_sale = DB::table('society_sold_tickets')
+                                        ->where('company_id',$user_company_id)
+                                        ->whereYear('ticket_selling_date', $year)
+                                        ->whereMonth('ticket_selling_date', $month)
+                                        ->sum('total_revenue');
+
+
+                                    
+        $total_income = $total_renewal_fee + $total_fund_collection + $total_member_loan_repayment + $total_event_ticket_sale;
+
         $expenses = DB::table('society_expenses') 
             ->leftJoin('society_expense_types','society_expenses.expense_type_id','society_expense_types.id')
             ->select(
@@ -44,7 +77,51 @@ class SocietyAccountController extends Controller
                     )
             ->get();
 
-        dd($expenses);
+            $total_expense = $expenses->sum('total_expense_amount');
+
+
+            if ($total_income >= $total_expense) {
+
+                $profit = $total_income - $total_expense;
+                $loss = 0;
+
+                return view('societymanagement::accounts.profit_and_loss_data',compact(
+                    'total_renewal_fee',
+                    'total_fund_collection',
+                    'total_member_loan_repayment',
+                    'total_event_ticket_sale',
+                    'total_income',
+                    'expenses',
+                    'total_expense',
+                    'profit',
+                    'loss',
+                    'year',
+                    'month'
+                ));
+
+            } else {
+                $profit = 0; 
+                $loss = $total_expense - $total_income;
+
+                return view('societymanagement::accounts.profit_and_loss_data',compact(
+                    'total_renewal_fee',
+                    'total_fund_collection',
+                    'total_member_loan_repayment',
+                    'total_event_ticket_sale',
+                    'total_income',
+                    'expenses',
+                    'total_expense',
+                    'profit',
+                    'loss',
+                    'year',
+                    'month'
+                ));
+            }
+
+
+
+            
+
     }
 
 
