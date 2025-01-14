@@ -271,6 +271,7 @@
                                     @elseif(Request::is('society_expense_type_list')) show
                                     @elseif(Request::is('society_expenses')) show
                                     @elseif(Request::is('society_profit_and_loss')) show
+                                    @elseif(Request::is('budget_and_collected_fund')) show
                             @endif" id="societyManagement" style="margin-top: -2px; padding-bottom : 10px">
 
             @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2) || (Auth::user()->role_id == 3))
@@ -425,7 +426,7 @@
                 </a>
                 <!-- Second-level sub-menu -->
                 <ul class="collapse nav flex-column ms-3 @if(Request::is('society_profit_and_loss')) show
-                            @elseif(Request::is('sold_event_tickets')) show
+                            @elseif(Request::is('budget_and_collected_fund')) show
                             @endif" id="SocietyAccounts" style="margin-top: -2px; padding-bottom : 10px">
                 
                   <li class="nav-item">
@@ -436,9 +437,9 @@
                   </li>
                  
                   <li class="nav-item">
-                    <a href="{{ url('sold_event_tickets') }}" class="nav-link {{ Request::is('sold_event_tickets') ? 'active' : '' }}" style="{{ Request::is('sold_event_tickets') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('sold_event_tickets') ? 'color: white; !important' : ''}}"></i>
-                        <span class="menu-arrow" style="{{ Request::is('sold_event_tickets') ? 'color: white; !important' : ''}}">Sold Tickets</span>
+                    <a href="{{ url('budget_and_collected_fund') }}" class="nav-link {{ Request::is('society_expenses') ? 'active' : '' }}" style="{{ Request::is('budget_and_collected_fund') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('budget_and_collected_fund') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('budget_and_collected_fund') ? 'color: white; !important' : ''}}">Budget v/s Fund</span>
                       </a>
                   </li>
                 </ul>

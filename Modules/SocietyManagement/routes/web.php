@@ -70,4 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/society_profit_and_loss', [SocietyAccountController::class, 'profit_and_loss']);
     Route::post('/society_profit_and_loss_submit', [SocietyAccountController::class, 'profit_and_loss_data'])->name('society_profit_and_loss_submit');
 
+    //budget v/s collected fund
+    Route::get('/budget_and_collected_fund', [SocietyAccountController::class, 'budget_and_collected_fund']);
+    Route::post('/budget.fund.dependancy',[SocietyAccountController::class,'budget_and_collected_fund_dependancy']);
 });

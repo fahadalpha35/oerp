@@ -12,9 +12,8 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class SocietyAccountController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
+    //profit and loss (start)
     public function profit_and_loss()
     {
         return view('societymanagement::accounts.profit_and_loss');
@@ -116,14 +115,72 @@ class SocietyAccountController extends Controller
                     'year',
                     'month'
                 ));
-            }
-
-
-
-            
+            }         
 
     }
+    //profit and loss (end)
 
+
+    //Budget v/s Fund (start)
+
+    public function budget_and_collected_fund(){
+        
+        $user_company_id = Auth::user()->company_id;
+
+        $events = DB::table('society_events')
+                    ->select('id','event_name')
+                    ->where('company_id', $user_company_id)
+                    ->get();
+
+        return view('societymanagement::accounts.budget_and_collected_fund',compact('events'));
+    }
+
+
+     
+     public function budget_and_collected_fund_dependancy(Request $request){
+
+        $selectedEvent = $request->input('data');
+        $user_company_id = Auth::user()->company_id;
+
+        $event = DB::table('society_events')
+                    ->select('event_name','event_budget')
+                    ->where('id',$selectedEvent)
+                    ->first();
+
+        $event_name = $event->event_name;
+        $event_budget = $event->event_budget;
+
+
+        $collected_fund = DB::table('society_fund_collections')
+                            ->where('event_id',$selectedEvent)
+                            ->where('purpose',1)
+                            ->where('fund_collection_status',2)
+                            ->sum('fund_amount');
+
+
+        $remaining_amount = $event_budget - $collected_fund;
+
+       
+        if ($event) {
+            // Return ticket price and available quantity as JSON
+            return response()->json([
+                'event_name' => $event_name,
+                'event_budget' => $event_budget,
+                'collected_fund' => $collected_fund,
+                'remaining_amount' => $remaining_amount
+            ]);
+        }
+    
+        // In case no ticket is found, return a default response
+        return response()->json([
+            'event_budget' => 0,
+            'collected_fund' => 0,
+            'remaining_amount' => 0
+        ]);
+    }
+    //Budget v/s Fund (end)
+  
+    
 
     public function index(){
         return view('societymanagement::accounts.my'); 
