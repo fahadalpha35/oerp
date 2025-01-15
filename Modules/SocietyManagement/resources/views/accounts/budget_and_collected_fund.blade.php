@@ -83,10 +83,9 @@
                      <br>
                 <!-- Print Button -->
                 <button id="print-button" class="btn btn-danger float-right">Print Report</button>
-                <br>
+                <br>                             
                               
-                              
-                        </div>
+                    </div>
                       <!-- /.card-body -->
                     </div>
               </div>

@@ -62,7 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/update_society_expense_type/{expense_id}', [SocietyExpenseController::class, 'update_society_expense_type'])->name('update_society_expense_type');
     // Route::post('/destroy_society_expense_type/{expense_id}', [SocietyExpenseController::class, 'destroy_society_expense_type'])->name('destroy_society_expense_type');
     Route::delete('/destroy_society_expense_type/{expense_id}', [SocietyExpenseController::class, 'destroy_society_expense_type'])->name('destroy_society_expense_type');
-
+    Route::get('/society_expense_report', [SocietyExpenseController::class, 'society_expense_report'])->name('society_expense_report');
 
     //accounts
 

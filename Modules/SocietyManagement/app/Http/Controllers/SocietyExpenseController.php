@@ -309,4 +309,14 @@ class SocietyExpenseController extends Controller
             return response()->json(['success' => false, 'message' => 'Error deleting Expense.']);
         }
     }
+
+
+
+    public function society_expense_report(){
+        // dd('samer');
+        return view('societymanagement::expense_report.expense_report');
+    }
+
+
+
 }
