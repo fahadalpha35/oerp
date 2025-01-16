@@ -14,20 +14,20 @@
                   <div class="card">          
                         <div class="card-body">
                             
-                            <form action="{{route('society_profit_and_loss_submit')}}" method="POST">
+                            <form action="{{route('society_expense_report_submit')}}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group mb-4">
                                             <label for="monthPicker">Start Date:</label>
-                                            <input type="date" class="form-control" name="start_date" id="start_date" required>
+                                            <input type="date" class="form-control" name="from_date" id="from_date" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group mb-4">
                                             <label for="monthPicker">End Date:</label>
-                                            <input type="date" class="form-control" name="end_date" id="end_date" required>
+                                            <input type="date" class="form-control" name="to_date" id="to_date" required>
                                         </div>
                                     </div>
                                 </div>

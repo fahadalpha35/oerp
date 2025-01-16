@@ -10,9 +10,12 @@ use Carbon\Carbon;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
+
 class SocietyAccountController extends Controller
 {
    
+    use ValidatesRequests;
+
     //profit and loss (start)
     public function profit_and_loss()
     {
@@ -179,6 +182,71 @@ class SocietyAccountController extends Controller
         ]);
     }
     //Budget v/s Fund (end)
+
+
+
+    //account type (start)
+    public function society_account_type_list(){
+
+        $user_company_id = Auth::user()->company_id;
+
+        $account_types = DB::table('society_accounts')
+                            ->where('company_id',$user_company_id)
+                            ->get();
+
+        return view('societymanagement::account_types.index',compact('account_types'));
+    }
+
+
+    public function add_society_account_type(){
+        return view('societymanagement::account_types.create');
+    }
+
+
+    public function store_society_account_type(Request $request){
+
+
+        $rules = [
+            'account_name' => 'required|string',
+            'accounts_type' => 'required|regex:/^[A-Za-z]$/',
+            'transaction_type' => 'required|numeric',
+        ];
+
+        $customMessages = [
+            'account_name.required' => 'Account Name is required',
+            'accounts_type.required' => 'Type is required',
+            'transaction_type.required' => 'Transaction Type is required',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
+        $user_company_id = Auth::user()->company_id;
+        
+        $account_type = DB::table('society_accounts')
+                            ->insertGetId([
+                            'company_id'=>$user_company_id,
+                            'account_name'=>$request->account_name,
+                            'accounts_type'=>$request->accounts_type,
+                            'transaction_type'=>$request->transaction_type
+                            ]);
+
+        return redirect()->route('society_account_type_list')->with('success_message', 'Account Type is added successfully!');
+    }
+    //account type (end)
+
+
+    //transaction (start)
+    public function society_transaction_list(){
+        dd('gg');
+    }
+    //transaction (end)
+
+
+    //balance sheet (start)
+    public function society_balance_sheet_report(){
+        dd('pp');
+    }
+    //balance sheet (end)
   
     
 
