@@ -232,6 +232,71 @@ class SocietyAccountController extends Controller
 
         return redirect()->route('society_account_type_list')->with('success_message', 'Account Type is added successfully!');
     }
+
+    public function edit_society_account_type($id){
+
+        $account_type = DB::table('society_accounts')->where('id',$id)->first();
+ 
+        return view('societymanagement::account_types.edit',compact('account_type'));
+    }
+
+
+
+    public function update_society_account_type(Request $request, $id)
+    {
+        $rules = [
+            'account_name' => 'required|string',
+            'accounts_type' => 'required|regex:/^[A-Za-z]$/',
+            'transaction_type' => 'required|numeric',
+        ];
+
+        $customMessages = [
+            'account_name.required' => 'Account Name is required',
+            'accounts_type.required' => 'Type is required',
+            'transaction_type.required' => 'Transaction Type is required',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
+        $data = array();
+        $data['account_name'] = $request->account_name;
+        $data['accounts_type'] = $request->accounts_type;
+        $data['transaction_type'] = $request->transaction_type;
+
+        $updated = DB::table('society_accounts')
+                    ->where('id', $id)
+                    ->update($data);
+
+        // Check if the update was successful
+     if ($updated){
+        // Return a success response
+            return redirect()->back()->with('success_message', 'Account Type is updated successfully!');
+        }else{
+        // Return a failure response
+            return redirect()->back()->with('error_message', 'Account Type failed or no changes were made');
+        }
+    }
+
+
+
+    public function delete_society_account_type($id){
+        try {
+            // Check if the branch exists using Query Builder
+            $account_type = DB::table('society_accounts')->where('id', $id)->first();
+            if (!$account_type) {
+                return response()->json(['success' => false, 'message' => 'Account Type is not found.'], 404);
+            }
+            // Delete the branch using Query Builder
+            DB::table('society_accounts')->where('id', $id)->delete();
+            // Return a success response
+            return response()->json(['success' => true, 'message' => 'Account Type has been deleted successfully!']);
+            } catch (\Exception $e) {
+                // If an error occurs, return an error response
+                return response()->json(['success' => false, 'message' => 'Error deleting Account Type.']);
+            }
+            
+    }
+
     //account type (end)
 
 

@@ -62,8 +62,8 @@
                               </td>
                               @if( (auth()->user()->role_id == 1) || (auth()->user()->role_id == 2))
                               <td>
-                                <a href="{{route('society_committees.edit',$account_type->id)}}" style="color: white"><button class="btn btn-warning"> Edit</button></a>
-                                <a onclick="deleteOperationWithoutYajra('{{ route('society_committees.destroy', ':id') }}', {{$account_type->id}})" style="color: white"><button class="btn btn-danger"> Delete</button></a>
+                                <a href="{{route('edit_society_account_type',$account_type->id)}}" style="color: white"><button class="btn btn-warning"> Edit</button></a>
+                                <a onclick="deleteOperationWithoutYajra('{{ route('delete_society_account_type', ':id') }}', {{$account_type->id}})" style="color: white"><button class="btn btn-danger"> Delete</button></a>
                               </td>
                               @endif
                             </tr>

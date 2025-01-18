@@ -79,7 +79,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/society_account_type_list', [SocietyAccountController::class, 'society_account_type_list'])->name('society_account_type_list');
     Route::get('/add_society_account_type', [SocietyAccountController::class, 'add_society_account_type'])->name('add_society_account_type');
     Route::post('/store_society_account_type', [SocietyAccountController::class, 'store_society_account_type'])->name('store_society_account_type');
-    // Route::get('/edit_society_account_type/{account_id}', [SocietyAccountController::class, 'edit_society_account_type'])->name('edit_society_account_type');
+    Route::get('/edit_society_account_type/{account_id}', [SocietyAccountController::class, 'edit_society_account_type'])->name('edit_society_account_type');
+    Route::post('/update_society_account_type/{account_id}', [SocietyAccountController::class, 'update_society_account_type'])->name('update_society_account_type');
+    Route::delete('/delete_society_account_type/{account_id}', [SocietyAccountController::class, 'delete_society_account_type'])->name('delete_society_account_type');
 
     //transaction
     Route::get('/society_transaction_list', [SocietyAccountController::class, 'society_transaction_list'])->name('society_transaction_list');
