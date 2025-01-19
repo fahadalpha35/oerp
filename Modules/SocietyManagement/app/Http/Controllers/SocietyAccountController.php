@@ -301,8 +301,89 @@ class SocietyAccountController extends Controller
 
 
     //transaction (start)
-    public function society_transaction_list(){
-        dd('gg');
+    public function society_transaction_list(Request $request){
+
+        if ($request->ajax()){
+      
+            $user_company_id = Auth::user()->company_id;
+
+            $society_transactions = DB::table('society_transactions')
+                                        ->leftJoin('society_accounts','society_transactions.account_id','society_accounts.id')
+                                        ->select(
+                                            'society_transactions.id',
+                                            'society_transactions.transaction_date',
+                                            'society_transactions.transaction_name',
+                                            'society_transactions.cost_less',
+                                            'society_transactions.transaction_amount',
+                                            'society_accounts.account_name'                                                 
+                                            )
+                                        ->where('society_transactions.company_id', $user_company_id)
+                                        ->get();
+       
+        return DataTables::of($society_transactions)
+        ->addIndexColumn()
+        ->addColumn('cost_less_type', function ($row) {
+            if($row->cost_less == 1){
+                return '<span>Yes</span>';
+            }else{
+                return '<span>No</span>' ;
+            }
+        })  
+        ->addColumn('action', function($row){
+            $btn = '<a href="'.route('society_expenses.edit', $row->id).'" class="edit btn btn-warning btn-sm">Edit</a>';   
+            $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(\''.route('society_expenses.destroy', $row->id).'\', '.$row->id.', \'exampleTable\')">Delete</a>';
+
+            return $btn;
+        })
+        ->rawColumns(['cost_less_type','action'])
+        ->make(true);
+        }
+        
+        return view('societymanagement::transactions.index');
+    }
+
+
+    public function add_society_transaction(){
+
+        $user_company_id = Auth::user()->company_id;
+
+        $account_types = DB::table('society_accounts')
+                            ->select('id','account_name')
+                            ->where('company_id',$user_company_id)
+                            ->get();
+
+        return view('societymanagement::transactions.create',compact('account_types'));
+    }
+
+
+    public function store_society_transaction(Request $request){
+
+        $user_company_id = Auth::user()->company_id;
+
+        $account_ids = $request->account_id;
+        $transaction_dates = $request->transaction_date;
+        $transaction_names = $request->transaction_name;
+        $cost_lesses = $request->cost_less;
+        $transaction_amounts = $request->transaction_amount;   
+
+        foreach ($account_ids as $key => $account_id) {
+                $transaction_date = $transaction_dates[$key] ?? null;
+                $transaction_name = $transaction_names[$key] ?? null;
+                $cost_less = $cost_lesses[$key] ?? null; 
+                $transaction_amount = $transaction_amounts[$key] ?? null;
+
+            $society_transactions = DB::table('society_transactions')
+                                    ->insertGetId([
+                                    'company_id'=>$user_company_id,
+                                    'account_id'=>$account_id,
+                                    'transaction_date'=>$transaction_date,
+                                    'transaction_name'=>$transaction_name,
+                                    'cost_less'=>$cost_less,
+                                    'transaction_amount'=>$transaction_amount
+                                    ]);
+        }
+
+        return redirect()->route('society_transaction_list')->with('success_message', 'Transactions are added successfully!');
     }
     //transaction (end)
 

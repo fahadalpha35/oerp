@@ -85,7 +85,8 @@ Route::middleware('auth')->group(function () {
 
     //transaction
     Route::get('/society_transaction_list', [SocietyAccountController::class, 'society_transaction_list'])->name('society_transaction_list');
-    // Route::get('/add_society_transaction', [SocietyAccountController::class, 'add_society_transaction'])->name('add_society_transaction');
+    Route::get('/add_society_transaction', [SocietyAccountController::class, 'add_society_transaction'])->name('add_society_transaction');
+    Route::post('/store_society_transaction', [SocietyAccountController::class, 'store_society_transaction'])->name('store_society_transaction');
     // Route::get('/edit_society_transaction/{transaction_id}', [SocietyAccountController::class, 'edit_society_transaction'])->name('edit_society_transaction');
 
     //balance sheet report

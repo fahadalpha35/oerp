@@ -214,7 +214,7 @@ class SocietyExpenseController extends Controller
                                     ]);
         }
 
-        return redirect()->route('society_expenses.index')->with('success_message', 'Expense is added successfully!');
+        return redirect()->route('society_expenses.index')->with('success_message', 'Expenses are added successfully!');
     }
 
     /**
