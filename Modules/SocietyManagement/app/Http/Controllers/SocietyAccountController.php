@@ -330,8 +330,9 @@ class SocietyAccountController extends Controller
             }
         })  
         ->addColumn('action', function($row){
-            $btn = '<a href="'.route('society_expenses.edit', $row->id).'" class="edit btn btn-warning btn-sm">Edit</a>';   
-            $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(\''.route('society_expenses.destroy', $row->id).'\', '.$row->id.', \'exampleTable\')">Delete</a>';
+            // $btn = '<a href="'.route('edit_society_transaction', $row->id).'" class="edit btn btn-warning btn-sm">Edit</a>';   
+            $btn = '<a href="/edit_society_transaction/'.$row->id.'/" class="edit btn btn-warning btn-sm">Edit</a>';   
+            $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" onclick="deleteOperation(\''.route('delete_society_transaction', $row->id).'\', '.$row->id.', \'exampleTable\')">Delete</a>';
 
             return $btn;
         })
@@ -385,12 +386,150 @@ class SocietyAccountController extends Controller
 
         return redirect()->route('society_transaction_list')->with('success_message', 'Transactions are added successfully!');
     }
+
+
+    public function edit_society_transaction($id)
+    {
+        $society_transaction = DB::table('society_transactions')
+                                ->where('society_transactions.id', $id)
+                                ->first();
+
+        $user_company_id = Auth::user()->company_id;
+        
+        $account_types = DB::table('society_accounts')
+                            ->select('id','account_name')
+                            ->where('company_id',$user_company_id)
+                            ->get();
+        
+        return view('societymanagement::transactions.edit',compact('society_transaction','account_types'));
+    }
+
+
+    public function update_society_transaction(Request $request, $id){
+
+        $rules = [
+            'transaction_date' => 'required|date',
+            'transaction_name' => 'required|string',
+            'transaction_amount' => 'required|numeric',
+        ];
+
+        $customMessages = [
+            'account_id.required' => 'Account Name is required',
+            'transaction_date.required' => 'Transaction Date is required',
+            'transaction_name.required' => 'Transaction Name is required',
+            'cost_less.required' => 'Cost Less is required',
+            'transaction_amount.required' => 'Transaction Name is required',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
+        $data = array();
+        $data['account_id'] = $request->account_id;
+        $data['transaction_date'] = $request->transaction_date;
+        $data['transaction_name'] = $request->transaction_name;
+        $data['cost_less'] = $request->cost_less;
+        $data['transaction_amount'] = $request->transaction_amount;
+        
+        $updated = DB::table('society_transactions')
+                        ->where('id', $id)
+                        ->update($data);
+
+        // Check if the update was successful
+     if ($updated){
+        // Return a success response
+            return redirect()->back()->with('success_message', 'Transaction is updated successfully!');
+        }else{
+        // Return a failure response
+            return redirect()->back()->with('error_message', 'Transaction failed or no changes were made');
+        }
+    }
+
+
+
+    public function delete_society_transaction($id){
+        try {
+            // Check if the branch exists using Query Builder
+            $society_transaction = DB::table('society_transactions')->where('id', $id)->first();
+            if (!$society_transaction) {
+                return response()->json(['success' => false, 'message' => 'Transaction is not found.'], 404);
+            }
+            // Delete the branch using Query Builder
+            DB::table('society_transactions')->where('id', $id)->delete();
+            // Return a success response
+            return response()->json(['success' => true, 'message' => 'Transaction has been deleted successfully!']);
+            } catch (\Exception $e) {
+                // If an error occurs, return an error response
+                return response()->json(['success' => false, 'message' => 'Error deleting Transaction.']);
+            }
+            
+    }
     //transaction (end)
 
 
     //balance sheet (start)
     public function society_balance_sheet_report(){
-        dd('pp');
+        return view('societymanagement::accounts.balance_sheet'); 
+    }
+
+    public function society_balance_transaction_report_submit(Request $request){
+        $year = $request->year;
+        $user_company_id = Auth::user()->company_id;
+       
+        //----asset (start)----
+        $assets = DB::table('society_accounts')
+                    ->leftJoin('society_transactions', 'society_accounts.id', '=', 'society_transactions.account_id')
+                    ->select(
+                        'society_accounts.account_name',
+                        'society_accounts.id as my_account_id',
+                        DB::raw("
+                            (SELECT SUM(transaction_amount) 
+                            FROM society_transactions 
+                            WHERE YEAR(transaction_date) = $year
+                            AND company_id = $user_company_id
+                            AND account_id = society_accounts.id 
+                            AND cost_less = 2) as total_transaction_amount
+                        ")
+                    )
+                    ->whereYear('society_transactions.transaction_date', $year)
+                    ->where('society_accounts.company_id', $user_company_id)
+                    ->where('society_accounts.accounts_type', 'A')
+                    ->where('society_transactions.cost_less', 2)
+                    ->groupBy('society_accounts.account_name', 'society_accounts.id') // Ensure unique rows
+                    ->get();
+
+
+        $total_asset_sum_amt = $assets->sum('total_transaction_amount');
+
+        $asset_depriciations = DB::table('society_accounts')
+                                ->leftJoin('society_transactions', 'society_accounts.id', '=', 'society_transactions.account_id')
+                                ->select(
+                                    'society_accounts.account_name',
+                                    'society_accounts.id as my_account_id',
+                                    DB::raw("
+                                        (SELECT SUM(transaction_amount) 
+                                        FROM society_transactions 
+                                        WHERE YEAR(transaction_date) = $year
+                                        AND company_id = $user_company_id
+                                        AND account_id = society_accounts.id 
+                                        AND cost_less = 1) as total_transaction_amount
+                                    ")
+                                )
+                                ->whereYear('society_transactions.transaction_date', $year)
+                                ->where('society_accounts.company_id', $user_company_id)
+                                ->where('society_accounts.accounts_type', 'A')
+                                ->where('society_transactions.cost_less', 1)
+                                ->groupBy('society_accounts.account_name', 'society_accounts.id') // Ensure unique rows
+                                ->get();
+
+
+        $total_asset_depriciation_sum_amt = $asset_depriciations->sum('total_transaction_amount');
+
+       //net total
+        $net_total_asset_sum_amt = $total_asset_sum_amt - $total_asset_depriciation_sum_amt;
+
+        //----asset (end)----
+
+
     }
     //balance sheet (end)
   

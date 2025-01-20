@@ -281,14 +281,14 @@
             @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2) || (Auth::user()->role_id == 3))
             <li class="nav-item">
                 <a href="{{ url('society_members') }}" class="nav-link {{ Request::is('society_members') ? 'active' : '' }}" style="{{ Request::is('society_members') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_members') ? 'color: white; !important' : ''}}"></i>
+                <i class="mdi mdi-checkbox-blank-circle-outline menu-icon" style="{{ Request::is('society_members') ? 'color: white; !important' : ''}}"></i>
                 <span class="menu-arrow" style="{{ Request::is('society_members') ? 'color: white; !important' : ''}}">Society Members</span>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a href="{{ url('renewal_fees') }}" class="nav-link {{ Request::is('renewal_fees') ? 'active' : '' }}" style="{{ Request::is('renewal_fees') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('renewal_fees') ? 'color: white; !important' : ''}}"></i>
+                <i class="mdi mdi-checkbox-blank-circle-outline menu-icon" style="{{ Request::is('renewal_fees') ? 'color: white; !important' : ''}}"></i>
                 <span class="menu-arrow" style="{{ Request::is('renewal_fees') ? 'color: white; !important' : ''}}">Renewal Fees</span>
                 </a>
              </li>
@@ -323,41 +323,41 @@
 
               <li class="nav-item">
                 <a href="{{ url('society_events') }}" class="nav-link {{ Request::is('society_events') ? 'active' : '' }}" style="{{ Request::is('society_events') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_events') ? 'color: white; !important' : ''}}"></i>
+                <i class="mdi mdi-checkbox-blank-circle-outline menu-icon" style="{{ Request::is('society_events') ? 'color: white; !important' : ''}}"></i>
                 <span class="menu-arrow" style="{{ Request::is('society_events') ? 'color: white; !important' : ''}}">Society Events</span>
                 </a>
              </li>
              <li class="nav-item">
                 <a href="{{ url('fund_collections') }}" class="nav-link {{ Request::is('fund_collections') ? 'active' : '' }}" style="{{ Request::is('fund_collections') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('fund_collections') ? 'color: white; !important' : ''}}"></i>
+                <i class="mdi mdi-checkbox-blank-circle-outline menu-icon" style="{{ Request::is('fund_collections') ? 'color: white; !important' : ''}}"></i>
                 <span class="menu-arrow" style="{{ Request::is('fund_collections') ? 'color: white; !important' : ''}}">Fund Collections</span>
                 </a>
              </li>
 
              <li class="nav-item">
                 <a href="{{ url('event_sponsorships') }}" class="nav-link {{ Request::is('event_sponsorships') ? 'active' : '' }}" style="{{ Request::is('event_sponsorships') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('event_sponsorships') ? 'color: white; !important' : ''}}"></i>
+                <i class="mdi mdi-checkbox-blank-circle-outline menu-icon" style="{{ Request::is('event_sponsorships') ? 'color: white; !important' : ''}}"></i>
                 <span class="menu-arrow" style="{{ Request::is('event_sponsorships') ? 'color: white; !important' : ''}}">Sponsorships</span>
                 </a>
              </li>
 
              <li class="nav-item">
                 <a href="{{ url('society_insurances') }}" class="nav-link {{ Request::is('society_insurances') ? 'active' : '' }}" style="{{ Request::is('society_insurances') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_insurances') ? 'color: white; !important' : ''}}"></i>
+                <i class="mdi mdi-checkbox-blank-circle-outline menu-icon" style="{{ Request::is('society_insurances') ? 'color: white; !important' : ''}}"></i>
                 <span class="menu-arrow" style="{{ Request::is('society_insurances') ? 'color: white; !important' : ''}}">Insurances</span>
                 </a>
              </li>
 
              <li class="nav-item">
                 <a href="{{ url('society_member_loans') }}" class="nav-link {{ Request::is('society_member_loans') ? 'active' : '' }}" style="{{ Request::is('society_member_loans') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_member_loans') ? 'color: white; !important' : ''}}"></i>
+                <i class="mdi mdi-checkbox-blank-circle-outline menu-icon" style="{{ Request::is('society_member_loans') ? 'color: white; !important' : ''}}"></i>
                 <span class="menu-arrow" style="{{ Request::is('society_member_loans') ? 'color: white; !important' : ''}}">Member Loans</span>
                 </a>
              </li>
 
              <li class="nav-item">
                 <a href="{{ url('loan_repayment_list') }}" class="nav-link {{ Request::is('loan_repayment_list') ? 'active' : '' }}" style="{{ Request::is('loan_repayment_list') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('loan_repayment_list') ? 'color: white; !important' : ''}}"></i>
+                <i class="mdi mdi-checkbox-blank-circle-outline menu-icon" style="{{ Request::is('loan_repayment_list') ? 'color: white; !important' : ''}}"></i>
                 <span class="menu-arrow" style="{{ Request::is('loan_repayment_list') ? 'color: white; !important' : ''}}">Loan Repayments</span>
                 </a>
              </li>

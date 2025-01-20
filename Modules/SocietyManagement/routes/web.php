@@ -87,9 +87,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/society_transaction_list', [SocietyAccountController::class, 'society_transaction_list'])->name('society_transaction_list');
     Route::get('/add_society_transaction', [SocietyAccountController::class, 'add_society_transaction'])->name('add_society_transaction');
     Route::post('/store_society_transaction', [SocietyAccountController::class, 'store_society_transaction'])->name('store_society_transaction');
-    // Route::get('/edit_society_transaction/{transaction_id}', [SocietyAccountController::class, 'edit_society_transaction'])->name('edit_society_transaction');
+    Route::get('/edit_society_transaction/{transaction_id}/', [SocietyAccountController::class, 'edit_society_transaction'])->name('edit_society_transaction');
+    Route::post('/update_society_transaction/{account_id}', [SocietyAccountController::class, 'update_society_transaction'])->name('update_society_transaction');
+    Route::delete('/delete_society_transaction/{account_id}', [SocietyAccountController::class, 'delete_society_transaction'])->name('delete_society_transaction');
 
     //balance sheet report
     Route::get('/society_balance_sheet_report', [SocietyAccountController::class, 'society_balance_sheet_report'])->name('society_balance_sheet_report');
-    // Route::post('/society_balance_transaction_report_submit', [SocietyAccountController::class, 'society_balance_transaction_report_submit'])->name('society_balance_transaction_report_submit');
+    Route::post('/society_balance_transaction_report_submit', [SocietyAccountController::class, 'society_balance_transaction_report_submit'])->name('society_balance_transaction_report_submit');
 });
