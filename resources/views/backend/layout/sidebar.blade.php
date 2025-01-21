@@ -276,6 +276,7 @@
                                     @elseif(Request::is('society_account_type_list')) show
                                     @elseif(Request::is('society_transaction_list')) show
                                     @elseif(Request::is('society_balance_sheet_report')) show
+                                    @elseif(Request::is('society_trial_balance_report')) show
                             @endif" id="societyManagement" style="margin-top: -2px; padding-bottom : 10px">
 
             @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2) || (Auth::user()->role_id == 3))
@@ -442,6 +443,7 @@
                             @elseif(Request::is('society_account_type_list')) show
                             @elseif(Request::is('society_transaction_list')) show
                             @elseif(Request::is('society_balance_sheet_report')) show
+                            @elseif(Request::is('society_trial_balance_report')) show
                             @endif" id="SocietyAccounts" style="margin-top: -2px; padding-bottom : 10px">
                 
                   <li class="nav-item">
@@ -478,6 +480,15 @@
                         <span class="menu-arrow" style="{{ Request::is('society_balance_sheet_report') ? 'color: white; !important' : ''}}">Balance Sheet</span>
                     </a>
                   </li>
+
+
+                  <li class="nav-item">
+                    <a href="{{ url('society_trial_balance_report') }}" class="nav-link {{ Request::is('society_expenses') ? 'active' : '' }}" style="{{ Request::is('society_trial_balance_report') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_trial_balance_report') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('society_trial_balance_report') ? 'color: white; !important' : ''}}">Trial Balance</span>
+                    </a>
+                  </li>
+
 
 
 

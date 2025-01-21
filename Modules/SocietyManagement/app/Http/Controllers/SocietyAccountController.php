@@ -529,9 +529,202 @@ class SocietyAccountController extends Controller
 
         //----asset (end)----
 
+        //----liability (start)----
+        $liabilities = DB::table('society_accounts')
+                        ->leftJoin('society_transactions', 'society_accounts.id', '=', 'society_transactions.account_id')
+                        ->select(
+                            'society_accounts.account_name',
+                            'society_accounts.id as my_account_id',
+                            DB::raw("
+                                (SELECT SUM(transaction_amount) 
+                                FROM society_transactions 
+                                WHERE YEAR(transaction_date) = $year
+                                AND company_id = $user_company_id
+                                AND account_id = society_accounts.id 
+                                AND cost_less = 2) as total_transaction_amount
+                            ")
+                        )
+                        ->whereYear('society_transactions.transaction_date', $year)
+                        ->where('society_accounts.company_id', $user_company_id)
+                        ->where('society_accounts.accounts_type', 'L')
+                        ->where('society_transactions.cost_less', 2)
+                        ->groupBy('society_accounts.account_name', 'society_accounts.id') // Ensure unique rows
+                        ->get();
+
+        $total_liability_sum_amt = $liabilities->sum('total_transaction_amount'); 
+
+
+        $liability_depriciations = DB::table('society_accounts')
+                                    ->leftJoin('society_transactions', 'society_accounts.id', '=', 'society_transactions.account_id')
+                                    ->select(
+                                        'society_accounts.account_name',
+                                        'society_accounts.id as my_account_id',
+                                        DB::raw("
+                                            (SELECT SUM(transaction_amount) 
+                                            FROM society_transactions 
+                                            WHERE YEAR(transaction_date) = $year
+                                            AND company_id = $user_company_id
+                                            AND account_id = society_accounts.id 
+                                            AND cost_less = 1) as total_transaction_amount
+                                        ")
+                                    )
+                                    ->whereYear('society_transactions.transaction_date', $year)
+                                    ->where('society_accounts.company_id', $user_company_id)
+                                    ->where('society_accounts.accounts_type', 'L')
+                                    ->where('society_transactions.cost_less', 1)
+                                    ->groupBy('society_accounts.account_name', 'society_accounts.id') // Ensure unique rows
+                                    ->get();
+
+        $total_liability_depriciation_sum_amt = $liability_depriciations->sum('total_transaction_amount');
+
+        $net_total_liability_sum_amt = $total_liability_sum_amt - $total_liability_depriciation_sum_amt;
+        //----liability (end)----
+
+
+        //----equity (start)----
+        $equities = DB::table('society_accounts')
+                        ->leftJoin('society_transactions', 'society_accounts.id', '=', 'society_transactions.account_id')
+                        ->select(
+                            'society_accounts.account_name',
+                            'society_accounts.id as my_account_id',
+                            DB::raw("
+                                (SELECT SUM(transaction_amount) 
+                                FROM society_transactions 
+                                WHERE YEAR(transaction_date) = $year
+                                AND company_id = $user_company_id
+                                AND account_id = society_accounts.id 
+                                AND cost_less = 2) as total_transaction_amount
+                            ")
+                        )
+                        ->whereYear('society_transactions.transaction_date', $year)
+                        ->where('society_accounts.company_id', $user_company_id)
+                        ->where('society_accounts.accounts_type', 'E')
+                        ->where('society_transactions.cost_less', 2)
+                        ->groupBy('society_accounts.account_name', 'society_accounts.id') // Ensure unique rows
+                        ->get();
+
+        $total_equity_sum_amt = $equities->sum('total_transaction_amount');
+
+
+        $equity_depriciations = DB::table('society_accounts')
+                                    ->leftJoin('society_transactions', 'society_accounts.id', '=', 'society_transactions.account_id')
+                                    ->select(
+                                        'society_accounts.account_name',
+                                        'society_accounts.id as my_account_id',
+                                        DB::raw("
+                                            (SELECT SUM(transaction_amount) 
+                                            FROM society_transactions 
+                                            WHERE YEAR(transaction_date) = $year
+                                            AND company_id = $user_company_id
+                                            AND account_id = society_accounts.id 
+                                            AND cost_less = 1) as total_transaction_amount
+                                        ")
+                                    )
+                                    ->whereYear('society_transactions.transaction_date', $year)
+                                    ->where('society_accounts.company_id', $user_company_id)
+                                    ->where('society_accounts.accounts_type', 'E')
+                                    ->where('society_transactions.cost_less', 1)
+                                    ->groupBy('society_accounts.account_name', 'society_accounts.id') // Ensure unique rows
+                                    ->get();
+
+        $total_equity_depriciation_sum_amt = $equity_depriciations->sum('total_transaction_amount');
+
+        $net_total_equity_sum_amt = $total_equity_sum_amt - $total_equity_depriciation_sum_amt;
+
+        //----equity (end)----
+
+        return view('societymanagement::accounts.balance_sheet_data',compact(
+                                                                'year',
+                                                                'assets',
+                                                                'total_asset_sum_amt',
+                                                                'asset_depriciations',
+                                                                'total_asset_depriciation_sum_amt',
+                                                                'net_total_asset_sum_amt',
+
+                                                                'liabilities',
+                                                                'total_liability_sum_amt',
+                                                                'liability_depriciations',
+                                                                'total_liability_depriciation_sum_amt',
+                                                                'net_total_liability_sum_amt',
+
+                                                                'equities',
+                                                                'total_equity_sum_amt',
+                                                                'equity_depriciations',
+                                                                'total_equity_depriciation_sum_amt',
+                                                                'net_total_equity_sum_amt'
+                                                            ));
+
 
     }
     //balance sheet (end)
+
+
+    //trial balance (start)
+    public function society_trial_balance_report(){
+        return view('societymanagement::accounts.trial_balance'); 
+    }
+
+    public function society_trial_balance_report_submit(Request $request){
+
+        $user_company_id = Auth::user()->company_id;
+        $year = $request->input('year');
+
+
+        $debit_accounts = DB::table('society_accounts')
+                            ->leftJoin('society_transactions', 'society_accounts.id', '=', 'society_transactions.account_id')
+                            ->select(
+                                'society_accounts.account_name',
+                                'society_accounts.id as my_account_id',
+                                DB::raw("
+                                    (SELECT SUM(transaction_amount) 
+                                    FROM society_transactions 
+                                    WHERE YEAR(transaction_date) = $year
+                                    AND company_id = $user_company_id
+                                    AND account_id = society_accounts.id) as total_transaction_amount
+                                ")
+                            )
+                            ->whereYear('society_transactions.transaction_date', $year)
+                            ->where('society_accounts.company_id', $user_company_id)
+                            ->where('society_accounts.transaction_type', 1)
+                            ->groupBy('society_accounts.account_name', 'society_accounts.id') // Ensure unique rows
+                            ->get();
+
+
+        $total_debit_amount = $debit_accounts->sum('total_transaction_amount');
+
+
+        $credit_accounts = DB::table('society_accounts')
+                            ->leftJoin('society_transactions', 'society_accounts.id', '=', 'society_transactions.account_id')
+                            ->select(
+                                'society_accounts.account_name',
+                                'society_accounts.id as my_account_id',
+                                DB::raw("
+                                    (SELECT SUM(transaction_amount) 
+                                    FROM society_transactions 
+                                    WHERE YEAR(transaction_date) = $year
+                                    AND company_id = $user_company_id
+                                    AND account_id = society_accounts.id) as total_transaction_amount
+                                ")
+                            )
+                            ->whereYear('society_transactions.transaction_date', $year)
+                            ->where('society_accounts.company_id', $user_company_id)
+                            ->where('society_accounts.transaction_type', 2)
+                            ->groupBy('society_accounts.account_name', 'society_accounts.id') // Ensure unique rows
+                            ->get();
+
+        $total_credit_amount = $credit_accounts->sum('total_transaction_amount');
+
+
+        return view('societymanagement::accounts.trial_balance_data',compact(
+                                                                        'year',
+                                                                        'debit_accounts',
+                                                                        'total_debit_amount',
+                                                                        'credit_accounts',
+                                                                        'total_credit_amount'
+                                                                    ));
+
+    }
+    //trial balance (end)
   
     
 

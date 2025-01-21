@@ -26,12 +26,12 @@
 
                     <!-- print section (start) -->
                     <div id="print-section">
-                        <h3 align = "center">Balance Sheet Report</h3>
+                        <h3 align = "center">Yearly Trial Balance Report</h3>
                         <br>
                         <h6><strong>Report Generation Date:</strong> {{ \Carbon\Carbon::now()->format('F j, Y') }}</h6>
                         <h6 >Reporting Year: <span style="color: blue">{{$year}}</span></h6>
                         <br>
-                        <h4>Assets</h4>
+                        <h4>Debit</h4>
                         <table>
                             <thead>
                                 <tr>
@@ -40,36 +40,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($assets as $asset)
+                                @foreach ($debit_accounts as $debit_account)
                                 <tr>
-                                    <td>{{$asset->account_name}}</td>
-                                    <td class="text-right" id="">{{ number_format($asset->total_transaction_amount, 2) }}</td>
+                                    <td>{{$debit_account->account_name}}</td>
+                                    <td class="text-right" id="">{{ number_format($debit_account->total_transaction_amount, 2) }}</td>
                                 </tr>  
                                 @endforeach
                                
-                                <tr>
-                                    <td>Total</td>
-                                    <td class="text-right" id="">{{ number_format($total_asset_sum_amt, 2) }}</td>
-                                </tr>
-                
-                                @if($total_asset_depriciation_sum_amt != '')
-                                <tr>
-                                    <td>Less : </td>
-                                    <td class="text-right" id="">({{ number_format($total_asset_depriciation_sum_amt, 2) }})</td>
-                                </tr>
-                                @else
-                                @endif
-                
                                 <tr class="total-row">
-                                    <td>Net Total</td>
-                                    <td class="text-right" id="">{{ number_format($net_total_asset_sum_amt, 2) }}</td>
+                                    <td>Total</td>
+                                    <td class="text-right" id="">{{ number_format($total_debit_amount, 2) }}</td>
                                 </tr>
                 
                             </tbody>
                         </table>
-                <br>
+                 <br>
                     
-                        <h4>Liabilities</h4>
+                        <h4>Credit</h4>
                         <table>
                             <thead>
                                 <tr>
@@ -78,70 +65,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($liabilities as $liability)
+                                @foreach ($credit_accounts as $credit_account)
                                 <tr>
-                                    <td>{{$liability->account_name}}</td>
-                                    <td class="text-right" id="">{{ number_format($liability->total_transaction_amount, 2) }}</td>
+                                    <td>{{$credit_account->account_name}}</td>
+                                    <td class="text-right" id="">{{ number_format($credit_account->total_transaction_amount, 2) }}</td>
                                 </tr>  
                                 @endforeach
                                
-                                <tr>
-                                    <td>Total</td>
-                                    <td class="text-right" id="">{{ number_format($total_liability_sum_amt, 2) }}</td>
-                                </tr>
-                
-                                @if($total_liability_depriciation_sum_amt != '')
-                                <tr>
-                                    <td>Less : </td>
-                                    <td class="text-right" id="">({{ number_format($total_liability_depriciation_sum_amt, 2) }})</td>
-                                </tr>
-                                @else
-                                @endif
-                
                                 <tr class="total-row">
-                                    <td>Net Total</td>
-                                    <td class="text-right" id="">{{ number_format($net_total_liability_sum_amt, 2) }}</td>
+                                    <td>Total</td>
+                                    <td class="text-right" id="">{{ number_format($total_credit_amount, 2) }}</td>
                                 </tr>
-                
+
                             </tbody>
                         </table>
                         <br>                    
-                       <h4 style="color: blue">Equity</h4>
-                       <table>
-                        <thead>
-                            <tr>
-                                <th>Description</th>
-                                <th class="text-right">Amount (BDT)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($equities as $equity)
-                            <tr>
-                                <td>{{$equity->account_name}}</td>
-                                <td class="text-right" id="">{{ number_format($equity->total_transaction_amount, 2) }}</td>
-                            </tr>  
-                            @endforeach
-                           
-                            <tr>
-                                <td>Total</td>
-                                <td class="text-right" id="">{{ number_format($total_equity_sum_amt, 2) }}</td>
-                            </tr>
-            
-                            @if($total_equity_depriciation_sum_amt != '')
-                            <tr>
-                                <td>Less : </td>
-                                <td class="text-right" id="">({{ number_format($total_equity_depriciation_sum_amt, 2) }})</td>
-                            </tr>
-                            @else
-                            @endif
-            
-                            <tr class="total-row">
-                                <td>Net Total</td>
-                                <td class="text-right" id="">{{ number_format($net_total_equity_sum_amt, 2) }}</td>
-                            </tr>
-            
-                        </tbody>
-                    </table>
                     </div>
                     <!-- print section (end) -->
             <br>

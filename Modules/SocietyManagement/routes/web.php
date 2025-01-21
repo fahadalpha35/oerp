@@ -94,4 +94,9 @@ Route::middleware('auth')->group(function () {
     //balance sheet report
     Route::get('/society_balance_sheet_report', [SocietyAccountController::class, 'society_balance_sheet_report'])->name('society_balance_sheet_report');
     Route::post('/society_balance_transaction_report_submit', [SocietyAccountController::class, 'society_balance_transaction_report_submit'])->name('society_balance_transaction_report_submit');
+
+    //trial balance report
+    Route::get('/society_trial_balance_report', [SocietyAccountController::class, 'society_trial_balance_report'])->name('society_trial_balance_report');
+    Route::post('/society_trial_balance_report_submit', [SocietyAccountController::class, 'society_trial_balance_report_submit'])->name('society_trial_balance_report_submit');
+
 });
