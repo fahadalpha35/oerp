@@ -9,35 +9,15 @@
           <div class="row">
              
               <div class="col-12">
-                <h3 class="mt-2 text-center">Profit And Loss Report</h3>
+                <h3 class="mt-2 text-center">Balance Sheet Report</h3>
                   <br>
                   <div class="card">          
                         <div class="card-body">
                             
-                            <form action="{{route('society_profit_and_loss_submit')}}" method="POST">
+                            <form action="{{route('society_balance_transaction_report_submit')}}" method="POST">
                                 @csrf
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <div class="form-group mb-4">
-                                            <label for="monthPicker">Select Month:</label>
-                                            <select class="form-control select2" id="monthPicker" name="month" required>
-                                                <option value="">--Select--</option>
-                                                <option value="01">January</option>
-                                                <option value="02">February</option>
-                                                <option value="03">March</option>
-                                                <option value="04">April</option>
-                                                <option value="05">May</option>
-                                                <option value="06">June</option>
-                                                <option value="07">July</option>
-                                                <option value="08">August</option>
-                                                <option value="09">September</option>
-                                                <option value="10">October</option>
-                                                <option value="11">November</option>
-                                                <option value="12">December</option>
-                                            </select>
-                                          </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
+                                <div class="row">                                  
+                                    <div class="col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label for="yearPicker">Select Year:</label>
                                             <select class="form-control select2" id="yearPicker" name="year" required>

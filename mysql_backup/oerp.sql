@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2024 at 12:13 PM
+-- Generation Time: Jan 13, 2025 at 12:21 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1527,7 +1527,13 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('BmsU7juv8GtBvIJOtImwJxtTNfbXM8nDV2KwxV2K', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoid1ZLSk8wemN6amllc2Rjb1ptOGdhM2dHc0JVMWhaZHZyWXNQTDlwOSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zb2NpZXR5X21lbWJlcl9sb2FucyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1734001917);
+('FXdiQfkL9fSHEG3eB2Qvb7GJJ8pPQZEBujpiXWn5', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:134.0) Gecko/20100101 Firefox/134.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiV01pQ1pRTXR4eHpPRHp4aHgyMEJnVjF1MFZ1dG5MY3RtaFZPcEd5ayI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1736667381),
+('hvb2RTMqyGJh9lvexx7ODEx3Lz9EjkoXMEsf74sy', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:134.0) Gecko/20100101 Firefox/134.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoibzA4M2I4dGlqckxMSURMNTY1bXZWcDY5MTJ6MWZWRUlsRmFRRUhJYSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zb2NpZXR5X3Byb2ZpdF9hbmRfbG9zcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1736767277),
+('hyQATAOB4LU6lt5zaQ7m7zGoxhAaffOHFraKPOIk', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVVVQdU9jRWdOc0dnb2NmYXU3bHY2OGx5R0RVWjJpRW1ueXJWN2tCcCI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0NzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3NvY2lldHlfcHJvZml0X2FuZF9sb3NzZXMiO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyNzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2xvZ2luIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1736667409),
+('JxausvCYVx8vKdsvNyJtBstvQHogNSilxp8o59cA', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:134.0) Gecko/20100101 Firefox/134.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMkJtMFdGMk9jN2VJYXFjOU1GSnkxRjQ3SkhOdGwxS3VrbFU5R3NFTyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1736684519),
+('UseCtJ6COuw1OPUSB4Yf2FyOwIDVK1RU8s7RnJMD', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:134.0) Gecko/20100101 Firefox/134.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoicWVlMzY2ZVdBNHVCRmZTdGdsUWpXaTRVQkd3clkzaHZuT3R3MDhOZCI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0NToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3NvY2lldHlfcHJvZml0X2FuZF9sb3NzIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zb2NpZXR5X3Byb2ZpdF9hbmRfbG9zcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1736663654),
+('VtRToofgZoe1kL1zvfbsBGXLif1n8I4ca4iRKnEi', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiRGp2RVJrTzlPUldyRW5oNWtOUElLalpHWklYSThXcUNtc3Y1QXYzRCI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0NzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3NvY2lldHlfcHJvZml0X2FuZF9sb3NzZXMiO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyNzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2xvZ2luIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1736667438),
+('VWm4dIpbeq5rgb6W4Zz0tuHOQfT17lkjUrN6xG6i', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:134.0) Gecko/20100101 Firefox/134.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiSHZJVjRjU3hnd09vQzkzUHNEU0hMU25TbTJUbmpaaUczcG1wV01qdyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zb2NpZXR5X3Byb2ZpdF9hbmRfbG9zcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1736752599);
 
 -- --------------------------------------------------------
 
@@ -1650,6 +1656,15 @@ CREATE TABLE `society_expenses` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `society_expenses`
+--
+
+INSERT INTO `society_expenses` (`id`, `company_id`, `expense_type_id`, `expense_name`, `expense_date`, `description`, `expense_amount`, `created_at`, `updated_at`) VALUES
+(2, 2, 3, 'Snacks', '2025-01-06', 'tea, biscuits', 250.00, '2025-01-06 12:15:39', '2025-01-06 12:15:39'),
+(3, 2, 2, 'Electricity Bill', '2025-01-08', 'digital meter electric bill', 1500.00, '2025-01-06 12:15:39', '2025-01-06 12:16:01'),
+(4, 2, 2, 'Water Bill', '2025-01-14', 'water', 800.00, '2025-01-06 12:15:39', '2025-01-06 12:15:39');
+
 -- --------------------------------------------------------
 
 --
@@ -1670,7 +1685,8 @@ CREATE TABLE `society_expense_types` (
 --
 
 INSERT INTO `society_expense_types` (`id`, `company_id`, `type_name`, `active_status`, `created_at`, `updated_at`) VALUES
-(2, 2, 'Utilities', 1, '2024-11-11 12:47:31', '2024-11-11 12:47:31');
+(2, 2, 'Utilities', 1, '2024-11-11 12:47:31', '2024-11-11 12:47:31'),
+(3, 2, 'Daily Expense', 1, '2025-01-06 12:04:08', '2025-01-06 12:04:08');
 
 -- --------------------------------------------------------
 
@@ -1745,7 +1761,7 @@ CREATE TABLE `society_loan_repayments` (
 INSERT INTO `society_loan_repayments` (`id`, `loan_id`, `due_date`, `amount_due`, `amount_paid`, `status`, `created_at`, `updated_at`, `repayment_status`) VALUES
 (1, 9, '2025-01-12', 5625.00, 0.00, NULL, '2024-12-12 10:46:22', '2024-12-12 10:46:22', 1),
 (2, 9, '2025-02-12', 5625.00, 0.00, NULL, '2024-12-12 10:46:22', '2024-12-12 10:46:22', 1),
-(3, 9, '2025-03-12', 5625.00, 5000.00, NULL, '2024-12-12 10:46:22', '2024-12-12 10:46:37', 2),
+(3, 9, '2025-03-12', 5625.00, 5625.00, NULL, '2024-12-12 10:46:22', '2024-12-14 06:19:33', 3),
 (4, 9, '2025-04-12', 5625.00, 0.00, NULL, '2024-12-12 10:46:22', '2024-12-12 10:46:22', 1);
 
 -- --------------------------------------------------------
@@ -2980,13 +2996,13 @@ ALTER TABLE `society_event_sponsorships`
 -- AUTO_INCREMENT for table `society_expenses`
 --
 ALTER TABLE `society_expenses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `society_expense_types`
 --
 ALTER TABLE `society_expense_types`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `society_fund_collections`

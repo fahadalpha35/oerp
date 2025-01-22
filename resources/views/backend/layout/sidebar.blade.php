@@ -270,20 +270,26 @@
                                     @elseif(Request::is('sold_event_tickets')) show
                                     @elseif(Request::is('society_expense_type_list')) show
                                     @elseif(Request::is('society_expenses')) show
+                                    @elseif(Request::is('society_expense_report')) show
                                     @elseif(Request::is('society_profit_and_loss')) show
+                                    @elseif(Request::is('budget_and_collected_fund')) show
+                                    @elseif(Request::is('society_account_type_list')) show
+                                    @elseif(Request::is('society_transaction_list')) show
+                                    @elseif(Request::is('society_balance_sheet_report')) show
+                                    @elseif(Request::is('society_trial_balance_report')) show
                             @endif" id="societyManagement" style="margin-top: -2px; padding-bottom : 10px">
 
             @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2) || (Auth::user()->role_id == 3))
             <li class="nav-item">
                 <a href="{{ url('society_members') }}" class="nav-link {{ Request::is('society_members') ? 'active' : '' }}" style="{{ Request::is('society_members') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_members') ? 'color: white; !important' : ''}}"></i>
+                <i class="mdi mdi-checkbox-blank-circle-outline menu-icon" style="{{ Request::is('society_members') ? 'color: white; !important' : ''}}"></i>
                 <span class="menu-arrow" style="{{ Request::is('society_members') ? 'color: white; !important' : ''}}">Society Members</span>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a href="{{ url('renewal_fees') }}" class="nav-link {{ Request::is('renewal_fees') ? 'active' : '' }}" style="{{ Request::is('renewal_fees') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('renewal_fees') ? 'color: white; !important' : ''}}"></i>
+                <i class="mdi mdi-checkbox-blank-circle-outline menu-icon" style="{{ Request::is('renewal_fees') ? 'color: white; !important' : ''}}"></i>
                 <span class="menu-arrow" style="{{ Request::is('renewal_fees') ? 'color: white; !important' : ''}}">Renewal Fees</span>
                 </a>
              </li>
@@ -318,41 +324,41 @@
 
               <li class="nav-item">
                 <a href="{{ url('society_events') }}" class="nav-link {{ Request::is('society_events') ? 'active' : '' }}" style="{{ Request::is('society_events') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_events') ? 'color: white; !important' : ''}}"></i>
+                <i class="mdi mdi-checkbox-blank-circle-outline menu-icon" style="{{ Request::is('society_events') ? 'color: white; !important' : ''}}"></i>
                 <span class="menu-arrow" style="{{ Request::is('society_events') ? 'color: white; !important' : ''}}">Society Events</span>
                 </a>
              </li>
              <li class="nav-item">
                 <a href="{{ url('fund_collections') }}" class="nav-link {{ Request::is('fund_collections') ? 'active' : '' }}" style="{{ Request::is('fund_collections') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('fund_collections') ? 'color: white; !important' : ''}}"></i>
+                <i class="mdi mdi-checkbox-blank-circle-outline menu-icon" style="{{ Request::is('fund_collections') ? 'color: white; !important' : ''}}"></i>
                 <span class="menu-arrow" style="{{ Request::is('fund_collections') ? 'color: white; !important' : ''}}">Fund Collections</span>
                 </a>
              </li>
 
              <li class="nav-item">
                 <a href="{{ url('event_sponsorships') }}" class="nav-link {{ Request::is('event_sponsorships') ? 'active' : '' }}" style="{{ Request::is('event_sponsorships') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('event_sponsorships') ? 'color: white; !important' : ''}}"></i>
+                <i class="mdi mdi-checkbox-blank-circle-outline menu-icon" style="{{ Request::is('event_sponsorships') ? 'color: white; !important' : ''}}"></i>
                 <span class="menu-arrow" style="{{ Request::is('event_sponsorships') ? 'color: white; !important' : ''}}">Sponsorships</span>
                 </a>
              </li>
 
              <li class="nav-item">
                 <a href="{{ url('society_insurances') }}" class="nav-link {{ Request::is('society_insurances') ? 'active' : '' }}" style="{{ Request::is('society_insurances') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_insurances') ? 'color: white; !important' : ''}}"></i>
+                <i class="mdi mdi-checkbox-blank-circle-outline menu-icon" style="{{ Request::is('society_insurances') ? 'color: white; !important' : ''}}"></i>
                 <span class="menu-arrow" style="{{ Request::is('society_insurances') ? 'color: white; !important' : ''}}">Insurances</span>
                 </a>
              </li>
 
              <li class="nav-item">
                 <a href="{{ url('society_member_loans') }}" class="nav-link {{ Request::is('society_member_loans') ? 'active' : '' }}" style="{{ Request::is('society_member_loans') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_member_loans') ? 'color: white; !important' : ''}}"></i>
+                <i class="mdi mdi-checkbox-blank-circle-outline menu-icon" style="{{ Request::is('society_member_loans') ? 'color: white; !important' : ''}}"></i>
                 <span class="menu-arrow" style="{{ Request::is('society_member_loans') ? 'color: white; !important' : ''}}">Member Loans</span>
                 </a>
              </li>
 
              <li class="nav-item">
                 <a href="{{ url('loan_repayment_list') }}" class="nav-link {{ Request::is('loan_repayment_list') ? 'active' : '' }}" style="{{ Request::is('loan_repayment_list') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('loan_repayment_list') ? 'color: white; !important' : ''}}"></i>
+                <i class="mdi mdi-checkbox-blank-circle-outline menu-icon" style="{{ Request::is('loan_repayment_list') ? 'color: white; !important' : ''}}"></i>
                 <span class="menu-arrow" style="{{ Request::is('loan_repayment_list') ? 'color: white; !important' : ''}}">Loan Repayments</span>
                 </a>
              </li>
@@ -395,6 +401,7 @@
                 <!-- Second-level sub-menu -->
                 <ul class="collapse nav flex-column ms-3 @if(Request::is('society_expense_type_list')) show
                             @elseif(Request::is('society_expenses')) show
+                            @elseif(Request::is('society_expense_report')) show
                             @endif" id="SocietyExpense" style="margin-top: -2px; padding-bottom : 10px">
                 
                   <li class="nav-item">
@@ -411,64 +418,89 @@
                       </a>
                   </li>
 
+                  <li class="nav-item">
+                    <a href="{{ url('society_expense_report') }}" class="nav-link {{ Request::is('society_expenses') ? 'active' : '' }}" style="{{ Request::is('society_expense_report') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_expense_report') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('society_expense_report') ? 'color: white; !important' : ''}}">Expense Report</span>
+                      </a>
+                  </li>
+
                 </ul>
               </li>
 
 
 
-
-              <!--society accounts -->
+            <!--society accounts -->
              <li class="nav-item">
-                <a class="nav-link" href="#SocietyAccount" data-toggle="collapse" aria-expanded="false">
+                <a class="nav-link" href="#SocietyAccounts" data-toggle="collapse" aria-expanded="false">
                   <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
                 <span class="menu-title">Accounts</span>
                 <i class="menu-arrow"></i>
                 </a>
                 <!-- Second-level sub-menu -->
                 <ul class="collapse nav flex-column ms-3 @if(Request::is('society_profit_and_loss')) show
-                            {{-- @elseif(Request::is('society_expenses')) show --}}
-                            @endif" id="SocietyAccount" style="margin-top: -2px; padding-bottom : 10px">
+                            @elseif(Request::is('budget_and_collected_fund')) show
+                            @elseif(Request::is('society_account_type_list')) show
+                            @elseif(Request::is('society_transaction_list')) show
+                            @elseif(Request::is('society_balance_sheet_report')) show
+                            @elseif(Request::is('society_trial_balance_report')) show
+                            @endif" id="SocietyAccounts" style="margin-top: -2px; padding-bottom : 10px">
                 
                   <li class="nav-item">
-                    <a href="{{ url('society_profit_and_loss') }}" class="nav-link {{ Request::is('society_profit_and_loss') ? 'active' : '' }}" style="{{ Request::is('society_profit_and_loss') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                    <a href="{{ url('society_profit_and_loss') }}" class="nav-link {{ Request::is('society_expenses') ? 'active' : '' }}" style="{{ Request::is('society_profit_and_loss') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
                         <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_profit_and_loss') ? 'color: white; !important' : ''}}"></i>
-                        <span class="menu-arrow" style="{{ Request::is('society_profit_and_loss') ? 'color: white; !important' : ''}}">Profit & Loss</span>
-                      </a>
+                        <span class="menu-arrow" style="{{ Request::is('society_profit_and_loss') ? 'color: white; !important' : ''}}">Profit And Loss</span>
+                    </a>
                   </li>
                  
-                  {{-- <li class="nav-item">
-                    <a href="{{ url('society_expenses') }}" class="nav-link {{ Request::is('society_expenses') ? 'active' : '' }}" style="{{ Request::is('society_expenses') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_expenses') ? 'color: white; !important' : ''}}"></i>
-                        <span class="menu-arrow" style="{{ Request::is('society_expenses') ? 'color: white; !important' : ''}}">Expenses</span>
-                      </a>
-                  </li> --}}
+                  <li class="nav-item">
+                    <a href="{{ url('budget_and_collected_fund') }}" class="nav-link {{ Request::is('society_expenses') ? 'active' : '' }}" style="{{ Request::is('budget_and_collected_fund') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('budget_and_collected_fund') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('budget_and_collected_fund') ? 'color: white; !important' : ''}}">Budget v/s Fund</span>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="{{ url('society_account_type_list') }}" class="nav-link {{ Request::is('society_expenses') ? 'active' : '' }}" style="{{ Request::is('society_account_type_list') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_account_type_list') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('society_account_type_list') ? 'color: white; !important' : ''}}">Account Types</span>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="{{ url('society_transaction_list') }}" class="nav-link {{ Request::is('society_expenses') ? 'active' : '' }}" style="{{ Request::is('society_transaction_list') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_transaction_list') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('society_transaction_list') ? 'color: white; !important' : ''}}">Transactions</span>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="{{ url('society_balance_sheet_report') }}" class="nav-link {{ Request::is('society_expenses') ? 'active' : '' }}" style="{{ Request::is('society_balance_sheet_report') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_balance_sheet_report') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('society_balance_sheet_report') ? 'color: white; !important' : ''}}">Balance Sheet</span>
+                    </a>
+                  </li>
+
+
+                  <li class="nav-item">
+                    <a href="{{ url('society_trial_balance_report') }}" class="nav-link {{ Request::is('society_expenses') ? 'active' : '' }}" style="{{ Request::is('society_trial_balance_report') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_trial_balance_report') ? 'color: white; !important' : ''}}"></i>
+                        <span class="menu-arrow" style="{{ Request::is('society_trial_balance_report') ? 'color: white; !important' : ''}}">Trial Balance</span>
+                    </a>
+                  </li>
+
+
+
 
                 </ul>
               </li>
-           
-
-            @endif
-
               {{-- <li class="nav-item">
-                <a class="nav-link" href="#societyMember" data-toggle="collapse" aria-expanded="false">
-                  <i class="mdi mdi-checkbox-blank-circle-outline  menu-icon"></i>
-                <span class="menu-title">Society Members</span>
-                <i class="menu-arrow"></i>
+                <a href="{{ url('society_accounts') }}" class="nav-link {{ Request::is('society_insurances') ? 'active' : '' }}" style="{{ Request::is('society_accounts') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
+                <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_accounts') ? 'color: white; !important' : ''}}"></i>
+                <span class="menu-arrow" style="{{ Request::is('society_accounts') ? 'color: white; !important' : ''}}">Profit And Loss</span>
                 </a>
-                <!-- Second-level sub-menu -->
-                <ul class="collapse nav flex-column ms-3 @if(Request::is('society_members')) show
-                            @endif" id="societyMember" style="margin-top: -2px;">
-
-                @if((Auth::user()->role_id == 1) || (Auth::user()->role_id == 2) || (Auth::user()->role_id == 3))
-                <li class="nav-item">
-                    <a href="{{ url('society_members') }}" class="nav-link {{ Request::is('society_members') ? 'active' : '' }}" style="{{ Request::is('society_members') ? 'background-color: #908ec4; color: white; margin-right:5px; !important' : ''}}">
-                        <i class="mdi mdi-adjust menu-icon" style="{{ Request::is('society_members') ? 'color: white; !important' : ''}}"></i>
-                        <span class="menu-arrow" style="{{ Request::is('society_members') ? 'color: white; !important' : ''}}">Members</span>
-                      </a>
-                  </li>
-                  @endif
-                </ul>
-              </li> --}}
+                </li> --}}
+            @endif
 
             </ul>
           </li>

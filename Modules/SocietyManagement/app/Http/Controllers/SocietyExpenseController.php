@@ -214,7 +214,7 @@ class SocietyExpenseController extends Controller
                                     ]);
         }
 
-        return redirect()->route('society_expenses.index')->with('success_message', 'Expense is added successfully!');
+        return redirect()->route('society_expenses.index')->with('success_message', 'Expenses are added successfully!');
     }
 
     /**
@@ -309,4 +309,34 @@ class SocietyExpenseController extends Controller
             return response()->json(['success' => false, 'message' => 'Error deleting Expense.']);
         }
     }
+
+
+
+    public function society_expense_report(){
+        // dd('samer');
+        return view('societymanagement::expense_report.expense_report');
+    }
+
+
+    public function society_expense_report_submit(Request $request){
+    
+        $from_date = $request->from_date;
+        $to_date = $request->to_date;
+        $user_company_id = Auth::user()->company_id;
+
+        $expenses = DB::table('society_expenses')
+                        ->leftJoin('society_expense_types','society_expenses.expense_type_id','society_expense_types.id')
+                        ->select('society_expense_types.type_name as expense_type_name','society_expenses.expense_name','society_expenses.expense_amount')
+                        ->where('society_expenses.company_id',$user_company_id)
+                        ->whereBetween('society_expenses.expense_date', [$from_date, $to_date])
+                        ->get();
+
+        // dd($expenses);
+ 
+     return view('societymanagement::expense_report.expense_report_data',compact('expenses', 'from_date', 'to_date'));
+
+    }
+
+
+
 }
